@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Snippets - 2026-01-25</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background-color: #FFF1E0;
+            color: #3E474F;
+            line-height: 1.6;
+            padding: 24px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            padding: 32px 0;
+            border-bottom: 3px solid #3E474F;
+            margin-bottom: 32px;
+        }
+        .header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .header .date {
+            font-size: 18px;
+            color: #66737D;
+        }
+        .header .meta {
+            font-size: 14px;
+            color: #66737D;
+            margin-top: 12px;
+        }
+        .topic-section {
+            margin-bottom: 40px;
+        }
+        .topic-title {
+            font-size: 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 0;
+            border-bottom: 2px solid #F2DFCE;
+            margin-bottom: 24px;
+            color: #3E474F;
+        }
+        .channel-section {
+            margin-bottom: 28px;
+        }
+        .channel-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            margin-bottom: 16px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .snippet-card {
+            background: #FFF9F5;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border-left: 4px solid #FCD0AF;
+        }
+        .snippet-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .snippet-title a {
+            color: #0D7680;
+            text-decoration: none;
+        }
+        .snippet-title a:hover {
+            text-decoration: underline;
+        }
+        .snippet-meta {
+            font-size: 13px;
+            color: #66737D;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+        .snippet-speakers {
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .snippet-speakers strong {
+            color: #3E474F;
+        }
+        .snippet-summary {
+            font-size: 15px;
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+        .snippet-claims {
+            margin-bottom: 16px;
+        }
+        .snippet-claims-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .snippet-claims ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .snippet-claims li {
+            font-size: 14px;
+            padding: 4px 0 4px 16px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .snippet-claims li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #0D7680;
+        }
+        .snippet-details {
+            font-size: 13px;
+            color: #66737D;
+            border-top: 1px solid #F2DFCE;
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+        .snippet-details p {
+            margin-bottom: 4px;
+        }
+        .snippet-conclusion {
+            font-size: 14px;
+            font-style: italic;
+            color: #3E474F;
+            background: #F2DFCE;
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 12px;
+        }
+        .footer {
+            text-align: center;
+            padding: 24px 0;
+            border-top: 1px solid #F2DFCE;
+            margin-top: 40px;
+            font-size: 12px;
+            color: #66737D;
+        }
+        /* Collapsible sections */
+        details {
+            margin-bottom: 8px;
+        }
+        details summary {
+            cursor: pointer;
+            list-style: none;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary::before {
+            content: "▶";
+            display: inline-block;
+            margin-right: 8px;
+            transition: transform 0.2s;
+            font-size: 12px;
+        }
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
+        .topic-details {
+            border: 1px solid #F2DFCE;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            background: #FFF9F5;
+        }
+        .topic-summary {
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 16px 20px;
+            color: #3E474F;
+            background: #F2DFCE;
+            border-radius: 8px;
+        }
+        .topic-details[open] .topic-summary {
+            border-radius: 8px 8px 0 0;
+        }
+        .topic-count {
+            font-size: 14px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .topic-content {
+            padding: 16px 20px;
+        }
+        .channel-details {
+            border: 1px solid #FCD0AF;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            background: white;
+        }
+        .channel-summary {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            padding: 12px 16px;
+            background: #FFF9F5;
+            border-radius: 6px;
+        }
+        .channel-details[open] .channel-summary {
+            border-radius: 6px 6px 0 0;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .channel-count {
+            font-size: 13px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .channel-content {
+            padding: 12px 16px;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 16px;
+            }
+            .header h1 {
+                font-size: 28px;
+            }
+            .snippet-card {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Daily Snippets</h1>
+            <div class="date">Sunday, January 25, 2026</div>
+            <div class="meta">32 videos • uploaded 2026-01-25 • 32 videos</div>
+        </div>
+        <details class="topic-details">
+            <summary class="topic-summary">POLITICS<span class="topic-count">(3 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">V.Shenderovich<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=QAhSx_r8JXw" target="_blank">ШЕНДЕРОВИЧ*: КОЛЕСНИКОВА И ЛУКАШЕНКО, ТРАМП И ЕВРОПА, ЗЕЛЕНСКИЙ И РЕЧЬ В ДАВОСЕ</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 54m 58s • @V.Shenderovich • Jan 25, 2026 • 25,209 views • 1,305 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Виктор Шeндeрович</div>
+                    <div class="snippet-summary">В этом выпуске обсуждаются международные отношения, роль Дональд Трамп в формировании нового мирового порядка и осознание Европы как самостоятельного игрока. Также рассматриваются мнения о Лукашенко и его взаимодействии с Западом.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Трамп создает альтернативный орган международного права.</li>
+                            <li>Европа начинает осознавать свою политическую силу.</li>
+                            <li>Канада заявляет о крахе старого международного порядка.</li>
+                            <li>Лукашенко может использовать бизнес для маневров между Западом и Россией.</li>
+                            <li>Китай становится более надежным союзником по сравнению с США.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Дональд Трамп, Александр Лукашенко, Владимир Путин, Эммануэль Макрон, Мария Колесникова, Гарри Каспаров, Зеленский</p>
+                        <p><strong>Organizations:</strong> ООН</p>
+                        <p><strong>Topics:</strong> Трамп и мир, Европа и Украина, Канада и международные отношения, Лукашенко и бизнес, Китай как союзник</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Система международного права, основанная на ООН, больше не работает, и необходимо создать новые механизмы для обеспечения безопасности.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">pastukhov_kitchen<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=qRq0ErCqNhg" target="_blank">От Миннеаполиса до Ирана: плановое безумие? Трамп играет в игры Путина. Пастуховская Кухня.</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 34m 55s • @pastukhov_kitchen • Jan 25, 2026 • 94,935 views • 5,876 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> N/A</div>
+                    <div class="snippet-summary">The episode discusses the political situation in the U.S., particularly focusing on immigration issues in Minnesota and the implications of Trump&#x27;s policies. It draws parallels between U.S. domestic unrest and international tensions involving figures like Putin.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The immigration crisis in Minnesota is escalating with local protests against ICE actions.</li>
+                            <li>Trump&#x27;s rhetoric is compared to that of controversial figures like Zhirinovsky.</li>
+                            <li>There are concerns about the potential for civil unrest in response to immigration enforcement.</li>
+                            <li>The episode suggests that the U.S. is experiencing a strategic shift in its global political stance.</li>
+                            <li>The speaker expresses skepticism about the stability of the current political climate.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Дмитрий Виловский, Трамп, Путин, Альберт Гор, Дмитрий Песков</p>
+                        <p><strong>Organizations:</strong> ICE, BlackRock</p>
+                        <p><strong>Topics:</strong> immigration crisis, Trump&#x27;s policies, Minnesota protests, political implications, international relations</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The interplay between domestic unrest and international politics could lead to significant consequences.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">triggerpod<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=CcjiSa_gRPs" target="_blank">&quot;We&#x27;re Governed By Cowards&quot; - Reform Candidate For London Mayor - Laila Cunningham</a>
+                    </div>
+                    <div class="snippet-meta">interview • 74m 46s • @triggerpod • Jan 25, 2026 • 226,418 views • 6,708 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Laila Cunningham</div>
+                    <div class="snippet-summary">In this episode, Laila Cunningham discusses her candidacy for London Mayor and addresses the pressing issues of crime, immigration, and political accountability in the city. She emphasizes the need for reform in policing and social policies to better serve Londoners.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Crime metrics in London are rising, with knife crime up by 68% over the past decade.</li>
+                            <li>The police are failing to charge 94% of crime victims, leading to a breakdown in trust.</li>
+                            <li>Illegal immigration is a significant issue, with London housing the largest number of illegal migrants in hotels.</li>
+                            <li>Cunningham argues that the current government prioritizes foreign nationals over British citizens for social housing.</li>
+                            <li>She believes that the political system is divided and that politicians are failing to represent the interests of the British public.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Sadi Khan, Theresa May, Margaret Thatcher, David Lammy</p>
+                        <p><strong>Organizations:</strong> Crown Prosecution Service, Reform</p>
+                        <p><strong>Topics:</strong> London crime, illegal immigration, political accountability, woke ideology, drug addiction, social housing</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Cunningham asserts that political cowardice has led to a failure in addressing the real issues facing Londoners.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">INVESTING<span class="topic-count">(27 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">Monetary-Matters<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=ZE-hqrDRyzg" target="_blank">Why U.S. Stocks *Aren’t* In A Bubble (Yet) | Aswath Damodaran</a>
+                    </div>
+                    <div class="snippet-meta">interview • 59m 55s • @Monetary-Matters • Jan 25, 2026 • 25,233 views • 617 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Aswath Damodaran</div>
+                    <div class="snippet-summary">In this episode, Aswath Damodaran discusses the current state of U.S. stocks, particularly focusing on the potential for bubbles in the AI sector and the overall market valuation. He emphasizes the importance of understanding the underlying fundamentals rather than relying solely on market sentiment.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The U.S. stock market is overvalued but not in a bubble.</li>
+                            <li>AI investments are likely to face corrections due to overvaluation.</li>
+                            <li>Nvidia and similar companies are benefiting from AI architecture investments.</li>
+                            <li>Collectively, many AI companies are overvalued with insufficient revenue to justify their valuations.</li>
+                            <li>Market corrections are a natural part of economic cycles and can lead to innovation.</li>
+                            <li>The cloud business remains robust despite potential downturns in AI-related revenues.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Jensen Huang, Ray Dalio</p>
+                        <p><strong>Organizations:</strong> Nvidia, Microsoft, OpenAI, Alphabet, Meta, Amazon, Oracle</p>
+                        <p><strong>Topics:</strong> market valuation, AI investments, stock market trends, venture capital, economic outlook</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> While the market is overvalued, it is not in a bubble, and corrections will occur, particularly in the AI sector.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">OGJohnAG<span class="channel-count">(4 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=BG7TqgE34sQ" target="_blank">The REAL Confiscation Threat: $100 Silver &amp; $5,000 Gold</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 11m 45s • @OGJohnAG • Jan 25, 2026 • 6,766 views • 452 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> OG John AG</div>
+                    <div class="snippet-summary">This episode discusses the historical context and modern concerns surrounding the confiscation of gold and silver by governments. It emphasizes the importance of protecting wealth through strategic investment and understanding the risks of inflation and regulatory changes.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Historical confiscation of gold occurred in the 1930s under President Franklin Roosevelt.</li>
+                            <li>Modern governments have more efficient methods to extract wealth than physical confiscation.</li>
+                            <li>Gold and silver have lost their traditional roles as everyday money.</li>
+                            <li>Anonymity and discretion are crucial for investors holding precious metals.</li>
+                            <li>Allocating 5% to 15% of a portfolio to precious metals is recommended for protection.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Franklin Roosevelt, Mussolini</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> gold confiscation, silver ownership, inflation risks, wealth protection, investment strategies</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Physical gold and silver, especially when held privately and anonymously, remain resilient assets against market risks and government actions.
+                    </div>
+                </div>
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=hueb7DcZKcE" target="_blank">Should You STILL Hold Gold in 2026? (Real Reasons Revealed)</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 15m 59s • @OGJohnAG • Jan 25, 2026 • 7,461 views • 355 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> OG</div>
+                    <div class="snippet-summary">This episode discusses the enduring value of gold as an investment and its role in a balanced portfolio. It emphasizes the importance of understanding gold&#x27;s unique properties compared to other financial assets.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Gold is a form of money that does not require trust in others.</li>
+                            <li>Unlike other assets, gold&#x27;s supply grows slowly and is not easily manipulated.</li>
+                            <li>Gold serves as a stabilizer in a portfolio, especially during economic uncertainty.</li>
+                            <li>Investors should allocate 5 to 15% of their portfolio to gold for better resilience.</li>
+                            <li>Gold&#x27;s value is based on stability and preservation, not on cash flow or yield.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> gold investment, money definition, portfolio strategy, market timing, economic stability</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Investing in gold is essential for protecting wealth in an unpredictable economic environment.
+                    </div>
+                </div>
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=dpSmjtyW13I" target="_blank">$2.5 Billion Silver Reserve Bill – THIS CHANGES EVERYTHING</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 12m 4s • @OGJohnAG • Jan 25, 2026 • 22,777 views • 1,448 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> OG John AG</div>
+                    <div class="snippet-summary">This episode discusses the introduction of a $2.5 billion bill for a strategic silver reserve in the US, highlighting its implications for national security and market dynamics. The speaker emphasizes the growing industrial demand for silver and the geopolitical context surrounding this move.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The US government is considering a strategic silver reserve due to increasing industrial demand.</li>
+                            <li>Silver is critical for various technologies, including solar panels and electric vehicles.</li>
+                            <li>There is a significant structural deficit in the silver market, with demand outpacing supply.</li>
+                            <li>China&#x27;s control over silver production raises concerns for US national security.</li>
+                            <li>The introduction of the silver reserve bill signals a recognition of silver scarcity at high government levels.</li>
+                            <li>The paper silver market is disconnected from physical supply realities, leading to potential price surges.</li>
+                            <li>The strategic reserve could trigger international competition for silver among nations.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> Reuters, White House, Silver Institute, JP Morgan</p>
+                        <p><strong>Topics:</strong> silver reserve, US legislation, industrial demand, geopolitical implications, market manipulation</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The strategic silver reserve bill represents a paradigm shift in how silver is viewed as a critical national asset.
+                    </div>
+                </div>
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=PrjXeNRlgck" target="_blank">India Gold Premium Explodes to $112: Silver Premium Hits $8 – Here&#x27;s What Happens Next</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 14m 30s • @OGJohnAG • Jan 25, 2026 • 6,456 views • 304 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> OG John AG</div>
+                    <div class="snippet-summary">This episode discusses the recent surge in gold and silver premiums in India, driven by regulatory anxiety ahead of the upcoming budget announcement. It highlights the implications for global silver supply and demand dynamics.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Gold premiums in India reached $112 per ounce, the highest since May 2014.</li>
+                            <li>Silver premiums surged to $8 per ounce, indicating strong physical demand.</li>
+                            <li>The Indian rupee&#x27;s decline is making imports more expensive, driving panic buying.</li>
+                            <li>India&#x27;s consumption accounts for 25% of global silver demand.</li>
+                            <li>If import duties increase, premiums could remain elevated or rise further.</li>
+                            <li>The structural deficit in silver is exacerbated by the current panic buying.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Nirmala Saraman, Chandra Vancesh</p>
+                        <p><strong>Organizations:</strong> Reuters, Silver Institute, BMI, Fitch Solutions</p>
+                        <p><strong>Topics:</strong> gold premiums, silver premiums, India market, import duties, currency impact, global demand</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The panic buying in India signals a tighter physical market for silver and gold, validating concerns about global supply dynamics.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">adam.taggart<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=iVYq2vEifVU" target="_blank">Rick Rule: I&#x27;ve Rarely Seen Such Good Opportunity In Oil &amp; Gas Stocks</a>
+                    </div>
+                    <div class="snippet-meta">interview • 83m 38s • @adam.taggart • Jan 25, 2026 • 146,421 views • 4,860 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Rick Rule, Adam Taggart</div>
+                    <div class="snippet-summary">In this episode, Rick Rule discusses the current opportunities in the oil and gas sector, emphasizing the cyclical nature of the industry and the potential for significant gains. He also shares insights on silver investments and the importance of understanding market dynamics.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Oil and gas stocks are undervalued due to Wall Street&#x27;s neglect.</li>
+                            <li>The oil industry is underinvesting in sustaining capital, risking future production.</li>
+                            <li>US shale production is nearing its peak, limiting future growth.</li>
+                            <li>Investors should focus on companies making necessary capital investments.</li>
+                            <li>Silver stocks may outperform physical silver in the current market.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Greta Thunberg, Trump</p>
+                        <p><strong>Organizations:</strong> Exxon, Battlebank</p>
+                        <p><strong>Topics:</strong> oil industry outlook, natural gas demand, investment strategies, silver market, political risks</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The oil and gas sector presents a unique investment opportunity, but careful selection of companies is crucial.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">capitalcosm<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=GYVdBu0MP7I" target="_blank">🔴 They LOST CONTROL of Gold &amp; Silver Prices (Now Oil is NEXT) | John Polomny</a>
+                    </div>
+                    <div class="snippet-meta">interview • 52m 1s • @capitalcosm • Jan 25, 2026 • 12,467 views • 649 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Danny, John Polomny</div>
+                    <div class="snippet-summary">In this episode, John Polomny discusses the current state of the silver and oil markets, emphasizing the potential for a commodity super cycle. He shares insights on investment strategies in mining stocks and the implications of geopolitical factors on commodity prices.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Silver is experiencing a supply-demand imbalance due to years of underproduction.</li>
+                            <li>Oil prices are expected to rise as demand continues to increase despite claims of a glut.</li>
+                            <li>Investing in mining stocks, particularly those with strong cash flows, is currently favorable.</li>
+                            <li>Emerging markets are beginning to outperform developed markets, indicating a shift in investment opportunities.</li>
+                            <li>The underinvestment in oil production will lead to higher prices in the future.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Robert Friedland</p>
+                        <p><strong>Organizations:</strong> IEA, Exxon, Suncor, BP, Technip</p>
+                        <p><strong>Topics:</strong> silver market, oil prices, commodity super cycle, mining stocks, emerging markets</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The current commodity market dynamics suggest significant investment opportunities, particularly in oil and mining sectors.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">eurodollaruniversity<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=IqbQqsfGcRA" target="_blank">Ray Dalio Makes Shocking Prediction (Here’s What You MUST Know)</a>
+                    </div>
+                    <div class="snippet-meta">panel • 22m 20s • @eurodollaruniversity • Jan 25, 2026 • 61,065 views • 2,471 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Ray Dalio, Steve, Jeeoff</div>
+                    <div class="snippet-summary">Ray Dalio discusses the potential threats to the US dollar and the misconceptions surrounding capital wars versus trade wars. The panel explores the ongoing demand for US treasuries and the complexities of the global monetary system.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The real threat to the US economy comes from capital wars, not trade wars.</li>
+                            <li>Despite fears, there is no significant movement away from US treasuries by global investors.</li>
+                            <li>The functionality of the dollar system is crucial for global trade and finance.</li>
+                            <li>The US dollar remains the dominant currency due to its established network and usability.</li>
+                            <li>Efforts to replace the dollar as a global reserve currency are complex and resource-intensive.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Donald Trump, Brent Johnson, Hugh Henry, George Gammon, Michael Green</p>
+                        <p><strong>Organizations:</strong> US Treasury, BRICS, Urell University</p>
+                        <p><strong>Topics:</strong> capital wars, US dollar, treasury assets, global economy, monetary system</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The US dollar is unlikely to be replaced as the global reserve currency due to its entrenched role in the global economy.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">hedgeye<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=fxiBo1_VI8w" target="_blank">CIO Corner: Capitalizing On Japan - Part III w/ Andrew McDermott</a>
+                    </div>
+                    <div class="snippet-meta">interview • 60m 9s • @hedgeye • Jan 25, 2026 • 569 views • 22 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> David Salem, Andrew McDermott</div>
+                    <div class="snippet-summary">In this episode, David Salem and Andrew McDermott discuss the evolution of Japan&#x27;s economy and investment landscape, focusing on the impact of Abenomics and current opportunities in various sectors. They explore the potential of Japanese companies in AI, semiconductors, and defense, while also addressing the geopolitical implications of Japan&#x27;s rising influence.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Japan&#x27;s financial markets were largely ignored by investors in 2010.</li>
+                            <li>Abenomics marked a significant turning point for Japan&#x27;s economy.</li>
+                            <li>Many Japanese companies are now trading at high multiples despite poor management.</li>
+                            <li>Japan&#x27;s nuclear power industry is recovering and innovating post-Fukushima.</li>
+                            <li>Japanese companies are becoming key players in the global defense market.</li>
+                            <li>Investment opportunities exist in small-cap Japanese companies with strong fundamentals.</li>
+                            <li>Japan&#x27;s geopolitical strategy is increasingly focused on collaboration with neighboring countries.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Warren Buffett, John Swans, George Buckley, Palmer Lucky, Kashida, Mr. Abe</p>
+                        <p><strong>Organizations:</strong> Hedgei, TIFF, Starbucks Japan, General Motors, Mitsubishi Electric, Hitachi, TSMC, Anderil</p>
+                        <p><strong>Topics:</strong> Japanese economy, investment opportunities, Abenomics, nuclear power, defense industry, AI and semiconductors, capital allocation</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Japan is positioned to capitalize on its economic strengths and geopolitical relationships, presenting unique investment opportunities.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">inittowinit928<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=esQSKBXKxdo" target="_blank">Silver Is Exploding And Most Investors Missed It ~ Monday Market Moves</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 35m 20s • @inittowinit928 • Jan 25, 2026 • 7,097 views • 364 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Steve Barton</div>
+                    <div class="snippet-summary">In this episode, Steve Barton discusses the recent movements in the markets, particularly focusing on silver and gold investments. He provides insights into market trends, technical analysis, and future expectations for various commodities.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Silver is up 14.5% for the week, indicating strong bullish momentum.</li>
+                            <li>Gold is expected to break the $5,000 mark next week.</li>
+                            <li>The DXY dollar index has fallen significantly, which could impact commodities positively.</li>
+                            <li>Technical analysis suggests potential downside for the S&amp;P 500 if certain support levels are broken.</li>
+                            <li>Investors should consider selective gold and silver miners for better returns.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> market analysis, silver investment, gold trends, commodities, technical analysis</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Silver and gold are poised for significant upward movement in the coming weeks.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">nobull-markettalkwithgeorg4907<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=-OqtPVuxhq4" target="_blank">John Roque, Unicus, Bob Coleman | Gold, Silver, IWM, Rotation, Energy | No Bull George Noble.</a>
+                    </div>
+                    <div class="snippet-meta">panel • 85m 1s • @nobull-markettalkwithgeorg4907 • Jan 25, 2026 • 542 views • 15 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> John Roque, George Noble, Bob Coleman</div>
+                    <div class="snippet-summary">In this episode, the panel discusses the current state of the markets, focusing on gold, silver, and small-cap stocks, while also addressing the importance of valuation in investment decisions. They explore the dynamics of the energy sector and the implications of market trends on future investments.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Gold and silver are experiencing significant bullish trends.</li>
+                            <li>Valuation is often ignored by many investors, leading to potential market instability.</li>
+                            <li>The Russell 2000 has broken out of a long-term base, indicating potential for further gains.</li>
+                            <li>The energy sector is showing strong internal action despite oil prices.</li>
+                            <li>Retail investors are increasingly engaging in &#x27;vibe investing&#x27;, distorting market realities.</li>
+                            <li>The market is currently driven by fear rather than greed, particularly in commodities.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Turbo B, Penny Ford, Jamie Baker, Peter Lynch, Jim Chanos, Elon Musk, Samuel O&#x27;Brien, Tavi Ka, Van Drunken Miller, Alberto Alvarez, Tom Chenos, Gordon Johnson, Jack Gamble, Melody, Michael How</p>
+                        <p><strong>Organizations:</strong> JP Morgan, Fidelity, Tesla, OpenAI, Southwest Airlines, Coastal Ventures, MRA Advisors, Nautilus Research</p>
+                        <p><strong>Topics:</strong> Gold and Silver, Market Trends, Investment Strategies, Valuation, Energy Sector, Small Caps, Data Centers</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The current market dynamics suggest a potential for significant movements in gold and silver, driven by fear and a lack of understanding of valuation among many investors.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">topic_Doomberg<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=bDQF0eANV7g" target="_blank">A NEW World Order: So Why Isn’t Oil EXPLODING?! | Doomberg</a>
+                    </div>
+                    <div class="snippet-meta">interview • 37m 10s • @soarfinancially • Jan 25, 2026 • 39,742 views • 1,474 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Guy, Doomberg</div>
+                    <div class="snippet-summary">The episode discusses the current state of the oil markets, particularly in relation to Venezuela&#x27;s political situation and its impact on global oil prices. It also explores geopolitical dynamics involving the US, China, and the emerging Board of Peace.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The oil market&#x27;s reaction to President Maduro&#x27;s capture was muted due to oversupply.</li>
+                            <li>Venezuela&#x27;s oil production has significantly declined, limiting its impact on global prices.</li>
+                            <li>Long-term effects of US involvement in Venezuela are likely to be bearish for oil prices.</li>
+                            <li>The Board of Peace is seen as a competitor to the UN, reflecting shifting geopolitical alliances.</li>
+                            <li>China&#x27;s role in Venezuela&#x27;s oil exports complicates US-China relations.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> President Maduro, Michael Bur, Trump, Putin, Xi, Mark Carney</p>
+                        <p><strong>Organizations:</strong> Exxon, Chevron, CIA</p>
+                        <p><strong>Topics:</strong> oil markets, Venezuela, geopolitics, Board of Peace, China relations</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The geopolitical landscape surrounding oil markets is complex, with significant implications for future pricing and international relations.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">topic_Eric_Sprott<span class="channel-count">(2 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=nHpc2tWndMU" target="_blank">150-$-Silber = 10x-Gewinne bei Juniors? (Eric Sprott kühne Prognose)</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 14m 40s • Jan 25, 2026 • 4,257 views • 184 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Eric Sprott</div>
+                    <div class="snippet-summary">The episode discusses Eric Sprott bold predictions about the silver market, emphasizing the potential for significant gains in junior mining stocks as structural changes unfold. It highlights the loss of control by banks over the precious metals market and the increasing industrial demand for silver.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Eric Sprott holds 97% of his wealth in gold and silver.</li>
+                            <li>He believes junior silver stocks could rise tenfold if silver reaches $150.</li>
+                            <li>The banks have lost control over the precious metals market.</li>
+                            <li>There is a significant industrial demand for silver due to technologies like solar panels and electric vehicles.</li>
+                            <li>The silver market has been in a structural deficit for five consecutive years.</li>
+                            <li>Current valuations of junior miners do not reflect the actual price of silver, which is over $100.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> JP Morgan, Bank of America</p>
+                        <p><strong>Topics:</strong> silver market, investment strategies, junior miners, industrial demand, market manipulation</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Sprott&#x27;s analysis suggests that the current market conditions present a unique investment opportunity in silver and junior mining stocks.
+                    </div>
+                </div>
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=vgj5Mr49eAA" target="_blank">$150 Silver = 10X Gains on Juniors? (Eric Sprott Bold Prediction)</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 18m 10s • @OGJohnAG • Jan 25, 2026 • 25,066 views • 1,328 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> OG John AG</div>
+                    <div class="snippet-summary">The episode discusses Eric Sprott predictions about the silver market, particularly the potential for junior mining stocks to experience significant gains as silver prices rise. It highlights structural shifts in the precious metals market and the mispricing of junior miners relative to current silver prices.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Eric Sprott claims that at $150 silver, junior mining stocks could increase by 10 times.</li>
+                            <li>The banks have lost control of the silver market, leading to a fundamental break in pricing mechanisms.</li>
+                            <li>Institutional investment in precious metals is expected to increase significantly, potentially overwhelming supply.</li>
+                            <li>Current valuations of junior miners are based on outdated silver price assumptions.</li>
+                            <li>Physical shortages in silver are real and accelerating, impacting market dynamics.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Eric Sprott</p>
+                        <p><strong>Organizations:</strong> JP Morgan, Silver Institute</p>
+                        <p><strong>Topics:</strong> silver market, junior miners, investment strategy, institutional demand, market manipulation</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The episode emphasizes that the junior miners are currently undervalued and present a significant investment opportunity as the silver market undergoes a historic repricing.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">topic_Grant_Williams_investor<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=yI_SsdPCjKY" target="_blank">Gold, Bonds, Cash… NONE Are Safe — Grant Williams Shocks Investors</a>
+                    </div>
+                    <div class="snippet-meta">interview • 13m 25s • @themetalsinsights144 • Jan 25, 2026 • 1,613 views • 19 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Grant Williams</div>
+                    <div class="snippet-summary">In this episode, Grant Williams discusses the changing landscape of safe investments, emphasizing the importance of adapting investment strategies over time. He argues that gold remains a reliable asset amidst increasing market volatility and distrust in traditional financial systems.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>There is no true safe haven in investing.</li>
+                            <li>Gold has proven to be a reliable store of value over time.</li>
+                            <li>Trust in US Treasury bonds has eroded due to geopolitical actions.</li>
+                            <li>Countries are increasingly turning to gold as a reserve asset.</li>
+                            <li>Self-interest is now the primary driver of international relations and investments.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Mark, Nicolas Maduro, Maduro, India, China, Saudis</p>
+                        <p><strong>Organizations:</strong> US Treasury, Swift</p>
+                        <p><strong>Topics:</strong> safe havens, gold investment, market volatility, trust erosion, commodities</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Investors should focus on tangible assets like gold and commodities in an era of heightened uncertainty.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">topic_Harry_Dent<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=ribPCFnUzsE" target="_blank">&quot;It&#x27;s Gonna Be Worse Than 2008&quot; - Harry dent</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 11m 34s • @lifeworthlivings • Jan 25, 2026 • 1,919 views • 85 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Harry Dent</div>
+                    <div class="snippet-summary">Harry Dent discusses the impending economic crisis, drawing parallels to the Great Depression and the 2008 recession. He emphasizes the risks of current investment strategies and the consequences of excessive money printing and government deficits.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The U.S. has printed $29 trillion since the 2008 recession, leading to a bubble.</li>
+                            <li>The next economic downturn could resemble the Great Depression with significant stock market crashes.</li>
+                            <li>Investors should consider treasury bonds as a safer investment during the upcoming crisis.</li>
+                            <li>Real estate is at risk of significant declines, especially for leveraged properties.</li>
+                            <li>The current economic situation is unsustainable and will lead to severe consequences.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Ben Bernanke, Mario Draghi, Peter Schiff</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> economic downturn, stock market crash, real estate bubble, money printing, investment strategy</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The odds are stacked against investors, and now is a critical time to reassess investment strategies.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">topic_Lyn_Alden<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=0zma8i1N8C0" target="_blank">&quot;America May Not Survive This&quot; | Lyn Alden</a>
+                    </div>
+                    <div class="snippet-meta">interview • 11m 51s • @lifeworthlivings • Jan 25, 2026 • 9,206 views • 323 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Lyn Alden</div>
+                    <div class="snippet-summary">In this episode, Lyn Alden discusses the unsustainable fiscal policies of developed countries and their implications for asset prices, particularly focusing on gold and Bitcoin. She emphasizes the importance of understanding market cycles and the long-term trends affecting hard assets.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Major developed countries are unlikely to control their public finances soon.</li>
+                            <li>There is a growing interest in hard assets like gold due to fiscal deficits.</li>
+                            <li>Gold has been increasing in central bank holdings since 2009.</li>
+                            <li>The structural trend of diminishing trust in fiat currencies is real and ongoing.</li>
+                            <li>Investors should be cautious of enthusiasm bubbles in asset markets.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> fiscal deficits, gold investment, Bitcoin trends, central bank policies, market cycles</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The trend of increasing interest in hard assets will continue well into the 2030s.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">topic_Martin_Armstrong_economist<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=LpkXgquIxDo" target="_blank">🔥Martin Armstrong Update: Two Planned Conflicts and America’s Future Successor</a>
+                    </div>
+                    <div class="snippet-meta">interview • 55m 27s • Jan 25, 2026 • 3,206 views • 81 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Martin Armstrong</div>
+                    <div class="snippet-summary">In this episode, Martin Armstrong discusses the current state of the precious metals market and the geopolitical tensions in Europe, particularly regarding potential conflicts and economic strategies. He emphasizes the looming sovereign debt crisis and the implications for global markets and currencies.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Europe is preparing for potential war, which is influencing the precious metals market.</li>
+                            <li>JP Morgan is moving its gold desk to Singapore due to concerns over capital controls in Europe.</li>
+                            <li>There is a significant risk of a sovereign debt crisis in Europe by 2026.</li>
+                            <li>The US may enforce capital controls similar to those in Europe.</li>
+                            <li>China is seen as a more aggressive threat compared to Russia, which is content with its borders.</li>
+                            <li>The decline of the West is contributing to China&#x27;s rise as a financial power.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> John McCain, Victoria Nuland, Blink, Garland, Macron</p>
+                        <p><strong>Organizations:</strong> JP Morgan, CME</p>
+                        <p><strong>Topics:</strong> geopolitics, precious metals, capital controls, sovereign debt crisis, US-China relations, war preparation</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The geopolitical landscape is shifting, with Europe facing potential conflict and economic turmoil, while China is positioned to rise as a dominant financial power.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">topic_Michael_Oliver<span class="channel-count">(5 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=8Br3Fj44oGA" target="_blank">&quot;If You Have Silver, You HAVE ONLY 3 Days to Act... WATCH THIS NOW&quot;: Michael Oliver | Silver 2026</a>
+                    </div>
+                    <div class="snippet-meta">interview • 23m 1s • @financedailysilverupdates • Jan 25, 2026 • 7,309 views • 175 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Michael Oliver</div>
+                    <div class="snippet-summary">In this episode, Michael Oliver discusses the impending changes in the silver market and the potential for significant price increases by 2026. He emphasizes the importance of understanding market structures and the historical context of silver&#x27;s price movements.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Silver is expected to break free from a 50-year price range.</li>
+                            <li>The logarithmic scale reveals a potential price target for silver between $300 and $500.</li>
+                            <li>Historical patterns suggest that significant price movements in silver often follow volatility spikes.</li>
+                            <li>The current market conditions indicate a structural fracture in the monetary system.</li>
+                            <li>Silver&#x27;s relative performance compared to gold is improving, indicating a regime reset.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> silver market, monetary metals, price dynamics, market breakout, investment strategy</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Silver is likely to experience a dramatic price increase as it escapes its long-standing price confinement.
+                    </div>
+                </div>
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=iLmyrhGUMhQ" target="_blank">#Gold to $8K in More Ways Than One: Michael Oliver Case &amp; My Own Technical Analysis</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 11m 24s • Jan 25, 2026 • 1,351 views • 18 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Humble Market Time</div>
+                    <div class="snippet-summary">In this episode, the speaker discusses the potential for gold prices to reach $8,000 based on technical analysis and historical trends. The analysis includes insights from Michael Oliver and examines the gold to silver ratio and market conditions.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Gold is currently approaching $5,000 and may top out around that level.</li>
+                            <li>The gold to silver ratio has recently fallen below 50 and is expected to drop to around 40.</li>
+                            <li>Michael Oliver suggests that gold typically experiences 7 to 8-fold moves during bull phases.</li>
+                            <li>Historical analysis shows significant price increases in gold from previous lows.</li>
+                            <li>Current economic conditions and money printing may lead to further increases in gold prices.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Michael Oliver</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> gold price analysis, technical analysis, market trends, gold to silver ratio, historical gold movements</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Gold is likely to reach $8,000 within the next three to four years.
+                    </div>
+                </div>
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=uqsllReVul8" target="_blank">If You Own Silver, You Have A Few Days Left For This Price Shock - Peter Krauth &amp; Michael Oliver</a>
+                    </div>
+                    <div class="snippet-meta">interview • 17m 15s • @moneysenseofficial • Jan 25, 2026 • 7,649 views • 231 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Peter Krauth, Michael Oliver</div>
+                    <div class="snippet-summary">This episode discusses the potential for a significant price increase in silver, driven by various market factors and geopolitical shifts. Experts Peter Krauth and Michael Oliver provide insights into the current silver market dynamics and future projections.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Bank of America projects silver could reach between $125 and $300 this year.</li>
+                            <li>A &#x27;thunderbolt tantrum&#x27; move is expected to drive silver prices significantly higher.</li>
+                            <li>China&#x27;s export restrictions and strategic designations are tightening the silver market.</li>
+                            <li>The US imports 43% of its silver consumption, creating a supply bottleneck.</li>
+                            <li>Silver is projected to outperform gold in the coming months.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> Bank of America</p>
+                        <p><strong>Topics:</strong> silver price predictions, gold silver ratio, market analysis, geopolitical factors, investment strategies</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Silver is poised for a dramatic price increase, with current conditions presenting a fleeting opportunity for investors.
+                    </div>
+                </div>
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=0C2OnjrY1lA" target="_blank">&quot;This Time It&#x27;s A BIGGER Bubble...&quot; - Michael Oliver | Gold Silver Price</a>
+                    </div>
+                    <div class="snippet-meta">interview • 8m 38s • @bullionnews • Jan 25, 2026 • 6,024 views • 67 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Michael Oliver</div>
+                    <div class="snippet-summary">In this episode, Michael Oliver discusses the impending market crash and its implications for investors, particularly focusing on gold and silver as safe havens. He argues that the current bubble is larger than previous ones, leading to potentially severe economic consequences.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The current market bubble is unprecedented in size and duration.</li>
+                            <li>Gold has outperformed the S&amp;P 500 in recent years.</li>
+                            <li>The Federal Reserve&#x27;s actions have historically lagged behind market realities.</li>
+                            <li>Past market crashes have shown that gold tends to rise during downturns.</li>
+                            <li>The upcoming market correction will have significant real-world consequences.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> Federal Reserve</p>
+                        <p><strong>Topics:</strong> market bubble, gold prices, Federal Reserve, economic consequences, investment strategies</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The impending market crash will be more severe due to the larger bubble, challenging the existence of the Federal Reserve.
+                    </div>
+                </div>
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=BC7MB4CdAZk" target="_blank">Silver at $100 Was The WARNING — What Comes Next ISN&#x27;T NORMAL  - Michael Oliver</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 16m 16s • Jan 25, 2026 • 4,480 views • 163 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Michael Oliver</div>
+                    <div class="snippet-summary">In this episode, Michael Oliver discusses the current state of the silver market, emphasizing that recent price movements are indicative of a significant shift away from historical norms. He argues that silver&#x27;s value is being driven by both its monetary and industrial demand, which is not being accurately reflected in its current pricing.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Silver is currently undervalued compared to gold and its historical price levels.</li>
+                            <li>There has been a consistent supply-demand deficit in silver for the past five years.</li>
+                            <li>Recent price surges in silver are a result of breaking out of a long-standing price ceiling.</li>
+                            <li>The demand for silver in high-tech industries is increasing significantly.</li>
+                            <li>Market manipulation has historically kept silver prices suppressed.</li>
+                            <li>Silver could potentially reach prices between $200 and $500 in the near future.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Eric Sprott</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> silver market, gold comparison, supply demand, market manipulation, historical trends</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Silver is entering a new reality of pricing that could lead to dramatic increases in value.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">topic_Rick_Rule<span class="channel-count">(4 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=OgCddaDddO0" target="_blank">Vàng Tiến Sát $5000 – Rick Rule &amp; Frank Gustra Chỉ Ra Thời Điểm Thực Sự Nên Bán Vàng?</a>
+                    </div>
+                    <div class="snippet-meta">interview • 15m 17s • Jan 25, 2026 • 1,187 views • 50 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Rick Rule, Frank Gustra</div>
+                    <div class="snippet-summary">The episode discusses the current trends in gold prices and the strategic decisions behind central banks&#x27; increasing gold reserves. Rick Rule and Frank Gustra provide insights into the long-term implications of these trends for individual investors.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Gold is approaching the $5000 mark due to macroeconomic trends.</li>
+                            <li>Central banks are buying gold instead of selling it, indicating a strategic shift.</li>
+                            <li>Rick Rule emphasizes that geopolitical events are catalysts, not core reasons for gold&#x27;s rise.</li>
+                            <li>Frank Gustra argues that the accumulation of gold is a long-term strategy, not a reaction to short-term events.</li>
+                            <li>Investors should view gold as a means to preserve purchasing power rather than a quick profit tool.</li>
+                            <li>Selling gold should be based on systemic financial conditions, not just price fluctuations.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> gold price, economic trends, investment strategy, monetary system, China&#x27;s gold reserves</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Gold is becoming a crucial part of long-term investment strategies as trust in fiat currencies wanes.
+                    </div>
+                </div>
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=OtNFTxzzE04" target="_blank">Droht ein Silbercrash wie 1980? Rick Rule rotiert jetzt in diese Aktien. +Defensive Öl-Aktien</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 28m 36s • @urbanjaekle • Jan 25, 2026 • 23,291 views • 1,409 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Urbanle</div>
+                    <div class="snippet-summary">The episode discusses the current state of the silver market, comparing it to historical peaks and exploring potential investment opportunities in oil and silver stocks. The speaker shares insights on market trends and personal investment strategies.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Silver prices have recently surpassed $100, reminiscent of spikes in 1980 and 2012.</li>
+                            <li>There are parallels between the current silver market and historical trends from the 70s and 80s.</li>
+                            <li>The speaker believes that while silver is rising, significant corrections may still occur.</li>
+                            <li>Rick Rule has sold 80% of his silver holdings and is now investing in silver mining companies.</li>
+                            <li>Oil stocks are showing bullish signals despite falling oil prices.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Rick Rule</p>
+                        <p><strong>Organizations:</strong> Exxon Mobile, Halliburton, Pan American Silver</p>
+                        <p><strong>Topics:</strong> silver market, gold prices, oil stocks, investment strategies, historical comparisons</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The speaker suggests that the commodity markets, particularly silver and oil, remain intriguing for investors.
+                    </div>
+                </div>
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=8hmkOr7Hl6M" target="_blank">BEWARE Stackers: This Is the Most Dangerous Silver Market Right Before a Pullback | Rick Rule</a>
+                    </div>
+                    <div class="snippet-meta">interview • 11m 58s • @2dollarsinvesting • Jan 25, 2026 • 3,322 views • 75 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Rick Rule</div>
+                    <div class="snippet-summary">In this episode, Rick Rule discusses the current state of the silver and gold markets, emphasizing the potential for growth in the precious metals sector. He also shares insights on his investment strategies and the role of AI in analyzing market data.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The gold sector is in a bull market, while the broader commodity market is not yet in a super cycle.</li>
+                            <li>Silver has outpaced gold this year, indicating increased interest from generalist investors.</li>
+                            <li>Weak demand and supply issues are affecting copper and oil prices.</li>
+                            <li>Rick Rule has shifted his portfolio towards senior gold stocks and oil and gas investments.</li>
+                            <li>AI can effectively screen for investment opportunities and analyze large datasets.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> Battle Bank</p>
+                        <p><strong>Topics:</strong> silver market, gold bull market, investment strategy, oil and gas, AI in investing</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The current market conditions suggest a potential for significant growth in the precious metals and oil sectors.
+                    </div>
+                </div>
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=07T1G3GuXxU" target="_blank">⭐️ Rick Rule Silver Stock Expert Rankings: Top Royalty &amp; Streaming Companies</a>
+                    </div>
+                    <div class="snippet-meta">interview • 12m 2s • @smartstocktrading • Jan 25, 2026 • 11,815 views • 316 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Rick Rule</div>
+                    <div class="snippet-summary">In this episode, Rick Rule discusses the current landscape of royalty and streaming companies in the precious metals sector, providing insights and rankings for various companies. He emphasizes the growth potential and investment opportunities within this industry despite common misconceptions about stagnation.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Royalty and streaming companies are lower risk alternatives to exploration and producing companies.</li>
+                            <li>The market for large transactions in streaming companies is increasing, contrary to popular belief.</li>
+                            <li>The copper industry will need to invest $250 billion over the next decade to maintain production.</li>
+                            <li>Franco Nevada is ranked as the best precious metals investment.</li>
+                            <li>Royal Gold has improved its standing due to a recent acquisition.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Darl</p>
+                        <p><strong>Organizations:</strong> Franco Nevada, Wheaton, Royal Gold, Triple Flag, Barrick, Sandstorm, Orion</p>
+                        <p><strong>Topics:</strong> royalty companies, streaming companies, investment rankings, market trends, copper industry</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The opportunities available to the streaming industry dwarf those seen in the last 30 years.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">OTHER<span class="topic-count">(2 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">AkkadDaily<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=Yhaik_nASyg" target="_blank">2026 Will Be the Year of the Chud</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 13m 18s • @SargonofAkkad • Jan 25, 2026 • 247,882 views • 12,721 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> []</div>
+                    <div class="snippet-summary">The episode discusses the upcoming video games set in medieval times, focusing on the controversy surrounding their themes and character representations. The speaker expresses a preference for games that prioritize traditional gaming values over modern social agendas.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The game &#x27;Nights Path&#x27; has sparked controversy over its character design and lack of LGBT representation.</li>
+                            <li>The speaker criticizes modern games for prioritizing social agendas over gameplay.</li>
+                            <li>The popularity of &#x27;Nights Path&#x27; is evidenced by its 100,000 wish lists on Steam.</li>
+                            <li>The speaker believes that traditional gaming values are being replaced by modern narratives.</li>
+                            <li>The upcoming game &#x27;Fable&#x27; is criticized for abandoning its original themes of good and evil.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> Steam</p>
+                        <p><strong>Topics:</strong> video games, medieval themes, LGBT representation, game criticism, modern agendas</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Players should choose wisely between traditional games and those that cater to modern agendas.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">LotuseatersDotCom<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=Hrcuk3eBAYw" target="_blank">How One Man Rewrote the Rules of War</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 15m 4s • @LotuseatersDotCom • Jan 25, 2026 • 4,043 views • 297 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> David Sterling</div>
+                    <div class="snippet-summary">This episode explores the innovative military strategies developed by David Sterling during his time in the hospital, which led to the formation of the SAS. It highlights how Sterling&#x27;s ideas transformed conventional warfare in North Africa during World War II.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>David Sterling conceived the SAS while recovering from a back injury in a hospital.</li>
+                            <li>Sterling proposed a new type of military unit that operated independently behind enemy lines.</li>
+                            <li>The SAS was designed to conduct small-scale raids with minimal resources.</li>
+                            <li>Sterling&#x27;s plan was initially met with skepticism but ultimately gained support from military leaders.</li>
+                            <li>The SAS was named to create the illusion of a larger airborne force in North Africa.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Lawrence of Arabia, John Lewis, General Neil Richie, Brigadier Dudley Clark, Jock Lewis, Churchill</p>
+                        <p><strong>Organizations:</strong> British Army, SAS Brigade</p>
+                        <p><strong>Topics:</strong> David Sterling, SAS formation, North Africa campaign, military strategy, special operations</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> David Sterling&#x27;s innovative approach to warfare significantly changed military operations in World War II.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <div class="footer">
+            Generated 2026-02-13 08:43:47
+        </div>
+    </div>
+</body>
+</html>

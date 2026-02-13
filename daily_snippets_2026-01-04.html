@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Snippets - 2026-01-04</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background-color: #FFF1E0;
+            color: #3E474F;
+            line-height: 1.6;
+            padding: 24px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            padding: 32px 0;
+            border-bottom: 3px solid #3E474F;
+            margin-bottom: 32px;
+        }
+        .header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .header .date {
+            font-size: 18px;
+            color: #66737D;
+        }
+        .header .meta {
+            font-size: 14px;
+            color: #66737D;
+            margin-top: 12px;
+        }
+        .topic-section {
+            margin-bottom: 40px;
+        }
+        .topic-title {
+            font-size: 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 0;
+            border-bottom: 2px solid #F2DFCE;
+            margin-bottom: 24px;
+            color: #3E474F;
+        }
+        .channel-section {
+            margin-bottom: 28px;
+        }
+        .channel-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            margin-bottom: 16px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .snippet-card {
+            background: #FFF9F5;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border-left: 4px solid #FCD0AF;
+        }
+        .snippet-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .snippet-title a {
+            color: #0D7680;
+            text-decoration: none;
+        }
+        .snippet-title a:hover {
+            text-decoration: underline;
+        }
+        .snippet-meta {
+            font-size: 13px;
+            color: #66737D;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+        .snippet-speakers {
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .snippet-speakers strong {
+            color: #3E474F;
+        }
+        .snippet-summary {
+            font-size: 15px;
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+        .snippet-claims {
+            margin-bottom: 16px;
+        }
+        .snippet-claims-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .snippet-claims ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .snippet-claims li {
+            font-size: 14px;
+            padding: 4px 0 4px 16px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .snippet-claims li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #0D7680;
+        }
+        .snippet-details {
+            font-size: 13px;
+            color: #66737D;
+            border-top: 1px solid #F2DFCE;
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+        .snippet-details p {
+            margin-bottom: 4px;
+        }
+        .snippet-conclusion {
+            font-size: 14px;
+            font-style: italic;
+            color: #3E474F;
+            background: #F2DFCE;
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 12px;
+        }
+        .footer {
+            text-align: center;
+            padding: 24px 0;
+            border-top: 1px solid #F2DFCE;
+            margin-top: 40px;
+            font-size: 12px;
+            color: #66737D;
+        }
+        /* Collapsible sections */
+        details {
+            margin-bottom: 8px;
+        }
+        details summary {
+            cursor: pointer;
+            list-style: none;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary::before {
+            content: "▶";
+            display: inline-block;
+            margin-right: 8px;
+            transition: transform 0.2s;
+            font-size: 12px;
+        }
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
+        .topic-details {
+            border: 1px solid #F2DFCE;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            background: #FFF9F5;
+        }
+        .topic-summary {
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 16px 20px;
+            color: #3E474F;
+            background: #F2DFCE;
+            border-radius: 8px;
+        }
+        .topic-details[open] .topic-summary {
+            border-radius: 8px 8px 0 0;
+        }
+        .topic-count {
+            font-size: 14px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .topic-content {
+            padding: 16px 20px;
+        }
+        .channel-details {
+            border: 1px solid #FCD0AF;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            background: white;
+        }
+        .channel-summary {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            padding: 12px 16px;
+            background: #FFF9F5;
+            border-radius: 6px;
+        }
+        .channel-details[open] .channel-summary {
+            border-radius: 6px 6px 0 0;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .channel-count {
+            font-size: 13px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .channel-content {
+            padding: 12px 16px;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 16px;
+            }
+            .header h1 {
+                font-size: 28px;
+            }
+            .snippet-card {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Daily Snippets</h1>
+            <div class="date">Sunday, January 04, 2026</div>
+            <div class="meta">23 videos • published 2026-01-04 • all snippets</div>
+        </div>
+        <details class="topic-details">
+            <summary class="topic-summary">POLITICS<span class="topic-count">(5 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">AkkadDaily<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=hAbgd_1K8uY" target="_blank">The Rules-Based Order Has No Clothes</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 22m 0s • 192,748 views</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> [unknown]</div>
+                    <div class="snippet-summary">The episode discusses the political situation in Venezuela under Nicholas Maduro and critiques the socialist policies that have led to the country&#x27;s decline. It also examines Donald Trump&#x27;s approach to foreign policy and the implications of a shifting global order.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Maduro&#x27;s regime has led to severe economic decline in Venezuela.</li>
+                            <li>Trump&#x27;s actions represent a return to imperial politics.</li>
+                            <li>The rules-based international order is a fiction that has failed.</li>
+                            <li>Socialist ideologies have historically resulted in poverty and repression.</li>
+                            <li>The US is strategically interested in Venezuela&#x27;s oil resources.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Nicholas Maduro, Hugo Chavez, Jeremy Corbyn, Bernie Sanders, Donald Trump, Vladimir Putin, Rory Stewart, Ed Davyy</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> Venezuela politics, US foreign policy, socialism critique, Trump&#x27;s actions, international law</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The episode argues that the current political landscape reveals the fragility of the rules-based order and the reality of power dynamics in international relations.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">Con_Tomlinson<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=NLMcUAnyfdg" target="_blank">The Criminals Hired by Hope Not Hate</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 27m 18s • 27,842 views</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Leo</div>
+                    <div class="snippet-summary">This episode discusses the criminal activities of Lyron Velman, a member of the organization Hope Not Hate, and critiques the organization&#x27;s ideological stance on censorship and free speech. It highlights the perceived hypocrisy and moral failings within leftist circles regarding personal virtue and accountability.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Lyron Velman, a senior member of Hope Not Hate, has been convicted of serious offenses against children.</li>
+                            <li>The organization is accused of prioritizing ideology over personal virtue, allowing criminals to operate within its ranks.</li>
+                            <li>Hope Not Hate is implicated in using legislation meant to protect children to censor political opponents.</li>
+                            <li>The episode argues that the organization has connections with government and intelligence agencies.</li>
+                            <li>Critics claim that Hope Not Hate employs individuals with violent pasts while condemning others for their political beliefs.</li>
+                            <li>The podcast suggests that the left&#x27;s approach to free speech is hypocritical and detrimental to democracy.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Lyron Velman, Ali Hussein, Nick Lol, Sadiq Khan, Lucy Connelly, Kim Leadbeater, Joe Cox, Brendan Cox, Matthew Collins, Harry Shuckman</p>
+                        <p><strong>Organizations:</strong> Hope Not Hate, GB News, North London synagogue</p>
+                        <p><strong>Topics:</strong> criminal behavior, leftist ideology, censorship, free speech, child protection, political corruption</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Hope Not Hate is portrayed as a morally corrupt organization that undermines free speech and protects individuals with criminal backgrounds.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">IgorYakovenko<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=0Qbh5SdIX0M" target="_blank">⚡️Ужас в Харькове, теневой флот РФ, расстрелы в Иране</a>
+                    </div>
+                    <div class="snippet-meta">panel • 117m 27s • 12,233 views</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Игорь Яковенко, Ольга Курносова, Давид Шарп</div>
+                    <div class="snippet-summary">В этом эпизоде обсуждаются протесты в Иране, российская агрессия и фейковые новости о нападении на резиденцию Путина. Также рассматриваются возможные последствия для России и Украины в свете международной политики и санкций.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Протесты в Иране вызваны экономическим кризисом и ростом цен.</li>
+                            <li>Россия продолжает агрессивные действия против Украины, несмотря на международные призывы к миру.</li>
+                            <li>Фейковые новости о нападении на Путина используются для манипуляции общественным мнением.</li>
+                            <li>Санкции США могут усилиться в ответ на действия России.</li>
+                            <li>Иран поставляет России детали для беспилотников, используемых в Украине.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Владимир Путин, Дональд Трамп, Зеленский, Махса Амини, Кирилл Буданов, Денис Капустин</p>
+                        <p><strong>Organizations:</strong> Госдепартамент США, The New York Times, ЦРУ, Агентство национальной безопасности США</p>
+                        <p><strong>Topics:</strong> протесты в Иране, российская агрессия, фейковые новости, санкции США, мобилизация в Украине</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Ситуация в Иране и действия России могут привести к значительным изменениям в международной политике и экономике.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">capitalcosm<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=cCT7IO1Augs" target="_blank">🔴 Someone BIG Knew Maduro was about to get ARRESTED (was there a SECRET deal?)</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 74m 57s • 16,105 views</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Grock</div>
+                    <div class="snippet-summary">This episode discusses the recent arrest of Venezuelan President Nicholas Maduro and the implications for the oil market and geopolitical landscape. The speaker analyzes insider trading patterns and the potential for increased US control over Venezuelan oil resources.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Maduro&#x27;s arrest was unexpected and met with little resistance.</li>
+                            <li>Insiders in the oil market anticipated the event, leading to unusual trading patterns.</li>
+                            <li>The US may gain control over Venezuela&#x27;s significant oil reserves.</li>
+                            <li>Political instability in Venezuela could affect oil production timelines.</li>
+                            <li>China&#x27;s involvement in Venezuela raises questions about international agreements.</li>
+                            <li>The US intervention is seen as a strategic move to secure resources amid global tensions.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Nicholas Maduro, Trump, Lula Dilva</p>
+                        <p><strong>Organizations:</strong> Exxon, Chevron, PDFSA</p>
+                        <p><strong>Topics:</strong> Venezuela politics, oil market analysis, geopolitical implications, silver market dynamics, US intervention</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The episode suggests that the US intervention in Venezuela is part of a broader strategy to secure vital resources, particularly silver and oil, amid shifting geopolitical dynamics.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">triggerpod<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=pqP6MkCmqgs" target="_blank">The Truth About Venezuela</a>
+                    </div>
+                    <div class="snippet-meta">interview • 21m 35s • 18,271 views</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Daniel</div>
+                    <div class="snippet-summary">This episode discusses the political and social turmoil in Venezuela, focusing on the Maduro regime&#x27;s ties to drug trafficking and terrorism. It highlights the implications of these issues for both Venezuela and the United States.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The Maduro regime operates as a drug cartel, using military resources to facilitate drug trafficking.</li>
+                            <li>Venezuela is a significant transit point for cocaine, with about 20% of the US supply coming through the country.</li>
+                            <li>The regime&#x27;s ties to terrorist organizations like FARC and ELN exacerbate the security threat to the US.</li>
+                            <li>The Venezuelan government collaborates with hostile regimes, including Iran, Russia, and China.</li>
+                            <li>Crime rates in Venezuela have surged under the Maduro regime, which has used gangs to suppress dissent.</li>
+                            <li>Military action may be necessary to end the Maduro regime and restore democracy in Venezuela.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Nicolas Maduro, Chavez, Biden, Makmoud Almad, Vladimir Putin, Xiinping</p>
+                        <p><strong>Organizations:</strong> DEA, FARC, ELN</p>
+                        <p><strong>Topics:</strong> Venezuela politics, drug trafficking, US foreign policy, terrorism, organized crime</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The only way to achieve a prosperous Venezuela is to remove Maduro from power.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">INVESTING<span class="topic-count">(16 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">Finding_Finance<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=XHt2VT2slhA" target="_blank">Massive Commodity Upswing Coming? Venezuela&#x27;s OIL Production EXPLAINED!</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 31m 48s • 5,222 views</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Andy</div>
+                    <div class="snippet-summary">In this episode, Andy discusses the potential upswing in Venezuela&#x27;s oil production and its implications for the global commodity market. He explores the relationship between Venezuela, China, and the U.S., and the broader context of oil prices and investment opportunities.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Venezuela sells oil to China using yuan to bypass U.S. sanctions.</li>
+                            <li>Increased investment is needed to boost Venezuela&#x27;s oil production.</li>
+                            <li>The commodity bull market is expected to continue despite short-term fluctuations.</li>
+                            <li>Historical precedents suggest that U.S. intervention in oil-rich countries can lead to price volatility.</li>
+                            <li>Major oil companies are showing bullish patterns despite bearish narratives.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Trump, Gaddafi, Saddam Hussein, Calvin, Eric Nuttle</p>
+                        <p><strong>Organizations:</strong> PDVSA, Goldman Sachs</p>
+                        <p><strong>Topics:</strong> Venezuela oil, commodity market, China relations, investment opportunities, oil production</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The long-term outlook for commodities, particularly oil, remains bullish despite current uncertainties.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">Monetary-Matters<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=cYabLwti67E" target="_blank">Harley Bassman Explains the Next Bond Crisis No One Is Pricing In</a>
+                    </div>
+                    <div class="snippet-meta">interview • 62m 40s • 5,544 views</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Harley Bassman</div>
+                    <div class="snippet-summary">In this episode, Harley Bassman discusses the current state of the bond market, inflation trends, and investment strategies, particularly focusing on mortgage-backed securities and gold as a hedge against currency devaluation. He emphasizes the importance of understanding fiscal policy and its impact on the economy and investment landscape.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Negative convexity is a risk in financial crises.</li>
+                            <li>Inflation is likely to remain above 3% due to demographic shifts and fiscal policy.</li>
+                            <li>Mortgage-backed securities offer better yields with lower risk compared to investment-grade bonds.</li>
+                            <li>Gold serves as a hedge against fiat currency devaluation.</li>
+                            <li>The current fiscal deficit is unsustainable and will impact the economy long-term.</li>
+                            <li>High-quality BDCs are attractive due to potential steepening of the yield curve.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> Simplify Asset Management</p>
+                        <p><strong>Topics:</strong> bond market, inflation, fiscal policy, mortgage securities, gold investment, credit markets</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Investors should consider gold and mortgage-backed securities as key components of their portfolios in the current economic climate.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">Movchans<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=hug4ECVYF7Q" target="_blank">2025 Results: The Fed, the Labor Market, AI, and Bubbles—What&#x27;s in Store for Investors in 2026?</a>
+                    </div>
+                    <div class="snippet-meta">panel • 48m 1s • 160 views</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Еудженнио Киреу, Елена Черкова, Артём Карлов</div>
+                    <div class="snippet-summary">This episode discusses the economic results of December 2025 and the overall year, focusing on the labor market, inflation, and investment trends. The speakers analyze the implications for investors in 2026 amidst changing economic indicators.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>US unemployment rose to 4-6%, exceeding the Fed&#x27;s forecast.</li>
+                            <li>Inflation decreased to 2.7%, but the accuracy of this data is questioned.</li>
+                            <li>The Fed lowered interest rates to 3.53-3.75% due to labor market risks.</li>
+                            <li>Consumer spending is showing signs of decline, impacting GDP growth.</li>
+                            <li>Investments in AI are expected to drive economic growth despite potential market corrections.</li>
+                            <li>The housing market remains inaccessible for many due to high mortgage rates.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Трамп, Рубини</p>
+                        <p><strong>Organizations:</strong> ФРС, Netflix, Warner Brothers, Walt Disney, Amazon, Параmount, Яндекс, Mobos Group</p>
+                        <p><strong>Topics:</strong> US labor market, inflation trends, interest rates, AI investments, real estate market, economic growth</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The economic outlook for 2026 suggests potential slowdowns, but significant uncertainties remain.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">eurodollaruniversity<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=rCwTQ9bqKOM" target="_blank">The TRILLION Dollar AI Debt Bubble Is Bursting</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 20m 5s • 37,917 views</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Jeeoff, Steve Van Meter</div>
+                    <div class="snippet-summary">This episode discusses the emerging concerns around the AI debt bubble and its implications for major tech companies. The speakers highlight the risks associated with the massive debt incurred to fuel AI development and the potential consequences for investors and the market.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Howard Marx warns that the AI bubble may not conform to historical patterns.</li>
+                            <li>The AI bubble is primarily driven by debt rather than equity.</li>
+                            <li>Major tech companies are accumulating significant debt, impacting their financial health.</li>
+                            <li>The credit cycle poses a risk to both the stock market and the AI sector.</li>
+                            <li>If the credit market tightens, it could severely hinder AI development.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Howard Marx, Larry Ellison, Mark Zuckerberg</p>
+                        <p><strong>Organizations:</strong> Oak Tree Capital, Oracle, Meta, Amazon</p>
+                        <p><strong>Topics:</strong> AI bubble, debt cycle, investor psychology, credit market risks, tech companies</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The intertwining of the AI bubble and the credit cycle presents significant risks for investors and the broader economy.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">topic_Grant_Williams_investor<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=ICSNuvDT0IU" target="_blank">Millions of Silver Stackers About to Lose this LIFETIME OPPORTUNITY! Grant Williams</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 13m 31s • 2,472 views</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Grant Williams</div>
+                    <div class="snippet-summary">In this episode, Grant Williams discusses the nature of volatility in the silver market and the importance of understanding market dynamics for investors and traders. He emphasizes the need for emotional control and a long-term perspective when navigating the complexities of precious metals investing.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Silver and gold are expected to rise significantly but will experience volatility.</li>
+                            <li>Market corrections are normal and should not trigger panic among investors.</li>
+                            <li>Emotional control is crucial for successful trading in volatile markets.</li>
+                            <li>Beginners should avoid trading silver and gold due to their inherent volatility.</li>
+                            <li>Understanding market patterns and emotional responses is key to making informed investment decisions.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> silver market, volatility, trading strategies, investing mindset, market corrections</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Investors must prepare for volatility and maintain a long-term perspective to succeed in the silver market.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">topic_Marc_Faber<span class="channel-count">(3 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=IJF9-BbDjcg" target="_blank">🔴 Dr. Marc Faber Reveals Why SILVER Prices Are REALLY Exploding</a>
+                    </div>
+                    <div class="snippet-meta">interview • 34m 45s • 18,330 views</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Danny, Marc Faber</div>
+                    <div class="snippet-summary">In this episode, Dr. Marc Faber discusses the recent surge in silver prices and the broader implications for precious metals investing. He shares insights on market trends, central banking policies, and the potential for emerging markets in 2026.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Silver prices are experiencing significant volatility with multiple pricing across markets.</li>
+                            <li>Central bankers are viewed as deceptive, leading to a preference for precious metals over fiat currencies.</li>
+                            <li>Gold has shown consistent performance over the past few years, indicating a potential ongoing bull market.</li>
+                            <li>Emerging markets may offer better investment opportunities compared to US stocks in the current economic climate.</li>
+                            <li>The performance of gold and silver is often more favorable than that of traditional stocks.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> Goldman Sachs</p>
+                        <p><strong>Topics:</strong> silver prices, precious metals, gold market, investing strategies, emerging markets</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Investing in precious metals is seen as a safer strategy compared to traditional asset classes in the current economic environment.
+                    </div>
+                </div>
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=ttPxf2o6E4k" target="_blank">WIR werden absolutes CHAOS erleben! BEREITE deine FAMILIE VOR! Marc Faber</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 8m 48s • 1,889 views</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Marc Faber</div>
+                    <div class="snippet-summary">In this episode, Marc Faber discusses the impending economic chaos and the impact of taxation on different social classes. He critiques current economic policies and warns about the consequences of government actions on inflation and market stability.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Tax increases disproportionately affect the middle and lower classes.</li>
+                            <li>Government deficits lead to inflation, acting as a hidden tax.</li>
+                            <li>The current economic policies are unsustainable and will lead to further inflation.</li>
+                            <li>Negative interest rates are unprecedented and problematic.</li>
+                            <li>The capitalist system requires the allowance of market failures to function properly.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Bill Gates, Warren Buffett, Kennedy</p>
+                        <p><strong>Organizations:</strong> EZB, US-Notenbank</p>
+                        <p><strong>Topics:</strong> Inflation, Taxation, Economic Policy, Market Dynamics, Wealth Disparity</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The current economic trajectory is unsustainable and will lead to significant financial instability.
+                    </div>
+                </div>
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=ruxJBd9mzys" target="_blank">Dr. Marc Faber warnt: &quot;Notenbanken sind VOLLIDIOTEN!&quot; | Warum der Silberpreis steigen muss</a>
+                    </div>
+                    <div class="snippet-meta">interview • 38m 52s • 43,102 views</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Dr. Marc Faber</div>
+                    <div class="snippet-summary">Dr. Marc Faber discusses the future of the silver market and provides insights into the economic landscape for 2026. He critiques central banks and shares his views on investment strategies amidst current market conditions.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Central banks are incompetent and fail to stabilize purchasing power.</li>
+                            <li>Faber predicts a correction in the stock market, particularly in the U.S.</li>
+                            <li>Investing in precious metals like gold and silver is advisable due to negative real interest rates.</li>
+                            <li>China&#x27;s export restrictions on silver could positively impact prices.</li>
+                            <li>The current economic environment is favorable for precious metals due to inflation.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Donald Trump, Elon Musk, Jamie Dimon</p>
+                        <p><strong>Organizations:</strong> ECB, JP Morgan</p>
+                        <p><strong>Topics:</strong> silver price, market predictions, central banks, economic outlook, investment strategies</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Investing in precious metals is a safe strategy in the current economic climate.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">topic_Michael_Howell<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=sYR7iBluHsI" target="_blank">Is This the End of Liquidity-Driven Bull Markets? w/ Michael Howell</a>
+                    </div>
+                    <div class="snippet-meta">interview • 11m 20s • 1,574 views</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Michael Howell</div>
+                    <div class="snippet-summary">This episode discusses the future of liquidity-driven bull markets and the potential shift towards Treasury QE. Michael Howell analyzes the current state of bank reserves and the Federal Reserve&#x27;s response to liquidity demands.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Liquidity is expected to increase by 2026, but may not be sufficient.</li>
+                            <li>Current bank reserves are below the desired level, causing spikes in repo rates.</li>
+                            <li>The Federal Reserve is reluctant to add more liquidity, favoring Main Street over Wall Street.</li>
+                            <li>The next Federal Reserve chair may not significantly change the liquidity strategy.</li>
+                            <li>There is a potential risk of inflation affecting future interest rate policies.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Scott Bessant, Kevin Hass, Lori Logan, John Williams, Jay Powell, Governor Waller, Michelle Bowman, Steven Miran</p>
+                        <p><strong>Organizations:</strong> Federal Reserve, Treasury, Dallas Fed</p>
+                        <p><strong>Topics:</strong> liquidity, Federal Reserve, bank reserves, Treasury QE, market behavior, interest rates</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The current Federal Reserve policy may not sustain a strong bull market.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">topic_Michael_Oliver<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=x4tO8gdgarU" target="_blank">500 Dolar Kesin! Gümüşün 2026’daki Fiyat Patlaması Asla Unutulmayacak - Michael Oliver</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 8m 20s • 2,755 views</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Michael Oliver</div>
+                    <div class="snippet-summary">This episode discusses the potential price surge of silver, predicting it could reach up to $500 due to long-standing market distortions. Michael Oliver analyzes the structural issues in the silver market and the implications for investors.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Silver has been undervalued for decades and is approaching a significant price correction.</li>
+                            <li>The fair price for silver could be between $200 and $300, but it may exceed $500 temporarily.</li>
+                            <li>Market corrections are often nonlinear and can lead to extreme price movements.</li>
+                            <li>Current market dynamics indicate a shift in the price regime for silver.</li>
+                            <li>Investors should be cautious of short-term fluctuations and focus on long-term trends.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> silver pricing, market correction, inflation impact, historical parallels, investment strategy</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The silver market is entering a phase of rapid price correction that could lead to unprecedented highs.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">topic_Rick_Rule<span class="channel-count">(5 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=3AgvlUQlQ74" target="_blank">&quot;Start Buying This ASAP...&quot; - Rick Rule</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 11m 32s • 9,046 views</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Rick Rule</div>
+                    <div class="snippet-summary">In this episode, Rick Rule discusses the current state of the US economy, focusing on debt levels and the implications for currency and investment strategies. He emphasizes the importance of understanding liquidity versus solvency and shares his investment approach in precious metals and commodities.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The US government&#x27;s balance sheet liabilities have increased significantly since the 1980s.</li>
+                            <li>The purchasing power of the US dollar is expected to decline by 75% over the next decade.</li>
+                            <li>Foreign central banks are diversifying out of US dollars and into gold due to the weaponization of the dollar.</li>
+                            <li>Current demand for industrial commodities is weaker than perceived despite supply shortfalls.</li>
+                            <li>Investing in hated sectors like oil can yield significant returns over time.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Doug Casey</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> US economy, debt levels, currency volatility, gold investment, commodity prices, short-term bonds</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Investors should consider the long-term implications of current economic trends and adjust their strategies accordingly.
+                    </div>
+                </div>
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=AcFaI_I5K9g" target="_blank">&quot;THE UNTHINKABLE Is About To Happen To GOLD &amp; SILVER!&quot;: Rick Rule | Silver Price Prediction 2026</a>
+                    </div>
+                    <div class="snippet-meta">interview • 21m 50s • 2,959 views</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Rick Rule</div>
+                    <div class="snippet-summary">In this episode, Rick Rule discusses the importance of gold and silver as investments, emphasizing their roles as stores of value and mediums of exchange. He also explores the future of silver in the market, driven by technological advancements and changing demand dynamics.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Gold has been a superior store of value for over a thousand years.</li>
+                            <li>Digital tokens representing gold will reduce transaction costs significantly.</li>
+                            <li>Silver&#x27;s price is expected to rise due to structural market forces.</li>
+                            <li>China&#x27;s new export rules are tightening silver supply.</li>
+                            <li>The demand for silver in EV batteries is set to explode.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Ronald Reagan, David Stockman, Ambrose Bierce, H.L. Mencken</p>
+                        <p><strong>Organizations:</strong> Tether, Brinks, SPAT</p>
+                        <p><strong>Topics:</strong> gold investment, silver market, digital currency, economic trends, market predictions</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Investors should consider gold and silver as essential components of their portfolios due to impending economic shifts.
+                    </div>
+                </div>
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=pRSO7_hgaFM" target="_blank">Commodity Investing ALERT: Gold, Oil &amp; Bitcoin Next Moves ~ Monday Market Moves</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 44m 18s • 4,719 views</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Steve Bordon</div>
+                    <div class="snippet-summary">In this episode, Steve Bordon discusses the latest market movements, focusing on commodities like gold, oil, and Bitcoin. He provides insights into current trends and potential future movements based on technical analysis.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Gold is down 4.9% for the week but up 64% for the year.</li>
+                            <li>The DXY may break down, which could be beneficial for commodities.</li>
+                            <li>Silver is down 8% for the week, indicating bearish trends.</li>
+                            <li>Oil prices are expected to spike due to geopolitical events in Venezuela.</li>
+                            <li>Bitcoin is showing short-term bullish signs but remains bearish long-term.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> William, Joseph, David, Frank, Aaron, Nick Maduro</p>
+                        <p><strong>Organizations:</strong> XLE, GDX, GDXJ, PSLV, PHYS</p>
+                        <p><strong>Topics:</strong> market analysis, gold trends, oil prices, Bitcoin outlook, silver performance, economic indicators</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The current market conditions suggest cautious optimism for commodities, particularly in light of geopolitical tensions.
+                    </div>
+                </div>
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=aoJ_3Jq7ngY" target="_blank">Our LATEST Gold &amp; Silver Predictions Will SHOCK Everyone - Rick Rule &amp; Mario Innecco</a>
+                    </div>
+                    <div class="snippet-meta">interview • 15m 33s • 8,576 views</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Rick Rule, Mario Innecco</div>
+                    <div class="snippet-summary">In this episode, Rick Rule and Mario Innecco discuss the importance of gold and silver as investments in the current economic climate, emphasizing their roles as stores of value and mediums of exchange. They explore how technological advancements are changing the landscape of gold transactions and the implications for investors.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Gold is essential for protecting purchasing power in a declining fiat currency environment.</li>
+                            <li>Silver is expected to outperform gold in the future.</li>
+                            <li>Central banks are cutting rates in response to financial system stress, not low inflation.</li>
+                            <li>Technological advancements are reducing transaction costs for gold, making it more viable as a medium of exchange.</li>
+                            <li>Owning gold is now a necessity rather than a luxury for financial security.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Bernanke</p>
+                        <p><strong>Organizations:</strong> Federal Reserve, Tether, Brinks</p>
+                        <p><strong>Topics:</strong> gold investment, silver market, inflation concerns, monetary policy, technology in finance</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Gold is a must-own asset for long-term financial security.
+                    </div>
+                </div>
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=0KP6dNuaMSQ" target="_blank">They’ve LOST CONTROL of Gold &amp; Silver! What Comes Next Will Shock Everyone - Bill Holter</a>
+                    </div>
+                    <div class="snippet-meta">interview • 21m 16s • 2,100 views</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Bill Holter</div>
+                    <div class="snippet-summary">Bill Holter discusses the current state of gold and silver markets, emphasizing the psychological shift in how these metals are perceived as safe assets. He warns of a systemic reckoning as confidence in paper currencies wanes and demand for physical metals increases.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Gold and silver are viewed differently in the East compared to the West.</li>
+                            <li>There is a significant imbalance between silver supply and demand.</li>
+                            <li>Traditional paper markets for metals are under strain due to excessive short selling.</li>
+                            <li>A breakdown in trust could lead to a credit market crisis.</li>
+                            <li>Governments may back currencies with gold and silver without making them convertible.</li>
+                            <li>The current financial system is vulnerable to a single disruptive event.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> gold and silver, market dynamics, economic collapse, credit trust, investment strategies</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The existing financial framework is unsustainable, leading to a potential monetary reset.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">triggerpod<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=UxtOh7HKSno" target="_blank">The Debt Crisis No One’s Talking About - Sir Niall Ferguson</a>
+                    </div>
+                    <div class="snippet-meta">interview • 75m 20s • 185,245 views</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Sir Niall Ferguson</div>
+                    <div class="snippet-summary">In this episode, Sir Niall Ferguson discusses the current debt crisis facing Western nations, drawing parallels to historical financial crises. He emphasizes the importance of understanding money, debt dynamics, and the potential consequences of unsustainable borrowing.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Borrowing to consume leads to financial trouble.</li>
+                            <li>Welfare states are struggling due to demographic changes.</li>
+                            <li>The US is projected to spend more on debt service than on defense.</li>
+                            <li>Historical financial crises often stem from a loss of trust in banks.</li>
+                            <li>Radical fiscal reforms are necessary but politically challenging.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Francis, Richard Nixon, Nathan Rothschild, Emanuel Macron, Jim Tish</p>
+                        <p><strong>Organizations:</strong> Wild Alaskan Company</p>
+                        <p><strong>Topics:</strong> debt crisis, financial history, money and trust, public debt, economic volatility, Rothschilds</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Without significant reforms, the current debt trajectory is unsustainable and could lead to severe economic consequences.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">OTHER<span class="topic-count">(2 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">LotuseatersDotCom<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=V062Zl_Xp1k" target="_blank">FREEMIUM: Epochs #244 | SAS: Operation Nimrod</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 108m 41s • 4,855 views</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Epox</div>
+                    <div class="snippet-summary">This episode recounts the events of Operation Nimrod, the SAS operation to rescue hostages from the Iranian embassy in London in 1980. It details the background of the siege, the actions taken by the SAS, and the outcome of the operation.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The SAS was called in after negotiations with terrorists collapsed.</li>
+                            <li>The operation involved a coordinated assault from multiple entry points.</li>
+                            <li>One hostage was killed by the terrorists during the siege.</li>
+                            <li>The SAS successfully rescued 19 out of 20 hostages.</li>
+                            <li>The operation lasted approximately 17 minutes.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Margaret Thatcher, Andy McNab, Chris Ryan, David Sterling, Willie Whitelaw, Mike Rose, Peter Deilier, Trevor Lock</p>
+                        <p><strong>Organizations:</strong> SAS, BBC</p>
+                        <p><strong>Topics:</strong> Operation Nimrod, SAS history, Iranian embassy siege, terrorism, hostage rescue</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Operation Nimrod was a significant success for the SAS, demonstrating their effectiveness in counter-terrorism operations.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">topic_Michael_Howell<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=s7h546_EPwQ" target="_blank">JVKE - &#x27;her&#x27; (feat. ZVC, Annika Wells, Kaden Hawke, John Michael Howell, Forrest Frank)</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 7m 2s • 15,006 views</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> JVKE</div>
+                    <div class="snippet-summary">The episode features JVKE expressing his emotions and experiences related to love and loneliness through his music. He reflects on the journey of finding love and the lessons learned along the way.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Love can bring both joy and pain.</li>
+                            <li>The journey to find love often involves overcoming personal fears.</li>
+                            <li>Experiences of loneliness can lead to self-discovery.</li>
+                            <li>True love is about connection and commitment.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> love, loneliness, self-discovery, relationships</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Finding love is a transformative journey that teaches valuable lessons.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <div class="footer">
+            Generated 2026-01-23 00:13:21
+        </div>
+    </div>
+</body>
+</html>
