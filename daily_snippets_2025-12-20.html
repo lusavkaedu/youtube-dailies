@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Snippets - 2025-12-20</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background-color: #FFF1E0;
+            color: #3E474F;
+            line-height: 1.6;
+            padding: 24px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            padding: 32px 0;
+            border-bottom: 3px solid #3E474F;
+            margin-bottom: 32px;
+        }
+        .header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .header .date {
+            font-size: 18px;
+            color: #66737D;
+        }
+        .header .meta {
+            font-size: 14px;
+            color: #66737D;
+            margin-top: 12px;
+        }
+        .topic-section {
+            margin-bottom: 40px;
+        }
+        .topic-title {
+            font-size: 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 0;
+            border-bottom: 2px solid #F2DFCE;
+            margin-bottom: 24px;
+            color: #3E474F;
+        }
+        .channel-section {
+            margin-bottom: 28px;
+        }
+        .channel-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            margin-bottom: 16px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .snippet-card {
+            background: #FFF9F5;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border-left: 4px solid #FCD0AF;
+        }
+        .snippet-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .snippet-title a {
+            color: #0D7680;
+            text-decoration: none;
+        }
+        .snippet-title a:hover {
+            text-decoration: underline;
+        }
+        .snippet-meta {
+            font-size: 13px;
+            color: #66737D;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+        .snippet-speakers {
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .snippet-speakers strong {
+            color: #3E474F;
+        }
+        .snippet-summary {
+            font-size: 15px;
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+        .snippet-claims {
+            margin-bottom: 16px;
+        }
+        .snippet-claims-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .snippet-claims ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .snippet-claims li {
+            font-size: 14px;
+            padding: 4px 0 4px 16px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .snippet-claims li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #0D7680;
+        }
+        .snippet-details {
+            font-size: 13px;
+            color: #66737D;
+            border-top: 1px solid #F2DFCE;
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+        .snippet-details p {
+            margin-bottom: 4px;
+        }
+        .snippet-conclusion {
+            font-size: 14px;
+            font-style: italic;
+            color: #3E474F;
+            background: #F2DFCE;
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 12px;
+        }
+        .footer {
+            text-align: center;
+            padding: 24px 0;
+            border-top: 1px solid #F2DFCE;
+            margin-top: 40px;
+            font-size: 12px;
+            color: #66737D;
+        }
+        /* Collapsible sections */
+        details {
+            margin-bottom: 8px;
+        }
+        details summary {
+            cursor: pointer;
+            list-style: none;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary::before {
+            content: "▶";
+            display: inline-block;
+            margin-right: 8px;
+            transition: transform 0.2s;
+            font-size: 12px;
+        }
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
+        .topic-details {
+            border: 1px solid #F2DFCE;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            background: #FFF9F5;
+        }
+        .topic-summary {
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 16px 20px;
+            color: #3E474F;
+            background: #F2DFCE;
+            border-radius: 8px;
+        }
+        .topic-details[open] .topic-summary {
+            border-radius: 8px 8px 0 0;
+        }
+        .topic-count {
+            font-size: 14px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .topic-content {
+            padding: 16px 20px;
+        }
+        .channel-details {
+            border: 1px solid #FCD0AF;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            background: white;
+        }
+        .channel-summary {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            padding: 12px 16px;
+            background: #FFF9F5;
+            border-radius: 6px;
+        }
+        .channel-details[open] .channel-summary {
+            border-radius: 6px 6px 0 0;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .channel-count {
+            font-size: 13px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .channel-content {
+            padding: 12px 16px;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 16px;
+            }
+            .header h1 {
+                font-size: 28px;
+            }
+            .snippet-card {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Daily Snippets</h1>
+            <div class="date">Saturday, December 20, 2025</div>
+            <div class="meta">24 videos • uploaded 2025-12-20 • 24 videos</div>
+        </div>
+        <details class="topic-details">
+            <summary class="topic-summary">POLITICS<span class="topic-count">(4 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">ThePodcastoftheLotusEaters<span class="channel-count">(2 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=YKGFz18B31I" target="_blank">Latin America Is Rejecting Socialism</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 36m 49s • Dec 20, 2025 • 11,750 views • 1,117 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> N/A</div>
+                    <div class="snippet-summary">This episode discusses the political landscape in Latin America, highlighting a trend of rejecting socialism and the rise of right-wing leaders. The focus is on recent elections in Chile and Brazil, and the implications for governance and immigration policies.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Latin America is trending away from socialism.</li>
+                            <li>Chile elected far-right candidate Jose Antonio Cast.</li>
+                            <li>Brazil is preparing for elections with a right-wing candidate.</li>
+                            <li>The region is experiencing increased political engagement.</li>
+                            <li>Leaders are focusing on crime reduction and immigration control.</li>
+                            <li>Venezuela&#x27;s past wealth is contrasted with its current poverty due to socialism.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Lula, Jose Antonio Cast, Max Struber, Renan Santos, Bolosaro, Netanyahu</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> Latin America politics, rejection of socialism, Chile elections, immigration policies, crime and governance, economic policies</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The days of socialism in Latin America seem to be over, with a shift towards more conservative governance.
+                    </div>
+                </div>
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=vq59kYODgf8" target="_blank">The Managerial Class</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 27m 7s • Dec 20, 2025 • 21,144 views • 1,219 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> N/A</div>
+                    <div class="snippet-summary">This episode explores the concept of the managerial state and elite theory, discussing how a small group of unelected individuals exert disproportionate influence over politics and society. It highlights the implications of this power structure on governance and public policy.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The managerial state is characterized by a small group holding disproportionate power over politics and culture.</li>
+                            <li>Elites often collaborate to protect their interests and maintain their positions.</li>
+                            <li>Decisions in society primarily flow from elites to the masses, not the other way around.</li>
+                            <li>The influence of unelected individuals like Bill Gates and Larry Fink on UK policy is concerning.</li>
+                            <li>The behavioral insights team is used to shape public opinion and compliance without legal frameworks.</li>
+                            <li>The current political system favors stability over necessary change, which can be oppressive.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Larry Fink, Kier Starmer, Rachel Reeves, James Burnham, Nema Pavliani, Mark Carney, George Osborne, Tony Blair</p>
+                        <p><strong>Organizations:</strong> Black Rock, Bill and Melinda Gates Foundation, Oracle, Courage Media</p>
+                        <p><strong>Topics:</strong> managerial state, elite theory, political influence, government policy, behavioral insights, globalism</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The managerial class operates with significant influence over government decisions, often sidelining the needs and voices of ordinary citizens.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">davidstarkeytalks<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=nkEryrDoBMI" target="_blank">Starkey &amp; Mogg ask: Can Danny Kruger REALLY save the Civil Service?</a>
+                    </div>
+                    <div class="snippet-meta">panel • 19m 10s • Dec 20, 2025 • 9,709 views • 798 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Starkey, Mogg</div>
+                    <div class="snippet-summary">This episode discusses Danny Kruger&#x27;s role in reforming the Civil Service and the challenges associated with government efficiency. The speakers explore the implications of bureaucratic expansion and the need for a fundamental reform of civil service principles.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Danny Kruger has transitioned to a reform MP without a by-election.</li>
+                            <li>The civil service has expanded significantly, necessitating a reduction in staff.</li>
+                            <li>Bureaucracies often create inefficiencies and waste due to lack of accountability.</li>
+                            <li>Meritocratic principles in civil service hiring have been eroded by DEI initiatives.</li>
+                            <li>A civil service reform act is essential for restoring political accountability.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Danny Kruger, Boris Johnson, David Cameron, Francis Maude, Michael Heseltine, Gus O&#x27;Donnell, Kier Starmer</p>
+                        <p><strong>Organizations:</strong> Civil Service, NHS</p>
+                        <p><strong>Topics:</strong> Danny Kruger, Civil Service Reform, Government Efficiency, Bureaucracy Issues, Political Appointments</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The episode concludes that significant reforms are necessary to restore the primacy of elected officials over civil servants.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">winston_marshall<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=0Ovx_jHYKHo" target="_blank">&#x27;My Biggest Fear About Britain!&#x27; Andrew Gold Speaks Out</a>
+                    </div>
+                    <div class="snippet-meta">interview • 69m 0s • Dec 20, 2025 • 110,340 views • 5,936 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Andrew Gold</div>
+                    <div class="snippet-summary">In this episode, Andrew Gold discusses his concerns about Islam&#x27;s influence in Britain and the challenges of cultural assimilation amidst rising immigration. He also critiques the media&#x27;s handling of controversial topics and the rise of conspiracy theories in alternative media.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Islam is a significant concern for the future of Britain.</li>
+                            <li>Cultural assimilation is crucial for maintaining British values.</li>
+                            <li>The media has narrowed the Overton window, leading to the rise of conspiracy theories.</li>
+                            <li>Many Muslims in Britain are not vocal about their beliefs due to fear of backlash.</li>
+                            <li>There is a growing divide between different ethnic communities in Britain.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Winston Marshall, Charlie Kirk, Douglas Murray, Yasmin Muhammad, Leila Cunningham, Raja Maya, Jihad Al-Shami</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> Islam in Britain, Cultural assimilation, Media bias, Conspiracy theories, Immigration concerns</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The integration of diverse cultures in Britain poses challenges that need to be addressed to preserve national identity.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">INVESTING<span class="topic-count">(15 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">ActionableIntelligenceAlert<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=tQMwGpnPE1U" target="_blank">2026 Commodity Resource Sector Super Cycle Is Taking Shape. AIA Weekly Update 12.20.25</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 60m 26s • Dec 20, 2025 • 389 views • 52 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> John Polomny</div>
+                    <div class="snippet-summary">In this episode, John Polomny discusses the emerging trends in the commodity resource sector as he anticipates a super cycle beginning in 2026. He emphasizes the importance of understanding market cycles and the potential for significant returns in undervalued commodities.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The commodity sector is showing multiple breakouts, indicating a potential super cycle.</li>
+                            <li>Gold stocks have outperformed the S&amp;P 500 and energy ETFs recently.</li>
+                            <li>There is a structural deficit in palladium and copper, which could drive prices higher.</li>
+                            <li>Investment in oil is seen as a significant opportunity due to underinvestment in the sector.</li>
+                            <li>The demand for lithium is expected to rise as battery technology advances.</li>
+                            <li>Ford is facing significant losses due to its electric vehicle investments, indicating a shift in market preferences.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Jim Farley, Keith Ellison, Ilhan Omar</p>
+                        <p><strong>Organizations:</strong> Actionable Intelligence, GDX, XLE, US Global Investors, AIA, Ford Motor Company, Chevron, Bloomberg, IAA</p>
+                        <p><strong>Topics:</strong> commodity super cycle, gold and oil, investment strategies, market trends, lithium demand, energy prices</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The resource sector is poised for a significant upswing, driven by underinvestment and changing market dynamics.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">Finding_Finance<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=LkajZQ64djM" target="_blank">SAMSUNG and SILVER SUPPLY, SILVER JUST Started MOVE, URANIUM Demand YUGE, Platinum/Gold RATIO</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 28m 43s • Dec 20, 2025 • 1,768 views • 197 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Andy</div>
+                    <div class="snippet-summary">In this episode, Andy discusses the current trends in precious metals, particularly silver and gold, and the implications of increasing demand for these commodities. He also touches on the future of uranium and the potential for significant price movements in the metals market.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Samsung is reportedly securing silver in Mexico due to its critical role in the digital world.</li>
+                            <li>Silver is in a 5-year deficit, leading to potential price surges as industries panic.</li>
+                            <li>Uranium demand is expected to surge, with significant investments in nuclear power planned.</li>
+                            <li>The gold to silver ratio indicates that platinum is outperforming gold in the current inflationary environment.</li>
+                            <li>Investors should focus on long-term trends rather than short-term market fluctuations.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Peter Schiff, Michael Oliver, Eric Young, Brady, Tracy</p>
+                        <p><strong>Organizations:</strong> Samsung, CNBC, Apple, Lenar</p>
+                        <p><strong>Topics:</strong> silver supply, uranium demand, gold prices, investment strategies, commodities</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The current market conditions suggest a significant shift towards precious metals as safe-haven assets.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">RealVisionFinance<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=Rv0a9_GdSPw" target="_blank">Are We Getting Rekt in 2026? | REKT Vision (December 19, 2025)</a>
+                    </div>
+                    <div class="snippet-meta">panel • 66m 16s • Dec 20, 2025 • 1,930 views • 74 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Grant, Alex</div>
+                    <div class="snippet-summary">The episode discusses the current state of the crypto market and predictions for 2026, focusing on the dynamics between Layer 1 tokens and application-based investments. The speakers analyze market sentiment and the potential for new investment opportunities in prediction markets and app-based solutions.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The crypto market is experiencing a disconnect between fundamentals and token prices.</li>
+                            <li>Prediction markets are gaining traction and could see significant growth.</li>
+                            <li>Investors are advised to focus on application-based investments rather than Layer 1 tokens.</li>
+                            <li>Market sentiment is currently negative, but there are signs of potential recovery.</li>
+                            <li>The future of crypto may involve more financialization of internet culture.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Matt Hogan</p>
+                        <p><strong>Organizations:</strong> Bitwise, Robinhood, Stripe, Paradigm</p>
+                        <p><strong>Topics:</strong> crypto market trends, prediction markets, L1 vs apps, market sentiment, 2026 predictions</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Investors should shift their focus from traditional Layer 1 tokens to innovative applications and prediction markets for better opportunities.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">adam.taggart<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=kSem5xVlLaI" target="_blank">Stocks Are 50-60% Overvalued. Could You Survive A Correction That Big? | Lance Roberts</a>
+                    </div>
+                    <div class="snippet-meta">interview • 96m 1s • Dec 20, 2025 • 6,549 views • 520 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Adam Taggart, Lance Roberts</div>
+                    <div class="snippet-summary">In this episode, Adam Taggart and Lance Roberts discuss the current state of the stock market, the potential for a significant correction, and the psychological impacts of social media on society. They emphasize the importance of understanding market risks and the need for a solid investment strategy.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The stock market is currently overvalued by 50-60%.</li>
+                            <li>Most investors do not survive 50% market drawdowns.</li>
+                            <li>Margin debt is at an all-time high, which can lead to forced selling during downturns.</li>
+                            <li>The last 15 days of December typically show positive market returns.</li>
+                            <li>Social media contributes to increased loneliness and mental health issues.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Elon Musk, Charlie Kirk</p>
+                        <p><strong>Organizations:</strong> Charter, United Healthcare</p>
+                        <p><strong>Topics:</strong> market correction, investment strategies, economic outlook, social media impact, mental health</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Investors should be cautious and prepared for potential market corrections while also addressing the societal impacts of technology and social media.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">arcadiaeconomics<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=n8uHVXPggMU" target="_blank">Silver 401k Rule Change To Create New Source of Demand In 2026</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 7m 55s • Dec 20, 2025 • 1,127 views • 139 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> David Morgan</div>
+                    <div class="snippet-summary">This episode discusses the upcoming rule change in 2026 that will allow precious metals to be included in 401k plans, highlighting the potential impact on American retirement savings. David Morgan emphasizes the importance of precious metals as a hedge against economic instability and the need for investors to adapt to these changes.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Most Americans currently have no exposure to precious metals in their retirement accounts.</li>
+                            <li>The 2026 rule change will allow precious metals to be included in 401k plans for the first time.</li>
+                            <li>This change could lead to significant demand for precious metals over the coming years.</li>
+                            <li>Financial advisors have historically kept metals at near zero levels in retirement portfolios.</li>
+                            <li>The upcoming changes represent a structural shift in how retirement portfolios are managed.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> Morgan Report</p>
+                        <p><strong>Topics:</strong> 401k rule change, precious metals, financial reset, investment strategy</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The inclusion of precious metals in 401k plans marks a significant shift in investment strategy for American retirees.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">eurodollaruniversity<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=nLGyr-Qc-Mo" target="_blank">Holy Sh*t…You Won’t Believe This New Housing Data</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 20m 37s • Dec 20, 2025 • 11,791 views • 758 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Hugh Henry</div>
+                    <div class="snippet-summary">This episode discusses the alarming trends in the housing market, particularly focusing on the surge in home D-listings in Miami and Florida. It explores the disconnect between falling interest rates and the lack of buyer activity, attributing it to broader economic issues.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Miami leads the nation in home D-listings, indicating a struggling housing market.</li>
+                            <li>Falling interest rates were expected to stimulate buyer activity, but this has not occurred.</li>
+                            <li>D-listings have surged, with a 45.5% increase year-to-date as of October.</li>
+                            <li>Economic factors, rather than interest rates, are holding back buyers in the housing market.</li>
+                            <li>Homeownership costs have risen significantly, impacting affordability for potential buyers.</li>
+                            <li>The housing market is showing signs of a bust rather than recovery, despite lower interest rates.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Larry Young, Jay Powell, Bessant</p>
+                        <p><strong>Organizations:</strong> realtor.com, Redfin, National Association of Realtors</p>
+                        <p><strong>Topics:</strong> housing market, D-listings, interest rates, economic conditions, Florida real estate</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The housing market&#x27;s struggles are a reflection of deeper economic issues, not merely the effects of interest rate changes.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">topic_Michael_Green_investor<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=iitZPHBpYiM" target="_blank">A Soulful Journey to Stellar Returns w/ Nima Shayegh (RWH064)</a>
+                    </div>
+                    <div class="snippet-meta">interview • 115m 59s • Dec 20, 2025 • 1,078 views • 39 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Nima Shayegh</div>
+                    <div class="snippet-summary">In this episode, Nima Shayegh shares his insights on long-term investing, the importance of simplicity in investment strategies, and the influence of his mentor Lou Simpson. The conversation delves into the psychological aspects of investing, the significance of alignment in partnerships, and the lessons learned from market volatility.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Simplicity in investment strategies allows for better long-term decision-making.</li>
+                            <li>Understanding the qualitative aspects of businesses is crucial for successful investing.</li>
+                            <li>Market volatility can create opportunities for investors who are prepared.</li>
+                            <li>Alignment between investors and management is essential for long-term success.</li>
+                            <li>Emotional intelligence plays a significant role in investment decision-making.</li>
+                            <li>Investing requires a balance between patience and action.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Warren Buffett, Lou Simpson, Charlie Munger, Bill Gross, Nick Sleep, K Sakaria, Howard Marks, Ray Dalio, Bill Miller, Rick Reeder, Chris Davis, Tom Russo, Quincy Lee, Josh Tarasof, Vaclav Smil</p>
+                        <p><strong>Organizations:</strong> Roomie Partners, PIMCO, Geico, Berkshire Hathaway, Appfolio</p>
+                        <p><strong>Topics:</strong> long-term investing, investment philosophy, risk management, market psychology, business evaluation, personal development</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Successful investing is about understanding the essence of businesses and maintaining a long-term perspective, even amidst market fluctuations.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">topic_Michael_Oliver<span class="channel-count">(5 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=QRIAhUlLNpc" target="_blank">THE $67 TRIGGER: WHY SILVER’S FRIDAY KILL SWITCH JUST ACTIVATED A BANKING CRISIS | MICHAEL OLIVER</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 26m 16s • Dec 20, 2025 • 1,133 views • 27 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Michael Oliver</div>
+                    <div class="snippet-summary">In this episode, Michael Oliver discusses the implications of silver&#x27;s price movements, particularly the significance of crossing the $67 threshold, which signals deeper issues within the banking system. He emphasizes that these movements reflect a breakdown in confidence rather than a bullish market trend.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Silver&#x27;s price crossing $67 indicates a structural event in the market.</li>
+                            <li>The banking system reacts to silver&#x27;s movements, revealing underlying stress.</li>
+                            <li>Confidence in the financial system is fragile and can lead to panic.</li>
+                            <li>Friday market movements are driven by institutional behavior under pressure.</li>
+                            <li>Silver acts as a monitor for banking stability, reflecting deeper systemic issues.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> silver market, banking crisis, confidence erosion, risk management, market behavior</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Silver&#x27;s movements are not about speculation but about revealing the fragility of the financial system.
+                    </div>
+                </div>
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=UosccWVjCbY" target="_blank">&quot;STOP Everything! Small Silver Investors MUST Watch THIS Now” | Michael Oliver</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 19m 9s • Dec 20, 2025 • 6,339 views • 288 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Michael Oliver</div>
+                    <div class="snippet-summary">In this episode, Michael Oliver discusses the current state and future potential of silver and gold investments, emphasizing the unique market conditions that favor silver. He provides insights into historical performance and the expected upward trajectory of silver prices.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Silver is poised for a dramatic repricing after decades of underperformance.</li>
+                            <li>Current market signals suggest that now is a good entry point for silver investors.</li>
+                            <li>Historical trends indicate that silver often captures a higher percentage of gold&#x27;s price during bull markets.</li>
+                            <li>Mining stocks have dramatically underperformed but are beginning to reverse this trend.</li>
+                            <li>The broader commodity complex is showing signs of a multi-year resurgence.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> GDX, XAU</p>
+                        <p><strong>Topics:</strong> silver investment, gold vs silver, market trends, mining stocks, commodity resurgence</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Investors should focus on silver and mining stocks as they are likely to outperform traditional equities in the coming years.
+                    </div>
+                </div>
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=Z66F9E98D-Q" target="_blank">Silver to $500 Just Started: The 6-Month Explosive Timeline Breakdown | Michael Oliver</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 16m 1s • Dec 20, 2025 • 1,079 views • 33 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Michael Oliver</div>
+                    <div class="snippet-summary">In this episode, Michael Oliver discusses the potential for silver prices to reach $500, emphasizing the undervaluation of silver compared to gold and the expected explosive growth in the silver market. He highlights the historical precedents and current market conditions that suggest a significant upward movement in silver and silver mining stocks.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Silver is currently undervalued and could see rapid price increases.</li>
+                            <li>Silver miners are expected to outperform gold miners.</li>
+                            <li>Historical trends indicate that breakouts in silver can lead to substantial gains.</li>
+                            <li>Gold has recently broken out against the S&amp;P 500, signaling a shift in capital.</li>
+                            <li>The current market conditions suggest a dramatic upward move for silver.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> MSA</p>
+                        <p><strong>Topics:</strong> silver price prediction, gold vs silver, mining stocks, market trends, monetary metals</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The precious metals complex, particularly silver, is on the verge of a significant upward movement.
+                    </div>
+                </div>
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=RIdjmdiQUjk" target="_blank">🔴 Someone BIG is Buying: SILVER Prices are about to go Ape...FAST! | Michael Oliver</a>
+                    </div>
+                    <div class="snippet-meta">interview • 49m 45s • Dec 20, 2025 • 5,670 views • 756 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Michael Oliver</div>
+                    <div class="snippet-summary">In this episode, Michael Oliver discusses the recent trends in gold and silver prices, emphasizing a significant shift in market dynamics. He predicts a bullish outlook for silver, suggesting it will outperform gold in the near future.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Gold has recently outperformed the S&amp;P 500 and is expected to continue this trend.</li>
+                            <li>A major buy signal for silver was indicated at the close of November.</li>
+                            <li>Silver is currently undervalued and could see significant price increases.</li>
+                            <li>The stock market is likely in a topping process, which may lead to weakness in the coming months.</li>
+                            <li>The dynamics of the market are shifting, with money moving from stocks to precious metals.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> gold prices, silver prices, market trends, investing strategies, economic outlook</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The episode concludes that silver is poised for a substantial price increase, potentially outperforming gold.
+                    </div>
+                </div>
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=N8I0niCdRQA" target="_blank">Michael Oliver Reveal Why Silver Will Reach Over $240 By 2026</a>
+                    </div>
+                    <div class="snippet-meta">interview • 16m 36s • Dec 20, 2025 • 1,013 views • 42 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Michael Oliver</div>
+                    <div class="snippet-summary">In this episode, Michael Oliver discusses his prediction that silver will reach over $240 by 2026, backed by his unique momentum analysis. He explains the current market conditions and historical precedents that support his bullish outlook on silver.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Michael Oliver predicts silver will reach $240 by 2026.</li>
+                            <li>He believes silver is currently in a historic breakout phase.</li>
+                            <li>Oliver&#x27;s analysis shows that silver could rise three times faster than gold.</li>
+                            <li>The gold-silver ratio is collapsing, indicating a bullish trend for silver.</li>
+                            <li>Mining stocks are expected to deliver significant returns as silver prices rise.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> King World News, Jerusalem Post, Commodity Culture, US Gold Bureau, Saxo Bank</p>
+                        <p><strong>Topics:</strong> silver price prediction, momentum analysis, market trends, gold-silver ratio, mining stocks</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Michael Oliver momentum analysis suggests that $240 silver is a realistic target based on current market conditions.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">topic_Rick_Rule<span class="channel-count">(2 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=uxNlGQJB6nM" target="_blank">Huge Silver Price ALERT! If You Own Gold &amp; Silver, Watch Now - Lynette Zang &amp; Rick Rule</a>
+                    </div>
+                    <div class="snippet-meta">interview • 20m 19s • Dec 20, 2025 • 4,578 views • 120 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Lynette Zang, Rick Rule</div>
+                    <div class="snippet-summary">In this episode, Lynette Zang and Rick Rule discuss the current state and future predictions for gold and silver prices, emphasizing the disconnect between physical and paper markets. They highlight the impact of inflation and currency debasement on precious metals as a safe investment.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Spot silver could top $100 in the near term.</li>
+                            <li>Gold&#x27;s intrinsic value is estimated at $40,000.</li>
+                            <li>Silver has outpaced gold 2:1 this year.</li>
+                            <li>Rising inflation pressures are driving investors to precious metals.</li>
+                            <li>Physical gold and silver markets are revealing a disconnect from paper pricing.</li>
+                            <li>Central banks are losing control over the gold and silver markets.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> Federal Reserve, Bank of England, LBMA, Shanghai Exchange</p>
+                        <p><strong>Topics:</strong> silver price prediction, gold valuation, market dynamics, inflation impact, currency confidence</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Investing in gold and silver is essential for maintaining purchasing power in a declining currency environment.
+                    </div>
+                </div>
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=XZRZQg4tm28" target="_blank">UNBELIEVABLE! You Won&#x27;t Believe This Huge 2026 Silver Prediction - Eric Sprott</a>
+                    </div>
+                    <div class="snippet-meta">interview • 23m 5s • Dec 20, 2025 • 4,391 views • 257 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Eric Sprott</div>
+                    <div class="snippet-summary">In this episode, Eric Sprott discusses the current dynamics of the silver market, emphasizing the impact of supply shortages and rising industrial demand. He predicts significant price increases for silver as the market shifts from paper to physical demand.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Silver&#x27;s true value is distorted and should be priced at $300 if gold reaches $4,500.</li>
+                            <li>The gold-silver ratio is collapsing, indicating a major shift in the silver market.</li>
+                            <li>Physical deliveries of silver are overwhelming paper supply, revealing a supply-demand imbalance.</li>
+                            <li>New industrial uses for silver, particularly in solid state batteries, could drastically increase demand.</li>
+                            <li>Manipulation by banks has historically suppressed silver prices, but this is changing as demand for physical silver rises.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> David Baitman, Michael Oliver</p>
+                        <p><strong>Organizations:</strong> Morgan Stanley</p>
+                        <p><strong>Topics:</strong> silver market, gold silver ratio, industrial demand, price manipulation, investment strategies</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Silver is entering a new phase of price discovery driven by physical demand and industrial usage.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">triANGLEINVESTOR<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=3YrUP2GL0U4" target="_blank">Premier American Uranium (TSXV:PUR) - From Exploration to Development</a>
+                    </div>
+                    <div class="snippet-meta">interview • 22m 56s • Dec 20, 2025 • 570 views • 14 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Lucian Wvalovich, Colin Healey</div>
+                    <div class="snippet-summary">This episode features an interview with Colin Healey, CEO of Premier American Uranium, discussing the current state of the uranium market and the company&#x27;s strategic plans for project development and M&amp;A activities. The conversation highlights the robust demand for uranium and the company&#x27;s focus on advancing its projects, particularly the Sabetta uranium project.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The uranium market has the best fundamentals seen in over a decade.</li>
+                            <li>Premier American Uranium&#x27;s Sabetta project has seen a significant resource increase.</li>
+                            <li>The company plans to conduct metallurgical testing to improve project economics.</li>
+                            <li>M&amp;A activities are focused on building critical mass in New Mexico and Wyoming.</li>
+                            <li>The company is financially stable with a positive outlook for raising funds.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> Premier American Uranium, American Future Fuel, 3M Island</p>
+                        <p><strong>Topics:</strong> uranium market, M&amp;A strategy, project development, financial outlook, metallurgical testing</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The uranium sector is poised for growth, and Premier American Uranium is strategically positioned to capitalize on this opportunity.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">RUSSIA<span class="topic-count">(3 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">IgorLipsits_1950<span class="channel-count">(2 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=zSIjK-UQTjw" target="_blank">Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Липсиц: ИНТЕРВЬЮ ЕВГЕНИИ КУТНОВОЙ 19.12.2025</a>
+                    </div>
+                    <div class="snippet-meta">interview • 30m 22s • Dec 20, 2025 • 7,246 views • 974 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Игорь Лифтиц, Евгения Кутнова</div>
+                    <div class="snippet-summary">В этом эпизоде обсуждаются проблемы российской экономики, уровень жизни населения и влияние войны на экономическую ситуацию в стране. Эксперты анализируют статистику и прогнозы, а также критикуют действия правительства.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Уровень жизни россиян падает из-за экономических проблем.</li>
+                            <li>Госдолг России растет, что создает финансовые трудности.</li>
+                            <li>Статистика в России ненадежна и часто искажена.</li>
+                            <li>IT-сектор в России переживает кризис и массовые банкротства.</li>
+                            <li>Война негативно сказывается на экономике и благосостоянии населения.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Татьяна Рыбакова, Путин, Трамп</p>
+                        <p><strong>Organizations:</strong> Ростат, Сбербанк, Моску Times</p>
+                        <p><strong>Topics:</strong> экономика России, уровень жизни, госдолг, война, статистика, IT-сектор</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Экономическая ситуация в России ухудшается, и население сталкивается с растущими трудностями.
+                    </div>
+                </div>
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=4CrHaMYlyPM" target="_blank">Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Липсиц: ИНТЕРВЬЮ ДЛЯ ПРОГРАММЫ &quot;BREAKFAST SHOW&quot; 20.12.2025</a>
+                    </div>
+                    <div class="snippet-meta">interview • 15m 32s • Dec 20, 2025 • 11,553 views • 1,028 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Игорь Владимирович</div>
+                    <div class="snippet-summary">В этом интервью обсуждаются последние изменения в экономической политике России, включая снижение ключевой ставки Центробанком и его влияние на инфляцию и бизнес. Также рассматриваются военные расходы и их влияние на бюджет страны.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Центробанк снизил ключевую ставку до 16%, что является демонстрационным шагом.</li>
+                            <li>Инфляция в России нестабильна и может снова вырасти.</li>
+                            <li>Экономика России возвращается к состоянию 90-х годов с увеличением наличных расчетов.</li>
+                            <li>Военные расходы составляют значительную часть бюджета, что приводит к дефициту.</li>
+                            <li>Существуют скрытые проблемы с безработицей, которые не отражаются в официальной статистике.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Эльвира Набиулина, Владимир Путин, Потанин, Дерепаско, Белоусов</p>
+                        <p><strong>Organizations:</strong> Центробанк, Госдума, Миноборона</p>
+                        <p><strong>Topics:</strong> ключевая ставка, инфляция, экономика России, госбюджет, военные расходы</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Россия сталкивается с серьезными экономическими проблемами, включая высокий госдолг и дефицит бюджета.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">IgorYakovenko<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=EOGTDr4NGr0" target="_blank">⚡️Новые требования</a>
+                    </div>
+                    <div class="snippet-meta">panel • 46m 33s • Dec 20, 2025 • 9,492 views • 1,601 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Игорь Яковенко, Екатерина Валерьевна</div>
+                    <div class="snippet-summary">В этом эпизоде обсуждаются комментарии Путина на его пресс-конференции и реакция на вопросы о войне в Украине. Спикеры анализируют пропагандистские приемы и экономические реалии России.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Путин продолжает врать о начале войны и ее причинах.</li>
+                            <li>Западные журналисты не могут задать острые вопросы на пресс-конференции.</li>
+                            <li>Россия гордится количеством дронов, несмотря на их неэффективность.</li>
+                            <li>Путин использует расчеловечивание противников как тактику подготовки к войне.</li>
+                            <li>Запросы о прекращении войны остаются без ответа.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Путин, Зеленский, Трамп, Марк Рютак, Андрей Оверьянов</p>
+                        <p><strong>Organizations:</strong> 24 канал, НАТО</p>
+                        <p><strong>Topics:</strong> прямая линия Путина, война в Украине, российская пропаганда, экономические проблемы, международные отношения</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Пресс-конференция Путина была полна вранья и манипуляций, что подчеркивает проблемы российской медиасферы.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">OTHER<span class="topic-count">(2 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">AkkadDaily<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=EFufz55ZhFg" target="_blank">Time for Your Compulsory Misogyny Lesson</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 16m 23s • Dec 20, 2025 • 10,095 views • 1,203 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> N/A</div>
+                    <div class="snippet-summary">This episode discusses the alarming rates of sexual assaults in England and Wales, attributing some societal issues to the influence of Andrew Tate and the feminist approach in schools. The speaker critiques the compulsory misogyny lessons for boys and argues that they fail to address the underlying issues of masculinity and societal expectations.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The number of sexual assaults in England and Wales is alarmingly high.</li>
+                            <li>Andrew Tate is often blamed for misogynistic attitudes among young men.</li>
+                            <li>Compulsory misogyny lessons in schools may backfire and increase resentment.</li>
+                            <li>The current feminist approach does not effectively address the needs of young men.</li>
+                            <li>There is a significant difference in attitudes towards Andrew Tate among different ethnic groups.</li>
+                            <li>The speaker believes that the issues of violence against women are not solely a native problem.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Andrew Tate, Jess Phillips</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> misogyny lessons, Andrew Tate influence, feminism in schools, youth masculinity, diversity issues, sexual assault statistics</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The current educational strategies fail to provide a positive framework for young men, leading to increased support for figures like Andrew Tate.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">LotuseatersDotCom<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=LaG_OrHFAK0" target="_blank">When Tolkien Became Father Christmas</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 12m 19s • Dec 20, 2025 • 1,118 views • 165 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> [unknown]</div>
+                    <div class="snippet-summary">This episode explores the private letters written by J.R.R. Tolkien as Father Christmas to his children over 23 years, showcasing his creativity and artistry. The letters reveal a whimsical narrative filled with adventures and characters that reflect Tolkien&#x27;s imaginative world.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Tolkien wrote letters as Father Christmas to his four children.</li>
+                            <li>The letters include Tolkien&#x27;s own drawings and showcase his creativity.</li>
+                            <li>The narrative of the letters has continuity similar to Tolkien&#x27;s other works.</li>
+                            <li>The letters were thought lost but were discovered in good condition after Tolkien&#x27;s death.</li>
+                            <li>The North Polar Bear is a recurring character in the letters.</li>
+                            <li>The letters reflect Tolkien&#x27;s love for languages and storytelling.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> J.R.R. Tolkien, Bailey Tolkien, Christopher Tolkien</p>
+                        <p><strong>Organizations:</strong> Lotus Eaters</p>
+                        <p><strong>Topics:</strong> Tolkien&#x27;s letters, Father Christmas, North Pole, children&#x27;s stories, creativity</p>
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <div class="footer">
+            Generated 2026-02-13 16:41:15
+        </div>
+    </div>
+</body>
+</html>
