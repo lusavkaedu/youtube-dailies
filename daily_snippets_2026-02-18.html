@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Snippets - 2026-02-18</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background-color: #FFF1E0;
+            color: #3E474F;
+            line-height: 1.6;
+            padding: 24px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            padding: 32px 0;
+            border-bottom: 3px solid #3E474F;
+            margin-bottom: 32px;
+        }
+        .header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .header .date {
+            font-size: 18px;
+            color: #66737D;
+        }
+        .header .meta {
+            font-size: 14px;
+            color: #66737D;
+            margin-top: 12px;
+        }
+        .topic-section {
+            margin-bottom: 40px;
+        }
+        .topic-title {
+            font-size: 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 0;
+            border-bottom: 2px solid #F2DFCE;
+            margin-bottom: 24px;
+            color: #3E474F;
+        }
+        .channel-section {
+            margin-bottom: 28px;
+        }
+        .channel-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            margin-bottom: 16px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .snippet-card {
+            background: #FFF9F5;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border-left: 4px solid #FCD0AF;
+        }
+        .snippet-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .snippet-title a {
+            color: #0D7680;
+            text-decoration: none;
+        }
+        .snippet-title a:hover {
+            text-decoration: underline;
+        }
+        .snippet-meta {
+            font-size: 13px;
+            color: #66737D;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+        .snippet-speakers {
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .snippet-speakers strong {
+            color: #3E474F;
+        }
+        .snippet-summary {
+            font-size: 15px;
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+        .snippet-claims {
+            margin-bottom: 16px;
+        }
+        .snippet-claims-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .snippet-claims ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .snippet-claims li {
+            font-size: 14px;
+            padding: 4px 0 4px 16px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .snippet-claims li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #0D7680;
+        }
+        .snippet-details {
+            font-size: 13px;
+            color: #66737D;
+            border-top: 1px solid #F2DFCE;
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+        .snippet-details p {
+            margin-bottom: 4px;
+        }
+        .snippet-conclusion {
+            font-size: 14px;
+            font-style: italic;
+            color: #3E474F;
+            background: #F2DFCE;
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 12px;
+        }
+        .footer {
+            text-align: center;
+            padding: 24px 0;
+            border-top: 1px solid #F2DFCE;
+            margin-top: 40px;
+            font-size: 12px;
+            color: #66737D;
+        }
+        /* Collapsible sections */
+        details {
+            margin-bottom: 8px;
+        }
+        details summary {
+            cursor: pointer;
+            list-style: none;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary::before {
+            content: "▶";
+            display: inline-block;
+            margin-right: 8px;
+            transition: transform 0.2s;
+            font-size: 12px;
+        }
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
+        .topic-details {
+            border: 1px solid #F2DFCE;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            background: #FFF9F5;
+        }
+        .topic-summary {
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 16px 20px;
+            color: #3E474F;
+            background: #F2DFCE;
+            border-radius: 8px;
+        }
+        .topic-details[open] .topic-summary {
+            border-radius: 8px 8px 0 0;
+        }
+        .topic-count {
+            font-size: 14px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .topic-content {
+            padding: 16px 20px;
+        }
+        .channel-details {
+            border: 1px solid #FCD0AF;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            background: white;
+        }
+        .channel-summary {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            padding: 12px 16px;
+            background: #FFF9F5;
+            border-radius: 6px;
+        }
+        .channel-details[open] .channel-summary {
+            border-radius: 6px 6px 0 0;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .channel-count {
+            font-size: 13px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .channel-content {
+            padding: 12px 16px;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 16px;
+            }
+            .header h1 {
+                font-size: 28px;
+            }
+            .snippet-card {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Daily Snippets</h1>
+            <div class="date">Wednesday, February 18, 2026</div>
+            <div class="meta">5 videos • uploaded 2026-02-18 • 5 videos</div>
+        </div>
+        <details class="topic-details">
+            <summary class="topic-summary">POLITICS<span class="topic-count">(1 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">RebelCapitalistInterviews<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=9qiQqwi3Swc" target="_blank">Epstein Files Are Just The Beginning… W/Robert Barnes</a>
+                    </div>
+                    <div class="snippet-meta">interview • 78m 14s • @RebelCapitalistInterviews • Feb 18, 2026 • 1,469 views • 349 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Robert Barnes, unnamed narrator</div>
+                    <div class="snippet-summary">In this episode, Robert Barnes discusses the implications of the Epstein files and the pervasive corruption among global elites. The conversation explores how these revelations could reshape public consciousness and political dynamics in the coming years.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The Epstein files implicate numerous powerful individuals in a global network of corruption and abuse.</li>
+                            <li>Many politicians and elites are believed to be involved in covering up the Epstein scandal.</li>
+                            <li>The current political landscape is shifting towards a confrontation between the working class and the Epstein class.</li>
+                            <li>Public awareness of the Epstein files is growing, leading to potential political upheaval.</li>
+                            <li>The need for a reduction in government power is emphasized to prevent future abuses.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Donald Trump, Pam Bondi, Bill Clinton, Hillary Clinton, Alex Jones, Thomas Massie, Ron Paul, Michael Tracy, Ghislaine Maxwell, Howard Lutnick, Roger Ver, George</p>
+                        <p><strong>Organizations:</strong> Goldman Sachs, Clinton Foundation</p>
+                        <p><strong>Topics:</strong> Epstein files, political corruption, globalist elites, power dynamics, public consciousness, government accountability</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The Epstein files could mark the beginning of a significant political transformation, challenging the existing power structures.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">INVESTING<span class="topic-count">(3 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">OGJohnAG_2<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=Magm_7l3gEU" target="_blank">FOMC Minutes TOMORROW — Gold&#x27;s $100 Move in Thin Liquidity (10 Days to First Notice)</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 16m 39s • @OGJohnAG_2 • Feb 18, 2026 • 2,488 views • 441 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses the upcoming release of the Federal Reserve&#x27;s FOMC minutes and its potential impact on gold prices in a thin liquidity environment. The narrator outlines different scenarios based on the minutes&#x27; content and how they could affect market reactions.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Thin liquidity could amplify gold price movements by $100 to $200.</li>
+                            <li>Dovish minutes may lead gold to reclaim $5,000, while hawkish minutes could drop it to $4,762.</li>
+                            <li>The minutes reveal internal Fed discussions that could differ from public statements.</li>
+                            <li>Market expectations currently favor no rate change at the March meeting.</li>
+                            <li>The release timing coincides with the Lunar New Year, affecting market participation.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Jerome Powell</p>
+                        <p><strong>Organizations:</strong> Federal Reserve, CME</p>
+                        <p><strong>Topics:</strong> FOMC minutes, gold price, market liquidity, rate cuts, economic data</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The FOMC minutes will significantly influence gold prices depending on their dovish or hawkish tone.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">eurodollaruniversity<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=IRnTS3ik4Co" target="_blank">The Largest Banks in the World Just Did the Unthinkable</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 21m 44s • @eurodollaruniversity • Feb 18, 2026 • 9,497 views • 872 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses the current state of the Chinese banking sector, highlighting concerns over a potential credit crisis and the implications of Japanification. It examines the challenges faced by major Chinese banks and the government&#x27;s attempts to manage the situation.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Chinese banks are facing a credit crisis, often referred to as a Japanification moment.</li>
+                            <li>The PBOC has lowered its one-year bank loan rate to a record low, indicating a serious credit issue.</li>
+                            <li>Chinese banks are heavily reliant on state-owned enterprises for lending, which has led to a rise in bad loans.</li>
+                            <li>Regulatory actions suggest that the reported non-performing loan ratios are not reflective of the true situation.</li>
+                            <li>The Chinese government is likely to lower its GDP target due to the ongoing banking issues.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Jamie Dimon, Hugh Henry</p>
+                        <p><strong>Organizations:</strong> S&amp;P, PBOC, Monetary Metals, Stanford University</p>
+                        <p><strong>Topics:</strong> Chinese banking crisis, Japanification, credit crisis, GDP targets, lending rates</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The Chinese banking sector is trapped in a cycle of low profitability and rising bad loans, complicating efforts to stimulate economic growth.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">sprottmoneyltd<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=QPemM3tt-B8" target="_blank">Silver Crash, Shanghai Shock &amp; Triple Digit Target | David Morgan</a>
+                    </div>
+                    <div class="snippet-meta">interview • 21m 21s • @sprottmoneyltd • Feb 18, 2026 • 3,661 views • 346 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Craig Hempy, David Morgan</div>
+                    <div class="snippet-summary">In this episode, Craig Hempy interviews David Morgan about the current state of the silver market, discussing recent price movements and the influence of the Shanghai metals exchange. They also explore investment strategies in silver and silver mining stocks.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>David Morgan believes the current silver selloff is significant but not the worst in history.</li>
+                            <li>He predicts that silver prices could reach triple digits again, but not immediately.</li>
+                            <li>The physical silver market is gaining control over prices, contrasting with the paper derivatives market.</li>
+                            <li>The Shanghai metals exchange is influencing silver prices more than COMEX at this time.</li>
+                            <li>Morgan suggests that a sideways movement in silver prices could benefit miners and investors.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> Morgan Report, Sprat Money</p>
+                        <p><strong>Topics:</strong> silver market, Shanghai metals exchange, gold-silver ratio, silver mining stocks, investment strategies</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The physical silver market is expected to take control in the long term, despite current volatility.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">RUSSIA<span class="topic-count">(1 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">IgorLipsits_1950<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=SqFkQZEeJcM" target="_blank">ЛИПСИЦ: СТРИМ С ВЛАДИСЛАВОМ ЖУКОВСКИМ 13.02.2026</a>
+                    </div>
+                    <div class="snippet-meta">interview • 60m 44s • @IgorLipsits_1950 • Feb 18, 2026 • 2,678 views • 375 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Владислав Жуковский, Игорь Игорь Липсиц</div>
+                    <div class="snippet-summary">В этом эпизоде Владислав Жуковский и Игорь Игорь Липсиц обсуждают текущее состояние российской экономики, включая инфляцию, ключевую ставку и прогнозы по нефтяным доходам. Они анализируют действия Центробанка и правительства в условиях экономического кризиса.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Инфляция в России продолжает расти, несмотря на снижение ключевой ставки.</li>
+                            <li>Правительство не может эффективно управлять экономикой из-за противоречивых решений.</li>
+                            <li>Ситуация на нефтяном рынке ухудшается, что негативно сказывается на бюджетных доходах.</li>
+                            <li>Ожидается значительный бюджетный дефицит в 2026 году.</li>
+                            <li>Население ожидает дальнейшего роста цен и ухудшения экономической ситуации.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Эльвира Набиуллина, Дмитрий Белоусов, Олег Дерепаска, Александр Шохин, Игорь Игорь Липсиц</p>
+                        <p><strong>Organizations:</strong> Центробанк, Минэкономики, Правительство Российской Федерации</p>
+                        <p><strong>Topics:</strong> экономика России, инфляция, ключевая ставка, нефтяной рынок, бюджетный дефицит, гиперинфляция</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Российская экономика сталкивается с серьезными вызовами, и прогнозы на будущее остаются пессимистичными.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <div class="footer">
+            Generated 2026-02-18 07:58:34
+        </div>
+    </div>
+</body>
+</html>
