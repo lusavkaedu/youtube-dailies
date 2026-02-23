@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Snippets - 2026-02-23</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background-color: #FFF1E0;
+            color: #3E474F;
+            line-height: 1.6;
+            padding: 24px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            padding: 32px 0;
+            border-bottom: 3px solid #3E474F;
+            margin-bottom: 32px;
+        }
+        .header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .header .date {
+            font-size: 18px;
+            color: #66737D;
+        }
+        .header .meta {
+            font-size: 14px;
+            color: #66737D;
+            margin-top: 12px;
+        }
+        .topic-section {
+            margin-bottom: 40px;
+        }
+        .topic-title {
+            font-size: 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 0;
+            border-bottom: 2px solid #F2DFCE;
+            margin-bottom: 24px;
+            color: #3E474F;
+        }
+        .channel-section {
+            margin-bottom: 28px;
+        }
+        .channel-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            margin-bottom: 16px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .snippet-card {
+            background: #FFF9F5;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border-left: 4px solid #FCD0AF;
+        }
+        .snippet-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .snippet-title a {
+            color: #0D7680;
+            text-decoration: none;
+        }
+        .snippet-title a:hover {
+            text-decoration: underline;
+        }
+        .snippet-meta {
+            font-size: 13px;
+            color: #66737D;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+        .snippet-speakers {
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .snippet-speakers strong {
+            color: #3E474F;
+        }
+        .snippet-summary {
+            font-size: 15px;
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+        .snippet-claims {
+            margin-bottom: 16px;
+        }
+        .snippet-claims-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .snippet-claims ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .snippet-claims li {
+            font-size: 14px;
+            padding: 4px 0 4px 16px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .snippet-claims li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #0D7680;
+        }
+        .snippet-details {
+            font-size: 13px;
+            color: #66737D;
+            border-top: 1px solid #F2DFCE;
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+        .snippet-details p {
+            margin-bottom: 4px;
+        }
+        .snippet-conclusion {
+            font-size: 14px;
+            font-style: italic;
+            color: #3E474F;
+            background: #F2DFCE;
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 12px;
+        }
+        .footer {
+            text-align: center;
+            padding: 24px 0;
+            border-top: 1px solid #F2DFCE;
+            margin-top: 40px;
+            font-size: 12px;
+            color: #66737D;
+        }
+        /* Collapsible sections */
+        details {
+            margin-bottom: 8px;
+        }
+        details summary {
+            cursor: pointer;
+            list-style: none;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary::before {
+            content: "▶";
+            display: inline-block;
+            margin-right: 8px;
+            transition: transform 0.2s;
+            font-size: 12px;
+        }
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
+        .topic-details {
+            border: 1px solid #F2DFCE;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            background: #FFF9F5;
+        }
+        .topic-summary {
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 16px 20px;
+            color: #3E474F;
+            background: #F2DFCE;
+            border-radius: 8px;
+        }
+        .topic-details[open] .topic-summary {
+            border-radius: 8px 8px 0 0;
+        }
+        .topic-count {
+            font-size: 14px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .topic-content {
+            padding: 16px 20px;
+        }
+        .channel-details {
+            border: 1px solid #FCD0AF;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            background: white;
+        }
+        .channel-summary {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            padding: 12px 16px;
+            background: #FFF9F5;
+            border-radius: 6px;
+        }
+        .channel-details[open] .channel-summary {
+            border-radius: 6px 6px 0 0;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .channel-count {
+            font-size: 13px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .channel-content {
+            padding: 12px 16px;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 16px;
+            }
+            .header h1 {
+                font-size: 28px;
+            }
+            .snippet-card {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Daily Snippets</h1>
+            <div class="date">Monday, February 23, 2026</div>
+            <div class="meta">8 videos • uploaded 2026-02-23 • 8 videos</div>
+        </div>
+        <details class="topic-details">
+            <summary class="topic-summary">INVESTING<span class="topic-count">(6 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">OGJohnAG<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=1taPrpLjzfk" target="_blank">PAXG and Mexico Are Sounding Alarms – Why Silver Could Gap Higher?</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 12m 38s • @OGJohnAG • Feb 23, 2026 • 30,594 views • 2,366 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> OG John AG</div>
+                    <div class="snippet-summary">This episode discusses the implications of Mexico&#x27;s crisis on global silver supply and the current state of the gold market, particularly focusing on the premium of gold-backed crypto. It highlights the structural realities of the silver market and the potential for significant price movements due to geopolitical uncertainties.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Mexico is the world&#x27;s largest silver producer, and its current crisis could disrupt global silver supply.</li>
+                            <li>The gold-backed token Pax G is showing a $50 premium, indicating strong market sentiment for gold.</li>
+                            <li>Current market conditions suggest that silver is not priced for potential supply shocks.</li>
+                            <li>The February ComX contract shows unprecedented open interest, raising concerns about physical delivery capabilities.</li>
+                            <li>Geopolitical tensions, particularly involving Iran, are influencing metals pricing.</li>
+                            <li>Central bank gold holdings have surpassed treasuries, indicating a shift in reserve strategies.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> G. Edward Griffin, Jim Rickards, Howard Marks</p>
+                        <p><strong>Organizations:</strong> Pax G, JP Morgan</p>
+                        <p><strong>Topics:</strong> silver supply, gold market, Mexico crisis, financial warfare, geopolitical risks</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The current market dynamics suggest a significant risk of supply disruption in silver and gold, driven by geopolitical factors and structural market conditions.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">OGJohnAG_2<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=vZevA2sMmAE" target="_blank">5 Days to COMEX Silver Crisis — The Math Says System BREAKS (88M vs 360M Ounces)</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 15m 24s • @OGJohnAG_2 • Feb 23, 2026 • 1,118 views • 145 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses the impending delivery crisis in ComX silver, highlighting the disparity between registered supply and open interest demand. The narrator analyzes the potential outcomes based on current market conditions and historical data.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>ComX has 88.2 million ounces of registered silver against 240 million ounces of demand.</li>
+                            <li>If 35% of contracts stand for delivery, the system could break.</li>
+                            <li>Historical delivery rates suggest March could see higher demand than usual.</li>
+                            <li>The inventory has dropped significantly over the past months.</li>
+                            <li>China&#x27;s market actions and geopolitical tensions could influence delivery decisions.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> CME Group</p>
+                        <p><strong>Topics:</strong> ComX silver, delivery crisis, market analysis, inventory drain, China market impact</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The upcoming delivery day is critical, with the potential for a significant market event.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">TheAsianGuy-k9h<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=_dCYBS0YwOg" target="_blank">5 DAYS LEFT: 125M Oz Demand vs 80M Available Silver SQUEEZE Coming?</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 23m 33s • @THEASIANGUY-AG • Feb 23, 2026 • 3,351 views • 215 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses the impending delivery deadline in the silver futures market and the significant imbalance between demand and available supply. The narrator explains the mechanics of the market and the implications of the current inventory trends leading up to February 27th.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>There are 239 million ounces of silver demanded against only 88 million ounces available for delivery.</li>
+                            <li>The registered silver inventory has halved from 170 million ounces to 88 million in five months.</li>
+                            <li>The March contract open interest has declined significantly, indicating that only committed participants remain.</li>
+                            <li>The CME has raised margin requirements six times in four months, impacting market dynamics.</li>
+                            <li>Short covering is accelerating as the first notice date approaches.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> CME, COMX, Black Rock, SLV</p>
+                        <p><strong>Topics:</strong> silver market, futures contracts, delivery mechanism, supply and demand, margin requirements</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The silver market is facing a critical moment with a significant supply-demand imbalance that could lead to a forced cash settlement.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">eurodollaruniversity<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=hVY2v4sqM2E" target="_blank">This Is the Breaking Point for the U.S. Consumer</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 21m 54s • @eurodollaruniversity • Feb 23, 2026 • 21,407 views • 1,218 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses the implications of a hiring recession on consumer spending, particularly focusing on Walmart and General Mills. It highlights the struggles of lower and middle-income consumers as savings rates decline and economic stress rises.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Walmart&#x27;s CFO has expressed concerns about a hiring recession affecting consumer spending.</li>
+                            <li>General Mills reported a decline in sales outlook due to consumer stress.</li>
+                            <li>The U.S. savings rate has fallen to its lowest level in several years.</li>
+                            <li>Consumers are increasingly using credit and drawing down savings to manage expenses.</li>
+                            <li>There is a growing concern that even higher-income consumers may reduce spending.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> John David Rainey, Jeff Harmoning, Steve Meter</p>
+                        <p><strong>Organizations:</strong> Walmart, General Mills</p>
+                        <p><strong>Topics:</strong> consumer spending, hiring recession, income issues, savings rate, economic stress</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The episode concludes that the ongoing economic stress could lead to a significant decline in consumer spending across all income levels.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">nobull-markettalkwithgeorg4907<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=qpu-StgWQcA" target="_blank">Matthew Tuttle, Nobody Special, Peter Boockvar | No Bull George Noble.</a>
+                    </div>
+                    <div class="snippet-meta">panel • 147m 44s • @nobull-markettalkwithgeorg4907 • Feb 23, 2026 • 85 views • 4 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> George Noble, Peter Boockvar, Matthew Tuttle, Nobody Special</div>
+                    <div class="snippet-summary">The episode discusses the current state of the market, focusing on the impact of AI, the importance of gold and silver as safe havens, and the ethical considerations in investing. The panelists share insights on various sectors, including technology and energy, while emphasizing the need for financial literacy and integrity.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The market will show itself through price action.</li>
+                            <li>Gold and silver are expected to rise due to increasing uncertainty.</li>
+                            <li>The semiconductor industry is becoming a key indicator for economic health.</li>
+                            <li>Investors need to be more educated and discerning in their choices.</li>
+                            <li>The rise of fraud and lack of integrity in the market is concerning.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Michael Kramer, Jay Pilowski, Louis Gave, Michael Howell, John Ro, Howard Lutnick, Kathy Wood, Anthony Pompliano, Eric Jackson, Charlie Munger, Jim Cramer, Tom Thornton</p>
+                        <p><strong>Organizations:</strong> Blue Owl, Nvidia, Oracle, Adobe, Canaccord Genuity, Constellation Energy</p>
+                        <p><strong>Topics:</strong> market trends, AI impact, gold and silver, investing strategies, financial integrity, semiconductor prices</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Investors should focus on education and integrity while being cautious of market trends and potential fraud.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">topic_Jim_Cramer<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=ZunlSmPNSyo" target="_blank">XRP NEWS TODAY: Jim Cramer&#x27;s XRP Call Just Got Proven Wrong</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 11m 31s • Feb 23, 2026 • 1,218 views • 106 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses the recent developments surrounding XRP and its growing acceptance among major financial institutions, particularly JP Morgan. The narrator emphasizes the importance of understanding the evolving crypto landscape and the potential for significant financial returns from XRP investments.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Jim Kramer previously labeled XRP a con while it was trading at 38 cents.</li>
+                            <li>JP Morgan has officially endorsed Ripple&#x27;s XRP as a key digital asset for banking.</li>
+                            <li>The Clarity Act is expected to pass by March 1st, 2026, marking a significant regulatory shift.</li>
+                            <li>Ripple has built a multi-billion dollar infrastructure to dominate the settlement market.</li>
+                            <li>Stable coins are now treated as regulatory capital with only a 2% haircut, unlocking massive liquidity.</li>
+                            <li>Bitcoin and Ethereum face a 20% haircut, making them less attractive to institutions.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Jim Kramer, Elon Musk, Patrick Wit</p>
+                        <p><strong>Organizations:</strong> JP Morgan, Ripple, Swift, SEC</p>
+                        <p><strong>Topics:</strong> XRP, crypto adoption, institutional investment, financial regulations, market predictions</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The transformation of XRP into a foundational asset for institutional finance is inevitable.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">RUSSIA<span class="topic-count">(1 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">IgorLipsits_1950<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=JBvCM262P7k" target="_blank">ЛИПСИЦ: ИНТЕРВЬЮ ДЛЯ КАНАЛА &quot;ЖИВОЙ ГВОЗДЬ&quot; 22.02.2026</a>
+                    </div>
+                    <div class="snippet-meta">interview • 22m 24s • @IgorLipsits_1950 • Feb 23, 2026 • 3,538 views • 414 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Игорь Владимирович Липсец</div>
+                    <div class="snippet-summary">В этом эпизоде Игорь Липсец обсуждает текущие экономические проблемы России, включая влияние войны на экономику и состояние рынка недвижимости. Он также комментирует заявления о росте золотовалютных резервов и инфляции.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Россия использует экономический шантаж против США и Европы.</li>
+                            <li>Состояние рынка недвижимости в России ухудшается, и доступность жилья снижается.</li>
+                            <li>Инфляция выше 20% может разрушить экономику.</li>
+                            <li>Золотовалютные резервы России выросли, но половина из них заморожена.</li>
+                            <li>Российская экономика может вести войну долго, но это потребует перехода к советской модели.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Сибига, Трамп, Дмитрий Анатольевич Медведев, Некрасов, Вася, Ренат</p>
+                        <p><strong>Organizations:</strong> МИД, США, ЦБ, Минфин</p>
+                        <p><strong>Topics:</strong> экономический террор, российская экономика, недвижимость, инфляция, золотовалютные резервы</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Российская экономика сталкивается с серьезными вызовами, и текущая ситуация может привести к экономическому кризису.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">OTHER<span class="topic-count">(1 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">SpaceWeatherNewsS0s<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=dLqd7n66uHo" target="_blank">Moving Into Place</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 6m 56s • @SpaceWeatherNewsS0s • Feb 23, 2026 • 27,920 views • 3,685 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">The episode discusses unusual animal migrations and environmental changes that are occurring globally. The narrator reflects on how these phenomena may be signs of a shifting Earth rather than mere anomalies.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>There is an increasing number of anomalous animal migrations across various species.</li>
+                            <li>These migrations do not follow traditional climatological patterns.</li>
+                            <li>Jetstream anomalies and unusual pressure cells are contributing to these changes.</li>
+                            <li>The narrator believes these migrations may be a sign of future environmental conditions.</li>
+                            <li>Species are being relocated to areas where they previously could not thrive.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> August Dunning</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> animal migration, climate change, environmental anomalies</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The unusual animal migrations are indicative of a changing Earth that is preparing for future conditions.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <div class="footer">
+            Generated 2026-02-23 07:17:20
+        </div>
+    </div>
+</body>
+</html>
