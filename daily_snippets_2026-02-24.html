@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Snippets - 2026-02-24</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background-color: #FFF1E0;
+            color: #3E474F;
+            line-height: 1.6;
+            padding: 24px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            padding: 32px 0;
+            border-bottom: 3px solid #3E474F;
+            margin-bottom: 32px;
+        }
+        .header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .header .date {
+            font-size: 18px;
+            color: #66737D;
+        }
+        .header .meta {
+            font-size: 14px;
+            color: #66737D;
+            margin-top: 12px;
+        }
+        .topic-section {
+            margin-bottom: 40px;
+        }
+        .topic-title {
+            font-size: 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 0;
+            border-bottom: 2px solid #F2DFCE;
+            margin-bottom: 24px;
+            color: #3E474F;
+        }
+        .channel-section {
+            margin-bottom: 28px;
+        }
+        .channel-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            margin-bottom: 16px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .snippet-card {
+            background: #FFF9F5;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border-left: 4px solid #FCD0AF;
+        }
+        .snippet-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .snippet-title a {
+            color: #0D7680;
+            text-decoration: none;
+        }
+        .snippet-title a:hover {
+            text-decoration: underline;
+        }
+        .snippet-meta {
+            font-size: 13px;
+            color: #66737D;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+        .snippet-speakers {
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .snippet-speakers strong {
+            color: #3E474F;
+        }
+        .snippet-summary {
+            font-size: 15px;
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+        .snippet-claims {
+            margin-bottom: 16px;
+        }
+        .snippet-claims-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .snippet-claims ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .snippet-claims li {
+            font-size: 14px;
+            padding: 4px 0 4px 16px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .snippet-claims li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #0D7680;
+        }
+        .snippet-details {
+            font-size: 13px;
+            color: #66737D;
+            border-top: 1px solid #F2DFCE;
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+        .snippet-details p {
+            margin-bottom: 4px;
+        }
+        .snippet-conclusion {
+            font-size: 14px;
+            font-style: italic;
+            color: #3E474F;
+            background: #F2DFCE;
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 12px;
+        }
+        .footer {
+            text-align: center;
+            padding: 24px 0;
+            border-top: 1px solid #F2DFCE;
+            margin-top: 40px;
+            font-size: 12px;
+            color: #66737D;
+        }
+        /* Collapsible sections */
+        details {
+            margin-bottom: 8px;
+        }
+        details summary {
+            cursor: pointer;
+            list-style: none;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary::before {
+            content: "▶";
+            display: inline-block;
+            margin-right: 8px;
+            transition: transform 0.2s;
+            font-size: 12px;
+        }
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
+        .topic-details {
+            border: 1px solid #F2DFCE;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            background: #FFF9F5;
+        }
+        .topic-summary {
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 16px 20px;
+            color: #3E474F;
+            background: #F2DFCE;
+            border-radius: 8px;
+        }
+        .topic-details[open] .topic-summary {
+            border-radius: 8px 8px 0 0;
+        }
+        .topic-count {
+            font-size: 14px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .topic-content {
+            padding: 16px 20px;
+        }
+        .channel-details {
+            border: 1px solid #FCD0AF;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            background: white;
+        }
+        .channel-summary {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            padding: 12px 16px;
+            background: #FFF9F5;
+            border-radius: 6px;
+        }
+        .channel-details[open] .channel-summary {
+            border-radius: 6px 6px 0 0;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .channel-count {
+            font-size: 13px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .channel-content {
+            padding: 12px 16px;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 16px;
+            }
+            .header h1 {
+                font-size: 28px;
+            }
+            .snippet-card {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Daily Snippets</h1>
+            <div class="date">Tuesday, February 24, 2026</div>
+            <div class="meta">4 videos • uploaded 2026-02-24 • 4 videos</div>
+        </div>
+        <details class="topic-details">
+            <summary class="topic-summary">INVESTING<span class="topic-count">(4 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">TheAsianGuy-k9h<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=C5KDkMz9Pro" target="_blank">US Intel Took Out Mexico&#x27;s Top Cartel Boss — 24% of Silver Supply Has No Price for This</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 30m 9s • @THEASIANGUY-AG • Feb 24, 2026 • 3,610 views • 293 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses the implications of the recent assassination of a top cartel leader in Mexico on the silver market and the broader economic consequences. It highlights the critical role of Mexican silver in the US economy and the potential for significant supply disruptions.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The US government classified silver as a critical mineral due to its importance to national security.</li>
+                            <li>70% of silver consumed in the US is imported, with over half coming from Mexico.</li>
+                            <li>The assassination of Elmeno has created a power vacuum that could disrupt silver supply chains.</li>
+                            <li>Transportation insurance for refined silver in affected regions has become unobtainable.</li>
+                            <li>Major industrial users are bypassing public markets to secure silver directly from producers.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Elmeno, Caroline Levit, Christopher Landau, Elmenito</p>
+                        <p><strong>Organizations:</strong> US Geological Survey, Vizla Silver</p>
+                        <p><strong>Topics:</strong> silver market, cartel impact, US-Mexico relations, supply chain disruption, national security</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The market has not yet priced in the significant risks associated with the disruption of Mexican silver supply.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">nobull-markettalkwithgeorg4907<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=b2eO3aWB3Iw" target="_blank">Albert Saporta, GAM Holding | Regime Change | No Bull George Noble.</a>
+                    </div>
+                    <div class="snippet-meta">interview • 82m 58s • @nobull-markettalkwithgeorg4907 • Feb 24, 2026 • 148 views • 10 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> George Noble, Albert Saporta</div>
+                    <div class="snippet-summary">In this episode, George Noble interviews Albert Saporta about the current state of global markets, the impact of geopolitical changes, and the future of investing strategies. They discuss inflation, bond yields, and the potential for a market correction.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The market environment has shifted from a deflationary to an inflationary one.</li>
+                            <li>Geopolitical uncertainties are increasingly affecting market stability.</li>
+                            <li>US markets are overvalued compared to global markets.</li>
+                            <li>There is a potential for significant capital repatriation from the US to Japan.</li>
+                            <li>Gold and commodities may be better investments than traditional equities.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> GAM Investments</p>
+                        <p><strong>Topics:</strong> market trends, geopolitical risks, inflation, bond market, commodities, US vs global markets</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Investors should consider reallocating from US equities to global markets and commodities due to changing economic conditions.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">topic_Jim_Cramer<span class="channel-count">(2 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=4qJ_wRwzUV4" target="_blank">Ripple XRP JIM CRAMER WARNING | RITUAL BLOOD MOON HAPPENING NOW | DAVID SCHWARTZ HINTS PISCES!!!</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 14m 50s • Feb 24, 2026 • 5,306 views • 462 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">The episode discusses the current state of XRP and Bitcoin, highlighting predictions based on astrological events and market indicators. It emphasizes the potential impact of the upcoming Blood Moon and various geopolitical tensions on the cryptocurrency market.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Jim Cramer is viewed as a contraindicator for market movements.</li>
+                            <li>The Blood Moon on March 3rd is expected to influence crypto prices.</li>
+                            <li>The narrator believes XRP may bottom out around the Blood Moon date.</li>
+                            <li>Geopolitical events involving Iran and Russia are linked to market predictions.</li>
+                            <li>The narrator suggests that market rituals are influencing current trends.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Jim Cramer, David Schwartz, Elon Musk, Benjamin Cohen, Archie, Mr. Pool, Trump, Baba Cucks, Bear Bouncer 3</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> XRP price prediction, Jim Cramer analysis, Blood Moon event, Astrology and investing, Market rituals</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The upcoming Blood Moon and geopolitical events may significantly impact the cryptocurrency market.
+                    </div>
+                </div>
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=Ij0nyL7Z2vc" target="_blank">Mad Money 02/23/26 | Audio Only</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 44m 19s • @cnbctelevision • Feb 24, 2026 • 2,790 views • 68 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Jim Kramer</div>
+                    <div class="snippet-summary">In this episode, Jim Kramer discusses the potential negative impact of artificial intelligence on white-collar jobs and the stock market, particularly focusing on the software industry. He also addresses concerns regarding private equity and the future of nuclear power investments.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>AI is predicted to significantly reduce white-collar jobs, leading to high unemployment.</li>
+                            <li>The stock market reacted negatively to fears about AI&#x27;s impact on software companies.</li>
+                            <li>Salesforce and other software stocks have seen significant declines due to AI competition.</li>
+                            <li>Private equity firms may face challenges as AI disrupts traditional business models.</li>
+                            <li>Nuclear power companies like BWX Technologies are positioned for growth amid energy demands.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Jensen Wong</p>
+                        <p><strong>Organizations:</strong> Catrini Research, Alop Sha, Salesforce, Adobe, Service Now, Crowd Strike, Palo Alto Networks, Anthropic, IBM, Blue Owl, BWX Technologies</p>
+                        <p><strong>Topics:</strong> AI impact on jobs, stock market decline, software industry, private equity concerns, nuclear power</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Investors should be cautious about high-priced stocks in the face of AI disruption.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <div class="footer">
+            Generated 2026-02-24 07:30:37
+        </div>
+    </div>
+</body>
+</html>
