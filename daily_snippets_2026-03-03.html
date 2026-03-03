@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Snippets - 2026-03-03</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background-color: #FFF1E0;
+            color: #3E474F;
+            line-height: 1.6;
+            padding: 24px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            padding: 32px 0;
+            border-bottom: 3px solid #3E474F;
+            margin-bottom: 32px;
+        }
+        .header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .header .date {
+            font-size: 18px;
+            color: #66737D;
+        }
+        .header .meta {
+            font-size: 14px;
+            color: #66737D;
+            margin-top: 12px;
+        }
+        .topic-section {
+            margin-bottom: 40px;
+        }
+        .topic-title {
+            font-size: 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 0;
+            border-bottom: 2px solid #F2DFCE;
+            margin-bottom: 24px;
+            color: #3E474F;
+        }
+        .channel-section {
+            margin-bottom: 28px;
+        }
+        .channel-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            margin-bottom: 16px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .snippet-card {
+            background: #FFF9F5;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border-left: 4px solid #FCD0AF;
+        }
+        .snippet-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .snippet-title a {
+            color: #0D7680;
+            text-decoration: none;
+        }
+        .snippet-title a:hover {
+            text-decoration: underline;
+        }
+        .snippet-meta {
+            font-size: 13px;
+            color: #66737D;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+        .snippet-speakers {
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .snippet-speakers strong {
+            color: #3E474F;
+        }
+        .snippet-summary {
+            font-size: 15px;
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+        .snippet-claims {
+            margin-bottom: 16px;
+        }
+        .snippet-claims-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .snippet-claims ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .snippet-claims li {
+            font-size: 14px;
+            padding: 4px 0 4px 16px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .snippet-claims li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #0D7680;
+        }
+        .snippet-details {
+            font-size: 13px;
+            color: #66737D;
+            border-top: 1px solid #F2DFCE;
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+        .snippet-details p {
+            margin-bottom: 4px;
+        }
+        .snippet-conclusion {
+            font-size: 14px;
+            font-style: italic;
+            color: #3E474F;
+            background: #F2DFCE;
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 12px;
+        }
+        .footer {
+            text-align: center;
+            padding: 24px 0;
+            border-top: 1px solid #F2DFCE;
+            margin-top: 40px;
+            font-size: 12px;
+            color: #66737D;
+        }
+        /* Collapsible sections */
+        details {
+            margin-bottom: 8px;
+        }
+        details summary {
+            cursor: pointer;
+            list-style: none;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary::before {
+            content: "▶";
+            display: inline-block;
+            margin-right: 8px;
+            transition: transform 0.2s;
+            font-size: 12px;
+        }
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
+        .topic-details {
+            border: 1px solid #F2DFCE;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            background: #FFF9F5;
+        }
+        .topic-summary {
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 16px 20px;
+            color: #3E474F;
+            background: #F2DFCE;
+            border-radius: 8px;
+        }
+        .topic-details[open] .topic-summary {
+            border-radius: 8px 8px 0 0;
+        }
+        .topic-count {
+            font-size: 14px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .topic-content {
+            padding: 16px 20px;
+        }
+        .channel-details {
+            border: 1px solid #FCD0AF;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            background: white;
+        }
+        .channel-summary {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            padding: 12px 16px;
+            background: #FFF9F5;
+            border-radius: 6px;
+        }
+        .channel-details[open] .channel-summary {
+            border-radius: 6px 6px 0 0;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .channel-count {
+            font-size: 13px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .channel-content {
+            padding: 12px 16px;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 16px;
+            }
+            .header h1 {
+                font-size: 28px;
+            }
+            .snippet-card {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Daily Snippets</h1>
+            <div class="date">Tuesday, March 03, 2026</div>
+            <div class="meta">4 videos • uploaded 2026-03-03 • 4 videos</div>
+        </div>
+        <details class="topic-details">
+            <summary class="topic-summary">INVESTING<span class="topic-count">(4 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">TheAsianGuy-k9h<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=lqL9fy71xkw" target="_blank">Silver Slammed From $100 to $86 — The $16 Shanghai Gap No One Is Talking About</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 29m 25s • @THEASIANGUY-AG • Mar 03, 2026 • 1,796 views • 171 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses the recent dramatic fluctuations in silver prices, highlighting a significant divergence between paper and physical silver markets. The narrator emphasizes the importance of understanding the $16 gap between these markets and the implications for investors.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Silver&#x27;s price dropped from $100.13 to $86.45 in a single session.</li>
+                            <li>The physical silver market in Shanghai only dropped approximately 5%, creating a $16 gap.</li>
+                            <li>Institutions like Bank of America and RBC Capital are accumulating physical silver during market volatility.</li>
+                            <li>The divergence between paper and physical prices indicates that the paper price is mispriced.</li>
+                            <li>The Fed&#x27;s inaction on interest rates is creating a structural tailwind for precious metals.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> McCory, HSBC, Bank of America, Cityroup, RBC Capital</p>
+                        <p><strong>Topics:</strong> silver market, price divergence, physical delivery, institutional buying, geopolitical impact</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The physical market&#x27;s stability amidst paper price volatility suggests a strong underlying demand for silver.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">eurodollaruniversity<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=rOb0eWqbqr4" target="_blank">The World Isn&#x27;t Prepared for What Just Happened to Oil</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 23m 43s • @eurodollaruniversity • Mar 03, 2026 • 18,036 views • 996 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses the recent spike in oil prices due to renewed conflict with Iran and its implications for financial markets, particularly the Treasury market. The narrator emphasizes the transitory nature of inflation caused by oil price fluctuations and the broader trend of delglobalization affecting political stability.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Gasoline prices have sharply increased due to geopolitical tensions.</li>
+                            <li>Treasury yields are rising, but not necessarily due to inflation concerns.</li>
+                            <li>The current oil price spike is driven by supply issues rather than demand.</li>
+                            <li>Historical patterns show that oil price spikes do not lead to sustained inflation.</li>
+                            <li>Delglobalization is causing more frequent and serious geopolitical conflicts.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Jerome Powell, KC Jeff, Brent Johnson, Michael Green, Beth Hammock, Lori Logan, Jamie Dimon</p>
+                        <p><strong>Organizations:</strong> Monetary Metals</p>
+                        <p><strong>Topics:</strong> oil market impact, Treasury yields, inflation expectations, geopolitical conflicts, delglobalization</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The instability in oil prices and the economy reflects a broader trend of delglobalization that is likely to continue affecting political dynamics.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">topic_Jim_Cramer<span class="channel-count">(2 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=FiJ8qLa09no" target="_blank">Mad Money 03/02/26 | Audio Only</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 44m 4s • @cnbctelevision • Mar 03, 2026 • 1,835 views • 51 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Jim Kramer</div>
+                    <div class="snippet-summary">In this episode, Jim Kramer discusses the current state of the stock market amidst geopolitical tensions, particularly the conflict with Iran, and its implications for various sectors. He also analyzes the performance of individual stocks and sectors, highlighting winners and losers from February.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The market&#x27;s reaction to the Iran conflict is less severe due to increased domestic oil production.</li>
+                            <li>Energy stocks are showing resilience despite geopolitical tensions.</li>
+                            <li>Data center-related stocks are performing well due to growing demand.</li>
+                            <li>AI displacement is negatively impacting enterprise software companies.</li>
+                            <li>Private equity firms are facing scrutiny due to exposure to troubled sectors.</li>
+                            <li>Bitcoin may be poised for a rally as it finds a bottom.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Christine Baron, Carl Echinbach, Neil Bushrey, Larry Williams</p>
+                        <p><strong>Organizations:</strong> Cummins, Netflix, Microsoft, Dutch Bros, Exxon, Chevron, Nvidia, Texas Pacific Land Corporation, Corning, Ksite Technologies, Sienna, Generac, Teradyne, Unity, Dell Technologies, DeVita, Halma Aerospace, Lockheed Martin, Capital One, Robinhood, Fox, IQVIA</p>
+                        <p><strong>Topics:</strong> market analysis, Iran conflict, energy stocks, data centers, AI impact, private equity, cryptocurrency</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The current market dynamics suggest that while geopolitical issues are significant, domestic energy production and data center demand are key factors driving stock performance.
+                    </div>
+                </div>
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=gRar359mhTI" target="_blank">When markets opened it seemed they didn&#x27;t mind the Iran conflict, says Jim Cramer</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 7m 36s • @cnbctelevision • Mar 03, 2026 • 15,124 views • 191 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Jim Cramer</div>
+                    <div class="snippet-summary">Jim Cramer discusses the market&#x27;s resilience in the face of the Iran conflict, suggesting that the U.S. economy&#x27;s current oil production levels mitigate the impact of geopolitical tensions. He reflects on how investor sentiment remains optimistic despite potential challenges.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The market didn&#x27;t react negatively to the Iran conflict due to increased domestic oil production.</li>
+                            <li>Investors are optimistic about a quick resolution to the conflict, which supports market stability.</li>
+                            <li>The importance of Middle Eastern oil to the U.S. economy has diminished over the years.</li>
+                            <li>Recent market movements indicate a reversal of the previous week&#x27;s negativity.</li>
+                            <li>Nvidia&#x27;s potential new chip announcement positively influenced its stock price.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> New York Times, Dow Jones, Exxon, Chevron, KKR, Blackstone, Apollo, Nvidia</p>
+                        <p><strong>Topics:</strong> Iran conflict, market reaction, oil prices, U.S. economy, investor sentiment</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The geopolitical situation in the Middle East is less impactful on the U.S. market due to the country&#x27;s abundant resources.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <div class="footer">
+            Generated 2026-03-03 06:24:24
+        </div>
+    </div>
+</body>
+</html>
