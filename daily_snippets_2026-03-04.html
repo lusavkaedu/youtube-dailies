@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Snippets - 2026-03-04</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background-color: #FFF1E0;
+            color: #3E474F;
+            line-height: 1.6;
+            padding: 24px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            padding: 32px 0;
+            border-bottom: 3px solid #3E474F;
+            margin-bottom: 32px;
+        }
+        .header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .header .date {
+            font-size: 18px;
+            color: #66737D;
+        }
+        .header .meta {
+            font-size: 14px;
+            color: #66737D;
+            margin-top: 12px;
+        }
+        .topic-section {
+            margin-bottom: 40px;
+        }
+        .topic-title {
+            font-size: 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 0;
+            border-bottom: 2px solid #F2DFCE;
+            margin-bottom: 24px;
+            color: #3E474F;
+        }
+        .channel-section {
+            margin-bottom: 28px;
+        }
+        .channel-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            margin-bottom: 16px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .snippet-card {
+            background: #FFF9F5;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border-left: 4px solid #FCD0AF;
+        }
+        .snippet-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .snippet-title a {
+            color: #0D7680;
+            text-decoration: none;
+        }
+        .snippet-title a:hover {
+            text-decoration: underline;
+        }
+        .snippet-meta {
+            font-size: 13px;
+            color: #66737D;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+        .snippet-speakers {
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .snippet-speakers strong {
+            color: #3E474F;
+        }
+        .snippet-summary {
+            font-size: 15px;
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+        .snippet-claims {
+            margin-bottom: 16px;
+        }
+        .snippet-claims-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .snippet-claims ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .snippet-claims li {
+            font-size: 14px;
+            padding: 4px 0 4px 16px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .snippet-claims li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #0D7680;
+        }
+        .snippet-details {
+            font-size: 13px;
+            color: #66737D;
+            border-top: 1px solid #F2DFCE;
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+        .snippet-details p {
+            margin-bottom: 4px;
+        }
+        .snippet-conclusion {
+            font-size: 14px;
+            font-style: italic;
+            color: #3E474F;
+            background: #F2DFCE;
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 12px;
+        }
+        .footer {
+            text-align: center;
+            padding: 24px 0;
+            border-top: 1px solid #F2DFCE;
+            margin-top: 40px;
+            font-size: 12px;
+            color: #66737D;
+        }
+        /* Collapsible sections */
+        details {
+            margin-bottom: 8px;
+        }
+        details summary {
+            cursor: pointer;
+            list-style: none;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary::before {
+            content: "▶";
+            display: inline-block;
+            margin-right: 8px;
+            transition: transform 0.2s;
+            font-size: 12px;
+        }
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
+        .topic-details {
+            border: 1px solid #F2DFCE;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            background: #FFF9F5;
+        }
+        .topic-summary {
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 16px 20px;
+            color: #3E474F;
+            background: #F2DFCE;
+            border-radius: 8px;
+        }
+        .topic-details[open] .topic-summary {
+            border-radius: 8px 8px 0 0;
+        }
+        .topic-count {
+            font-size: 14px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .topic-content {
+            padding: 16px 20px;
+        }
+        .channel-details {
+            border: 1px solid #FCD0AF;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            background: white;
+        }
+        .channel-summary {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            padding: 12px 16px;
+            background: #FFF9F5;
+            border-radius: 6px;
+        }
+        .channel-details[open] .channel-summary {
+            border-radius: 6px 6px 0 0;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .channel-count {
+            font-size: 13px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .channel-content {
+            padding: 12px 16px;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 16px;
+            }
+            .header h1 {
+                font-size: 28px;
+            }
+            .snippet-card {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Daily Snippets</h1>
+            <div class="date">Wednesday, March 04, 2026</div>
+            <div class="meta">6 videos • uploaded 2026-03-04 • 6 videos</div>
+        </div>
+        <details class="topic-details">
+            <summary class="topic-summary">INVESTING<span class="topic-count">(4 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">nobull-markettalkwithgeorg4907<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=4rGVkTGahPg" target="_blank">Russell Clark | Goodbye Menlo Park, Konnichiwa Tokyo : Head east young man. | No Bull George Noble.</a>
+                    </div>
+                    <div class="snippet-meta">interview • 54m 7s • @nobull-markettalkwithgeorg4907 • Mar 04, 2026 • 120 views • 12 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Russell Clark, George Noble</div>
+                    <div class="snippet-summary">In this episode, Russell Clark discusses his views on the current investment landscape, focusing on gold, semiconductors, and the Japanese market. He emphasizes the impact of political dynamics on economic policies and investment strategies.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Gold remains a strong investment due to ongoing geopolitical tensions.</li>
+                            <li>The semiconductor industry is facing significant supply issues that could drive inflation.</li>
+                            <li>Japan is emerging as a favorable market for investment due to its political stability and economic potential.</li>
+                            <li>Inflation is likely to be entrenched in the economy due to government spending policies.</li>
+                            <li>AI is changing the software landscape, impacting traditional business models.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> gold trading, semiconductors, Japanese market, inflation, AI impact, political economy</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Investors should consider diversifying into gold and Japanese equities while being cautious about US tech stocks.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">topic_Jim_Cramer<span class="channel-count">(2 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=2sEGl6FYAC8" target="_blank">Selling in the hottest semiconductor stocks was brutal, says Jim Cramer</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 10m 28s • @cnbctelevision • Mar 04, 2026 • 14,651 views • 250 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Jim Cramer</div>
+                    <div class="snippet-summary">Jim Cramer discusses the recent volatility in the stock market, particularly focusing on semiconductor stocks and the impact of geopolitical tensions. He emphasizes the importance of staying invested and not reacting impulsively to market fluctuations.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The semiconductor stocks faced brutal selling pressure recently.</li>
+                            <li>The South Korean market&#x27;s decline affected U.S. stocks due to margin calls.</li>
+                            <li>Boeing&#x27;s stock is undervalued despite record orders.</li>
+                            <li>Investors should focus on company performance rather than geopolitical events.</li>
+                            <li>The AI disruption could impact enterprise software companies significantly.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Steve, Neil Bush</p>
+                        <p><strong>Organizations:</strong> CNBC, Blackstone, Cloudflare</p>
+                        <p><strong>Topics:</strong> semiconductor stocks, market volatility, Iran conflict, Boeing, AI disruption</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Investing requires a focus on fundamentals rather than reacting to every market event.
+                    </div>
+                </div>
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=ISGe21_RSYs" target="_blank">Mad Money 03/03/26 | Audio Only</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 43m 55s • @cnbctelevision • Mar 04, 2026 • 1,555 views • 33 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Jim Kramer</div>
+                    <div class="snippet-summary">In this episode, Jim Kramer discusses the current state of the market amidst the ongoing conflict in Iran and its impact on oil prices. He also addresses concerns regarding private credit funds and the influence of AI on various sectors.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The market is experiencing significant volatility due to geopolitical tensions, particularly with Iran.</li>
+                            <li>Oil prices are expected to remain high temporarily due to the conflict, but long-term trends suggest a return to lower prices.</li>
+                            <li>Private credit funds are facing redemption pressures as investors fear losses, despite the underlying assets being solvent.</li>
+                            <li>AI is disrupting traditional tech companies, leading to concerns about their future profitability.</li>
+                            <li>Kramer advises against making impulsive trading decisions based on market panic.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Matthew Prince, Carly Garner, Steve, Dave Gitlin</p>
+                        <p><strong>Organizations:</strong> CNBC, Blackstone, Cloudflare, Carrier Global</p>
+                        <p><strong>Topics:</strong> market analysis, oil prices, Iran conflict, private credit, AI impact, semiconductor stocks</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Investors should focus on long-term fundamentals rather than short-term market fears.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">topic_Tracy_Shuchart<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=o05Er4vo-RE" target="_blank">There will be ‘TREPIDATION’ for ships crossing Strait of Hormuz, says economist</a>
+                    </div>
+                    <div class="snippet-meta">interview • 7m 2s • @foxbusiness • Mar 04, 2026 • 14,468 views • 235 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Tracy Shuchart</div>
+                    <div class="snippet-summary">The episode discusses the current situation in the Strait of Hormuz and its implications for global oil supply and prices. Tracy Shuchart provides insights on the impact of insurance issues and geopolitical tensions on shipping and energy markets.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The Strait of Hormuz is crucial for global oil supply, with 21 million barrels a day crossing it.</li>
+                            <li>Insurance has been pulled due to threats from Iran, causing ships to anchor and wait for clarity.</li>
+                            <li>The U.S. government may consider backstopping insurance for vessels in the Strait.</li>
+                            <li>Iran&#x27;s actions have led to significant disruptions in oil production in neighboring countries like Iraq.</li>
+                            <li>The diesel market is facing challenges due to heavy crude supply issues from the Middle East.</li>
+                            <li>Uranium energy is gaining attention as a long-term investment opportunity.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> Ninja Trader Group, Lloyds of London</p>
+                        <p><strong>Topics:</strong> Strait of Hormuz, oil prices, insurance issues, Iran threats, diesel market, uranium energy</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> There will be trepidation for ships crossing the Strait of Hormuz due to ongoing threats and insurance issues.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">RUSSIA<span class="topic-count">(1 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">IgorLipsits_1950<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=CJWuz2sBdpo" target="_blank">LIPSITS: INTERVIEW WITH IGOR EIMAN 02.03.2026</a>
+                    </div>
+                    <div class="snippet-meta">interview • 55m 52s • @IgorLipsits_1950 • Mar 04, 2026 • 1,603 views • 265 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Игорь Владимирович Липсец, unnamed narrator</div>
+                    <div class="snippet-summary">В этом эпизоде Игорь Липсец обсуждает экономические последствия войны в заливе и их влияние на Россию. Он также анализирует состояние российской экономики, включая проблемы с бюджетом и безработицей.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Война в заливе может привести к росту цен на нефть, но долгосрочные последствия будут ограниченными.</li>
+                            <li>Российская экономика сталкивается с серьезными бюджетными проблемами и дефицитом.</li>
+                            <li>Ситуация на нефтяном рынке ухудшается из-за старения месторождений и высоких издержек.</li>
+                            <li>Безработица в России может увеличиться, особенно среди неквалифицированных работников.</li>
+                            <li>Возможен распад России на регионы или возвращение к авторитарной модели, подобной Северной Корее.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Дмитрий Медведев, Трамп, Мадуро</p>
+                        <p><strong>Organizations:</strong> Газпром, Роснефть, РЖД</p>
+                        <p><strong>Topics:</strong> экономика России, война в заливе, нефтяной рынок, глобальная безопасность, бюджетные проблемы, безработица</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Российская экономика находится на грани кризиса, и возможны серьезные социальные и политические последствия.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">OTHER<span class="topic-count">(1 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">SpaceWeatherNewsS0s<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=7KpeVH4t_2s" target="_blank">Observers Live #25 - Are You Inspired?</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 47m 7s • @SpaceWeatherNewsS0s • Mar 04, 2026 • 7,066 views • 907 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">In this episode, the host discusses recent solar activity and its implications for Earth, including potential connections to earthquakes. The conversation also touches on prepping strategies and the current state of societal issues.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Recent solar activity is linked to geomagnetic storms affecting Earth.</li>
+                            <li>There is a possible mechanism by which solar activity may trigger earthquakes.</li>
+                            <li>The current magnetic pole shift is accelerating and could have significant consequences.</li>
+                            <li>Prepping for potential disasters is crucial and should include food, water, and medical supplies.</li>
+                            <li>The elites are becoming more reckless due to the urgency of current global issues.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Grand, Native Patriot, The Hellbent, Brett, Katherine Austin Fitz, Alex Jones</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> solar activity, earthquakes, geomagnetic storms, prepping strategies, current events</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The urgency of current global issues necessitates immediate action in prepping and awareness.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <div class="footer">
+            Generated 2026-03-04 07:29:39
+        </div>
+    </div>
+</body>
+</html>
