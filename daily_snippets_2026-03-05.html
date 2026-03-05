@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Snippets - 2026-03-05</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background-color: #FFF1E0;
+            color: #3E474F;
+            line-height: 1.6;
+            padding: 24px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            padding: 32px 0;
+            border-bottom: 3px solid #3E474F;
+            margin-bottom: 32px;
+        }
+        .header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .header .date {
+            font-size: 18px;
+            color: #66737D;
+        }
+        .header .meta {
+            font-size: 14px;
+            color: #66737D;
+            margin-top: 12px;
+        }
+        .topic-section {
+            margin-bottom: 40px;
+        }
+        .topic-title {
+            font-size: 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 0;
+            border-bottom: 2px solid #F2DFCE;
+            margin-bottom: 24px;
+            color: #3E474F;
+        }
+        .channel-section {
+            margin-bottom: 28px;
+        }
+        .channel-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            margin-bottom: 16px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .snippet-card {
+            background: #FFF9F5;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border-left: 4px solid #FCD0AF;
+        }
+        .snippet-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .snippet-title a {
+            color: #0D7680;
+            text-decoration: none;
+        }
+        .snippet-title a:hover {
+            text-decoration: underline;
+        }
+        .snippet-meta {
+            font-size: 13px;
+            color: #66737D;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+        .snippet-speakers {
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .snippet-speakers strong {
+            color: #3E474F;
+        }
+        .snippet-summary {
+            font-size: 15px;
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+        .snippet-claims {
+            margin-bottom: 16px;
+        }
+        .snippet-claims-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .snippet-claims ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .snippet-claims li {
+            font-size: 14px;
+            padding: 4px 0 4px 16px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .snippet-claims li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #0D7680;
+        }
+        .snippet-details {
+            font-size: 13px;
+            color: #66737D;
+            border-top: 1px solid #F2DFCE;
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+        .snippet-details p {
+            margin-bottom: 4px;
+        }
+        .snippet-conclusion {
+            font-size: 14px;
+            font-style: italic;
+            color: #3E474F;
+            background: #F2DFCE;
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 12px;
+        }
+        .footer {
+            text-align: center;
+            padding: 24px 0;
+            border-top: 1px solid #F2DFCE;
+            margin-top: 40px;
+            font-size: 12px;
+            color: #66737D;
+        }
+        /* Collapsible sections */
+        details {
+            margin-bottom: 8px;
+        }
+        details summary {
+            cursor: pointer;
+            list-style: none;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary::before {
+            content: "▶";
+            display: inline-block;
+            margin-right: 8px;
+            transition: transform 0.2s;
+            font-size: 12px;
+        }
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
+        .topic-details {
+            border: 1px solid #F2DFCE;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            background: #FFF9F5;
+        }
+        .topic-summary {
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 16px 20px;
+            color: #3E474F;
+            background: #F2DFCE;
+            border-radius: 8px;
+        }
+        .topic-details[open] .topic-summary {
+            border-radius: 8px 8px 0 0;
+        }
+        .topic-count {
+            font-size: 14px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .topic-content {
+            padding: 16px 20px;
+        }
+        .channel-details {
+            border: 1px solid #FCD0AF;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            background: white;
+        }
+        .channel-summary {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            padding: 12px 16px;
+            background: #FFF9F5;
+            border-radius: 6px;
+        }
+        .channel-details[open] .channel-summary {
+            border-radius: 6px 6px 0 0;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .channel-count {
+            font-size: 13px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .channel-content {
+            padding: 12px 16px;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 16px;
+            }
+            .header h1 {
+                font-size: 28px;
+            }
+            .snippet-card {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Daily Snippets</h1>
+            <div class="date">Thursday, March 05, 2026</div>
+            <div class="meta">8 videos • uploaded 2026-03-05 • 8 videos</div>
+        </div>
+        <details class="topic-details">
+            <summary class="topic-summary">POLITICS<span class="topic-count">(1 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">IgorLipsits_1950<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=azhJNa89BoI" target="_blank">ЛИПСИЦ: ИНТЕРВЬЮ ЕВГЕНИЮ КИСЕЛЕВУ 04.03.2026 Г.</a>
+                    </div>
+                    <div class="snippet-meta">interview • 49m 35s • @IgorLipsits_1950 • Mar 05, 2026 • 2,121 views • 348 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Евгений Киселёв, Игорь Липсиц</div>
+                    <div class="snippet-summary">В этом эпизоде Евгений Киселёв беседует с экономистом Игорем Липсицем о текущей экономической ситуации в России на фоне войны и международных санкций. Обсуждаются последствия для экономики, нефтяного рынка и возможные сценарии развития событий.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Россия находится в &#x27;зоне смерти&#x27; из-за высоких военных расходов.</li>
+                            <li>Война с Украиной истощает ресурсы России.</li>
+                            <li>Санкции имеют накопительный эффект и могут привести к серьезным последствиям.</li>
+                            <li>Краткосрочные выгоды от войны могут привести к долгосрочным потерям.</li>
+                            <li>Экономика России сталкивается с глубоким кризисом в различных отраслях.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Дмитрий Некрасов, Александр Прокопенко, Игорь Липсиц, Гуриев, Сонин, Сицхоки, Янес Клюги, Алексашенко, Чемезов, Потанин, Дерепаска, Собянин</p>
+                        <p><strong>Organizations:</strong> ОПЕК, ВТО</p>
+                        <p><strong>Topics:</strong> экономика России, война и нефть, санкции, финансовая ситуация, долгосрочные последствия</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Экономическая ситуация в России ухудшается, и высокие военные расходы могут привести к катастрофическим последствиям для страны.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">INVESTING<span class="topic-count">(6 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">Monetary-Matters<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=Mlbaxz1mdhM" target="_blank">Why the Economy Rolls Over After Peak Summer Euphoria | Tian Yang</a>
+                    </div>
+                    <div class="snippet-meta">interview • 61m 58s • @Monetary-Matters • Mar 05, 2026 • 838 views • 42 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Maxi, Tian Yang</div>
+                    <div class="snippet-summary">In this episode, Tian Yang discusses the current macroeconomic environment, the implications of jobless growth, and the potential impact of geopolitical events on energy prices and investment strategies. The conversation also explores the role of AI in shaping future economic trends and the importance of sovereignty in investment decisions.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The macro environment is currently benign but shows signs of slowing.</li>
+                            <li>Jobless growth is characterized by productivity gains without significant hiring.</li>
+                            <li>Energy prices could derail the current macro environment if they remain elevated.</li>
+                            <li>The U.S. is transitioning to a more sovereign-focused investment strategy.</li>
+                            <li>Gold is expected to continue its rally as a neutral reserve asset.</li>
+                            <li>Capital cycles indicate sectors with high returns are becoming scarce.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Trump, Chris, Elon Musk, Maduro, FDR, Lincoln, Michael C</p>
+                        <p><strong>Organizations:</strong> Kaya NXT, Variant Perception</p>
+                        <p><strong>Topics:</strong> macro environment, jobless growth, energy prices, AI impact, capital cycles, sovereignty, gold investment</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The balance of 2026 presents a favorable macro environment, but various geopolitical and economic factors could lead to significant shifts.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">OGJohnAG<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=0l3pJ52OGiY" target="_blank">$83 Paper, $95 Shanghai, 24 Days Of Silver Left – Jane Street&#x27;s $1.3B Is Raising Questions</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 12m 44s • @OGJohnAG • Mar 05, 2026 • 12,028 views • 990 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> OG John AG</div>
+                    <div class="snippet-summary">In this episode, OG John AG discusses the current state of the silver market, highlighting significant changes in open interest and delivery notices, as well as the implications of institutional investments. He also examines the broader energy landscape and its potential impact on market dynamics.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Silver is currently priced at $83 in the West and $95 in Shanghai, indicating a significant premium.</li>
+                            <li>Total open interest in silver has fallen to its lowest level since 2013, signaling reduced market participation.</li>
+                            <li>Jane Street has dramatically increased its holdings in the Eyesshares Silver Trust, raising questions about their market strategy.</li>
+                            <li>Three simultaneous energy supply disruptions are currently affecting global markets, particularly in oil and gas.</li>
+                            <li>The paper market for silver is failing to reflect physical scarcity, which could lead to significant price movements.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> Jane Street, Goldman, McCory, Bank of America, JP Morgan, Morgan Stanley, Wells Fargo, Black Rock, Shanghai Futures Exchange, Shanghai Gold Exchange</p>
+                        <p><strong>Topics:</strong> silver market, trading strategies, institutional investment, energy supply, market volatility</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The current market conditions are highly uncertain, and traders should approach with caution.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">TheAsianGuy-k9h<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=HLQN7JCEvxo" target="_blank">US Military Is Burning Silver in Combat &amp; Has Zero Reserves — May Delivery Crunch Arrives April 30</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 36m 41s • @THEASIANGUY-AG • Mar 05, 2026 • 1,040 views • 82 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses the significant consumption of silver by the U.S. military in active combat operations and the implications of having no strategic reserves. It highlights the structural vulnerabilities in the silver market leading up to a potential delivery crisis on April 30, 2026.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The U.S. military is consuming silver in combat while holding zero reserves.</li>
+                            <li>Global silver demand has exceeded mine supply for six consecutive years.</li>
+                            <li>Comex registered inventory has dropped 33% in five months.</li>
+                            <li>China has restricted silver exports, complicating supply for the U.S.</li>
+                            <li>The May futures contract has open interest significantly exceeding available metal.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> President Trump</p>
+                        <p><strong>Organizations:</strong> United States Geological Survey, Defense Logistics Agency</p>
+                        <p><strong>Topics:</strong> silver market, military consumption, supply chain, critical minerals, delivery crisis</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The silver market is approaching a structural break due to military consumption and supply constraints.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">eurodollaruniversity<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=aychcns0eFg" target="_blank">Swiss Central Bank Just Sent a HUGE Warning to the World</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 18m 10s • @eurodollaruniversity • Mar 05, 2026 • 19,287 views • 956 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">The episode discusses a recent warning from the Swiss National Bank regarding potential currency intervention due to rising oil prices and inflation concerns. It analyzes the implications of these developments on interest rates and the global economy.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The Swiss National Bank issued a rare warning about intervening in currency markets.</li>
+                            <li>Inflation projections by the SNB have consistently underestimated the actual inflation rates.</li>
+                            <li>The current economic conditions suggest a higher likelihood of negative interest rates in Switzerland.</li>
+                            <li>The strength of the Swiss Frank is negatively impacting the economy and inflation rates.</li>
+                            <li>Recent oil price spikes have not led to the expected inflationary pressures.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Christine Lagarde, Powell</p>
+                        <p><strong>Organizations:</strong> Swiss National Bank, S&amp;P, Monetary Metals</p>
+                        <p><strong>Topics:</strong> Swiss National Bank, currency intervention, inflation projections, oil price impact, interest rates</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The Swiss National Bank&#x27;s warning reflects broader economic challenges and the potential for lower interest rates globally.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">topic_Jim_Cramer<span class="channel-count">(2 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=B8bQ8Y0pQSQ" target="_blank">Mad Money 03/04/26 | Audio Only</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 44m 19s • @cnbctelevision • Mar 05, 2026 • 1,861 views • 43 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Jim Kramer</div>
+                    <div class="snippet-summary">In this episode, Jim Kramer discusses the impact of the oil market and the ongoing conflict in Iran on stock performance, while also highlighting the potential of Crowd Strike and the turnaround of Target under new management. He emphasizes the importance of understanding market sentiment and making informed investment decisions.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The oil market is indicating a potential resolution to the conflict in Iran, which could stabilize prices.</li>
+                            <li>Crowd Strike reported strong earnings, showcasing its critical role in cybersecurity amidst geopolitical tensions.</li>
+                            <li>Target is experiencing a turnaround under new management, with positive sales trends and strategic investments.</li>
+                            <li>Investors should focus on high-quality stocks and avoid panic selling during market fluctuations.</li>
+                            <li>The sentiment in the market is shifting towards riskier stocks, indicating a potential rally.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> George Kurts, Michael Fideli</p>
+                        <p><strong>Organizations:</strong> CNBC, Crowd Strike, Exxon, Kanico, Halbertton, Amazon, Nvidia, Target, Forgant Power Solutions</p>
+                        <p><strong>Topics:</strong> oil market, Iran conflict, Crowd Strike, Target turnaround, investing strategies</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Investors should remain optimistic about the market&#x27;s recovery and focus on quality stocks like Crowd Strike and Target.
+                    </div>
+                </div>
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=J7TfPYRXRLs" target="_blank">Oil stocks could be wrong, but right now they&#x27;re saying the Strait of Hormuz will reopen: Cramer</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 8m 7s • @cnbctelevision • Mar 05, 2026 • 14,765 views • 187 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Jim Cramer</div>
+                    <div class="snippet-summary">Jim Cramer discusses the current state of the oil market in relation to the conflict with Iran and its implications for stock prices. He emphasizes the potential for a market rebound and the resilience of certain tech stocks amidst concerns over AI competition.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The oil market is reacting positively to the potential reopening of the Strait of Hormuz.</li>
+                            <li>Historical parallels are drawn between the current situation and the Gulf War in 1991.</li>
+                            <li>Crowd Strike&#x27;s stock has been negatively impacted by fears of AI competition but showed resilience after a strong earnings report.</li>
+                            <li>Amazon and Nvidia stocks are experiencing a rally despite no significant news.</li>
+                            <li>Positive market sentiment is driving stock prices higher, independent of news flow.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> George Kurts</p>
+                        <p><strong>Organizations:</strong> Exxon, Kico, Halbert, Crowd Strike, Anthropic, Amazon, Nvidia, Western Digital</p>
+                        <p><strong>Topics:</strong> oil market, Iran conflict, stock market, Crowd Strike, AI impact, investing strategies</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The oil stocks indicate that the war&#x27;s trajectory may be improving, suggesting a potential market recovery.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">OTHER<span class="topic-count">(1 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">SpaceWeatherNewsS0s<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=keL5J3YKTNM" target="_blank">You Are In Control</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 9m 6s • @SpaceWeatherNewsS0s • Mar 05, 2026 • 7,950 views • 1,569 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">The episode discusses the nature of suffering and the importance of personal responsibility in the face of life&#x27;s challenges. It emphasizes the need to communicate effectively with those who are receptive and highlights the economic difficulties facing society.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Life is filled with suffering and malevolence, but how we respond to it matters.</li>
+                            <li>Christian imagery encourages individuals to bear their burdens and transform through suffering.</li>
+                            <li>Effective communication requires engaging with those who are willing to listen.</li>
+                            <li>Current economic conditions are worsening, affecting basic necessities.</li>
+                            <li>Ignoring the consequences of moralistic policies will lead to greater suffering.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> suffering, Christianity, communication, economic issues, personal growth</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Accepting and transforming suffering is essential for personal growth.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <div class="footer">
+            Generated 2026-03-05 07:23:41
+        </div>
+    </div>
+</body>
+</html>
