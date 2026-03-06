@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Snippets - 2026-03-06</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background-color: #FFF1E0;
+            color: #3E474F;
+            line-height: 1.6;
+            padding: 24px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            padding: 32px 0;
+            border-bottom: 3px solid #3E474F;
+            margin-bottom: 32px;
+        }
+        .header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .header .date {
+            font-size: 18px;
+            color: #66737D;
+        }
+        .header .meta {
+            font-size: 14px;
+            color: #66737D;
+            margin-top: 12px;
+        }
+        .topic-section {
+            margin-bottom: 40px;
+        }
+        .topic-title {
+            font-size: 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 0;
+            border-bottom: 2px solid #F2DFCE;
+            margin-bottom: 24px;
+            color: #3E474F;
+        }
+        .channel-section {
+            margin-bottom: 28px;
+        }
+        .channel-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            margin-bottom: 16px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .snippet-card {
+            background: #FFF9F5;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border-left: 4px solid #FCD0AF;
+        }
+        .snippet-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .snippet-title a {
+            color: #0D7680;
+            text-decoration: none;
+        }
+        .snippet-title a:hover {
+            text-decoration: underline;
+        }
+        .snippet-meta {
+            font-size: 13px;
+            color: #66737D;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+        .snippet-speakers {
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .snippet-speakers strong {
+            color: #3E474F;
+        }
+        .snippet-summary {
+            font-size: 15px;
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+        .snippet-claims {
+            margin-bottom: 16px;
+        }
+        .snippet-claims-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .snippet-claims ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .snippet-claims li {
+            font-size: 14px;
+            padding: 4px 0 4px 16px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .snippet-claims li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #0D7680;
+        }
+        .snippet-details {
+            font-size: 13px;
+            color: #66737D;
+            border-top: 1px solid #F2DFCE;
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+        .snippet-details p {
+            margin-bottom: 4px;
+        }
+        .snippet-conclusion {
+            font-size: 14px;
+            font-style: italic;
+            color: #3E474F;
+            background: #F2DFCE;
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 12px;
+        }
+        .footer {
+            text-align: center;
+            padding: 24px 0;
+            border-top: 1px solid #F2DFCE;
+            margin-top: 40px;
+            font-size: 12px;
+            color: #66737D;
+        }
+        /* Collapsible sections */
+        details {
+            margin-bottom: 8px;
+        }
+        details summary {
+            cursor: pointer;
+            list-style: none;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary::before {
+            content: "▶";
+            display: inline-block;
+            margin-right: 8px;
+            transition: transform 0.2s;
+            font-size: 12px;
+        }
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
+        .topic-details {
+            border: 1px solid #F2DFCE;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            background: #FFF9F5;
+        }
+        .topic-summary {
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 16px 20px;
+            color: #3E474F;
+            background: #F2DFCE;
+            border-radius: 8px;
+        }
+        .topic-details[open] .topic-summary {
+            border-radius: 8px 8px 0 0;
+        }
+        .topic-count {
+            font-size: 14px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .topic-content {
+            padding: 16px 20px;
+        }
+        .channel-details {
+            border: 1px solid #FCD0AF;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            background: white;
+        }
+        .channel-summary {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            padding: 12px 16px;
+            background: #FFF9F5;
+            border-radius: 6px;
+        }
+        .channel-details[open] .channel-summary {
+            border-radius: 6px 6px 0 0;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .channel-count {
+            font-size: 13px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .channel-content {
+            padding: 12px 16px;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 16px;
+            }
+            .header h1 {
+                font-size: 28px;
+            }
+            .snippet-card {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Daily Snippets</h1>
+            <div class="date">Friday, March 06, 2026</div>
+            <div class="meta">13 videos • uploaded 2026-03-06 • 13 videos</div>
+        </div>
+        <details class="topic-details">
+            <summary class="topic-summary">POLITICS<span class="topic-count">(1 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">HiddenForces<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=84438yW3skY" target="_blank">When Empires Stop Building: The Iran War and the End of American Soft Power | Bruno Maçães</a>
+                    </div>
+                    <div class="snippet-meta">interview • 43m 26s • @HiddenForces • Mar 06, 2026 • 418 views • 20 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Dmitri Ahenus, Bruno Maçães</div>
+                    <div class="snippet-summary">This episode features a discussion between Dmitri Ahenus and Bruno Maçães about the ongoing military campaign against Iran by the US and Israel, exploring its implications for American power and global geopolitics. They analyze the motivations behind the conflict, the role of various political figures, and the potential outcomes of the war.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The US and Israel&#x27;s military actions against Iran are driven by political calculations and historical enmity.</li>
+                            <li>Trump&#x27;s administration is characterized by a lack of coherent strategy and planning regarding the conflict.</li>
+                            <li>The abandonment of soft power in favor of military force reflects a broader decline in American influence.</li>
+                            <li>Iran&#x27;s leadership is unlikely to compromise due to deep-rooted ideological commitments.</li>
+                            <li>The potential for chaos and destruction in Iran could have significant repercussions for US interests in the region.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Marco Rubio, Miriam Mson, Odd Arn Westad, Kamani, Maduro</p>
+                        <p><strong>Organizations:</strong> Hidden Forces, Carnegie Endowment for Peace</p>
+                        <p><strong>Topics:</strong> Iran conflict, US foreign policy, American decline, military strategy, geopolitics</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The current military strategy may lead to significant instability in Iran and pose challenges for US foreign policy moving forward.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">INVESTING<span class="topic-count">(12 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">MetalsInvestorForum<span class="channel-count">(10 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=EMdHdjiKzV8" target="_blank">Tim Laneyrie of Andean Silver Ltd. talks to Joe Mazumdar | Metals Investor Forum | February 2026</a>
+                    </div>
+                    <div class="snippet-meta">interview • 13m 33s • @MetalsInvestorForum • Mar 06, 2026 • 27 views • 1 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Joe Mazumdar, Tim Lannerie</div>
+                    <div class="snippet-summary">Tim Lannerie discusses the plans for Andean Silver Ltd.&#x27;s Laguna Verde project, focusing on the potential for restarting operations and the impact of current silver prices. The conversation also touches on the regulatory environment in Chile and the company&#x27;s strategy for growth and sustainability.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Andean Silver plans to restart operations at Laguna Verde, leveraging existing infrastructure.</li>
+                            <li>The company has raised $60 million to fund feasibility studies and potential restart costs.</li>
+                            <li>Permitting processes in Chile are expected to become easier under the new pro-mining government.</li>
+                            <li>The project has seen a 360% growth in resource estimates over the last two years.</li>
+                            <li>Andean Silver is exploring renewable energy options to reduce operational costs.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> Andean Silver Ltd., Core Mining, Equis</p>
+                        <p><strong>Topics:</strong> silver price, mining operations, environmental permits, exploration growth, renewable energy</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Andean Silver is pivoting towards development to capitalize on rising metal prices while ensuring sustainable practices.
+                    </div>
+                </div>
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=Gak4gALhS-Q" target="_blank">Matthew Turner of Rockhaven Resources Ltd. talks to John Kaiser | Metals Investor Forum | Feb 2026</a>
+                    </div>
+                    <div class="snippet-meta">interview • 15m 38s • @MetalsInvestorForum • Mar 06, 2026 • 23 views</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> John Kaiser, Matthew Turner</div>
+                    <div class="snippet-summary">Matthew Turner discusses the challenges and opportunities facing Rockhaven Resources, particularly regarding their gold mining project. The conversation covers permitting issues, resource estimates, and market conditions affecting the company&#x27;s future.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The stock price of Rockhaven Resources increased significantly in late 2025.</li>
+                            <li>The company is facing permitting challenges with their autoclave process due to gold being refractory in arsenopyrite.</li>
+                            <li>Higher gold prices have changed market expectations for production levels.</li>
+                            <li>The western BRX zone is identified as the highest grade area on the property.</li>
+                            <li>A bulk sample of 6,000 tons is planned to better understand the resource and its economics.</li>
+                            <li>The company is optimistic about receiving the necessary permits for the bulk sample.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> Rockhaven Resources Ltd.</p>
+                        <p><strong>Topics:</strong> gold mining, permitting, bulk sampling, resource estimation, market trends</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The successful extraction of the bulk sample could significantly enhance the project&#x27;s viability and attract investment.
+                    </div>
+                </div>
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=7e2PLCdzYwM" target="_blank">Greg Smith of Newcore Gold Ltd. talks to Brien Lundin | Metals Investor Forum | February 2026</a>
+                    </div>
+                    <div class="snippet-meta">interview • 11m 13s • @MetalsInvestorForum • Mar 06, 2026 • 18 views • 1 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Brien Lundin, Greg Smith</div>
+                    <div class="snippet-summary">Greg Smith discusses the exploration and economic potential of Newcore Gold&#x27;s projects in Ghana, highlighting the company&#x27;s robust resource estimates and plans for future development. The conversation covers the implications of current gold prices on project economics and the company&#x27;s strategy moving forward.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Newcore Gold has a multi-million ounce project in Ghana with strong exploration potential.</li>
+                            <li>The company&#x27;s current resource includes 740,000 ounces indicated and 950,000 ounces inferred.</li>
+                            <li>High-grade intercepts have been found that support the project&#x27;s economic viability.</li>
+                            <li>The transition to a CIL plant will improve gold recovery rates compared to previous models.</li>
+                            <li>Newcore Gold is considering bringing the project into production if it aligns with shareholder interests.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> Newcore Gold Ltd.</p>
+                        <p><strong>Topics:</strong> gold mining, exploration potential, economic analysis, resource updates, production plans</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Newcore Gold is well-positioned to capitalize on its exploration potential and robust economics in the current gold market.
+                    </div>
+                </div>
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=MveRBO1Cu5o" target="_blank">Matthew Turner of Rockhaven Resources presents at Metals Investor Forum in Toronto | February 2026</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 9m 33s • @MetalsInvestorForum • Mar 06, 2026 • 13 views</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Matthew Turner</div>
+                    <div class="snippet-summary">Matthew Turner discusses the progress and future plans of Rockhaven Resources, focusing on their flagship Classic Gold Silver project in the Yukon. He highlights the company&#x27;s exploration efforts, market performance, and upcoming initiatives for 2026.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Rockhaven has been operational since 2010 and has never rolled back its stock.</li>
+                            <li>The company has identified 12 main mineralized zones through extensive drilling.</li>
+                            <li>Rockhaven&#x27;s market cap is approximately $60 million with 292 million shares outstanding.</li>
+                            <li>The flagship project is located in the Dawson Range gold belt of the Yukon.</li>
+                            <li>The company plans to conduct a direct shipping operation for high-grade mineralization.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> John, Brad Thr, Doug Eaton, Cal Everett</p>
+                        <p><strong>Organizations:</strong> Rockhaven Resources, Strategic Metals, Condire Investors</p>
+                        <p><strong>Topics:</strong> Rockhaven Resources, Gold exploration, Mining permits, Market trends, Investment strategy</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Rockhaven Resources is poised for significant growth in 2026 with its exploration and operational strategies.
+                    </div>
+                </div>
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=YjNi3B4WMWA" target="_blank">Tim Laneyrie of Andean Silver Ltd. presents at Metals Investor Forum in Toronto | February 2026</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 12m 6s • @MetalsInvestorForum • Mar 06, 2026 • 20 views • 1 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Tim Laneyrie</div>
+                    <div class="snippet-summary">Tim Laneyrie discusses the Cereabo silver-gold project in southern Chile, detailing its operational history, current status, and future exploration plans. He highlights the project&#x27;s financial health and the team&#x27;s expertise in mining operations.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The Cereabo project was acquired two years ago and has a long operational history since 1994.</li>
+                            <li>The company has achieved a 3,600% return to shareholders and made eight new major discoveries.</li>
+                            <li>The project has a processing facility that can be rapidly restarted within months.</li>
+                            <li>Recent drilling has extended the known ore body significantly beyond previous estimates.</li>
+                            <li>The team has received permits for extensive drilling in previously unexplored areas.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Matthew Allen, Damian Kerber, Elro Fentes, Alex Foster, Sophia Aravina</p>
+                        <p><strong>Organizations:</strong> Andean Silver Ltd., Cordelan Mining, Scotch Asset Management, Equinox, Sprat, KGHM, Asenko, Mandalay Resources</p>
+                        <p><strong>Topics:</strong> Cereabo silver project, mining operations, exploration strategy, financial performance, environmental impact</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The company aims to pivot towards a feasibility study and restart operations by early 2028.
+                    </div>
+                </div>
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=hlNYAn6AIO0" target="_blank">Derek Macpherson of West Point Gold Corp. talks to Chen Lin | Metals Investor Forum | February 2026</a>
+                    </div>
+                    <div class="snippet-meta">interview • 11m 6s • @MetalsInvestorForum • Mar 06, 2026 • 8 views</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Derek Macpherson, Chen Lin</div>
+                    <div class="snippet-summary">Derek Macpherson discusses the recent successes and future plans of West Point Gold Corp., focusing on their drilling results and the potential for gold discovery. The conversation highlights the company&#x27;s strategic advantages and upcoming catalysts for investors.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>West Point Gold&#x27;s share price recently hit $2, a significant increase from $1.30.</li>
+                            <li>The company has reported consistent high-grade drill results from the Tyro zone.</li>
+                            <li>Derek believes there is potential for 5 million ounces of gold in the deposit.</li>
+                            <li>The project is located near Bullhead City, providing excellent infrastructure.</li>
+                            <li>West Point Gold has $30 million in cash and plans to drill 15,000 meters this year.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> West Point Gold Corp., Meadows Investment Forum</p>
+                        <p><strong>Topics:</strong> gold exploration, stock performance, drilling results, mining infrastructure, investment potential</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The exploration potential and strategic location of West Point Gold Corp. position it well for future growth.
+                    </div>
+                </div>
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=tdtqRiD7vSg" target="_blank">Peter Gianulis of A2Gold Corp. presents at Metals Investor Forum in Toronto | February 2026</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 10m 5s • @MetalsInvestorForum • Mar 06, 2026 • 4 views • 1 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Peter Gianulis</div>
+                    <div class="snippet-summary">Peter Gianulis discusses the current state of the junior mining sector, asserting that it is entering a bull market after years of decline. He outlines his investment philosophy and the strategies that have led to the success of A2 Gold.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The junior mining industry is finally entering a bull market after 17 years of decline.</li>
+                            <li>New funds and generalist money are starting to flow into the precious metals sector.</li>
+                            <li>A2 Gold has a strong geological team and valuable properties in Nevada.</li>
+                            <li>Management at A2 Gold has significant personal investment in the company.</li>
+                            <li>Jurisdiction and scale are critical factors for successful mining investments.</li>
+                            <li>A2 Gold has attracted interest from major investors like Ken Ross and Eric Sprott.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> John Livermore, Andy Wallace, Eric Sprott, Norm Pitcher, Javier Reyes</p>
+                        <p><strong>Organizations:</strong> A2 Gold, Solomon Brothers, Carolton Asset Management, Ken Ross, IM Gold, Luca Mining, Gold Group</p>
+                        <p><strong>Topics:</strong> junior mining, bull market, investment strategy, A2 Gold, geology, market trends</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The junior mining sector is poised for growth, and A2 Gold is well-positioned to capitalize on this trend.
+                    </div>
+                </div>
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=pj04Mx6dP2I" target="_blank">Peter Gianulis of A2Gold Corp. talks to Ted Butler | Metals Investor Forum | February 2026</a>
+                    </div>
+                    <div class="snippet-meta">interview • 11m 17s • @MetalsInvestorForum • Mar 06, 2026 • 5 views • 1 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Ted Butler, Peter Gianulis</div>
+                    <div class="snippet-summary">In this episode, Ted Butler interviews Peter Gianulis, CEO of A2 Gold Corp, discussing the company&#x27;s recent developments and future plans for their mining projects. They delve into the importance of jurisdiction in mining and the financial strategies that support A2 Gold&#x27;s growth.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>A2 Gold has initiated a 30,000 meter drill program at their East Side project.</li>
+                            <li>The company has approximately 1.5 million ounces of gold and 9 million ounces of silver in the inferred category.</li>
+                            <li>Peter Gianulis emphasizes the significance of jurisdiction in mining operations.</li>
+                            <li>A2 Gold is well-financed with around $15 million in the bank.</li>
+                            <li>The recent financing included strategic investors like Ken Ross and Eric Sprott.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Jeff Clark, John Marma, Gabe Gasos, Andy Wallace, Pete Chapman, John Vincent</p>
+                        <p><strong>Organizations:</strong> A2 Gold Corp, Allegian Gold, Solomon Brothers, Ken Ross, Eric Sprott</p>
+                        <p><strong>Topics:</strong> A2 Gold Corp, mining projects, investment strategies, jurisdiction issues, financial performance</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> A2 Gold is positioned for growth with strong financial backing and a promising drilling program.
+                    </div>
+                </div>
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=-wQh4zSRziQ" target="_blank">Mal Karwowska of Newcore Gold Ltd. presents at Metals Investor Forum in Toronto | February 2026</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 10m 17s • @MetalsInvestorForum • Mar 06, 2026 • 23 views • 1 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Mal Karwowska</div>
+                    <div class="snippet-summary">Mal Karwowska discusses the advancements and potential of Newcore Gold&#x27;s projects in Ghana, highlighting the company&#x27;s strong management and exploration strategies. The presentation emphasizes the economic value and future growth opportunities in the gold mining sector.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Newcore Gold is advancing its NG Gold project in Ghana with a 45,000 meter drill program.</li>
+                            <li>The company has a strong management team with significant industry experience and shareholder alignment.</li>
+                            <li>Newcore Gold&#x27;s current market cap is approximately 230 million Canadian.</li>
+                            <li>The project is located in a stable jurisdiction, making it attractive for investment.</li>
+                            <li>Recent drilling has shown high-grade mineralization, indicating potential for resource growth.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Luke Alexander, Greg Smith, Doug Forester, Blaine Johnson, Brian</p>
+                        <p><strong>Organizations:</strong> Newcore Gold, New Market Gold, Kirkland Lake, Caliber Mining, Equinox, Newmont, Asante Gold</p>
+                        <p><strong>Topics:</strong> Newcore Gold, Ghana gold project, mining investment, exploration potential, market cap</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Newcore Gold is well-positioned for future growth and value creation in the gold mining sector.
+                    </div>
+                </div>
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=QOJqSIuuUNw" target="_blank">Derek Macpherson of West Point Gold Corp. presents at Metals Investor Forum in Toronto|February 2026</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 10m 53s • @MetalsInvestorForum • Mar 06, 2026 • 5 views</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Derek Macpherson</div>
+                    <div class="snippet-summary">Derek Macpherson discusses the current status and future plans of West Point Gold Corp., focusing on their gold exploration projects in Arizona and Nevada. He highlights the company&#x27;s financial position, drilling programs, and potential resource discoveries.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>West Point Gold Corp. has a flagship asset, the Gold Chain project in Arizona, with an exploration target of 19 to 30 million tons of gold.</li>
+                            <li>The company is well funded with $30 million in cash and a $25 million financing recently closed.</li>
+                            <li>They are conducting a 15,000 meter drilling program with promising results from previous drilling.</li>
+                            <li>The Gold Chain project has exceptional infrastructure and patented claims that provide subsurface water rights.</li>
+                            <li>The company aims to convert the Tyro main zone into a maiden resource by the end of the year.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> West Point Gold Corp., Kinross</p>
+                        <p><strong>Topics:</strong> gold exploration, financing, mining permits, drilling results, resource estimation</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> West Point Gold Corp. is positioned for significant growth through its exploration efforts and strong financial backing.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">OGJohnAG<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=1KbQpKwq3Fc" target="_blank">CME Cuts Silver Margins 22% As Vaults Lose 6M Ounces Overnight – Timing Is Suspicious – NFP Tomorrow</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 10m 55s • @OGJohnAG • Mar 06, 2026 • 9,941 views • 971 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> OG John AG</div>
+                    <div class="snippet-summary">The episode discusses the recent 22% cut in silver margins by the CME and its implications for the physical and paper silver markets. It also touches on the geopolitical tensions involving Iran and their impact on global markets.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>CME cut silver margins from 18% to 14% amidst critical lows in registered inventory.</li>
+                            <li>6 million ounces of registered silver were adjusted out in a single session.</li>
+                            <li>Managed money silver longs are at a two-decade low.</li>
+                            <li>Gold ETFs saw record inflows despite paper price action.</li>
+                            <li>Iran&#x27;s military actions are escalating, impacting global markets.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> CME, Asahi, Brinks, CNT, Delaware, HSBC, Lumis, StoneX, Jane Street</p>
+                        <p><strong>Topics:</strong> silver margins, CME, physical market, gold, NFP, Iran conflict</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The disconnect between physical and paper markets is significant and will not resolve quickly.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">eurodollaruniversity<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=dea4kKDA83U" target="_blank">Oil Just Sent a Terrifying Warning to the Entire Economy</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 20m 43s • @eurodollaruniversity • Mar 06, 2026 • 10,675 views • 662 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses the recent surge in oil prices and its potential implications for the global economy, drawing parallels to past oil shocks. The narrator emphasizes the unpredictability of the current situation and the need for careful analysis of possible outcomes.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Oil prices have surged over 20% since last Thursday, with WTI nearing $80 per barrel.</li>
+                            <li>The current oil spike is more serious than previous spikes, with potential parallels to the 1990 oil shock.</li>
+                            <li>Asian importers are scrambling for oil due to geopolitical tensions, leading to a bidding war for available supplies.</li>
+                            <li>Historical evidence suggests that oil shocks typically lead to economic recessions rather than inflation.</li>
+                            <li>The Fed&#x27;s perception of oil price increases as inflationary may lead to misguided economic policies.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Patrick Bet David, Mark Boss, Tom Ellsworth</p>
+                        <p><strong>Organizations:</strong> Reuters, Yurell University</p>
+                        <p><strong>Topics:</strong> oil prices, economic impact, Middle East conflict, inflation, credit markets</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The current oil shock is unlikely to be inflationary and may instead contribute to economic weakness.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <div class="footer">
+            Generated 2026-03-06 07:40:33
+        </div>
+    </div>
+</body>
+</html>
