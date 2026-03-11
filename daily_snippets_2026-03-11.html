@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Snippets - 2026-03-11</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background-color: #FFF1E0;
+            color: #3E474F;
+            line-height: 1.6;
+            padding: 24px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            padding: 32px 0;
+            border-bottom: 3px solid #3E474F;
+            margin-bottom: 32px;
+        }
+        .header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .header .date {
+            font-size: 18px;
+            color: #66737D;
+        }
+        .header .meta {
+            font-size: 14px;
+            color: #66737D;
+            margin-top: 12px;
+        }
+        .topic-section {
+            margin-bottom: 40px;
+        }
+        .topic-title {
+            font-size: 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 0;
+            border-bottom: 2px solid #F2DFCE;
+            margin-bottom: 24px;
+            color: #3E474F;
+        }
+        .channel-section {
+            margin-bottom: 28px;
+        }
+        .channel-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            margin-bottom: 16px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .snippet-card {
+            background: #FFF9F5;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border-left: 4px solid #FCD0AF;
+        }
+        .snippet-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .snippet-title a {
+            color: #0D7680;
+            text-decoration: none;
+        }
+        .snippet-title a:hover {
+            text-decoration: underline;
+        }
+        .snippet-meta {
+            font-size: 13px;
+            color: #66737D;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+        .snippet-speakers {
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .snippet-speakers strong {
+            color: #3E474F;
+        }
+        .snippet-summary {
+            font-size: 15px;
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+        .snippet-claims {
+            margin-bottom: 16px;
+        }
+        .snippet-claims-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .snippet-claims ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .snippet-claims li {
+            font-size: 14px;
+            padding: 4px 0 4px 16px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .snippet-claims li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #0D7680;
+        }
+        .snippet-details {
+            font-size: 13px;
+            color: #66737D;
+            border-top: 1px solid #F2DFCE;
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+        .snippet-details p {
+            margin-bottom: 4px;
+        }
+        .snippet-conclusion {
+            font-size: 14px;
+            font-style: italic;
+            color: #3E474F;
+            background: #F2DFCE;
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 12px;
+        }
+        .footer {
+            text-align: center;
+            padding: 24px 0;
+            border-top: 1px solid #F2DFCE;
+            margin-top: 40px;
+            font-size: 12px;
+            color: #66737D;
+        }
+        /* Collapsible sections */
+        details {
+            margin-bottom: 8px;
+        }
+        details summary {
+            cursor: pointer;
+            list-style: none;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary::before {
+            content: "▶";
+            display: inline-block;
+            margin-right: 8px;
+            transition: transform 0.2s;
+            font-size: 12px;
+        }
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
+        .topic-details {
+            border: 1px solid #F2DFCE;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            background: #FFF9F5;
+        }
+        .topic-summary {
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 16px 20px;
+            color: #3E474F;
+            background: #F2DFCE;
+            border-radius: 8px;
+        }
+        .topic-details[open] .topic-summary {
+            border-radius: 8px 8px 0 0;
+        }
+        .topic-count {
+            font-size: 14px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .topic-content {
+            padding: 16px 20px;
+        }
+        .channel-details {
+            border: 1px solid #FCD0AF;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            background: white;
+        }
+        .channel-summary {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            padding: 12px 16px;
+            background: #FFF9F5;
+            border-radius: 6px;
+        }
+        .channel-details[open] .channel-summary {
+            border-radius: 6px 6px 0 0;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .channel-count {
+            font-size: 13px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .channel-content {
+            padding: 12px 16px;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 16px;
+            }
+            .header h1 {
+                font-size: 28px;
+            }
+            .snippet-card {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Daily Snippets</h1>
+            <div class="date">Wednesday, March 11, 2026</div>
+            <div class="meta">16 videos • uploaded 2026-03-11 • 16 videos</div>
+        </div>
+        <details class="topic-details">
+            <summary class="topic-summary">POLITICS<span class="topic-count">(1 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">ThePodcastoftheLotusEaters<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=01Jvl676xU0" target="_blank">Breakfast With Beau | Wednesday 11th March 2026</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 99m 27s • @ThePodcastoftheLotusEaters • Mar 11, 2026 • 8,824 views • 925 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Jo Harry</div>
+                    <div class="snippet-summary">In this episode, Jo Harry discusses the latest news surrounding the Iran conflict, including military actions and media coverage, while also commenting on various societal issues and personalities. The conversation touches on the controversial figure Joey Barton and broader themes of trust in abuse allegations.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>US bombers have taken off from Britain for strikes on Iran.</li>
+                            <li>Joey Barton has been charged with grievous bodily harm after a violent incident.</li>
+                            <li>King Charles&#x27;s wife, Camilla, made a speech urging belief in abuse victims, which sparked debate.</li>
+                            <li>The media is criticized for its handling of military and political news.</li>
+                            <li>Aramco warns of catastrophic consequences from a prolonged war.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Joey Barton, King Charles, Camilla, David Lammy, Jimmy Savile</p>
+                        <p><strong>Organizations:</strong> Aramco</p>
+                        <p><strong>Topics:</strong> Iran conflict, Joey Barton news, media criticism, military actions, abuse victims</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The episode highlights the complexities of current military actions and societal issues, emphasizing the need for critical engagement with media narratives.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">INVESTING<span class="topic-count">(12 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">CRUXInvestor<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=sDaz-E61Tac" target="_blank">Olive Resource Capital Posts Strong 2026 Returns Despite Geopolitical Uncertainty</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 24m 16s • @CRUXInvestor • Mar 11, 2026 • 12 views</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator, Sam</div>
+                    <div class="snippet-summary">The episode discusses Olive Resource Capital&#x27;s strong returns in 2026 amidst geopolitical uncertainty, highlighting key investments and market trends. The speakers reflect on their experiences at the PDAC conference and the implications of recent geopolitical events on the market.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Olive Resource Capital is up about 25% in 2026 after a strong performance in 2025.</li>
+                            <li>Key holdings driving performance include Arizona Sonora and Westwind Gold.</li>
+                            <li>There is potential for a rotation to copper later in the year.</li>
+                            <li>Recent geopolitical tensions have caused market volatility, impacting stock prices.</li>
+                            <li>The PDAC conference saw record attendance, indicating positive sentiment in the mining sector.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Mr. Ogleby, Paulo, Akiba</p>
+                        <p><strong>Organizations:</strong> Olive Resource Capital, Arizona Sonora, Westwind Gold, Sailfish Royalties</p>
+                        <p><strong>Topics:</strong> 2026 market outlook, investment strategies, PDAC conference, geopolitical impact, copper and precious metals</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Despite recent market volatility, the speakers remain optimistic about the investment outlook for the year.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">FelixFriends<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=parGmLXYN0Y" target="_blank">This Is a SERIOUS Warning! Most People Have No Idea What&#x27;s Coming Silver</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 25m 13s • @FelixFriends • Mar 11, 2026 • 16,304 views • 1,458 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Felix Prehn</div>
+                    <div class="snippet-summary">Felix Prehn discusses the current state of the silver market, highlighting the significant disparity between paper claims and physical silver availability. He emphasizes the potential investment opportunities arising from this situation and the impact of external factors like oil prices and geopolitical tensions.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>There are 356 ounces of paper silver for every ounce of physical silver.</li>
+                            <li>The silver market is experiencing a significant supply-demand imbalance.</li>
+                            <li>Recent delivery requests for silver have surged, indicating potential shortages.</li>
+                            <li>Higher oil prices could lead to increased inflation, affecting silver prices.</li>
+                            <li>Silver has both precious and industrial metal applications, making it unique in the current market.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> Goat Academy, JP Morgan, Bank of America</p>
+                        <p><strong>Topics:</strong> silver market, investment strategies, economic indicators, oil prices, supply and demand</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Investors should be aware of the current silver market dynamics and consider positioning themselves accordingly.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">Finding_Finance<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=PizOFP2m2vY" target="_blank">Why This Energy Crisis Could Destroy the Global Economy</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 37m 10s • @Finding_Finance • Mar 11, 2026 • 732 views • 123 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Andy</div>
+                    <div class="snippet-summary">In this episode, Andy discusses the potential catastrophic effects of the current energy crisis on the global economy, particularly focusing on oil supply and prices. He analyzes various market dynamics and investment strategies in light of these developments.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The current energy crisis could lead to significant price increases and shortages across various sectors.</li>
+                            <li>Shipping disruptions are causing a substantial reduction in oil supply, potentially impacting global markets.</li>
+                            <li>Historical parallels suggest that the current situation could lead to a severe economic downturn similar to the 1973 oil embargo.</li>
+                            <li>The government is likely intervening in oil markets to prevent price spikes, which could have long-term consequences.</li>
+                            <li>Investors should be cautious and consider the potential for significant losses in sectors dependent on energy.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Kelvin Froge, Ross Hendris, Eric Nuttle, Darren Woods, Ron Baron, Stanley Druckenmiller, Art Berman</p>
+                        <p><strong>Organizations:</strong> Exxon Mobile, Chevron, Aramco</p>
+                        <p><strong>Topics:</strong> energy crisis, oil prices, market impact, investment strategies, global economy</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The energy crisis poses a serious threat to the global economy, and the repercussions could be felt for years to come.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">ForwardGuidanceBW<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=hTY0ffRlmBQ" target="_blank">The Global Economy Is Splitting Into Spheres | Eric Wallerstein</a>
+                    </div>
+                    <div class="snippet-meta">interview • 58m 50s • @ForwardGuidanceBW • Mar 11, 2026 • 1,627 views • 77 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Eric Wallerstein</div>
+                    <div class="snippet-summary">In this episode, Eric Wallerstein discusses the evolving dynamics of the global economy, focusing on the implications of geopolitical tensions and the role of the US dollar. He shares insights from his experiences in economic policy and the Federal Reserve, emphasizing the importance of understanding geographical discrepancies in market reactions.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The world is splitting into economic spheres, with a renewed focus on natural resources.</li>
+                            <li>Tariffs have been used to address trade deficits and counter China&#x27;s economic influence.</li>
+                            <li>The US dollar&#x27;s value is influenced by macroeconomic fundamentals and geopolitical factors.</li>
+                            <li>Latin America presents significant investment opportunities due to its resources and potential for growth.</li>
+                            <li>The Federal Reserve&#x27;s balance sheet management is crucial for financial stability and economic growth.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Stephen Moran, Paul Atkins, Michael Celig, Stephen Moore, Paulo Ardonio</p>
+                        <p><strong>Organizations:</strong> Clock Tower Group, Council of Economic Advisors, Federal Reserve, Blockworks</p>
+                        <p><strong>Topics:</strong> global economy, geopolitical tensions, US dollar, tariffs, Latin America, China relations</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The future of the global economy will be shaped by geopolitical dynamics and the strategic positioning of the US in relation to other nations.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">GoldInvestmentLetter<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=8a8u9MJ6Zec" target="_blank">GIL Market Briefing</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 11m 39s • @GoldInvestmentLetter • Mar 11, 2026 • 55 views • 4 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Eric Mashinsky</div>
+                    <div class="snippet-summary">In this episode, Eric Mashinsky discusses the current state of the gold market and shares his insights on investment opportunities in mining stocks. He emphasizes the importance of timing and offers advice on how to navigate market corrections.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>March is typically a choppy month for gold, but April and May are expected to see sharp increases.</li>
+                            <li>Phenom Resources is currently undervalued and has potential for significant growth.</li>
+                            <li>Investors should be cautious of sensationalized headlines that may misrepresent market conditions.</li>
+                            <li>Buying positions in smaller companies requires strategic bidding and patience.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Rob McEwan, Bob Coppel</p>
+                        <p><strong>Organizations:</strong> goldstletter.com</p>
+                        <p><strong>Topics:</strong> gold market, mining stocks, investment strategies, Phenom Resources, market corrections</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Phenom Resources is Eric&#x27;s best investment idea right now.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">IgorLipsits_1950<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=bSlk2USgnZ0" target="_blank">LIPSITS - GAVRILYUK: LET&#x27;S TALK ABOUT INFLATION</a>
+                    </div>
+                    <div class="snippet-meta">interview • 40m 50s • @IgorLipsits_1950 • Mar 11, 2026 • 27,676 views • 2,103 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Игорь Володимирович Липсец, Мкета Аврилюк</div>
+                    <div class="snippet-summary">В этом эпизоде обсуждаются основные аспекты инфляции, ее влияние на экономику и жизнь людей, а также возможные сценарии для бизнеса в условиях изменяющейся инфляции. Гости делятся мнениями о текущей экономической ситуации в России и Украине.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Инфляция - это процесс роста цен на большинство товаров.</li>
+                            <li>Высокая инфляция может привести к банкротству бизнесов.</li>
+                            <li>Девальвация рубля может вызвать рост инфляции.</li>
+                            <li>Стабильная инфляция позволяет бизнесу планировать свои расходы.</li>
+                            <li>Нулевая или отрицательная инфляция может быть опасной для экономики.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> инфляция, экономика, девальвация, бюджет, социальные услуги, цены на нефть</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> В условиях высокой инфляции бизнесу необходимо адаптироваться и предсказывать изменения, чтобы выжить.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">Patrick_Ceresna<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=xtFvhdielUY" target="_blank">The Real Reason the S&amp;P 500 Is Correcting (Not What You Think)</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 10m 57s • @Patrick_Ceresna • Mar 11, 2026 • 569 views • 64 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">The episode discusses the recent correction in the S&amp;P 500 and challenges common beliefs about its causes. It highlights the roles of private credit issues and the AI bubble burst as significant factors behind the market&#x27;s downturn.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The S&amp;P 500 has broken down its trade range, indicating a topping formation.</li>
+                            <li>Private credit is under stress, with a significant portion of borrowers having negative cash flow.</li>
+                            <li>The AI bubble has burst, impacting tech stocks like Nvidia.</li>
+                            <li>Systematic traders are poised to sell, contributing to market volatility.</li>
+                            <li>Current market conditions remain vulnerable, with no signs of a bullish reversal.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> David Rosen, Trump, Nvidia</p>
+                        <p><strong>Organizations:</strong> Rubik Capital, Owl Blue Owl Capital, Blackstone, Goldman</p>
+                        <p><strong>Topics:</strong> S&amp;P 500 correction, private credit, AI bubble, market volatility, financial stocks</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The market is still at risk and not out of the woods yet.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">RebelCapitalistInterviews<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=sMrw7_QLd4w" target="_blank">Private Credit Blow Up Just Hit Real Estate (Huge Systemic Risks) w/Ken McElroy</a>
+                    </div>
+                    <div class="snippet-meta">interview • 57m 32s • @RebelCapitalistInterviews • Mar 11, 2026 • 1,069 views • 68 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Ken McElroy</div>
+                    <div class="snippet-summary">In this episode, Ken McElroy discusses the impact of private credit issues on the real estate market, particularly in multifamily properties. He highlights the systemic risks arising from rising interest rates and the challenges faced by investors in the current economic climate.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Rising interest rates have led to a repricing of the commercial real estate market.</li>
+                            <li>Many multifamily investors are struggling to meet debt payments due to unrealistic rent growth assumptions.</li>
+                            <li>Private credit facilities are becoming more prominent as traditional lenders tighten their criteria.</li>
+                            <li>The current market conditions are creating opportunities for buyers to acquire distressed assets at significant discounts.</li>
+                            <li>Increased expenses, including insurance and property taxes, are further straining real estate owners.</li>
+                            <li>High unemployment rates could lead to increased demand for rental properties, but affordability remains a concern.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> Blue Owl, KKR, Blackstone</p>
+                        <p><strong>Topics:</strong> private credit, real estate, multifamily market, debt issues, market conditions, occupancy rates</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The multifamily real estate market is facing significant challenges, but there are also opportunities for savvy investors to capitalize on distressed assets.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">TheAcquirersPodcast<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=6vlfiTTGumQ" target="_blank">Alexander Roepers on constructive activism and concentrated value in $KEX, $AXTA, and $FLS | S08 E09</a>
+                    </div>
+                    <div class="snippet-meta">interview • 60m 51s • @TheAcquirersPodcast • Mar 11, 2026 • 914 views • 29 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Tobias Carile, Jake Taylor, Alexander Roepers</div>
+                    <div class="snippet-summary">In this episode, Alexander Roepers discusses his investment strategy at Atlantic Investment Management, focusing on constructive activism and concentrated value in mid-sized companies. He shares insights on market trends, specific companies, and the importance of maintaining a disciplined investment approach.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Roepers emphasizes the importance of concentrating capital on high conviction public equities.</li>
+                            <li>He avoids high-tech and biotech sectors due to obsolescence risks.</li>
+                            <li>Roepers believes that M&amp;A activity is crucial for unlocking value in mid-sized companies.</li>
+                            <li>He discusses the challenges and opportunities in the current market environment, particularly for value stocks.</li>
+                            <li>Roepers highlights the significance of dynamic sizing in portfolio management.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> Atlantic Investment Management, Kirby Corporation, Axon Nobel, Exalta, Weatherford, Baker Hughes, Cintas, Ellis, Vopak</p>
+                        <p><strong>Topics:</strong> constructive activism, investment strategy, market analysis, M&amp;A activity, value investing, portfolio management</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Roepers advocates for a disciplined investment strategy focused on mid-sized companies with strong fundamentals and potential for value creation.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">nobull-markettalkwithgeorg4907<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=oxJ7EdL0GOY" target="_blank">Zachary Marx | In the Zone. Got Miners? | No Bull George Noble.</a>
+                    </div>
+                    <div class="snippet-meta">interview • 59m 42s • @nobull-markettalkwithgeorg4907 • Mar 11, 2026 • 406 views • 24 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Zachary Marx, George Noble</div>
+                    <div class="snippet-summary">In this episode, Zachary Marx discusses his investment strategies, particularly in gold miners and the impact of AI on various sectors. The conversation also covers market volatility and the challenges in private credit.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Gold miners are currently trading at low multiples, presenting a strong investment opportunity.</li>
+                            <li>Zach believes that gold prices can drop significantly while miners still increase in value.</li>
+                            <li>AI is rapidly changing the software landscape, affecting the stability of earnings for software companies.</li>
+                            <li>Private credit markets are experiencing volatility laundering, leading to misleading valuations.</li>
+                            <li>The current market dynamics favor patient investors who can capitalize on long-term trends.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Steve Crest, Elon Musk, Clifford Asness, Caitlin Clark</p>
+                        <p><strong>Organizations:</strong> Vineyard Quant Capital, Seeking Alpha, S&amp;P Global, Bloomberg</p>
+                        <p><strong>Topics:</strong> gold miners, AI impact, market volatility, investment strategies, private credit</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Zach emphasizes the importance of understanding market dynamics and the potential for significant returns in gold mining investments.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">topic_Jim_Cramer<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=HVoDihN2W08" target="_blank">Ripple XRP JIM CRAMER SAVE US!</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 12m 13s • Mar 11, 2026 • 9,140 views • 622 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Sophie Maz</div>
+                    <div class="snippet-summary">In this episode, Sophie Maz discusses the potential impact of Jim Kramer&#x27;s predictions on the cryptocurrency market, particularly XRP. She analyzes market trends, liquidity, and the recent performance of XRP ETFs.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Jim Kramer stated it&#x27;s impossible to make money today, which may influence market behavior.</li>
+                            <li>A significant Treasury buyback is expected to inject liquidity into the market.</li>
+                            <li>A whale opened a massive long position on XRP, indicating bullish sentiment.</li>
+                            <li>The XRP ETF launched with $26 million in trading volume, exceeding expectations.</li>
+                            <li>Market manipulation is affecting XRP&#x27;s price movements, as confirmed by Iranian officials.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Jim Kramer, Elon Musk</p>
+                        <p><strong>Organizations:</strong> Poly Markets, Bank of America, XRP, Bloomberg</p>
+                        <p><strong>Topics:</strong> XRP market analysis, Jim Kramer predictions, cryptocurrency trends, ETF performance, market manipulation</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The XRP market is poised for significant movement, with bullish indicators suggesting a potential upward trend.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">triANGLEINVESTOR<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=_VVdj-MURW0" target="_blank">Energy War &amp; The Strait of Hormuz: What Happens If It Closes? - Amanda van Dyke</a>
+                    </div>
+                    <div class="snippet-meta">interview • 30m 41s • @triANGLEINVESTOR • Mar 11, 2026 • 389 views • 16 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Amanda Van Dyke, Lucy Walovich</div>
+                    <div class="snippet-summary">In this episode, Amanda Van Dyke discusses the challenges and opportunities in the critical minerals sector, particularly in relation to mining investment and geopolitical factors. The conversation also touches on the implications of energy supply disruptions and the future of nuclear energy.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>There is a fundamental anti-mining bias in the global financial community.</li>
+                            <li>Permitting timelines for new mines have ballooned to 16-18 years in many jurisdictions.</li>
+                            <li>The closure of the Strait of Hormuz would significantly impact global energy prices.</li>
+                            <li>Copper prices need to be structurally repriced to meet future demand.</li>
+                            <li>Uranium is seen as a crucial fuel for nuclear energy&#x27;s future.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> European Commission, European Investment Bank, French Development Bank, IFC</p>
+                        <p><strong>Topics:</strong> critical minerals, mining investment, geopolitics, energy markets, nuclear energy</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The mining industry must overcome regulatory and financial barriers to meet the growing demand for critical minerals.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">RUSSIA<span class="topic-count">(2 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">IgorLipsits_1950<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=x9MrcQH4hfQ" target="_blank">ЛИПСИЦ: ИНТЕРВЬЮ ТАТЬЯНЕ ПОПОВОЙ 10.03.2026</a>
+                    </div>
+                    <div class="snippet-meta">interview • 66m 53s • @IgorLipsits_1950 • Mar 11, 2026 • 8,470 views • 1,167 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Игорь Владимирович Липсец, Татьяна Попова</div>
+                    <div class="snippet-summary">В этом эпизоде Татьяна Попова беседует с профессором Игорем Липсецем о текущем состоянии экономики России и влиянии международных конфликтов на нефтяной рынок. Обсуждаются возможные сценарии развития ситуации и их последствия для бюджета и финансовой стабильности страны.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Краткосрочные изменения на нефтяном рынке не приведут к долгосрочным последствиям.</li>
+                            <li>Высокие цены на нефть могут угрожать спросу на нефть из-за роста электрификации транспорта.</li>
+                            <li>Долгосрочная война приведет к серьезным экономическим последствиям для России.</li>
+                            <li>Российский бюджет может получить временные выгоды от краткосрочного роста цен на нефть.</li>
+                            <li>Ситуация с неплатежами в оборонной промышленности усугубляется кризисом в экономике.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Трамп, Михаил Самус, Орешкин, Вьюгин, Некрасов, Алексашенко, Иноземцев</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> экономика России, нефтяной рынок, влияние войны, инвестиции, финансовая политика</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Экономическая ситуация в России остается критической, и дальнейшие действия правительства будут определяться развитием международных конфликтов.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">IgorYakovenko<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=Gdgc2am1_D8" target="_blank">ТРЕТЬЯ МИРОВАЯ?</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 124m 13s • @IgorYakovenko • Mar 11, 2026 • 39,769 views • 4,861 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Игорь Яковенко</div>
+                    <div class="snippet-summary">В этом эпизоде Игорь Яковенко обсуждает текущие события, связанные с войной в Украине, независимость Литвы и глобальные конфликты, включая ситуацию в Иране. Он также анализирует риторику и действия различных мировых лидеров в контексте этих событий.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Литва восстановила независимость в 1990 году после оккупации Советским Союзом.</li>
+                            <li>Украинские военнослужащие нанесли удар по важному военному объекту в России.</li>
+                            <li>Германия передала Украине 35 ракет для зенитно-ракетного комплекса Патриот.</li>
+                            <li>Переговоры о мире между Украиной и Россией пока не ведутся.</li>
+                            <li>Иран начал минировать Армузский пролив, что может повлиять на мировые нефтяные поставки.</li>
+                            <li>Ситуация на Ближнем Востоке и война в Украине взаимосвязаны.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Путин, Зеленский, Трамп, Писториус, Сергей Маратович Грабский, Михаил Михайлович Подаляк, Андрей Андреевич Пиантковский, Рустем Умеров, Ксир, Айдер Муждабаев, Макс, Олег Михнич, Майкл Стоунбридж, Лариса Смирнова, Даниил, Александр, Елена Кузина, Татьяна Эриксон, Виктор, Елена, Ивета Форова</p>
+                        <p><strong>Organizations:</strong> Бундесфера</p>
+                        <p><strong>Topics:</strong> Литва, независимость, война в Украине, Иран, переговоры, дроновая угроза, глобальные конфликты</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Война в Украине и конфликты на Ближнем Востоке являются частью более широкого глобального противостояния.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">OTHER<span class="topic-count">(1 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">AkkadDaily<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=HUMm0sOZnb4" target="_blank">McDonalds Gets Burgermogged</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 15m 2s • @SargonofAkkad • Mar 11, 2026 • 47,125 views • 4,406 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses the recent marketing efforts of McDonald&#x27;s, particularly focusing on the CEO&#x27;s promotional video for the new Big Arch burger. The narrator critiques the authenticity of fast food advertising and the perceived artificiality of McDonald&#x27;s products compared to competitors like Burger King.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The narrator prefers Burger King burgers over McDonald&#x27;s due to perceived freshness.</li>
+                            <li>The CEO of McDonald&#x27;s appears unconvincing while promoting the Big Arch burger.</li>
+                            <li>There are concerns about the lack of decomposition in McDonald&#x27;s burgers compared to other fast food.</li>
+                            <li>The narrator questions the authenticity of fast food advertising and the portrayal of products.</li>
+                            <li>Burger King CEO&#x27;s willingness to eat their own burger contrasts with McDonald&#x27;s CEO&#x27;s reluctance.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> McDonald&#x27;s, Burger King, Wendy&#x27;s, A&amp;W</p>
+                        <p><strong>Topics:</strong> fast food, burger comparison, advertising critique, food processing, consumer perception</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The marketing strategies of fast food companies raise questions about product authenticity and consumer trust.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <div class="footer">
+            Generated 2026-03-11 16:24:19
+        </div>
+    </div>
+</body>
+</html>
