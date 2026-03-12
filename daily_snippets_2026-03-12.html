@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Snippets - 2026-03-12</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background-color: #FFF1E0;
+            color: #3E474F;
+            line-height: 1.6;
+            padding: 24px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            padding: 32px 0;
+            border-bottom: 3px solid #3E474F;
+            margin-bottom: 32px;
+        }
+        .header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .header .date {
+            font-size: 18px;
+            color: #66737D;
+        }
+        .header .meta {
+            font-size: 14px;
+            color: #66737D;
+            margin-top: 12px;
+        }
+        .topic-section {
+            margin-bottom: 40px;
+        }
+        .topic-title {
+            font-size: 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 0;
+            border-bottom: 2px solid #F2DFCE;
+            margin-bottom: 24px;
+            color: #3E474F;
+        }
+        .channel-section {
+            margin-bottom: 28px;
+        }
+        .channel-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            margin-bottom: 16px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .snippet-card {
+            background: #FFF9F5;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border-left: 4px solid #FCD0AF;
+        }
+        .snippet-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .snippet-title a {
+            color: #0D7680;
+            text-decoration: none;
+        }
+        .snippet-title a:hover {
+            text-decoration: underline;
+        }
+        .snippet-meta {
+            font-size: 13px;
+            color: #66737D;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+        .snippet-speakers {
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .snippet-speakers strong {
+            color: #3E474F;
+        }
+        .snippet-summary {
+            font-size: 15px;
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+        .snippet-claims {
+            margin-bottom: 16px;
+        }
+        .snippet-claims-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .snippet-claims ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .snippet-claims li {
+            font-size: 14px;
+            padding: 4px 0 4px 16px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .snippet-claims li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #0D7680;
+        }
+        .snippet-details {
+            font-size: 13px;
+            color: #66737D;
+            border-top: 1px solid #F2DFCE;
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+        .snippet-details p {
+            margin-bottom: 4px;
+        }
+        .snippet-conclusion {
+            font-size: 14px;
+            font-style: italic;
+            color: #3E474F;
+            background: #F2DFCE;
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 12px;
+        }
+        .footer {
+            text-align: center;
+            padding: 24px 0;
+            border-top: 1px solid #F2DFCE;
+            margin-top: 40px;
+            font-size: 12px;
+            color: #66737D;
+        }
+        /* Collapsible sections */
+        details {
+            margin-bottom: 8px;
+        }
+        details summary {
+            cursor: pointer;
+            list-style: none;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary::before {
+            content: "▶";
+            display: inline-block;
+            margin-right: 8px;
+            transition: transform 0.2s;
+            font-size: 12px;
+        }
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
+        .topic-details {
+            border: 1px solid #F2DFCE;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            background: #FFF9F5;
+        }
+        .topic-summary {
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 16px 20px;
+            color: #3E474F;
+            background: #F2DFCE;
+            border-radius: 8px;
+        }
+        .topic-details[open] .topic-summary {
+            border-radius: 8px 8px 0 0;
+        }
+        .topic-count {
+            font-size: 14px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .topic-content {
+            padding: 16px 20px;
+        }
+        .channel-details {
+            border: 1px solid #FCD0AF;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            background: white;
+        }
+        .channel-summary {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            padding: 12px 16px;
+            background: #FFF9F5;
+            border-radius: 6px;
+        }
+        .channel-details[open] .channel-summary {
+            border-radius: 6px 6px 0 0;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .channel-count {
+            font-size: 13px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .channel-content {
+            padding: 12px 16px;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 16px;
+            }
+            .header h1 {
+                font-size: 28px;
+            }
+            .snippet-card {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Daily Snippets</h1>
+            <div class="date">Thursday, March 12, 2026</div>
+            <div class="meta">4 videos • uploaded 2026-03-12 • 4 videos</div>
+        </div>
+        <details class="topic-details">
+            <summary class="topic-summary">INVESTING<span class="topic-count">(3 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">OutlierTrading<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=4NTh_FrF-0Y" target="_blank">Navigating Market Volatility and Finding Opportunities | Stock Market Update</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 18m 1s • @OutlierTrading • Mar 12, 2026 • 98 views • 10 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses current market volatility and identifies trading opportunities across various sectors, particularly focusing on commodities like crude oil. The narrator emphasizes the importance of understanding market signals and adapting trading strategies accordingly.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Volatility is essential for traders, and current market conditions present numerous opportunities.</li>
+                            <li>The VIX index indicates elevated volatility, which can impact trading strategies.</li>
+                            <li>Energy sector remains strong, while tech is struggling amidst market fluctuations.</li>
+                            <li>Crude oil trading has shown significant profit potential due to recent market movements.</li>
+                            <li>Identifying stocks that buck market trends can lead to profitable trading opportunities.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Andrew Mack, Euan Sinclair, Augustine LeBron</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> market volatility, trading strategies, commodities, sector trends, stock opportunities</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> There are substantial trading opportunities in the current volatile market, especially in energy and specific stocks.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">TheAsianGuy-k9h<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=rrdQy3fj4g8" target="_blank">THEY CONFIRMED IT: BlackRock&#x27;s Internal Memo Reveals Why Silver Is Still Massively Undervalued</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 25m 40s • @THEASIANGUY-AG • Mar 12, 2026 • 7,959 views • 337 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses a recent memo from BlackRock that contradicts mainstream narratives about the silver market, suggesting that silver is undervalued. The narrator explains the structural factors driving demand for silver and the disconnect between paper prices and physical market realities.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>BlackRock&#x27;s memo indicates that the structural case for precious metals is strengthening.</li>
+                            <li>The U.S. government is in a debt spiral, which historically benefits precious metals.</li>
+                            <li>Central banks are increasing their gold reserves, indicating a shift away from the U.S. dollar.</li>
+                            <li>Industrial demand for silver is rising due to its use in electronics and solar technology.</li>
+                            <li>The paper price of silver is not reflecting the actual demand and supply dynamics.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Christia Koulian</p>
+                        <p><strong>Organizations:</strong> BlackRock</p>
+                        <p><strong>Topics:</strong> silver market, BlackRock memo, precious metals, investment strategy, CPI narrative</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The current paper price of silver is a temporary disconnect from its true value driven by structural market forces.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">topic_Jim_Cramer<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=HFFajTszFy4" target="_blank">Mad Money 03/11/26 | Audio Only</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 43m 56s • @cnbctelevision • Mar 12, 2026 • 1,928 views • 42 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Jim Kramer</div>
+                    <div class="snippet-summary">In this episode, Jim Kramer discusses the impact of the ongoing war on oil prices and the stock market, while providing investment strategies based on current economic conditions. He emphasizes the importance of being proactive in stock purchases amidst geopolitical tensions and corporate earnings reports.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The war&#x27;s impact on oil prices could lead to significant market volatility.</li>
+                            <li>Investors should consider buying stocks before potential market shifts due to geopolitical events.</li>
+                            <li>Oracle&#x27;s recent earnings report indicates strong performance despite market concerns.</li>
+                            <li>AI technology is reshaping workforce dynamics, potentially leading to significant layoffs in major tech companies.</li>
+                            <li>The stock market may react positively if President Trump successfully negotiates a ceasefire with Iran.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> President Trump, Secretary of War Hexus, Henry Kissinger, Mark Zuckerberg, Larry Ellison, Sam Altman</p>
+                        <p><strong>Organizations:</strong> Oracle, Nvidia, HP Enterprise, Exxon, Chevron, Dollar Tree, Dollar General, Five Below, Mattel, Block, Amazon, Microsoft</p>
+                        <p><strong>Topics:</strong> oil prices, stock market, data centers, AI impact, investing strategies, Iran conflict, corporate earnings</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Investors should remain vigilant and ready to act as market conditions evolve due to geopolitical tensions and corporate earnings.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">RUSSIA<span class="topic-count">(1 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">IgorLipsits_1950<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=EEuBLfUFhdU" target="_blank">LIPSITS: INTERVIEW WITH ALEXANDER DEMCHENKO 03/11/2026</a>
+                    </div>
+                    <div class="snippet-meta">interview • 38m 42s • @igorlipsits_1950 • Mar 12, 2026 • 2,553 views • 342 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Александр Демченко, Игорь Липсиц</div>
+                    <div class="snippet-summary">In this episode, Alexander Demchenko interviews economist Igor Lipsits about the current state of the Russian economy amidst the ongoing Iranian war and its implications for Putin&#x27;s governance. They discuss the potential economic collapse and the systemic issues facing Russia.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The Russian budget is facing a significant deficit.</li>
+                            <li>The Iranian war has led to rising oil prices, which may temporarily alleviate budget issues.</li>
+                            <li>Putin lacks internal competition, allowing him to maintain control.</li>
+                            <li>The Russian economy is becoming increasingly isolated and traditional.</li>
+                            <li>There is a risk of a return to 1990s-style economic collapse.</li>
+                            <li>Mobilization efforts may lead to a significant decline in the civilian economy.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> Высшая школа экономики</p>
+                        <p><strong>Topics:</strong> Russian economy, Putin&#x27;s policies, Iranian war impact, oil prices, economic crisis, military mobilization</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The Russian economy is on the brink of collapse due to systemic issues and the impact of ongoing conflicts.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <div class="footer">
+            Generated 2026-03-12 06:39:55
+        </div>
+    </div>
+</body>
+</html>
