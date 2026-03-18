@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Snippets - 2026-03-18</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background-color: #FFF1E0;
+            color: #3E474F;
+            line-height: 1.6;
+            padding: 24px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            padding: 32px 0;
+            border-bottom: 3px solid #3E474F;
+            margin-bottom: 32px;
+        }
+        .header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .header .date {
+            font-size: 18px;
+            color: #66737D;
+        }
+        .header .meta {
+            font-size: 14px;
+            color: #66737D;
+            margin-top: 12px;
+        }
+        .topic-section {
+            margin-bottom: 40px;
+        }
+        .topic-title {
+            font-size: 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 0;
+            border-bottom: 2px solid #F2DFCE;
+            margin-bottom: 24px;
+            color: #3E474F;
+        }
+        .channel-section {
+            margin-bottom: 28px;
+        }
+        .channel-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            margin-bottom: 16px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .snippet-card {
+            background: #FFF9F5;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border-left: 4px solid #FCD0AF;
+        }
+        .snippet-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .snippet-title a {
+            color: #0D7680;
+            text-decoration: none;
+        }
+        .snippet-title a:hover {
+            text-decoration: underline;
+        }
+        .snippet-meta {
+            font-size: 13px;
+            color: #66737D;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+        .snippet-speakers {
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .snippet-speakers strong {
+            color: #3E474F;
+        }
+        .snippet-summary {
+            font-size: 15px;
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+        .snippet-claims {
+            margin-bottom: 16px;
+        }
+        .snippet-claims-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .snippet-claims ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .snippet-claims li {
+            font-size: 14px;
+            padding: 4px 0 4px 16px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .snippet-claims li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #0D7680;
+        }
+        .snippet-details {
+            font-size: 13px;
+            color: #66737D;
+            border-top: 1px solid #F2DFCE;
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+        .snippet-details p {
+            margin-bottom: 4px;
+        }
+        .snippet-conclusion {
+            font-size: 14px;
+            font-style: italic;
+            color: #3E474F;
+            background: #F2DFCE;
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 12px;
+        }
+        .footer {
+            text-align: center;
+            padding: 24px 0;
+            border-top: 1px solid #F2DFCE;
+            margin-top: 40px;
+            font-size: 12px;
+            color: #66737D;
+        }
+        /* Collapsible sections */
+        details {
+            margin-bottom: 8px;
+        }
+        details summary {
+            cursor: pointer;
+            list-style: none;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary::before {
+            content: "▶";
+            display: inline-block;
+            margin-right: 8px;
+            transition: transform 0.2s;
+            font-size: 12px;
+        }
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
+        .topic-details {
+            border: 1px solid #F2DFCE;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            background: #FFF9F5;
+        }
+        .topic-summary {
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 16px 20px;
+            color: #3E474F;
+            background: #F2DFCE;
+            border-radius: 8px;
+        }
+        .topic-details[open] .topic-summary {
+            border-radius: 8px 8px 0 0;
+        }
+        .topic-count {
+            font-size: 14px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .topic-content {
+            padding: 16px 20px;
+        }
+        .channel-details {
+            border: 1px solid #FCD0AF;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            background: white;
+        }
+        .channel-summary {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            padding: 12px 16px;
+            background: #FFF9F5;
+            border-radius: 6px;
+        }
+        .channel-details[open] .channel-summary {
+            border-radius: 6px 6px 0 0;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .channel-count {
+            font-size: 13px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .channel-content {
+            padding: 12px 16px;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 16px;
+            }
+            .header h1 {
+                font-size: 28px;
+            }
+            .snippet-card {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Daily Snippets</h1>
+            <div class="date">Wednesday, March 18, 2026</div>
+            <div class="meta">5 videos • uploaded 2026-03-18 • 5 videos</div>
+        </div>
+        <details class="topic-details">
+            <summary class="topic-summary">POLITICS<span class="topic-count">(1 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">topic_Jim_Cramer<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=XFstbZuQFyQ" target="_blank">BREAKING: Canada&#x27;s Carney REFUSES Trump Demands as $1.6 Trillion Trade Deal COLLAPSES | Jim Cramer</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 24m 35s • @cramerarchives • Mar 18, 2026 • 6,521 views • 214 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">The episode discusses the recent tensions between Canada and the United States regarding the USMCA trade agreement, highlighting Trump&#x27;s demands and Carney&#x27;s firm stance against them. It emphasizes the implications of these developments for American workers and the broader international trade landscape.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Trump is considering withdrawing from the USMCA, which he previously negotiated.</li>
+                            <li>Mark Carney has rejected Trump&#x27;s five major demands that would harm Canada&#x27;s economy.</li>
+                            <li>Canada has diversified its trade relationships, reducing dependence on the US.</li>
+                            <li>American tariffs primarily hurt US consumers and businesses, not Canada.</li>
+                            <li>The USMCA review is set to begin on July 1, 2026, but the relationship is already deteriorating.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Donald Trump, Mark Carney</p>
+                        <p><strong>Organizations:</strong> USMCA, World Economic Forum, European Union</p>
+                        <p><strong>Topics:</strong> USMCA collapse, Canada-US relations, Trump&#x27;s trade policy, economic independence, Canadian dairy market</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Trump&#x27;s reckless trade policies are jeopardizing the US economy while Canada is prepared to thrive independently.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">INVESTING<span class="topic-count">(2 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">TheAsianGuy-k9h<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=skQh_3P9dFk" target="_blank">Fed Pause Sends Silver to $79: What The Fed Is About To Do Tomorrow...</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 25m 16s • @THEASIANGUY-AG • Mar 18, 2026 • 1,641 views • 120 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Asian guy here</div>
+                    <div class="snippet-summary">This episode discusses the current state of silver prices in relation to Federal Reserve policies and geopolitical tensions, particularly focusing on the implications of a recent military strike in the Persian Gulf. The speaker argues that the narrative surrounding silver&#x27;s decline is misleading and that significant underlying factors could lead to a price surge.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The Federal Reserve&#x27;s pause in rate cuts is a sign of being trapped between two catastrophic outcomes.</li>
+                            <li>Current inflation is driven by geopolitical conditions, not just monetary policy.</li>
+                            <li>The silver market is underpinned by inelastic industrial demand that cannot be easily disrupted.</li>
+                            <li>The gold to silver ratio indicates that silver is undervalued compared to historical norms.</li>
+                            <li>The recent military actions in the Persian Gulf could lead to significant inflationary pressures.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> Federal Reserve, CME</p>
+                        <p><strong>Topics:</strong> silver price, Federal Reserve, geopolitical risks, inflation, market analysis</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The Federal Reserve&#x27;s current stance is not a position of strength, and the market dynamics suggest that silver prices are set to rise significantly.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">topic_Doomberg<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=V9TiwJaPUMI" target="_blank">Doomberg on the Global Oil and Gas Markets Update</a>
+                    </div>
+                    <div class="snippet-meta">panel • 54m 0s • @energynewsbeat • Mar 18, 2026 • 2,005 views • 128 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> D Turley, David Blackman, Doomberg</div>
+                    <div class="snippet-summary">The episode discusses the current state of global oil and gas markets amidst geopolitical tensions, particularly focusing on the Iran situation and the implications for energy security. The speakers analyze various factors affecting oil prices and the future of energy production.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Legacy media is ineffective in providing truth during the current geopolitical crisis.</li>
+                            <li>The destruction of oil facilities in the Middle East could lead to a significant increase in oil prices.</li>
+                            <li>China and Russia are likely to support Iran amidst the ongoing conflict.</li>
+                            <li>California has significant untapped oil resources that could be developed if regulations change.</li>
+                            <li>The global energy market is shifting towards a bifurcated system favoring Asia.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Trump, Xi Jinping, Harris Starmer, Chris Wright, Scott Bessent, Putin</p>
+                        <p><strong>Organizations:</strong> Sandstone Group, Energy Impacts, Lloyd&#x27;s of London</p>
+                        <p><strong>Topics:</strong> oil markets, geopolitics, energy security, Iran conflict, California oil, China-Russia relations</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The current geopolitical landscape will lead to a reevaluation of energy policies and a potential boom in oil and gas production in regions like California.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">OTHER<span class="topic-count">(2 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">IgorLipsits_1950<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=bbPjxzzHuWQ" target="_blank">КАК МИРОВАЯ ЭКОНОМИКА НАУЧИЛАСЬ СБЕРЕГАТЬ ЭНЕРГИЮ И ВЫЖИВАТЬ ПРИ ДОРОГОЙ НЕФТИ</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 35m 36s • @igorlipsits_1950 • Mar 18, 2026 • 1,796 views • 429 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Игорь Липсиц</div>
+                    <div class="snippet-summary">Профессор Игорь Липсиц обсуждает, как мировая экономика адаптировалась к высоким ценам на нефть и научилась эффективно использовать энергию. Он анализирует исторические кризисы на нефтяном рынке и современные тенденции в энергетике.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Мировая экономика обладает адаптивностью к проблемам с энергопоставками.</li>
+                            <li>После шока 1973 года началась тема энергосбережения и повышения энергоэффективности.</li>
+                            <li>Создание стратегических запасов нефти стало важным шагом для стран-потребителей.</li>
+                            <li>Развитие технологий, таких как сланцевая добыча, изменяет рынок нефти.</li>
+                            <li>Электромобили и возобновляемая энергетика становятся все более значимыми.</li>
+                            <li>Россия не адаптируется к изменениям в структуре мирового спроса на энергоресурсы.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Никсон, Фесал, Ахмед Заки Ямани</p>
+                        <p><strong>Organizations:</strong> ОПЕК, Международное энергетическое агентство</p>
+                        <p><strong>Topics:</strong> мировая экономика, энергосбережение, нефть, кризисы, технологии</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Сегодня мир лучше подготовлен к энергетическим кризисам, чем в 1970-х годах.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">SpaceWeatherNewsS0s<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=Dqq6ACZf1lA" target="_blank">Observers Live #26 - Looking Up</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 55m 27s • @spaceweathernewss0s • Mar 18, 2026 • 8,796 views • 1,206 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">In this episode, the host discusses recent scientific updates related to solar activity and its impacts on Earth, including health implications and space weather events. The conversation also touches on the importance of preparedness in light of these developments.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Recent studies link major geomagnetic storms to increased health risks like strokes and heart attacks.</li>
+                            <li>The Van Allen probe&#x27;s re-entry was accelerated due to unexpected solar activity.</li>
+                            <li>Solar activity is impacting Earth&#x27;s magnetic field, leading to increased vulnerability.</li>
+                            <li>The upcoming solar superstorm in May 2024 is expected to produce significant cosmic effects.</li>
+                            <li>Uranus is experiencing a magnetic pole shift, affecting its atmospheric conditions.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Ben, Adrian, Bear Independent, Christina McCarthy, Joe Schmo 1776, Birdie, Katie Light, Michelle Allen, Jimmy Joe, Sterling Cooper, Gios review</p>
+                        <p><strong>Organizations:</strong> NASA, Jet Propulsion Lab</p>
+                        <p><strong>Topics:</strong> solar flares, space weather, health impacts, geomagnetic storms, Uranus, comets, prepping</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The ongoing changes in solar activity and Earth&#x27;s magnetic field necessitate increased awareness and preparedness.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <div class="footer">
+            Generated 2026-03-18 07:06:19
+        </div>
+    </div>
+</body>
+</html>
