@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Snippets - 2026-03-27</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background-color: #FFF1E0;
+            color: #3E474F;
+            line-height: 1.6;
+            padding: 24px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            padding: 32px 0;
+            border-bottom: 3px solid #3E474F;
+            margin-bottom: 32px;
+        }
+        .header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .header .date {
+            font-size: 18px;
+            color: #66737D;
+        }
+        .header .meta {
+            font-size: 14px;
+            color: #66737D;
+            margin-top: 12px;
+        }
+        .topic-section {
+            margin-bottom: 40px;
+        }
+        .topic-title {
+            font-size: 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 0;
+            border-bottom: 2px solid #F2DFCE;
+            margin-bottom: 24px;
+            color: #3E474F;
+        }
+        .channel-section {
+            margin-bottom: 28px;
+        }
+        .channel-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            margin-bottom: 16px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .snippet-card {
+            background: #FFF9F5;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border-left: 4px solid #FCD0AF;
+        }
+        .snippet-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .snippet-title a {
+            color: #0D7680;
+            text-decoration: none;
+        }
+        .snippet-title a:hover {
+            text-decoration: underline;
+        }
+        .snippet-meta {
+            font-size: 13px;
+            color: #66737D;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+        .snippet-speakers {
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .snippet-speakers strong {
+            color: #3E474F;
+        }
+        .snippet-summary {
+            font-size: 15px;
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+        .snippet-claims {
+            margin-bottom: 16px;
+        }
+        .snippet-claims-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .snippet-claims ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .snippet-claims li {
+            font-size: 14px;
+            padding: 4px 0 4px 16px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .snippet-claims li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #0D7680;
+        }
+        .snippet-details {
+            font-size: 13px;
+            color: #66737D;
+            border-top: 1px solid #F2DFCE;
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+        .snippet-details p {
+            margin-bottom: 4px;
+        }
+        .snippet-conclusion {
+            font-size: 14px;
+            font-style: italic;
+            color: #3E474F;
+            background: #F2DFCE;
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 12px;
+        }
+        .footer {
+            text-align: center;
+            padding: 24px 0;
+            border-top: 1px solid #F2DFCE;
+            margin-top: 40px;
+            font-size: 12px;
+            color: #66737D;
+        }
+        /* Collapsible sections */
+        details {
+            margin-bottom: 8px;
+        }
+        details summary {
+            cursor: pointer;
+            list-style: none;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary::before {
+            content: "▶";
+            display: inline-block;
+            margin-right: 8px;
+            transition: transform 0.2s;
+            font-size: 12px;
+        }
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
+        .topic-details {
+            border: 1px solid #F2DFCE;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            background: #FFF9F5;
+        }
+        .topic-summary {
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 16px 20px;
+            color: #3E474F;
+            background: #F2DFCE;
+            border-radius: 8px;
+        }
+        .topic-details[open] .topic-summary {
+            border-radius: 8px 8px 0 0;
+        }
+        .topic-count {
+            font-size: 14px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .topic-content {
+            padding: 16px 20px;
+        }
+        .channel-details {
+            border: 1px solid #FCD0AF;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            background: white;
+        }
+        .channel-summary {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            padding: 12px 16px;
+            background: #FFF9F5;
+            border-radius: 6px;
+        }
+        .channel-details[open] .channel-summary {
+            border-radius: 6px 6px 0 0;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .channel-count {
+            font-size: 13px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .channel-content {
+            padding: 12px 16px;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 16px;
+            }
+            .header h1 {
+                font-size: 28px;
+            }
+            .snippet-card {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Daily Snippets</h1>
+            <div class="date">Friday, March 27, 2026</div>
+            <div class="meta">4 videos • uploaded 2026-03-27 • 4 videos</div>
+        </div>
+        <details class="topic-details">
+            <summary class="topic-summary">INVESTING<span class="topic-count">(2 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">TheAsianGuy-k9h<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=3O1kFEJyCcw" target="_blank">$13.7B Short vs Empty Vaults — The Silver Math That Doesn&#x27;t Add Up</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 26m 45s • @THEASIANGUY-AG • Mar 27, 2026 • 676 views • 53 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses the current state of the silver market, highlighting significant supply shortages and the implications of recent trading behaviors. It emphasizes the disconnect between paper silver prices and physical availability, driven by various market dynamics and geopolitical factors.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>2.6 million ounces of silver left the ComX system in a single session, indicating a significant supply drain.</li>
+                            <li>The registered silver inventory coverage ratio is only 13.5%, meaning there is insufficient physical metal to meet paper claims.</li>
+                            <li>JP Morgan holds an estimated $13.7 billion in short exposure in the silver market, which cannot be covered by available physical inventory.</li>
+                            <li>India is set to remonetize silver at the banking level, significantly increasing demand.</li>
+                            <li>The market is experiencing backwardation, where immediate delivery prices exceed future prices, indicating supply stress.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> CME Group, JP Morgan, Bloomberg</p>
+                        <p><strong>Topics:</strong> silver market, futures contracts, supply and demand, market manipulation, India&#x27;s silver policy</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The structural deficit in the silver market is deepening, with physical demand outpacing supply and significant implications for future pricing.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">eurodollaruniversity<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=dkgSJvjWs5M" target="_blank">The $52 Trillion Private Credit Time Bomb Is Exploding</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 150m 26s • @eurodollaruniversity • Mar 27, 2026 • 24,625 views • 896 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">The episode discusses the looming crisis in private credit, drawing parallels to the 2008 financial crisis and emphasizing the importance of understanding behavioral changes in the market. It outlines the stages of a credit cycle and the potential implications for the economy.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Private credit is on a path toward a crisis similar to 2008.</li>
+                            <li>Behavioral changes in the market precede state changes in the credit cycle.</li>
+                            <li>The Federal Reserve&#x27;s actions during the 2008 crisis were not solely about subprime mortgages.</li>
+                            <li>Expectations in the market can shift dramatically, leading to a recalibration of perceived value.</li>
+                            <li>The current private credit environment shows signs of accumulating errors similar to those seen before the 2008 crisis.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Ben Bernanke, Jeffrey Gunlack, Jamie Dimon</p>
+                        <p><strong>Organizations:</strong> Federal Reserve, AIG, Bear Stearns, JP Morgan, Countrywide, Maiden Lane, Urall University</p>
+                        <p><strong>Topics:</strong> private credit, credit crisis, 2008 comparisons, behavioral changes, state changes</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The private credit market is facing significant risks that could lead to a broader economic crisis.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">RUSSIA<span class="topic-count">(1 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">IgorLipsits_1950<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=Ak0bkzpqs7Q" target="_blank">ЛИПСИЦ: ИНТЕРВЬЮ ДЛЯ КАНАЛА &quot;ФОРУМ СВОБОДНОЙ РОССИИ&quot; 25.03.2026</a>
+                    </div>
+                    <div class="snippet-meta">interview • 43m 23s • @igorlipsits_1950 • Mar 27, 2026 • 1,576 views • 257 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Дмитрий Семёнов, Игорь Липсиц</div>
+                    <div class="snippet-summary">В этом интервью Игорь Липсиц обсуждает текущее состояние российской экономики в контексте войны и изменения цен на нефть. Он также затрагивает проблемы бюджета и последствия энергетического перехода для России.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Путин получил временное финансовое облегчение благодаря высоким ценам на нефть.</li>
+                            <li>Российский бюджет может получить дополнительные доходы, но это временное явление.</li>
+                            <li>Снижение цен на нефть неизбежно из-за перехода на электротранспорт.</li>
+                            <li>Россия сталкивается с угрозами из-за энергетического перехода в развитых странах.</li>
+                            <li>Курс рубля больше не определяется рыночными механизмами.</li>
+                            <li>Малый и средний бизнес в России теряет доступ к рекламным каналам.</li>
+                            <li>Украина может стать лидером в производстве дронов после войны.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Путин, Набиулина, Милов, Пирогурусатом, Данкверт</p>
+                        <p><strong>Organizations:</strong> Форум Свободной России</p>
+                        <p><strong>Topics:</strong> экономика России, нефтяные цены, бюджетные проблемы, война в Украине, энергетический переход, инфляция, глобальная политика</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Россия сталкивается с серьезными экономическими вызовами, и ее будущее зависит от способности адаптироваться к изменениям в мировой экономике.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">OTHER<span class="topic-count">(1 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">SpaceWeatherNewsS0s<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=76CMY4UlsWQ" target="_blank">Observers Live #28 - Comets and Solar Storms</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 44m 7s • @spaceweathernewss0s • Mar 27, 2026 • 8,841 views • 1,111 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses the upcoming arrival of two comets and the expected solar storm activity related to the Ryer cycle. The narrator shares insights on the implications of these celestial events for Earth and the audience&#x27;s health.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Two comets are expected to arrive in April, impacting solar activity.</li>
+                            <li>The Ryer cycle solar storm uptick is anticipated to coincide with the comets&#x27; arrival.</li>
+                            <li>Solar flares and sunspot activity are on the rise, indicating increased solar activity.</li>
+                            <li>The interaction with comet tails could have chemical impacts on Earth&#x27;s atmosphere.</li>
+                            <li>The narrator emphasizes the importance of community among observers for preparedness.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Katie Light, Derek Patton, Susie Rose Finley, Evan Williams, Birdie, Joe Peterson, Allan Shepard</p>
+                        <p><strong>Organizations:</strong> Pan Stars Observatory, American College of Cardiology, Solar Killshot Action Network</p>
+                        <p><strong>Topics:</strong> comets, solar storms, space weather, Ryer cycle, earth disaster cycle</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> April could be a significant month for solar activity and its effects on Earth.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <div class="footer">
+            Generated 2026-03-27 07:12:25
+        </div>
+    </div>
+</body>
+</html>
