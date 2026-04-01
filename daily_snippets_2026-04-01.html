@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Snippets - 2026-04-01</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background-color: #FFF1E0;
+            color: #3E474F;
+            line-height: 1.6;
+            padding: 24px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            padding: 32px 0;
+            border-bottom: 3px solid #3E474F;
+            margin-bottom: 32px;
+        }
+        .header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .header .date {
+            font-size: 18px;
+            color: #66737D;
+        }
+        .header .meta {
+            font-size: 14px;
+            color: #66737D;
+            margin-top: 12px;
+        }
+        .topic-section {
+            margin-bottom: 40px;
+        }
+        .topic-title {
+            font-size: 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 0;
+            border-bottom: 2px solid #F2DFCE;
+            margin-bottom: 24px;
+            color: #3E474F;
+        }
+        .channel-section {
+            margin-bottom: 28px;
+        }
+        .channel-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            margin-bottom: 16px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .snippet-card {
+            background: #FFF9F5;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border-left: 4px solid #FCD0AF;
+        }
+        .snippet-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .snippet-title a {
+            color: #0D7680;
+            text-decoration: none;
+        }
+        .snippet-title a:hover {
+            text-decoration: underline;
+        }
+        .snippet-meta {
+            font-size: 13px;
+            color: #66737D;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+        .snippet-speakers {
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .snippet-speakers strong {
+            color: #3E474F;
+        }
+        .snippet-summary {
+            font-size: 15px;
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+        .snippet-claims {
+            margin-bottom: 16px;
+        }
+        .snippet-claims-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .snippet-claims ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .snippet-claims li {
+            font-size: 14px;
+            padding: 4px 0 4px 16px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .snippet-claims li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #0D7680;
+        }
+        .snippet-details {
+            font-size: 13px;
+            color: #66737D;
+            border-top: 1px solid #F2DFCE;
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+        .snippet-details p {
+            margin-bottom: 4px;
+        }
+        .snippet-conclusion {
+            font-size: 14px;
+            font-style: italic;
+            color: #3E474F;
+            background: #F2DFCE;
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 12px;
+        }
+        .footer {
+            text-align: center;
+            padding: 24px 0;
+            border-top: 1px solid #F2DFCE;
+            margin-top: 40px;
+            font-size: 12px;
+            color: #66737D;
+        }
+        /* Collapsible sections */
+        details {
+            margin-bottom: 8px;
+        }
+        details summary {
+            cursor: pointer;
+            list-style: none;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary::before {
+            content: "▶";
+            display: inline-block;
+            margin-right: 8px;
+            transition: transform 0.2s;
+            font-size: 12px;
+        }
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
+        .topic-details {
+            border: 1px solid #F2DFCE;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            background: #FFF9F5;
+        }
+        .topic-summary {
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 16px 20px;
+            color: #3E474F;
+            background: #F2DFCE;
+            border-radius: 8px;
+        }
+        .topic-details[open] .topic-summary {
+            border-radius: 8px 8px 0 0;
+        }
+        .topic-count {
+            font-size: 14px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .topic-content {
+            padding: 16px 20px;
+        }
+        .channel-details {
+            border: 1px solid #FCD0AF;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            background: white;
+        }
+        .channel-summary {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            padding: 12px 16px;
+            background: #FFF9F5;
+            border-radius: 6px;
+        }
+        .channel-details[open] .channel-summary {
+            border-radius: 6px 6px 0 0;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .channel-count {
+            font-size: 13px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .channel-content {
+            padding: 12px 16px;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 16px;
+            }
+            .header h1 {
+                font-size: 28px;
+            }
+            .snippet-card {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Daily Snippets</h1>
+            <div class="date">Wednesday, April 01, 2026</div>
+            <div class="meta">4 videos • uploaded 2026-04-01 • 4 videos</div>
+        </div>
+        <details class="topic-details">
+            <summary class="topic-summary">INVESTING<span class="topic-count">(2 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">SkoniecznyMariusz<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=j2xJS22j46o" target="_blank">Why My Aduro Shares are Not For Sale</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 6m 45s • @SkoniecznyMariusz • Apr 01, 2026 • 380 views • 48 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">The episode discusses the narrator&#x27;s steadfast commitment to holding shares in Aduro Clean Technologies despite market volatility and global crises. It emphasizes the importance of long-term investment strategies and understanding the value of the technology Aduro offers.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Aduro&#x27;s technology addresses significant issues in plastic recycling and oil upgrading.</li>
+                            <li>Investors should hold onto their stocks for years to realize true value.</li>
+                            <li>Market fluctuations should not dictate investment decisions.</li>
+                            <li>Aduro&#x27;s current market cap does not reflect the potential value of its technology.</li>
+                            <li>The narrator will not sell shares regardless of economic or geopolitical events.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Ben Graham</p>
+                        <p><strong>Organizations:</strong> Aduro Clean Technologies</p>
+                        <p><strong>Topics:</strong> Aduro investment, market psychology, long-term holding, recession risks, oil technology</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> My shares are not for sale anytime soon for any reason.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">nobull-markettalkwithgeorg4907<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=WMTX7f2PaCw" target="_blank">Craig Shapiro | The World post Feb 28 | No Bull George Noble.</a>
+                    </div>
+                    <div class="snippet-meta">interview • 44m 42s • @nobull-markettalkwithgeorg4907 • Apr 01, 2026 • 152 views • 15 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Craig Shapiro, George Noble</div>
+                    <div class="snippet-summary">In this episode, Craig Shapiro discusses the current state of the markets, the impact of geopolitical tensions, and the implications of AI on the economy. The conversation also covers investment strategies in light of these challenges.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The market is experiencing significant volatility driven by geopolitical events.</li>
+                            <li>AI is expected to displace a large number of white-collar jobs, impacting economic growth.</li>
+                            <li>The closure of the Strait of Hormuz poses a major risk to global trade and economic stability.</li>
+                            <li>Gold is becoming a more attractive asset as the dollar&#x27;s dominance is challenged.</li>
+                            <li>Investors should be cautious and consider hedging against potential market downturns.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Jay Plasky, Kevin Worse, Al Oliver Hardy, Dario from Anthropic</p>
+                        <p><strong>Organizations:</strong> Ninja Trader, Kraken</p>
+                        <p><strong>Topics:</strong> market volatility, AI impact, Iran and oil, US economy, gold and silver, private credit</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The current economic landscape suggests a shift towards lower growth and higher inflation, making traditional investment strategies less effective.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">OTHER<span class="topic-count">(2 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">SkoniecznyMariusz<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=Nu7OGXEnQPc" target="_blank">Why Aduro Clean Technologies is Different</a>
+                    </div>
+                    <div class="snippet-meta">interview • 6m 55s • @SkoniecznyMariusz • Apr 01, 2026 • 88 views • 14 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses the unique aspects of Aduro Clean Technologies and their pilot plant operations. The speaker addresses investor concerns and technical challenges related to their chemical recycling technology.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The pilot unit is performing as expected and is overspec for its intended purpose.</li>
+                            <li>Aduro is focusing on optimizing their technology before releasing more data.</li>
+                            <li>The company is working on multiple applications beyond just plastic recycling.</li>
+                            <li>Skepticism from engineers is based on their experience with pyrolysis, which is different from Aduro&#x27;s approach.</li>
+                            <li>Aduro will not operate in the supercritical water range.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> Aduro Clean Technologies</p>
+                        <p><strong>Topics:</strong> Aduro Clean Technologies, pilot plant, chemical recycling, technology skepticism, supercritical water</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Aduro Clean Technologies is confident in their technology and is focused on optimization and future announcements.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">SpaceWeatherNewsS0s<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=T0dUbdQX4bw" target="_blank">Observers Live #29 - Waiting for the Solar Storm Tonight</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 50m 40s • @spaceweathernewss0s • Apr 01, 2026 • 14,236 views • 1,580 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">In this episode, the host discusses the anticipated solar storm and its potential impacts on Earth, while also providing insights on preparedness and survival strategies. The conversation includes updates on solar activity and the importance of community networks for survival.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The solar storm is expected to arrive soon, potentially impacting Earth significantly.</li>
+                            <li>NOAA has been underestimating the strength of solar storms due to a weakening magnetic field.</li>
+                            <li>Individuals need to prepare for larger space weather events as Earth&#x27;s magnetic field continues to weaken.</li>
+                            <li>Community networks of like-minded individuals are crucial for effective survival strategies.</li>
+                            <li>Prepping involves not just food and water, but also medical supplies and community support.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> NOAA, Loheed Martin, Heaven&#x27;s Harvest, Refuge Medical, Gold Co, goldobservers.com</p>
+                        <p><strong>Topics:</strong> solar storm, space weather, prepping strategies, survival tips, community building</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The host emphasizes the need for individuals to be proactive in their preparedness and to build strong community networks.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <div class="footer">
+            Generated 2026-04-01 07:09:47
+        </div>
+    </div>
+</body>
+</html>
