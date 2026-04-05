@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Snippets - 2026-04-04</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background-color: #FFF1E0;
+            color: #3E474F;
+            line-height: 1.6;
+            padding: 24px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            padding: 32px 0;
+            border-bottom: 3px solid #3E474F;
+            margin-bottom: 32px;
+        }
+        .header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .header .date {
+            font-size: 18px;
+            color: #66737D;
+        }
+        .header .meta {
+            font-size: 14px;
+            color: #66737D;
+            margin-top: 12px;
+        }
+        .topic-section {
+            margin-bottom: 40px;
+        }
+        .topic-title {
+            font-size: 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 0;
+            border-bottom: 2px solid #F2DFCE;
+            margin-bottom: 24px;
+            color: #3E474F;
+        }
+        .channel-section {
+            margin-bottom: 28px;
+        }
+        .channel-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            margin-bottom: 16px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .snippet-card {
+            background: #FFF9F5;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border-left: 4px solid #FCD0AF;
+        }
+        .snippet-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .snippet-title a {
+            color: #0D7680;
+            text-decoration: none;
+        }
+        .snippet-title a:hover {
+            text-decoration: underline;
+        }
+        .snippet-meta {
+            font-size: 13px;
+            color: #66737D;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+        .snippet-speakers {
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .snippet-speakers strong {
+            color: #3E474F;
+        }
+        .snippet-summary {
+            font-size: 15px;
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+        .snippet-claims {
+            margin-bottom: 16px;
+        }
+        .snippet-claims-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .snippet-claims ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .snippet-claims li {
+            font-size: 14px;
+            padding: 4px 0 4px 16px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .snippet-claims li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #0D7680;
+        }
+        .snippet-details {
+            font-size: 13px;
+            color: #66737D;
+            border-top: 1px solid #F2DFCE;
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+        .snippet-details p {
+            margin-bottom: 4px;
+        }
+        .snippet-conclusion {
+            font-size: 14px;
+            font-style: italic;
+            color: #3E474F;
+            background: #F2DFCE;
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 12px;
+        }
+        .footer {
+            text-align: center;
+            padding: 24px 0;
+            border-top: 1px solid #F2DFCE;
+            margin-top: 40px;
+            font-size: 12px;
+            color: #66737D;
+        }
+        /* Collapsible sections */
+        details {
+            margin-bottom: 8px;
+        }
+        details summary {
+            cursor: pointer;
+            list-style: none;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary::before {
+            content: "▶";
+            display: inline-block;
+            margin-right: 8px;
+            transition: transform 0.2s;
+            font-size: 12px;
+        }
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
+        .topic-details {
+            border: 1px solid #F2DFCE;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            background: #FFF9F5;
+        }
+        .topic-summary {
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 16px 20px;
+            color: #3E474F;
+            background: #F2DFCE;
+            border-radius: 8px;
+        }
+        .topic-details[open] .topic-summary {
+            border-radius: 8px 8px 0 0;
+        }
+        .topic-count {
+            font-size: 14px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .topic-content {
+            padding: 16px 20px;
+        }
+        .channel-details {
+            border: 1px solid #FCD0AF;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            background: white;
+        }
+        .channel-summary {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            padding: 12px 16px;
+            background: #FFF9F5;
+            border-radius: 6px;
+        }
+        .channel-details[open] .channel-summary {
+            border-radius: 6px 6px 0 0;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .channel-count {
+            font-size: 13px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .channel-content {
+            padding: 12px 16px;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 16px;
+            }
+            .header h1 {
+                font-size: 28px;
+            }
+            .snippet-card {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Daily Snippets</h1>
+            <div class="date">Saturday, April 04, 2026</div>
+            <div class="meta">35 videos • uploaded 2026-04-04 • 35 videos</div>
+        </div>
+        <details class="topic-details">
+            <summary class="topic-summary">POLITICS<span class="topic-count">(9 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">ActionableIntelligenceAlert<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=zV-Q-o34oMQ" target="_blank">The supply ratchet tightens on the world economy as the Iran war continues. AIA Weekly Update 4.4.2</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 39m 12s • @ActionableIntelligenceAlert • Apr 04, 2026 • 2,750 views • 314 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> John Polomny</div>
+                    <div class="snippet-summary">In this episode, John Polomny discusses the ongoing Iran war and its implications for the global economy, particularly focusing on rising oil prices and supply chain disruptions. He highlights the potential long-term consequences for various sectors, including agriculture and energy.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The situation in Iran is escalating and not going as planned.</li>
+                            <li>Rising oil prices are expected to significantly impact global markets by mid-April.</li>
+                            <li>The U.S. military strategy in Iran is failing, leading to increased risks.</li>
+                            <li>The damage to Iranian infrastructure could have long-lasting effects on global supply chains.</li>
+                            <li>Farmers in the U.S. are planning to plant less corn due to rising fertilizer prices.</li>
+                            <li>The energy crisis is pushing countries to reconsider their reliance on fossil fuels and explore nuclear energy.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Donald J. Trump, Pete Hegseth, Lieutenant Colonel Danny Davis, Paulo MRO, Alexander Stell, Charlie Bilio</p>
+                        <p><strong>Organizations:</strong> Actionable Intelligence</p>
+                        <p><strong>Topics:</strong> Iran war, global economy, oil prices, supply chain, agriculture, energy crisis</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The ongoing conflict in Iran is creating a tightening supply situation that will have severe repercussions for the global economy.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">AkkadDaily<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=MWxgS79il3Q" target="_blank">Women Didn&#x27;t Want What Feminism Promised</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 17m 15s • @SargonofAkkad • Apr 04, 2026 • 64,670 views • 4,605 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">The episode discusses historical perspectives on feminism and women&#x27;s roles in society, contrasting past views with contemporary feminist ideologies. It highlights how many women historically preferred traditional family structures over feminist movements.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Many women in the past did not support the feminist movement.</li>
+                            <li>The traditional family structure was seen as beneficial for society.</li>
+                            <li>Surveys indicated that most women preferred individual effort over organized feminist movements.</li>
+                            <li>Feminism is portrayed as a movement that seeks to deconstruct family and gender roles.</li>
+                            <li>The narrator argues that traditional relationships lead to greater happiness.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Mary Augusta Ward, Gavin Newsom</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> feminism, women&#x27;s roles, family dynamics, gender relations, historical perspectives</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The episode concludes that traditional family roles are more fulfilling and beneficial than the ideals promoted by modern feminism.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">IgorYakovenko<span class="channel-count">(2 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=OEbAxK5IEZc" target="_blank">ДУМАЕМ ВМЕСТЕ С МАРКОМ ФЕЙГИНЫМ</a>
+                    </div>
+                    <div class="snippet-meta">interview • 64m 55s • @IgorYakovenko • Apr 04, 2026 • 55,270 views • 5,961 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Игорь Яковенко, Мар Захарович Фейгин</div>
+                    <div class="snippet-summary">In this episode, Igor Yakovenko interviews Mark Feigin about the ongoing conflict in the Middle East, particularly focusing on Iran&#x27;s military capabilities and the implications of Trump&#x27;s foreign policy. They discuss the potential outcomes of the conflict and the political ramifications for both the US and Russia.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The military potential of Iran has not been completely destroyed despite claims to the contrary.</li>
+                            <li>Trump&#x27;s strategy in the Middle East lacks clarity and may lead to further complications.</li>
+                            <li>The conflict in the Middle East is being influenced by Russia&#x27;s interests.</li>
+                            <li>There is a significant risk of escalation if ground operations are initiated.</li>
+                            <li>The internal political situation in the US is affecting foreign policy decisions.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Трамп, Путин, Гарри Каспаров, Анастасия Шевченко, Борис Немцов</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> Middle East conflict, Iran&#x27;s military potential, Trump&#x27;s strategy, US foreign policy, Russia&#x27;s involvement, Political implications</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The ongoing conflict in the Middle East will likely continue, with significant implications for US foreign policy and regional stability.
+                    </div>
+                </div>
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=Gj2nrVrHLn0" target="_blank">ШИЗОФРЕНИЧЕСКАЯ ВОЙНА. ЧТО ЕВРОПА МОЖЕТ ОБЪЯСНИТЬ ТРАМПУ. НЕТАНЬЯХУ ВЫСТУПАЕТ ПРОТИВ СВОЕЙ СТРАНЫ</a>
+                    </div>
+                    <div class="snippet-meta">panel • 22m 6s • @IgorYakovenko • Apr 04, 2026 • 9,591 views • 838 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">The episode discusses the current geopolitical tensions involving Belarus, Russia, and Ukraine, highlighting the irrational behaviors of leaders like Putin and Trump. It also examines the complexities of international alliances and the concept of a &#x27;schizophrenic war&#x27; where leaders act against their national interests.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Lukashenko&#x27;s rhetoric suggests Belarus is preparing for war, despite claims of not wanting conflict.</li>
+                            <li>Putin&#x27;s actions are often irrational and counterproductive to his regime&#x27;s stability.</li>
+                            <li>The Belarusian army is unprepared for a conflict against Ukraine, which has been in a prolonged war.</li>
+                            <li>Trump&#x27;s foreign policy is seen as contradictory to US interests, favoring Russia over Ukraine.</li>
+                            <li>The current war is characterized by a lack of clear alliances, creating confusion about which side various countries are on.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Александр Лукашенко, Владимир Путин, Дональд Трамп, Марко Рубио, Бенджамин Нетаньяху, Виктор Орбан</p>
+                        <p><strong>Organizations:</strong> НАТО, Евросоюз</p>
+                        <p><strong>Topics:</strong> war preparation, dictatorship, US politics, European relations, Ukraine conflict</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The episode concludes that the ongoing geopolitical situation reflects a complex and contradictory landscape where leaders often act against their own countries&#x27; interests.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">TheJayMartinShow<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=8EJ-L534fXE" target="_blank">Peter Zeihan: Iran War Heralds Catastrophic Energy Crisis</a>
+                    </div>
+                    <div class="snippet-meta">interview • 66m 23s • @TheJayMartinShow • Apr 04, 2026 • 7,629 views • 333 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Peter Zeihan, J Martin</div>
+                    <div class="snippet-summary">In this episode, Peter Zeihan discusses the implications of the ongoing conflict in Iran and its potential to trigger a catastrophic energy crisis. He analyzes the current geopolitical landscape, focusing on the role of the United States and the impact of Donald Trump&#x27;s policies.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The US is witnessing a significant shift in its foreign policy under Trump, driven by his personal instincts.</li>
+                            <li>Iran&#x27;s nuclear program has been deliberately kept at a non-imminent threat level for decades.</li>
+                            <li>The IRGC has gained power and financial resources due to the ongoing conflict.</li>
+                            <li>The US military&#x27;s ability to project power is being undermined by the lack of consistent foreign policy.</li>
+                            <li>The energy crisis resulting from the conflict will have global repercussions, particularly for East Asia and Europe.</li>
+                            <li>The US dollar remains the dominant currency despite the geopolitical turmoil.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Donald Trump, Tulsi Gabbard, General Kaine, Secretary Hagsth, Kamay, Hugo Chavez, Nicolas Maduro, Netanyahu, Eric Prince</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> Iran conflict, US foreign policy, energy crisis, nuclear deterrence, military strategy, globalization</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The current geopolitical situation is leading to a potential energy crisis that could reshape global power dynamics.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">ThePodcastoftheLotusEaters<span class="channel-count">(2 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=CHYVxHrqkLY" target="_blank">The British Government Is Lying to You</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 16m 22s • @ThePodcastoftheLotusEaters • Apr 04, 2026 • 28,341 views • 1,934 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">The episode discusses the British government&#x27;s handling of non-crime hate incidents and the implications for free speech and policing. It critiques the government&#x27;s narrative and highlights concerns about the ongoing recording of lawful speech as intelligence.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The government is not actually scrapping non-crime hate incidents but reforming how they are recorded.</li>
+                            <li>Non-crime hate incidents can still appear in background checks, effectively acting as a criminal record.</li>
+                            <li>The police are still interested in monitoring lawful free speech despite claims to the contrary.</li>
+                            <li>The new system introduces more subjectivity and less accountability in policing.</li>
+                            <li>The government is responding to criticism with PR-friendly changes rather than genuine reform.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Graeme Lahan, Pretty Patel, Suella Braverman</p>
+                        <p><strong>Organizations:</strong> Home Office, Telegraph, college of policing</p>
+                        <p><strong>Topics:</strong> government deception, police policy, free speech, hate incidents, political criticism</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The reforms do not eliminate the issues surrounding non-crime hate incidents and may lead to increased surveillance of lawful speech.
+                    </div>
+                </div>
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=iVBij8LKDcw" target="_blank">Canadian Leftists Get Internationally Humiliated</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 24m 58s • @ThePodcastoftheLotusEaters • Apr 04, 2026 • 47,360 views • 2,904 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode critiques the recent New Democratic Party convention in Canada, highlighting its absurdities and the challenges faced by the party after significant electoral losses. The discussion focuses on the party&#x27;s attempts to rebrand itself and the controversies surrounding its internal processes.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The NDP suffered a significant electoral defeat, dropping from 24 to 7 seats.</li>
+                            <li>Avi Lewis was elected as the new leader of the NDP during the convention.</li>
+                            <li>The convention introduced an equity card system to manage speaking privileges.</li>
+                            <li>Delegates expressed frustration over the misuse of equity cards.</li>
+                            <li>The party&#x27;s attempts to connect with the working class were criticized as ineffective.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Jagmeet Singh, Avi Lewis, Adrien Smith, Nicholas Touro, Masura Tasim</p>
+                        <p><strong>Organizations:</strong> New Democratic Party</p>
+                        <p><strong>Topics:</strong> NDP convention, political strategy, equity cards, leadership change, party decline</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The NDP&#x27;s internal chaos and focus on identity politics may hinder its ability to regain voter trust.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">davidstarkeytalks<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=jpPzpM6gSXQ" target="_blank">&quot;Why is Reform playing it so safe?&quot; | David Starkey looks ahead to local elections</a>
+                    </div>
+                    <div class="snippet-meta">interview • 47m 3s • @davidstarkeytalks • Apr 04, 2026 • 11,751 views • 610 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> David Starkey, Mark Littlewood</div>
+                    <div class="snippet-summary">David Starkey and Mark Littlewood discuss the upcoming local elections in May, focusing on the performance and strategies of various political parties, particularly the Reform party. They analyze the implications of these elections for the political landscape in the UK.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The May elections are seen as a health check for political parties rather than a decisive moment.</li>
+                            <li>Reform party needs to perform well to validate its position as a serious contender.</li>
+                            <li>The Conservatives are trying to maintain their relevance amidst challenges from Reform and other parties.</li>
+                            <li>There is a significant shift in political alignment towards identity and locality issues over traditional economic concerns.</li>
+                            <li>Reform&#x27;s strategy appears cautious, aiming to appeal to moderates while avoiding alienating their base.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Nigel Farage, Robert Jenrick, Kemi Badenoch, Steve Davis, Rupert Lowe, Simon Dudley</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> local elections, political parties, Reform party, Conservative party, Green party, political strategy</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The outcome of the May elections will significantly impact the future of the Conservative party and the Reform party&#x27;s positioning in UK politics.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">winston_marshall<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=fnKzrxWDFb0" target="_blank">What It’s Really Like To Be Deported By ICE</a>
+                    </div>
+                    <div class="snippet-meta">interview • 47m 17s • @winston_marshall • Apr 04, 2026 • 5,900 views • 408 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Ted Jones</div>
+                    <div class="snippet-summary">This episode features an interview with Ted Jones, who shares his personal experience of being deported from the US after living there for over 20 years. He discusses the complexities of immigration law, his views on the political climate, and his reflections on life in the UK.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Ted was tracked by ICE due to his work schedule and documentation.</li>
+                            <li>He argues that the experience of detention is not as bad as commonly perceived.</li>
+                            <li>Ted believes that immigration law is complex and nuanced.</li>
+                            <li>He criticizes the inflammatory rhetoric surrounding deportation from political leaders.</li>
+                            <li>Ted expresses a sense of disconnection from British culture despite being a citizen.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Father James, Renee Good, Alex Pretty</p>
+                        <p><strong>Organizations:</strong> ICE</p>
+                        <p><strong>Topics:</strong> deportation experience, immigration law, political identity, Catholicism, US-UK comparison</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Ted emphasizes the need for a more nuanced understanding of immigration and deportation.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">INVESTING<span class="topic-count">(19 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">CRUXInvestor<span class="channel-count">(4 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=ilpbV7YDdk8" target="_blank">ICG Silver &amp; Gold (CSE:ICG) - Newly Listed District-Scale Play, Fully Funded for Drilling</a>
+                    </div>
+                    <div class="snippet-meta">interview • 22m 59s • @CRUXInvestor • Apr 04, 2026 • 932 views</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Steven Sarvabian</div>
+                    <div class="snippet-summary">In this episode, Steven Sarvabian discusses the newly listed ICG Silver and Gold and their exploration plans for the Tuscarora district in Nevada. He outlines the company&#x27;s strategy for drilling and the potential for discovering both gold and silver resources.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>ICG Silver and Gold is a spinout from American Pacific Mining.</li>
+                            <li>The company has 10,000 contiguous acres in the Tuscarora district.</li>
+                            <li>A phase one exploration program is set to begin in June with 3,000 to 6,000 meters of drilling planned.</li>
+                            <li>The project has previously produced significant amounts of gold and silver.</li>
+                            <li>High-grade silver targets have been identified with samples returning up to 38,000 g per ton.</li>
+                            <li>The geological model indicates overlapping gold and silver systems.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Jeff Swinoga, Corbin McCall, Gary Bachman</p>
+                        <p><strong>Organizations:</strong> ICG Silver and Gold, American Pacific Mining, Waterton Global Resource Management, Echelon Capital Markets, Barrick, Torex, Hudbay, Radisson, Novo Resources</p>
+                        <p><strong>Topics:</strong> ICG Silver and Gold, Tuscarora district, exploration strategy, drilling program, mineral resource potential</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> ICG Silver and Gold aims to leverage its exploration strategy to create significant value for investors through its upcoming drilling program.
+                    </div>
+                </div>
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=_UqwTlF2lnY" target="_blank">Precipitate Gold (TSXV:PRG) - &#x27;Undervalued?&#x27; Investment Series, with Jeff Wilson</a>
+                    </div>
+                    <div class="snippet-meta">interview • 20m 55s • @CRUXInvestor • Apr 04, 2026 • 1,034 views</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Jeff Wilson</div>
+                    <div class="snippet-summary">In this episode, Jeff Wilson discusses the investment potential of Precipitate Gold Corporation, focusing on their exploration projects in the Dominican Republic. He highlights the company&#x27;s drilling plans and the favorable market conditions for gold and copper mining.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Precipitate Gold is focused on gold and copper exploration in the Dominican Republic.</li>
+                            <li>The company has $9 million in working capital and is planning a significant drill campaign.</li>
+                            <li>Precipitate&#x27;s projects are 100% owned with no underlying obligations.</li>
+                            <li>The company believes it is undervalued compared to peers like Goldquest.</li>
+                            <li>Recent investments from Dominican institutional investors have boosted confidence in the mining sector.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> Precipitate Gold Corporation, Goldquest, Barrick</p>
+                        <p><strong>Topics:</strong> gold exploration, copper mineralization, Dominican Republic, junior mining, investment opportunity</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Precipitate Gold is positioned for significant growth and discovery in a favorable mining jurisdiction.
+                    </div>
+                </div>
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=DzkPR3wtUKg" target="_blank">ATEX Resources (TSXV:ATX) – 2 Billion Ton Copper With Near-Term Development</a>
+                    </div>
+                    <div class="snippet-meta">interview • 36m 24s • @CRUXInvestor • Apr 04, 2026 • 1,217 views</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Chris Beer</div>
+                    <div class="snippet-summary">In this episode, Chris Beer, the interim CEO of ATEX Resources, discusses the company&#x27;s Valeriano project, which has a significant copper resource and ongoing exploration efforts. He outlines the geological potential, drilling strategies, and the company&#x27;s ambitions in the copper mining sector.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>ATEX Resources has 2 billion tons of copper with a potential for high-grade breccia.</li>
+                            <li>The company is currently drilling approximately 30,000 meters to expand its geological understanding.</li>
+                            <li>Agnico is a significant partner, holding over 15% ownership in ATEX.</li>
+                            <li>The Valeriano project is expected to attract interest from larger mining companies due to its high-grade potential.</li>
+                            <li>The company aims to find additional high-grade breccia zones to enhance mineability.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Ben Pullinger, Pierre Lassonde</p>
+                        <p><strong>Organizations:</strong> ATEX Resources Inc., Antofagasta, Codelco, Agnico, Newmont</p>
+                        <p><strong>Topics:</strong> copper mining, exploration strategy, Valeriano project, geological findings, market potential</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> ATEX Resources is well-positioned to capitalize on its exploration successes and the growing demand for copper.
+                    </div>
+                </div>
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=AX1y7Lnzpmw" target="_blank">Founders Metals (TSXV:FDR) - Suriname&#x27;s Next Major Gold Camp?</a>
+                    </div>
+                    <div class="snippet-meta">interview • 22m 52s • @CRUXInvestor • Apr 04, 2026 • 1,028 views</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Colin Padget</div>
+                    <div class="snippet-summary">In this episode, Colin Padget, CEO of Founders Metals, discusses the company&#x27;s gold exploration efforts in Suriname, particularly focusing on the Antino project. He elaborates on the drilling program, discoveries made, and the strategic direction of the company.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Founders Metals is conducting a large drill program in Suriname to expand gold discoveries.</li>
+                            <li>The Antino project covers over 100,000 hectares in a prospective gold region.</li>
+                            <li>The company has made five new discoveries in the last 18 months.</li>
+                            <li>Colin Padget emphasizes the importance of both high-grade and lower-grade mineralization.</li>
+                            <li>Institutional investors like BlackRock and Dynamic Funds have shown interest in Founders Metals.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Vincent Collis, Chris Taylor, Pascal Vaugliard, Rob</p>
+                        <p><strong>Organizations:</strong> Founders Metals, BlackRock, Dynamic Funds, Franklin</p>
+                        <p><strong>Topics:</strong> gold exploration, Suriname, Antino project, drilling program, mineralization</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The exploration potential in Suriname is significant, and the company is focused on making new discoveries while balancing resource development.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">CommodityCulture<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=exMnFrz9B5c" target="_blank">SILVER Headed to $300 - $500 THIS YEAR and &#x27;It Will STAY There&#x27;: Michael Oliver</a>
+                    </div>
+                    <div class="snippet-meta">interview • 46m 58s • @CommodityCulture • Apr 04, 2026 • 34,306 views • 1,783 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Michael Oliver, Jesse Day</div>
+                    <div class="snippet-summary">In this episode, Michael Oliver discusses his bold prediction for silver prices to reach $300 to $500 this year, backed by technical and fundamental analysis. He also explores the implications of current geopolitical events on precious metals and shares insights from his book on anarcho capitalism.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Michael Oliver predicts silver will surge to $300 to $500 this year.</li>
+                            <li>He believes the ongoing war is irrelevant to the price movements of gold and silver.</li>
+                            <li>Oliver argues that the degradation of money units is a key driver for precious metals.</li>
+                            <li>He highlights the strong demand for silver in solar energy production.</li>
+                            <li>Oliver asserts that silver miners are set to outperform gold miners.</li>
+                            <li>He discusses the potential for a recession but does not see it as a threat to silver prices.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Donald Trump, Murray Rothbard, Javier Milei</p>
+                        <p><strong>Organizations:</strong> Arc Silver Gold OSM, Momentum Structural Analysis</p>
+                        <p><strong>Topics:</strong> silver price prediction, gold and silver mining, monetary policy, anarcho capitalism, geopolitical impacts</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Silver is expected to significantly increase in value due to underlying economic factors, regardless of geopolitical tensions.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">Finding_Finance<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=5LnR3UJpGBA" target="_blank">MOGA Alert: Making Oil Great Again &amp; $500 Silver incoming? 📈🚀</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 30m 38s • @Finding_Finance • Apr 04, 2026 • 4,054 views • 351 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Andy</div>
+                    <div class="snippet-summary">In this episode, Andy discusses the current state of oil prices, inflation, and the job market while providing insights on investment strategies. He emphasizes the importance of understanding market cycles and the potential for significant price movements in commodities.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Buying the S&amp;P 500 at 23 times price to earnings historically yields poor returns.</li>
+                            <li>Oil prices are expected to rise significantly due to low inventories and geopolitical factors.</li>
+                            <li>The Fed&#x27;s actions to control inflation may lead to a stagflationary environment.</li>
+                            <li>Silver is predicted to reach $300 to $500 per ounce by summer.</li>
+                            <li>The current economic conditions favor hard assets over financial assets.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Howard Marks, Lyn Alden, Michael Oliver, Lucas, Tavi</p>
+                        <p><strong>Organizations:</strong> Finding Value, CNBC</p>
+                        <p><strong>Topics:</strong> oil prices, inflation, job market, commodities, financial strategies</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The episode concludes that the current market conditions indicate a strong potential for rising commodity prices, particularly oil and silver.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">LaDucTrading<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=jWXY_SaSreY" target="_blank">Macro Driven New Volatility Regime &amp; How To Trade It</a>
+                    </div>
+                    <div class="snippet-meta">interview • 19m 17s • @LaDucTrading • Apr 04, 2026 • 561 views • 28 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Samantha LaDuek</div>
+                    <div class="snippet-summary">In this episode, Samantha LaDuek discusses the current volatility in the market driven by macroeconomic factors and geopolitical risks, particularly focusing on the implications of the Iran war and rising oil prices. She shares insights on trading strategies in the derivatives space to navigate these turbulent times.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Rising oil prices and geopolitical risks are creating a volatile market environment.</li>
+                            <li>Liquidity is crucial for market movements, and current conditions are bearish.</li>
+                            <li>The Fed&#x27;s monetary policy is tightening, impacting market sentiment.</li>
+                            <li>There is a potential for a prolonged Middle East conflict affecting global markets.</li>
+                            <li>Traders should prepare for continued volatility and consider longer-duration options strategies.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> JP Morgan, Citibank</p>
+                        <p><strong>Topics:</strong> market volatility, macro trends, trading strategies, oil prices, AI impact, liquidity, geopolitical risks</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Volatility is expected to persist, and traders need to adapt their strategies accordingly.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">LotuseatersDotCom<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=Y7nzGxqCh10" target="_blank">How Bad Will Markets Become?</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 20m 17s • @LotuseatersDotCom • Apr 04, 2026 • 6,291 views • 467 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">The episode discusses the unsustainable rise in interest rates and its implications for government debt and the economy. It highlights the interconnectedness of rising borrowing costs, inflation, and potential market crashes.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Rising interest rates are increasing the cost of government borrowing.</li>
+                            <li>Many governments are unlikely to pay back their debts, leading to a debt trap.</li>
+                            <li>Higher interest rates are causing stock market declines as investors seek safer returns.</li>
+                            <li>The current economic environment is characterized by rising energy and food prices.</li>
+                            <li>Governments may face increased unemployment and reduced tax revenues due to economic downturns.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> interest rates, government debt, market crash, inflation, energy crisis</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The combination of rising interest rates and inflation creates a self-reinforcing debt trap that is difficult to escape.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">Monetary-Matters<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=jgDRK1hfDCo" target="_blank">When Chaos Pays: How the Middle East Conflict is Minting Fortunes at Sea | Ed Finley-Richardson</a>
+                    </div>
+                    <div class="snippet-meta">interview • 157m 29s • @Monetary-Matters • Apr 04, 2026 • 11,838 views • 400 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Ed Finley-Richardson</div>
+                    <div class="snippet-summary">In this episode, Ed Finley-Richardson discusses the impact of the Middle East conflict on the shipping industry, particularly oil tankers, and explores investment opportunities in this volatile market. He emphasizes the potential for significant profits amidst current geopolitical tensions and market dynamics.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The closure of the Strait of Hormuz has created a feeding frenzy for shipping companies.</li>
+                            <li>Shipping rates for oil tankers are currently at historic highs due to geopolitical tensions.</li>
+                            <li>The reopening of the Strait could lead to increased shipping activity and profitability.</li>
+                            <li>Iran&#x27;s oil exports may eventually be normalized, benefiting tanker companies.</li>
+                            <li>Congestion in shipping routes can lead to increased profits for tanker owners.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Trump, Emanuel Macron, Howard Marks, Hamish Norton</p>
+                        <p><strong>Organizations:</strong> Monetary Matters, Misadventures in Shipping</p>
+                        <p><strong>Topics:</strong> Middle East conflict, shipping industry, oil tankers, investment strategies, geopolitics</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The shipping industry, particularly oil tankers, is poised for significant profitability despite current geopolitical challenges.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">OGJohnAG_2<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=xwiSzDl3m5g" target="_blank">Weekend Markets FLAT at $73 — Iran Just Shot Down 2 US Jets, Monday Gap in 28 Hours</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 12m 37s • @OGJohnAG_2 • Apr 04, 2026 • 720 views • 73 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> OG John AG</div>
+                    <div class="snippet-summary">In this episode, OG John AG discusses the current state of the markets following the shooting down of two US jets by Iran and its implications for silver and oil prices. He analyzes the potential market reactions as trading resumes and the structural issues affecting silver supply.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Iran shot down two US jets, escalating geopolitical tensions.</li>
+                            <li>Oil prices spiked to $111 following the incident.</li>
+                            <li>Silver prices remained flat despite the geopolitical chaos.</li>
+                            <li>The Shanghai market is paying a premium for silver compared to Western prices.</li>
+                            <li>Mexico&#x27;s largest silver mine is offline, affecting global supply.</li>
+                            <li>The COMEX coverage ratio remains at 13.5%, indicating a potential supply issue.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Trump</p>
+                        <p><strong>Organizations:</strong> COMEX, Shanghai Futures Exchange, JM Bullion</p>
+                        <p><strong>Topics:</strong> market analysis, geopolitical risk, silver pricing, oil prices, Iran conflict</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The upcoming market gap will reveal whether the geopolitical risks and supply shocks are being recognized or suppressed.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">OutlierTrading<span class="channel-count">(2 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=De26JTmLyjU" target="_blank">Trading Options as a Business | The Options Trench</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 65m 48s • @OutlierTrading • Apr 04, 2026 • 585 views • 46 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator, Chris</div>
+                    <div class="snippet-summary">This episode discusses the nuances of trading options as a business, emphasizing the importance of competitiveness and the ability to work with imperfect information. The speakers share insights from their experiences on trading floors and the psychological aspects of trading.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Competitiveness is crucial for success in trading.</li>
+                            <li>Traders must learn to operate with imperfect information.</li>
+                            <li>Emotional regulation is key to managing wins and losses.</li>
+                            <li>Understanding market anomalies can enhance trading strategies.</li>
+                            <li>Traders should focus on the process rather than just outcomes.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> SIG, NYMEX</p>
+                        <p><strong>Topics:</strong> trading strategies, imperfect information, competitiveness, emotional regulation, market anomalies</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Successful trading requires a blend of competitiveness, emotional control, and a deep understanding of market dynamics.
+                    </div>
+                </div>
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=9JdI1XeR1G0" target="_blank">Building a Trade Step by Step | Outlier Options Trading Bootcamp</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 64m 46s • @OutlierTrading • Apr 04, 2026 • 345 views • 18 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">In this episode, the host discusses the process of building a trade, emphasizing the importance of decision making and portfolio management. The conversation includes insights on market hypotheses and the nuances of options trading.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Building a trade requires a clear strategy and understanding of market conditions.</li>
+                            <li>The first step in trade building is assessing what your portfolio needs.</li>
+                            <li>A market hypothesis is essential for aligning your portfolio with your trading decisions.</li>
+                            <li>Options trading involves understanding the impact of time and volatility on trade outcomes.</li>
+                            <li>Successful trading is about consistent decision making over time, not just individual trades.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Agustin Lebron, Kirk, ZX</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> trade building, decision making, portfolio management, market analysis, options trading</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Effective trade building hinges on a well-defined strategy and understanding of market dynamics.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">ResourceTalks<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=OBiR7K5fhrg" target="_blank">Why Lobo Tiggre Is Selling and What He May Buy in 2026</a>
+                    </div>
+                    <div class="snippet-meta">interview • 52m 51s • @ResourceTalks • Apr 04, 2026 • 3,094 views</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Mark, Lobo Tiggre</div>
+                    <div class="snippet-summary">In this episode, Mark and Lobo Tiggre discuss the current state of the oil market, the implications of geopolitical events, and potential investment opportunities in energy and commodities. They also explore the long-term effects of underinvestment in the oil sector and the rising interest in uranium as a key energy source.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The oil market is experiencing significant volatility due to geopolitical tensions.</li>
+                            <li>Long-term underinvestment in the oil sector could lead to higher prices in the future.</li>
+                            <li>Uranium is becoming increasingly attractive as a stable energy source amid global energy concerns.</li>
+                            <li>Inflation expectations are influenced by rising energy prices, impacting overall economic sentiment.</li>
+                            <li>China&#x27;s energy strategy may not be as vulnerable as previously thought due to diversified supplies.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Rick Rule, Antonio, Trump, Jamie Dimon</p>
+                        <p><strong>Organizations:</strong> Terra Hutton, The Independent Speculator</p>
+                        <p><strong>Topics:</strong> oil market dynamics, investment strategies, geopolitical risks, energy prices, uranium potential, inflation impacts</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Investors should be cautious and consider the long-term implications of current geopolitical events on energy markets.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">SkoniecznyMariusz<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=54IXQPJV9Vk" target="_blank">Why Leef Brands Stock Will be a Huge Success</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 8m 42s • @SkoniecznyMariusz • Apr 04, 2026 • 404 views • 25 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">The episode discusses the growth potential of Leaf Brands and its extraction business in California, highlighting recent improvements and future opportunities. The speaker emphasizes the company&#x27;s unique position in the cannabis market and the potential for significant revenue growth.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Leaf Brands has seen significant improvements in its extraction business over the past year.</li>
+                            <li>The company is on track to increase its farm size and production capacity.</li>
+                            <li>Leaf Brands is one of the few cannabis companies consistently growing revenue and profit.</li>
+                            <li>The potential for international shipping could greatly enhance revenue opportunities.</li>
+                            <li>The licensing process in California creates barriers for competitors, giving Leaf Brands a competitive edge.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Kevin, Aaron Edelheit</p>
+                        <p><strong>Organizations:</strong> Leaf Brands, Water Tower Research</p>
+                        <p><strong>Topics:</strong> cannabis industry, business growth, market opportunities, extraction process, financial projections</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Leaf Brands is positioned for substantial growth due to its unique business model and market opportunities.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">TheAsianGuy-k9h<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=uJ8OjnGkswg" target="_blank">Silver&#x27;s Black Monday Setup: 3 Forces Hit the Market Before Monday&#x27;s Bell (Apr 4)</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 24m 24s • @THEASIANGUY-AG • Apr 04, 2026 • 17,692 views • 533 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses the impending market reactions to three converging forces affecting the silver market before Monday&#x27;s opening. The narrator outlines the implications of a strong jobs report, a ceasefire collapse, and liquidity issues in private equity on silver prices.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The jobs report has shifted rate hike expectations significantly.</li>
+                            <li>The ceasefire collapse is creating geopolitical risks that will impact oil and silver prices.</li>
+                            <li>Blue Owl Capital&#x27;s gating of redemptions signals a liquidity shock that could affect the entire financial system.</li>
+                            <li>The COMEX inventory situation shows a concerning leverage ratio that could lead to forced liquidations.</li>
+                            <li>Physical silver holders will not lose their ounces despite potential paper price drops.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Jerome Powell</p>
+                        <p><strong>Organizations:</strong> Bloomberg, CNBC, Blue Owl Capital</p>
+                        <p><strong>Topics:</strong> silver market, rate hike expectations, geopolitical risks, private equity, COMEX inventory</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The paper price of silver may fall due to forced liquidation, but the physical supply deficit remains unchanged.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">WeStudyBillionaires<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=EypWd5o6Wjs" target="_blank">Stock Market Maestros: How Top Fund Managers Beat the Market w/ Kyle Grieve (TIP805)</a>
+                    </div>
+                    <div class="snippet-meta">interview • 59m 4s • @WeStudyBillionaires • Apr 04, 2026 • 873 views • 30 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Kyle Grieve</div>
+                    <div class="snippet-summary">In this episode, Kyle Grieve discusses insights from the book &#x27;The Stock Market Maestros,&#x27; which explores how top fund managers achieve success in the stock market. The episode covers various investment strategies, behaviors of successful investors, and case studies of notable fund managers.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Top investors can succeed with a hit rate below 50% by maximizing returns on winners.</li>
+                            <li>Behavioral alpha score is crucial for distinguishing skilled investors from those relying on luck.</li>
+                            <li>Successful investors often have varied strategies for managing winners and losers.</li>
+                            <li>The payoff ratio is a key metric for evaluating investment success.</li>
+                            <li>Investors should focus on long-term performance rather than short-term fluctuations.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Lee Freeman Shore, Claire Finn Levy, Peter Lynch, John Templeton, Josh Goldberg, Greg Padilla, John Bar, John Lynn, Gorm Thomasson, Andrew Hall</p>
+                        <p><strong>Organizations:</strong> Essentia Analytics, G2 Investment Partners Management, Aristotle, Alliance Bernstein, AKO Capital, Invesco</p>
+                        <p><strong>Topics:</strong> fund management, investment strategies, portfolio management, behavioral finance, case studies</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Effective investment strategies prioritize managing winners and minimizing losses.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">adam.taggart<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=37Sjc0OXKKw" target="_blank">Oil Price Shock To Cause A Recession This Year? | Lance Roberts</a>
+                    </div>
+                    <div class="snippet-meta">interview • 99m 23s • @adam.taggart • Apr 04, 2026 • 26,586 views • 1,052 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator, Lance Roberts</div>
+                    <div class="snippet-summary">In this episode, Lance Roberts discusses the potential impact of rising oil prices on the economy and the risk of a recession. He analyzes market trends and offers insights on investment strategies in light of current economic conditions.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The risk of a recession has increased due to elevated oil prices.</li>
+                            <li>Analysts have not yet adjusted earnings expectations to account for the impact of higher oil prices.</li>
+                            <li>Historical data shows that oil price spikes can lead to recessions, but the economic context today is different.</li>
+                            <li>The market is currently pricing in a short-term resolution to the conflict affecting oil prices.</li>
+                            <li>Investors should be cautious and consider reducing risk in their portfolios.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> oil prices, recession risk, market analysis, investment strategy, economic outlook</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The risk of a recession is rising due to high oil prices, but the market&#x27;s reaction will depend on how long these prices remain elevated.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">capitalcosm<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=amaOQZnoNmI" target="_blank">🔴 BUCKLE UP Gold &amp; Silver Buyers! You May NEVER See Prices This Low Again | Alasdair Macleod</a>
+                    </div>
+                    <div class="snippet-meta">interview • 44m 0s • @capitalcosm • Apr 04, 2026 • 14,738 views • 1,034 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Alasdair Macleod, Danny</div>
+                    <div class="snippet-summary">In this episode, Alasdair Macleod discusses the current state of gold and silver prices amidst geopolitical tensions and economic uncertainty. He emphasizes the importance of investing in precious metals as a hedge against inflation and currency devaluation.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Gold prices are expected to rise as central banks are aggressive buyers.</li>
+                            <li>The current geopolitical situation could lead to significant increases in oil prices.</li>
+                            <li>Inflation in Europe is likely to be much higher than predicted by the IMF.</li>
+                            <li>The market is not fully aware of the seriousness of the current energy crisis.</li>
+                            <li>There is a significant shortage of silver, which is not reflected in paper markets.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> President Trump, Harold McMillan, Pepe Escobar, Prime Minister Albanese, Prime Minister Kier Starmer</p>
+                        <p><strong>Organizations:</strong> IMF</p>
+                        <p><strong>Topics:</strong> gold prices, oil market, inflation, geopolitical risks, investment strategies</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Investing in gold and silver is crucial in the current economic climate.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">eurodollaruniversity<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=gFeiPNiw9eY" target="_blank">Oh No... The Oil Markets JUST BROKE</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 21m 7s • @eurodollaruniversity • Apr 04, 2026 • 68,442 views • 2,460 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses the recent volatility in oil prices and the unusual behavior of the oil futures market. It explores the implications of these trends for the economy and potential future scenarios.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Oil prices have surged to historic highs while futures for later delivery are falling.</li>
+                            <li>There is a significant disconnect in the oil market, with current prices not reflecting future expectations.</li>
+                            <li>The futures curve indicates a potential crash in oil prices after a short-term spike.</li>
+                            <li>Demand destruction is becoming a likely factor influencing future oil prices.</li>
+                            <li>The market is pricing in negative economic outcomes rather than inflation.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> President Trump, Patrick Beck David</p>
+                        <p><strong>Organizations:</strong> Monetary Metals, Bloomberg, S&amp;P Global</p>
+                        <p><strong>Topics:</strong> oil prices, market analysis, futures curve, economic implications, demand destruction</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The WTI futures curve suggests that oil prices will rise sharply in the short term before experiencing a significant decline due to demand destruction.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">RUSSIA<span class="topic-count">(3 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">IgorLipsits_1950<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=0fshtj1bJVI" target="_blank">ЛИПСИЦ: ИНТЕРВЬЮ ДЛЯ &quot;КАНАЛА 24&quot; 03.04.2026</a>
+                    </div>
+                    <div class="snippet-meta">interview • 33m 27s • @IgorLipsits_1950 • Apr 04, 2026 • 45,931 views • 3,317 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Игорь Липсиц</div>
+                    <div class="snippet-summary">Игорь Липсиц discusses the current state of the Russian economy amidst the ongoing war and its implications for the future. He analyzes the challenges faced by the government and the potential impact on ordinary Russians.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Russia has lost significant revenue due to attacks on its ports.</li>
+                            <li>The inability to export mazut poses a serious problem for the Russian economy.</li>
+                            <li>Putin has publicly acknowledged the negative trends in the Russian economy.</li>
+                            <li>The government is likely to impose new taxes to fund the war.</li>
+                            <li>There is a risk of a return to a more controlled economic model similar to North Korea.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Путин</p>
+                        <p><strong>Organizations:</strong> Блумберг</p>
+                        <p><strong>Topics:</strong> Russian economy, war impact, oil exports, government response, public sentiment</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The Russian economy is facing severe challenges, and the government&#x27;s response may lead to increased hardship for ordinary citizens.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">IgorYakovenko<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=sieCeq81HAY" target="_blank">🤯ЧТО ЗЕЛЕНСКИЙ ДОЛЖЕН ПЕСКОВУ? ВПЕРЕД - В ПРОШЛОЕ! ПУТИН И НАСКАЛЬНАЯ ЖИВОПИСЬ. ИНТЕРНЕТ НА БЕРЕСТЕ</a>
+                    </div>
+                    <div class="snippet-meta">panel • 48m 18s • @IgorYakovenko • Apr 04, 2026 • 27,110 views • 2,767 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Игорь Яковенко, Екатерина Валерьевна</div>
+                    <div class="snippet-summary">The episode discusses the ongoing conflict in Ukraine, focusing on the statements made by Russian officials and the implications for both Ukraine and Russia. It highlights the absurdity of claims made by Peskov regarding Zelensky&#x27;s obligations and the broader context of the war&#x27;s impact on Russian society and military capabilities.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Zelensky is urged to withdraw Ukrainian troops from Donbas.</li>
+                            <li>Peskov&#x27;s statements reflect a bizarre sense of obligation towards Zelensky.</li>
+                            <li>Russia is struggling to achieve its military objectives in Ukraine.</li>
+                            <li>The war has led to significant Russian military losses.</li>
+                            <li>The Kremlin&#x27;s rhetoric is becoming increasingly absurd as the war drags on.</li>
+                            <li>Ukraine is gaining an advantage in drone warfare.</li>
+                            <li>The potential for internal unrest in Russia is growing due to economic pressures.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Зеленский, Песков, Шайгу, Трамп, Байден, Килинкаров, Пашинян, Медведев, Фёдоров</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> Ukraine conflict, Russian military, Western relations, Political commentary, Media analysis</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The ongoing war in Ukraine is leading to a significant decline in Russia&#x27;s military effectiveness and societal stability.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">V.Shenderovich<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=9IiKSpnYMk8" target="_blank">ШЕНДЕРОВИЧ – В МОЕ ОТСУТСТВИЕ МОЖЕТЕ МЕНЯ ДАЖЕ БИТЬ. РЕПРЕССИИ - ВЫГОДНЫЙ БИЗНЕС. Главная тема</a>
+                    </div>
+                    <div class="snippet-meta">interview • 37m 16s • @V.Shenderovich • Apr 04, 2026 • 6,028 views • 416 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Виктор Шендерович, Ян Маровицкий</div>
+                    <div class="snippet-summary">В этом эпизоде Виктор Шендерович обсуждает репрессии в России, судебные приговоры и влияние иностранных инвесторов, таких как Сорос, на российскую культуру. Также рассматриваются проблемы космической программы и политическая система страны.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Российская судебная система используется для подавления инакомыслия.</li>
+                            <li>Репрессии выгодны для чиновников, которые получают финансирование за свою лояльность.</li>
+                            <li>Сорос стал врагом России, несмотря на его инвестиции в культуру.</li>
+                            <li>Космическая программа России переживает кризис из-за коррупции и неэффективного управления.</li>
+                            <li>Путин использует войну как средство для сохранения власти.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Жак Тиле, Навальный, Сорос, Чубайс, Березовский, Александр Морозов</p>
+                        <p><strong>Organizations:</strong> Роскомнадзор, Минюст, Госдума</p>
+                        <p><strong>Topics:</strong> репрессии в России, судебная система, космическая программа, влияние Сороса, политическая система</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Война в Украине и внутренние проблемы России могут привести к изменению власти в стране.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">OTHER<span class="topic-count">(4 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">IgorLipsits_1950<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=XdIDdFysvtw" target="_blank">LIPSITS: INTERVIEW WITH MYKYTA HAVRYLIUK 02.04.2026</a>
+                    </div>
+                    <div class="snippet-meta">interview • 35m 6s • @IgorLipsits_1950 • Apr 04, 2026 • 30,235 views • 2,229 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Микита Гаврилюк, Игорь Липсец</div>
+                    <div class="snippet-summary">В этом эпизоде Микита Гаврилюк беседует с Игорем Липсецем о текущем состоянии украинской экономики, влиянии международных финансовых организаций и олигархате. Обсуждаются также проблемы государственной политики и возможные пути решения экономических кризисов.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Программа кэшбэка за бензин в Украине может привести к негативным последствиям для бюджета.</li>
+                            <li>Раздача денег без адресной помощи неэффективна и может усугубить экономические проблемы.</li>
+                            <li>МВФ требует от Украины повышения налогов и прекращения нецелевых раздач денег.</li>
+                            <li>Олигархи в России не имеют реальной власти и боятся Путина.</li>
+                            <li>Трамп использует свои олигархические связи для управления страной в своих интересах.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Юлия Тимошенко, Дерипаска, Ходорковский, Путин, Трамп</p>
+                        <p><strong>Organizations:</strong> Международный валютный фонд, Trump Corporation</p>
+                        <p><strong>Topics:</strong> украинская экономика, государственные программы, инсайдерская торговля, олигархат, МВФ, политическая система</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Экономическая политика должна быть направлена на стимулирование роста и справедливое распределение ресурсов.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">LotuseatersDotCom<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=yzBZYVVcpuI" target="_blank">Was There a Rivalry Between C S Lewis and Tolkien</a>
+                    </div>
+                    <div class="snippet-meta">panel • 15m 31s • @LotuseatersDotCom • Apr 04, 2026 • 2,903 views • 224 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode explores the relationship and rivalry between C S Lewis and J R R Tolkien, focusing on their differing perspectives and influences. It discusses their literary contributions, personal beliefs, and the dynamics of their friendship.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>C S Lewis and J R R Tolkien had a complex friendship with differing religious views.</li>
+                            <li>Lewis was influenced by H G Wells but opposed his ideologies.</li>
+                            <li>Tolkien played a significant role in Lewis&#x27;s conversion to Christianity.</li>
+                            <li>Their friendship cooled due to personal disagreements, including Lewis&#x27;s marriage.</li>
+                            <li>Both authors challenged each other to write sci-fi stories, leading to Lewis&#x27;s &#x27;Out of the Silent Planet&#x27;.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> C S Lewis, J R R Tolkien, H G Wells, Peter Kreeft, Charles Williams, Owen Barfield, Hugo Dyson, Joy Davidman, George Orwell</p>
+                        <p><strong>Organizations:</strong> Inklings</p>
+                        <p><strong>Topics:</strong> C S Lewis, J R R Tolkien, literary rivalry, Anglicanism vs Catholicism, Inklings</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The rivalry and friendship between Lewis and Tolkien were marked by both collaboration and significant ideological differences.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">SpaceWeatherNewsS0s<span class="channel-count">(2 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=OYd3c8th7NY" target="_blank">Unexpected Solar Shockwave Hits Earth - Comet Screaming Toward Sun</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 40m 3s • @SpaceWeatherNewsS0s • Apr 04, 2026 • 34,940 views • 3,367 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Ben Davidson</div>
+                    <div class="snippet-summary">Ben Davidson discusses the recent unexpected solar shockwave hitting Earth and the approach of a comet towards the sun. He provides insights into the implications of these events on space weather and potential effects on Earth.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>A G2 solar storm is currently affecting Earth due to an unexpected plasma shock wave.</li>
+                            <li>The comet maps is approaching the sun and may not survive the encounter.</li>
+                            <li>The solar wind speed has significantly increased, indicating a shockwave event.</li>
+                            <li>There is a possibility of coronal mass ejection activity due to the comet&#x27;s approach.</li>
+                            <li>The auroral viewer went offline just before the shock wave hit Earth.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Tamitha, Elon Musk</p>
+                        <p><strong>Organizations:</strong> NOAA</p>
+                        <p><strong>Topics:</strong> solar storm, comet maps, geomagnetic activity, CME, space weather</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The unexpected solar events could have significant implications for space weather and technology on Earth.
+                    </div>
+                </div>
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=n0x4uSYS5o0" target="_blank">Comet MAPS Hitting the Sun LIVE</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 49m 38s • @SpaceWeatherNewsS0s • Apr 04, 2026 • 33,122 views • 2,992 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">The episode features a live commentary on Comet MAPS as it approaches the sun, discussing its potential survival and interactions with solar phenomena. The narrator shares insights on comet behavior and engages with the audience through questions and comments.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Comet MAPS is entering the solar corona and its survival is uncertain.</li>
+                            <li>The likelihood of the comet surviving its passage is in the single-digit percentage range.</li>
+                            <li>There is no substantial evidence of electrical interactions resulting in major solar flare or CME activity.</li>
+                            <li>The comet&#x27;s size is approximately one mile across, making it unlikely to survive.</li>
+                            <li>The narrator discusses the potential for the comet to trigger coronal mass ejections.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Avi Lo, Dr. Manosphi Lingum, David Gogggins</p>
+                        <p><strong>Organizations:</strong> NASA, NOAA</p>
+                        <p><strong>Topics:</strong> comet observation, solar corona, space weather, CME interactions, live commentary</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The narrator expects that Comet MAPS has likely disintegrated upon entering the solar corona.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <div class="footer">
+            Generated 2026-04-05 13:25:16
+        </div>
+    </div>
+</body>
+</html>
