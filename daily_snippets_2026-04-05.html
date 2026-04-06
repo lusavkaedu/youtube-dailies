@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Snippets - 2026-04-05</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background-color: #FFF1E0;
+            color: #3E474F;
+            line-height: 1.6;
+            padding: 24px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            padding: 32px 0;
+            border-bottom: 3px solid #3E474F;
+            margin-bottom: 32px;
+        }
+        .header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .header .date {
+            font-size: 18px;
+            color: #66737D;
+        }
+        .header .meta {
+            font-size: 14px;
+            color: #66737D;
+            margin-top: 12px;
+        }
+        .topic-section {
+            margin-bottom: 40px;
+        }
+        .topic-title {
+            font-size: 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 0;
+            border-bottom: 2px solid #F2DFCE;
+            margin-bottom: 24px;
+            color: #3E474F;
+        }
+        .channel-section {
+            margin-bottom: 28px;
+        }
+        .channel-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            margin-bottom: 16px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .snippet-card {
+            background: #FFF9F5;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border-left: 4px solid #FCD0AF;
+        }
+        .snippet-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .snippet-title a {
+            color: #0D7680;
+            text-decoration: none;
+        }
+        .snippet-title a:hover {
+            text-decoration: underline;
+        }
+        .snippet-meta {
+            font-size: 13px;
+            color: #66737D;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+        .snippet-speakers {
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .snippet-speakers strong {
+            color: #3E474F;
+        }
+        .snippet-summary {
+            font-size: 15px;
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+        .snippet-claims {
+            margin-bottom: 16px;
+        }
+        .snippet-claims-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .snippet-claims ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .snippet-claims li {
+            font-size: 14px;
+            padding: 4px 0 4px 16px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .snippet-claims li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #0D7680;
+        }
+        .snippet-details {
+            font-size: 13px;
+            color: #66737D;
+            border-top: 1px solid #F2DFCE;
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+        .snippet-details p {
+            margin-bottom: 4px;
+        }
+        .snippet-conclusion {
+            font-size: 14px;
+            font-style: italic;
+            color: #3E474F;
+            background: #F2DFCE;
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 12px;
+        }
+        .footer {
+            text-align: center;
+            padding: 24px 0;
+            border-top: 1px solid #F2DFCE;
+            margin-top: 40px;
+            font-size: 12px;
+            color: #66737D;
+        }
+        /* Collapsible sections */
+        details {
+            margin-bottom: 8px;
+        }
+        details summary {
+            cursor: pointer;
+            list-style: none;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary::before {
+            content: "▶";
+            display: inline-block;
+            margin-right: 8px;
+            transition: transform 0.2s;
+            font-size: 12px;
+        }
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
+        .topic-details {
+            border: 1px solid #F2DFCE;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            background: #FFF9F5;
+        }
+        .topic-summary {
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 16px 20px;
+            color: #3E474F;
+            background: #F2DFCE;
+            border-radius: 8px;
+        }
+        .topic-details[open] .topic-summary {
+            border-radius: 8px 8px 0 0;
+        }
+        .topic-count {
+            font-size: 14px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .topic-content {
+            padding: 16px 20px;
+        }
+        .channel-details {
+            border: 1px solid #FCD0AF;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            background: white;
+        }
+        .channel-summary {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            padding: 12px 16px;
+            background: #FFF9F5;
+            border-radius: 6px;
+        }
+        .channel-details[open] .channel-summary {
+            border-radius: 6px 6px 0 0;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .channel-count {
+            font-size: 13px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .channel-content {
+            padding: 12px 16px;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 16px;
+            }
+            .header h1 {
+                font-size: 28px;
+            }
+            .snippet-card {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Daily Snippets</h1>
+            <div class="date">Sunday, April 05, 2026</div>
+            <div class="meta">16 videos • uploaded 2026-04-05 • 16 videos</div>
+        </div>
+        <details class="topic-details">
+            <summary class="topic-summary">POLITICS<span class="topic-count">(8 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">AkkadDaily<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=_8tUyZiqsmk" target="_blank">The Biggest Cope I&#x27;ve Ever Seen</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 22m 31s • @SargonofAkkad • Apr 05, 2026 • 49,344 views • 3,840 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">The episode analyzes a debate involving Charlie Kirk, focusing on crime rates and cultural issues within the black community. The narrator critiques the arguments presented, emphasizing personal responsibility and the impact of welfare policies.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Black Americans represent 13% of the population but commit a disproportionate amount of crime.</li>
+                            <li>The narrator argues that the majority of the black community is not responsible for the high crime rates.</li>
+                            <li>Welfare policies have contributed to the breakdown of the black family structure.</li>
+                            <li>Historical oppression does not fully explain the current crime rates in the black community.</li>
+                            <li>Self-accountability is necessary for improvement in crime rates.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Charlie Kirk</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> crime statistics, black community, cultural issues, welfare impact, historical oppression</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The issues facing the black community are largely a result of cultural choices rather than solely historical oppression.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">Con_Tomlinson<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=cG30PkAJy-8" target="_blank">British Politics is Getting Dirtier</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 20m 47s • @Con_Tomlinson • Apr 05, 2026 • 46,490 views • 3,919 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">The episode discusses the increasing coarseness in British politics, illustrated by personal experiences with police involvement and political accusations. It highlights the dangers of using legal mechanisms for political ends and the need for integrity in political discourse.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The police conducted a welfare check based on a politically motivated complaint.</li>
+                            <li>Using the law as a weapon in politics can destroy lives and erode integrity.</li>
+                            <li>Political discourse has become increasingly hostile and divisive.</li>
+                            <li>Mass deportations are a necessary policy that many politicians are afraid to discuss.</li>
+                            <li>Personal friendships are being sacrificed for partisan political reasons.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Rupert Lowe, Zia Yusuf, Nigel Farage, Constantin Kissing, Steven Bernell, Charlie Kirk, Peter Whittle, Harrison Pit, Jesse Lee Peterson, Robert</p>
+                        <p><strong>Organizations:</strong> British police, Restore Britain, Reform UK</p>
+                        <p><strong>Topics:</strong> political tactics, domestic violence claims, political integrity, mass deportations, political discourse</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The current political climate requires a return to integrity and honesty, prioritizing the country&#x27;s future over personal or political gain.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">LotuseatersDotCom<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=1SlfLKb4t2U" target="_blank">The King Was Betrayed From Within</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 9m 17s • @LotuseatersDotCom • Apr 05, 2026 • 1,341 views • 128 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses the internal betrayal faced by King Edward IV during the Wars of the Roses, focusing on the conspiracies led by Warrick and the Duke of Clarence. It highlights the political machinations and the eventual uprising against the king.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Warrick plotted to turn the Duke of Clarence against King Edward IV.</li>
+                            <li>The Duke of Clarence was tempted by the prospect of becoming king.</li>
+                            <li>Warrick and Clarence orchestrated a rebellion in the north against Edward IV.</li>
+                            <li>The king was ultimately captured due to the betrayal of his nobles.</li>
+                            <li>Both Edward IV and Henry VI were held as prisoners by Warrick.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Edward IV, George, Duke of Clarence, Warrick, Richard, Duke of Gloucester, Henry VI, Elizabeth Woodville, Lord Rivers, John Woodville</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> Wars of the Roses, Political Betrayal, Royal Succession, Noble Uprisings, Conspiracy</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The episode illustrates how internal betrayal and ambition led to the downfall of King Edward IV.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">NewCultureForum<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=upFWvhfiQGs" target="_blank">The Left &amp; Our Enemies Believe COLONISERS Must Be COLONISED!</a>
+                    </div>
+                    <div class="snippet-meta">interview • 49m 34s • @NewCultureForum • Apr 05, 2026 • 18,497 views • 1,144 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Marie Daouda</div>
+                    <div class="snippet-summary">In this episode, Marie Daouda discusses her experiences as a French-Moroccan academic and her views on the complexities of colonialism, race, and cultural identity in the West. She argues against the prevailing narratives that demonize Western culture and emphasizes the importance of understanding history with nuance.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The benefits of French colonial presence in Morocco outweigh the negatives.</li>
+                            <li>Cultural references are being lost in modern education, leading to cultural illiteracy.</li>
+                            <li>The left&#x27;s narrative often portrays a simplistic view of colonial history.</li>
+                            <li>Victimhood narratives can infantilize ethnic minorities and deny them agency.</li>
+                            <li>Historical figures should be viewed with humility and reverence rather than demonization.</li>
+                            <li>The current cultural climate risks erasing important historical context.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Jean-Jacques Rousseau, Frantz Fanon, Sartre, Churchill</p>
+                        <p><strong>Organizations:</strong> Oxford University, Black Lives Matter, New Culture Forum</p>
+                        <p><strong>Topics:</strong> colonialism, cultural identity, race relations, Western culture, historical narrative, victimhood</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> A nuanced understanding of history and culture is essential for fostering genuine human connections and social cohesion.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">ThePodcastoftheLotusEaters<span class="channel-count">(2 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=O3p2sbPJuvY" target="_blank">Make British Villains Again</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 25m 42s • @ThePodcastoftheLotusEaters • Apr 05, 2026 • 20,451 views • 1,087 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">The episode discusses the portrayal of British villains in Hollywood and connects it to current US foreign policy, particularly regarding Iran. The speaker argues that making the British the villains again could serve as a strategic move for the US to distance itself from conflicts.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Hollywood historically portrayed British characters as villains after the Soviet Union&#x27;s collapse.</li>
+                            <li>The speaker believes that British villains are compelling due to their calm and collected demeanor.</li>
+                            <li>Donald Trump&#x27;s recent comments suggest a shift in how the British are viewed in international conflicts.</li>
+                            <li>The speaker argues that making the British the villains could help the US exit from the Iran conflict without losing face.</li>
+                            <li>There is a concern about the human cost of war, particularly regarding American soldiers and Iranian civilians.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Donald Trump, Charles Dance, Alan Rickman, Robin Hood, Jeremy Irons, John Malkovich, Marco Rubio, Pete Hegseth, Cynthia</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> British villains, Hollywood, US foreign policy, Iran conflict, war consequences</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The speaker advocates for the narrative of British villains to help the US navigate its foreign policy challenges.
+                    </div>
+                </div>
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=xVO21O0YoH4" target="_blank">Trump Will Lose Europe</a>
+                    </div>
+                    <div class="snippet-meta">panel • 25m 47s • @ThePodcastoftheLotusEaters • Apr 05, 2026 • 54,720 views • 3,091 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses the implications of Trump&#x27;s foreign policy decisions on the Iran conflict and their effects on European energy security. The panel analyzes how these actions may impact Trump&#x27;s popularity and the political landscape in Europe.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Trump&#x27;s approval ratings are at an all-time low due to his handling of foreign policy.</li>
+                            <li>The Iranians are exploiting perceived weaknesses in Trump&#x27;s strategy.</li>
+                            <li>European countries are facing a severe energy crisis exacerbated by their policies.</li>
+                            <li>Trump&#x27;s actions are pushing European right-wing movements to become anti-American.</li>
+                            <li>The conflict is benefiting China and Russia economically.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Trump, Netanyahu, John Bolton, Karma, Marco Rubio, Franklin Graham, Cyrus the Great</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> Iran conflict, Trump&#x27;s policies, European energy crisis, US foreign relations, Middle East tensions</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Trump&#x27;s foreign policy is undermining his support and destabilizing European politics.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">capitalcosm<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=ZkYQC-IBKMc" target="_blank">🔴 Former Bush Insider Reveals SHOCKING Intel On Iran War &amp; Hormuz Crisis | Catherine Austin Fitts</a>
+                    </div>
+                    <div class="snippet-meta">interview • 52m 52s • @capitalcosm • Apr 05, 2026 • 27,504 views • 2,162 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Catherine Austin Fitts, Danny</div>
+                    <div class="snippet-summary">Catherine Austin Fitts discusses the implications of the Iran War and the ongoing energy crisis, emphasizing the potential for a global depression. The conversation explores the intersection of military strategy, financial systems, and the push for digital control.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Iran&#x27;s energy resources pose a threat to the Western financial system.</li>
+                            <li>The closure of the Strait of Hormuz could lead to severe global energy shortages.</li>
+                            <li>Russia benefits from the current situation by gaining access to Iranian oil.</li>
+                            <li>The U.S. military may struggle to defeat Iran in a conventional ground invasion.</li>
+                            <li>The financial system is undergoing a reset towards digital control.</li>
+                            <li>Famine could affect both developing and developed nations due to energy shortages.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Wesley Clark, Jeffrey Epstein, Poppy Bush, Donald Trump, Albanese, Kier Starmer</p>
+                        <p><strong>Organizations:</strong> Lloyds of London, CIA</p>
+                        <p><strong>Topics:</strong> Iran War, Financial System, Energy Crisis, Global Depression, Digital Control Grid, Military Strategy</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The current geopolitical tensions and financial strategies could lead to widespread economic and humanitarian crises.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">triggerpod<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=c00xjsrVIHI" target="_blank">“We Need Regime Change” - Elica Le Bon</a>
+                    </div>
+                    <div class="snippet-meta">interview • 70m 12s • @triggerpod • Apr 05, 2026 • 92,489 views • 4,552 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Elica Le Bon</div>
+                    <div class="snippet-summary">In this episode, Elica Le Bon discusses the complexities surrounding the call for regime change in Iran amidst ongoing conflict and public uprisings. The conversation explores the implications of foreign intervention and the internal dynamics of Iranian society.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The worst-case scenario is that the war ends and the regime remains in power.</li>
+                            <li>Public sentiment in Iran is largely against the current regime.</li>
+                            <li>Regime change requires coordinated uprisings and defections, not just military action.</li>
+                            <li>The Iranian regime&#x27;s brutality is driving radicalization among its citizens.</li>
+                            <li>There is skepticism about the effectiveness of U.S. intervention in achieving regime change.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Ted Cruz, Francis, Resa Palavi, Deli Rodriguez, Anakasparian</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> Iran regime change, Uprisings, Military intervention, Public sentiment, Ideological subversion</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Regime change in Iran is unlikely without a comprehensive strategy that includes internal uprisings and defections.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">INVESTING<span class="topic-count">(7 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">CRUXInvestor<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=VlBJLBWb02Q" target="_blank">Banyan Gold (TSXV:BYN) - &#x27;Undervalued?&#x27; Investment Series, with Tara Christie</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 19m 50s • @CRUXInvestor • Apr 05, 2026 • 1,210 views</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Tara Christie</div>
+                    <div class="snippet-summary">Tara Christie, president and CEO of Banyan Gold, discusses the company&#x27;s undervaluation in the current market and outlines the investment case for potential investors. She highlights the company&#x27;s significant gold resources, upcoming milestones, and the advantages of their infrastructure.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Banyan Gold has 2.2 million oz of indicated resources and 5.4 million oz of inferred resources.</li>
+                            <li>The company is preparing for a resource update and a Preliminary Economic Assessment (PEA) in the near future.</li>
+                            <li>Banyan&#x27;s management team has significant experience and investment in the company.</li>
+                            <li>The company has a unique tier one asset with potential for high gold production.</li>
+                            <li>Recent investments from knowledgeable mining companies signal confidence in Banyan&#x27;s potential.</li>
+                            <li>The valuation gap exists due to legacy overhang and market perception issues.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> John Robbins</p>
+                        <p><strong>Organizations:</strong> Banyan Gold, Alpiana, Franco-Nevada</p>
+                        <p><strong>Topics:</strong> Banyan Gold overview, investment case, gold market, resource update, valuation gap</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Banyan Gold is positioned for significant growth and is currently undervalued in the market.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">Finding_Finance<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=0eeNTKvL_PY" target="_blank">Forget $100—Oil is Headed for a Parabolic Breakout</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 32m 0s • @Finding_Finance • Apr 05, 2026 • 3,819 views • 358 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Andy</div>
+                    <div class="snippet-summary">In this episode, Andy discusses the current state of oil prices and investment strategies, emphasizing the importance of buying undervalued assets. He shares insights on market cycles and the psychological aspects of investing.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Oil prices are at historical lows and are expected to rise significantly.</li>
+                            <li>Buying during periods of fear and uncertainty can lead to substantial returns.</li>
+                            <li>Gold and commodities are currently the best investment opportunities.</li>
+                            <li>Emotional stability is crucial for successful investing.</li>
+                            <li>The current energy crisis is unprecedented and will impact oil prices dramatically.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Evan, Bruce, Mike Zaccardi, Art Berman, Kevin Hassett, Jim Rogers, Stanley Druckenmiller, Jeff Currie, Eric Nuttall</p>
+                        <p><strong>Organizations:</strong> Finding Value</p>
+                        <p><strong>Topics:</strong> oil prices, investment strategy, gold and commodities, market cycles, financial education</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Investors should focus on undervalued assets like oil and gold to maximize returns.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">OutlierTrading<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=1G-h4tqfQEM" target="_blank">High Win Rate Trading Strategies</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 14m 53s • @OutlierTrading • Apr 05, 2026 • 338 views • 23 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses high win rate trading strategies, emphasizing the psychological aspects and potential pitfalls of focusing solely on win rates. The narrator provides insights into specific strategies and the importance of understanding expected returns.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>High win rates can be misleading if not paired with proper risk management.</li>
+                            <li>The disposition effect leads investors to sell winning trades while holding losing ones.</li>
+                            <li>Selling options can lead to higher win rates but comes with capped profits and unlimited risks.</li>
+                            <li>A high win rate does not guarantee profitability due to the potential for large losses.</li>
+                            <li>Strategies should focus on expected returns rather than just win rates.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Barber, Odin</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> high win rate, trading strategies, psychology of trading, risk and reward, options trading, expected return</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Focusing solely on high win rates is a mistake; it&#x27;s essential to consider expected returns and risk management.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">SkoniecznyMariusz<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=yCIhpL0fYv0" target="_blank">You’ll Regret Not Understanding This in 6 Months</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 11m 1s • @SkoniecznyMariusz • Apr 05, 2026 • 564 views • 33 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses the challenges and opportunities in the California cannabis market, focusing on Leaf Brands&#x27; innovative strategies to become profitable. It highlights the potential for significant gains for investors as interstate commerce becomes a reality.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Leaf Brands struggled due to high production costs and sourcing issues.</li>
+                            <li>The company became cash flow positive after establishing its own farm.</li>
+                            <li>Leaf Brands can produce cannabis concentrate for less than $10 per pound.</li>
+                            <li>The cannabis market in California is currently limited to in-state sales.</li>
+                            <li>Interstate commerce could dramatically increase Leaf Brands&#x27; profitability.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Aaron Edelheit</p>
+                        <p><strong>Organizations:</strong> Leaf Brands, Mindset Capital</p>
+                        <p><strong>Topics:</strong> cannabis market, Leaf Brands, investment strategy, California regulations, interstate commerce</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Investors should consider acquiring shares of Leaf Brands before interstate commerce is allowed.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">adam.taggart<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=-c3HgDDXDYQ" target="_blank">Great Recession 2.0? | Michael Pento</a>
+                    </div>
+                    <div class="snippet-meta">interview • 65m 18s • @adam.taggart • Apr 05, 2026 • 36,209 views • 1,607 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Adam Taggart, Michael Pento</div>
+                    <div class="snippet-summary">In this episode, Adam Taggart interviews money manager Michael Pento about the potential for a new recession driven by a combination of geopolitical tensions and economic bubbles. They discuss the implications of rising oil prices, the state of the credit cycle, and strategies for navigating the current investment landscape.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The credit cycle has ended, leading to a potential recession.</li>
+                            <li>Rising oil prices due to the Iran war are exacerbating economic challenges.</li>
+                            <li>The U.S. economy is facing long-term secular headwinds including high debt and demographic issues.</li>
+                            <li>Home prices are expected to drop significantly during the next recession.</li>
+                            <li>The traditional 60/40 investment portfolio may not be effective in the current economic climate.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Donald Trump, Lacy Hunt</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> Great Recession, Iran war impact, credit cycle, real estate market, inflation, investment strategies</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The combination of geopolitical tensions and economic bubbles suggests a high likelihood of a recession, necessitating a more active and defensive investment strategy.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">eurodollaruniversity<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=hjS2jHNlvj4" target="_blank">The Labor Market Just Sent A MASSIVE Warning To Investors</a>
+                    </div>
+                    <div class="snippet-meta">panel • 21m 28s • @eurodollaruniversity • Apr 05, 2026 • 31,614 views • 1,349 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator, Steve, Jeff</div>
+                    <div class="snippet-summary">This episode discusses the recent labor market trends and their implications for investors, highlighting a significant drop in workforce participation and mixed employment data. The speakers analyze how these trends are influenced by energy price shocks and government stimulus effects.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Almost 400,000 American workers dropped out of the labor force in March.</li>
+                            <li>The S&amp;P Global PMI for the services sector contracted for the first time in three years.</li>
+                            <li>The six-month average for payrolls is just 15,000, indicating stagnation.</li>
+                            <li>The stock market tends to react positively to headline employment numbers despite underlying economic weakness.</li>
+                            <li>The energy price shock is impacting consumer spending and business hiring decisions.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> S&amp;P Global, Bureau of Labor Statistics, URL University</p>
+                        <p><strong>Topics:</strong> labor market, employment data, economic trends, energy prices, stock market</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The underlying trend in the labor market is downward, despite temporary positive headlines.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">inittowinit928<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=ZQ6I3O-z2z8" target="_blank">S&amp;P 500 Surges 3.4% While Oil Explodes 11.9% What Comes Next ~ Monday Market Moves</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 35m 36s • @inittowinit928 • Apr 05, 2026 • 5,212 views • 238 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Steve Barton</div>
+                    <div class="snippet-summary">In this episode, Steve Barton discusses the recent market movements, including a surge in the S&amp;P 500 and significant changes in oil prices. He provides insights on various commodities and their expected performance in the coming week.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The S&amp;P 500 is up 3.4% since last week.</li>
+                            <li>Oil prices have exploded by 11.9% but may face downward pressure soon.</li>
+                            <li>Gold is expected to underperform the S&amp;P 500 next week.</li>
+                            <li>The 10-year yield is down 2.7% since last week.</li>
+                            <li>Natural gas prices are expected to decline further.</li>
+                            <li>Copper demand is projected to increase, but short-term prices may drop.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Laura, Guard Alarms, Jonathan, Cam, Rick Rule, Jordan, Michael Oliver, Eric Sprott</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> S&amp;P 500, oil prices, gold market, silver market, natural gas, copper, uranium</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Overall, the market shows signs of volatility with potential downward trends in several commodities.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">RUSSIA<span class="topic-count">(1 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">IgorYakovenko<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=6p3QEOoa-FU" target="_blank">МЕДИАФРЕНИЯ-177. ПУТИН В БИТВЕ ПРОТИВ ИНТРНЕТА ПЕРЕШЕЛ НА ПАПИРУС</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 89m 5s • @igoryakovenko • Apr 05, 2026 • 31,536 views • 3,269 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Игорь Яковенко</div>
+                    <div class="snippet-summary">В этом выпуске обсуждаются отношения между Путиным и Россией, а также влияние интернета на российское общество. Яковенко анализирует текущие события и настроения в стране, включая критику власти и состояние медиа.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>95% россиян пользуются интернетом, в то время как Путин не использует его.</li>
+                            <li>Путин и его окружение пытаются подавить свободу слова и доступ к информации.</li>
+                            <li>Существуют разные мнения о роли Путина в российском обществе.</li>
+                            <li>Российская пропаганда теряет свою эффективность.</li>
+                            <li>Существуют серьезные проблемы с интернетом и коммуникацией в России.</li>
+                            <li>Многие россияне недовольны текущей ситуацией и политикой Путина.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Володин, Юлия Навальная, Михаил Овсеевский, Вика Циганова, Лилия Гумерова, Платошкин, Маргарита Симонян, Владимир Соловьёв, Константин Севков, Юрий Подаляка, Михаил Матвеев, Дмитрий Борисенко, Андо Долгорёва, Джастос Волкнер</p>
+                        <p><strong>Organizations:</strong> Фонд борьбы с коррупцией, Ростелеком</p>
+                        <p><strong>Topics:</strong> Путин и Россия, интернет в России, российская пропаганда, война с Украиной, социальные сети, потери России, медийная политика</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Россия не равна Путину, и общество неоднородно в своих взглядах и мнениях.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <div class="footer">
+            Generated 2026-04-06 06:36:04
+        </div>
+    </div>
+</body>
+</html>
