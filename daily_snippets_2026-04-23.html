@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Snippets - 2026-04-23</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background-color: #FFF1E0;
+            color: #3E474F;
+            line-height: 1.6;
+            padding: 24px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            padding: 32px 0;
+            border-bottom: 3px solid #3E474F;
+            margin-bottom: 32px;
+        }
+        .header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .header .date {
+            font-size: 18px;
+            color: #66737D;
+        }
+        .header .meta {
+            font-size: 14px;
+            color: #66737D;
+            margin-top: 12px;
+        }
+        .topic-section {
+            margin-bottom: 40px;
+        }
+        .topic-title {
+            font-size: 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 0;
+            border-bottom: 2px solid #F2DFCE;
+            margin-bottom: 24px;
+            color: #3E474F;
+        }
+        .channel-section {
+            margin-bottom: 28px;
+        }
+        .channel-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            margin-bottom: 16px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .snippet-card {
+            background: #FFF9F5;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border-left: 4px solid #FCD0AF;
+        }
+        .snippet-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .snippet-title a {
+            color: #0D7680;
+            text-decoration: none;
+        }
+        .snippet-title a:hover {
+            text-decoration: underline;
+        }
+        .snippet-meta {
+            font-size: 13px;
+            color: #66737D;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+        .snippet-speakers {
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .snippet-speakers strong {
+            color: #3E474F;
+        }
+        .snippet-summary {
+            font-size: 15px;
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+        .snippet-claims {
+            margin-bottom: 16px;
+        }
+        .snippet-claims-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .snippet-claims ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .snippet-claims li {
+            font-size: 14px;
+            padding: 4px 0 4px 16px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .snippet-claims li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #0D7680;
+        }
+        .snippet-details {
+            font-size: 13px;
+            color: #66737D;
+            border-top: 1px solid #F2DFCE;
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+        .snippet-details p {
+            margin-bottom: 4px;
+        }
+        .snippet-conclusion {
+            font-size: 14px;
+            font-style: italic;
+            color: #3E474F;
+            background: #F2DFCE;
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 12px;
+        }
+        .footer {
+            text-align: center;
+            padding: 24px 0;
+            border-top: 1px solid #F2DFCE;
+            margin-top: 40px;
+            font-size: 12px;
+            color: #66737D;
+        }
+        /* Collapsible sections */
+        details {
+            margin-bottom: 8px;
+        }
+        details summary {
+            cursor: pointer;
+            list-style: none;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary::before {
+            content: "▶";
+            display: inline-block;
+            margin-right: 8px;
+            transition: transform 0.2s;
+            font-size: 12px;
+        }
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
+        .topic-details {
+            border: 1px solid #F2DFCE;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            background: #FFF9F5;
+        }
+        .topic-summary {
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 16px 20px;
+            color: #3E474F;
+            background: #F2DFCE;
+            border-radius: 8px;
+        }
+        .topic-details[open] .topic-summary {
+            border-radius: 8px 8px 0 0;
+        }
+        .topic-count {
+            font-size: 14px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .topic-content {
+            padding: 16px 20px;
+        }
+        .channel-details {
+            border: 1px solid #FCD0AF;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            background: white;
+        }
+        .channel-summary {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            padding: 12px 16px;
+            background: #FFF9F5;
+            border-radius: 6px;
+        }
+        .channel-details[open] .channel-summary {
+            border-radius: 6px 6px 0 0;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .channel-count {
+            font-size: 13px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .channel-content {
+            padding: 12px 16px;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 16px;
+            }
+            .header h1 {
+                font-size: 28px;
+            }
+            .snippet-card {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Daily Snippets</h1>
+            <div class="date">Thursday, April 23, 2026</div>
+            <div class="meta">3 videos • uploaded 2026-04-23 • 3 videos</div>
+        </div>
+        <details class="topic-details">
+            <summary class="topic-summary">INVESTING<span class="topic-count">(3 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">TheAsianGuy-k9h<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=Ttac45Bfv8U" target="_blank">URGENT: China &amp; the US Are Buying Silver Right Now — Here&#x27;s the $200 Target</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 25m 3s • @THEASIANGUY-AG • Apr 23, 2026 • 609 views • 76 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Asian Guy</div>
+                    <div class="snippet-summary">This episode discusses the current state of the silver market, highlighting the significant buying activity from China and the US government. It emphasizes the structural changes in the market and the potential for silver prices to rise significantly in the near future.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>China&#x27;s silver imports reached an all-time record high, ten times the seasonal average.</li>
+                            <li>The US government has initiated a $12 billion program to accumulate silver after a 26-year absence.</li>
+                            <li>The silver to S&amp;P 500 ratio has compressed from nearly 200 oz to 90 in under two years.</li>
+                            <li>Institutional ETF allocations to precious metals are currently at only 2% of total assets.</li>
+                            <li>The structural supply deficit in silver continues despite a slight decline in solar demand.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> Federal Reserve, Hecla Mining, Korea Zinc, JP Morgan</p>
+                        <p><strong>Topics:</strong> silver market, sovereign buyers, investment strategy, price targets, supply deficit</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Silver prices are expected to rise to between $150 and $200 per ounce due to structural market changes and increased demand from sovereign buyers.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">eurodollaruniversity<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=87G7gXWxCQA" target="_blank">The Oil Market Just Entered a Dangerous Phase… EU Confirms Panic Has Begun</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 21m 8s • @eurodollaruniversity • Apr 23, 2026 • 12,658 views • 973 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">The episode discusses the current energy shock affecting Europe and its implications for consumer confidence and unemployment rates. It highlights the disconnect between stock market performance and the underlying economic realities.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The energy shock is causing consumer confidence in Europe to plummet.</li>
+                            <li>Unemployment rates are rising in Scandinavia and the UK due to economic pressures.</li>
+                            <li>The stock market does not accurately reflect the state of the economy.</li>
+                            <li>Germany&#x27;s economic outlook has been revised downward due to the energy crisis.</li>
+                            <li>The tipping point for the economy may be closer than many realize.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Tobias Meyer, Christine Lagarde, Katherina Reich</p>
+                        <p><strong>Organizations:</strong> DHL, Bloomberg TV, European Commission, Monetary Metals</p>
+                        <p><strong>Topics:</strong> energy shock, consumer confidence, unemployment, economic sentiment, stock market</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The energy shock is a significant threat to economic stability, and its effects are being underestimated.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">triANGLEINVESTOR<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=r01i1DrJe7M" target="_blank">The Next Major Copper Porphyry in Idaho?! - IDEX Metals (TSX.V: IDEX)</a>
+                    </div>
+                    <div class="snippet-meta">interview • 33m 29s • @triANGLEINVESTOR • Apr 23, 2026 • 16 views • 5 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Lucian Walkowicz, Clayton Fisher</div>
+                    <div class="snippet-summary">This episode features an interview with Clayton Fisher, CEO of i-8 Metals, discussing the future of copper mining in Idaho and the company&#x27;s exploration efforts. The conversation covers the increasing demand for copper, challenges in the mining industry, and the potential for new discoveries in the region.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Copper demand is expected to outstrip supply, leading to a major deficit by 2040.</li>
+                            <li>Permitting is a significant bottleneck for new mining projects.</li>
+                            <li>AI and new technologies are improving exploration success rates.</li>
+                            <li>i-8 Metals has made a copper discovery at their Freeze project.</li>
+                            <li>The company plans to drill 10,000 meters this year to explore further.</li>
+                            <li>Community support and infrastructure in Idaho are strong advantages for mining operations.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Governor Little, Chris</p>
+                        <p><strong>Organizations:</strong> i-8 Metals, Hercules Metals</p>
+                        <p><strong>Topics:</strong> copper demand, mining exploration, permitting issues, AI in geology, investment strategies, Idaho mining</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The future of copper mining in Idaho looks promising, with significant exploration potential and community support.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <div class="footer">
+            Generated 2026-04-23 07:11:02
+        </div>
+    </div>
+</body>
+</html>
