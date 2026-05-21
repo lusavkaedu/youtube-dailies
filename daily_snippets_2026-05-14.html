@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Snippets - 2026-05-14</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background-color: #FFF1E0;
+            color: #3E474F;
+            line-height: 1.6;
+            padding: 24px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            padding: 32px 0;
+            border-bottom: 3px solid #3E474F;
+            margin-bottom: 32px;
+        }
+        .header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .header .date {
+            font-size: 18px;
+            color: #66737D;
+        }
+        .header .meta {
+            font-size: 14px;
+            color: #66737D;
+            margin-top: 12px;
+        }
+        .topic-section {
+            margin-bottom: 40px;
+        }
+        .topic-title {
+            font-size: 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 0;
+            border-bottom: 2px solid #F2DFCE;
+            margin-bottom: 24px;
+            color: #3E474F;
+        }
+        .channel-section {
+            margin-bottom: 28px;
+        }
+        .channel-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            margin-bottom: 16px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .snippet-card {
+            background: #FFF9F5;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border-left: 4px solid #FCD0AF;
+        }
+        .snippet-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .snippet-title a {
+            color: #0D7680;
+            text-decoration: none;
+        }
+        .snippet-title a:hover {
+            text-decoration: underline;
+        }
+        .snippet-meta {
+            font-size: 13px;
+            color: #66737D;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+        .snippet-speakers {
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .snippet-speakers strong {
+            color: #3E474F;
+        }
+        .snippet-summary {
+            font-size: 15px;
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+        .snippet-claims {
+            margin-bottom: 16px;
+        }
+        .snippet-claims-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .snippet-claims ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .snippet-claims li {
+            font-size: 14px;
+            padding: 4px 0 4px 16px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .snippet-claims li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #0D7680;
+        }
+        .snippet-details {
+            font-size: 13px;
+            color: #66737D;
+            border-top: 1px solid #F2DFCE;
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+        .snippet-details p {
+            margin-bottom: 4px;
+        }
+        .snippet-conclusion {
+            font-size: 14px;
+            font-style: italic;
+            color: #3E474F;
+            background: #F2DFCE;
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 12px;
+        }
+        .footer {
+            text-align: center;
+            padding: 24px 0;
+            border-top: 1px solid #F2DFCE;
+            margin-top: 40px;
+            font-size: 12px;
+            color: #66737D;
+        }
+        /* Collapsible sections */
+        details {
+            margin-bottom: 8px;
+        }
+        details summary {
+            cursor: pointer;
+            list-style: none;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary::before {
+            content: "▶";
+            display: inline-block;
+            margin-right: 8px;
+            transition: transform 0.2s;
+            font-size: 12px;
+        }
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
+        .topic-details {
+            border: 1px solid #F2DFCE;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            background: #FFF9F5;
+        }
+        .topic-summary {
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 16px 20px;
+            color: #3E474F;
+            background: #F2DFCE;
+            border-radius: 8px;
+        }
+        .topic-details[open] .topic-summary {
+            border-radius: 8px 8px 0 0;
+        }
+        .topic-count {
+            font-size: 14px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .topic-content {
+            padding: 16px 20px;
+        }
+        .channel-details {
+            border: 1px solid #FCD0AF;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            background: white;
+        }
+        .channel-summary {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            padding: 12px 16px;
+            background: #FFF9F5;
+            border-radius: 6px;
+        }
+        .channel-details[open] .channel-summary {
+            border-radius: 6px 6px 0 0;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .channel-count {
+            font-size: 13px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .channel-content {
+            padding: 12px 16px;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 16px;
+            }
+            .header h1 {
+                font-size: 28px;
+            }
+            .snippet-card {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Daily Snippets</h1>
+            <div class="date">Thursday, May 14, 2026</div>
+            <div class="meta">7 videos • uploaded 2026-05-14 • 7 videos</div>
+        </div>
+        <details class="topic-details">
+            <summary class="topic-summary">INVESTING<span class="topic-count">(6 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">topic_Chris_MacIntosh_investor<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=4LSNuq8qGf8" target="_blank">🔴 Food Shortages &amp; Revolutions Coming - Here&#x27;s How To PROTECT YOURSELF | Chris Macintosh</a>
+                    </div>
+                    <div class="snippet-meta">interview • 39m 27s • @capitalcosm • May 14, 2026 • 24,710 views • 1,339 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Danny, Chris Macintosh</div>
+                    <div class="snippet-summary">In this episode, Chris Macintosh discusses the impending food shortages and economic crises, emphasizing the importance of positioning investments in critical resources. He highlights the risks associated with sovereign debt and the geopolitical landscape affecting energy supplies.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>We are headed towards significant shortages of food, which can lead to revolutions.</li>
+                            <li>The current economic environment is characterized by a sovereign debt crisis.</li>
+                            <li>Energy supply issues are exacerbated by geopolitical tensions.</li>
+                            <li>Investors should focus on critical resources like food, agriculture, and energy.</li>
+                            <li>The market is not pricing in the reality of supply constraints.</li>
+                            <li>Pension plans are at significant risk due to government control.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Trump, Besson, Ludik, the Turkish lady</p>
+                        <p><strong>Organizations:</strong> Capitalist Exploits Insider, Toyota, Mobile, Shell, Walmart</p>
+                        <p><strong>Topics:</strong> food shortages, economic collapse, energy crisis, sovereign debt, investment strategies, geopolitical factors</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Positioning for the upcoming economic challenges is crucial for protecting capital.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">topic_Jeff_Gundlach<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=Ym3MOmQsPxk" target="_blank">Jeffrey Gundlach at Milken: Financial Alchemy and the Erosion of Trust</a>
+                    </div>
+                    <div class="snippet-meta">panel • 21m 7s • @doublelinecapital • May 14, 2026 • 26,151 views • 671 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">The panel discusses the current state and future of private credit and direct lending, highlighting concerns about creditworthiness and the erosion of trust in financial markets. They draw parallels to past market booms and the potential for systemic issues arising from current lending practices.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>There is a significant mismatch between assets and liabilities in direct lending.</li>
+                            <li>The opacity of financial products is eroding investor trust.</li>
+                            <li>High commissions on private credit products may mislead investors about liquidity.</li>
+                            <li>The SEC is investigating several private credit firms for potential fraud.</li>
+                            <li>Historical performance arguments for private credit are becoming less valid.</li>
+                            <li>Institutional investors are increasingly seeking diversification away from corporate credit.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Howard Marks</p>
+                        <p><strong>Organizations:</strong> Oak Tree, SEC</p>
+                        <p><strong>Topics:</strong> private credit, direct lending, creditworthiness, investor trust, market behavior</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The erosion of trust in private credit markets could lead to significant financial losses.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">topic_Jim_Cramer<span class="channel-count">(3 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=WubZMiGRH-I" target="_blank">Mad Money 05/14/26 | Audio Only</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 44m 17s • @cnbctelevision • May 14, 2026 • 7,963 views • 110 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Jim Cramer</div>
+                    <div class="snippet-summary">In this episode, Jim Cramer discusses the recent IPO of Cerebras Systems and its implications for the semiconductor market. He emphasizes the importance of understanding valuations and warns against the potential pitfalls of overenthusiasm in investing.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Cerebras Systems&#x27; IPO was priced at $185 but quickly soared to $350, raising concerns about its valuation.</li>
+                            <li>Cramer compares Cerebras&#x27; valuation to Nvidia and other semiconductor companies, highlighting the disparity in sales multiples.</li>
+                            <li>He warns that the current market enthusiasm resembles the dot-com bubble of 1999.</li>
+                            <li>Cramer believes that while Cerebras has strong technology, its stock price is unjustifiably high.</li>
+                            <li>He encourages investors to exercise discipline and understand the companies they invest in.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Jensen Huang, Rick Wurster, Larry Culp, Chuck Robbins</p>
+                        <p><strong>Organizations:</strong> Cerebras Systems, Nvidia, OpenAI, Amazon Web Services, Morgan Stanley, Charles Schwab, Trane Technologies</p>
+                        <p><strong>Topics:</strong> Cerebras IPO, Nvidia growth, market valuation, investment strategy, AI technology</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Investors should be cautious and avoid overpaying for stocks based on hype.
+                    </div>
+                </div>
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=iSzmKhhZbrQ" target="_blank">Cisco CEO Chuck Robbins: There&#x27;s a networking supercycle that we&#x27;re entering right now</a>
+                    </div>
+                    <div class="snippet-meta">interview • 8m 44s • @cnbctelevision • May 14, 2026 • 18,264 views • 161 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Chuck Robbins</div>
+                    <div class="snippet-summary">In this episode, Cisco CEO Chuck Robbins discusses the company&#x27;s impressive quarterly performance and the factors driving growth in the networking sector. He highlights the importance of their silicon strategy and the emerging trends in AI and hyperscaler demands.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Cisco reported a 35% increase in product orders and over 50% in networking orders.</li>
+                            <li>The company&#x27;s silicon strategy has allowed it to control its supply chain and destiny.</li>
+                            <li>Acquisitions like Acacia have significantly contributed to Cisco&#x27;s growth.</li>
+                            <li>The market is experiencing a dynamic shift with high demand from hyperscalers.</li>
+                            <li>Robbins emphasizes the need for agility in responding to market changes.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Jim, Jensen</p>
+                        <p><strong>Organizations:</strong> Cisco, Broadcom, Acacia</p>
+                        <p><strong>Topics:</strong> Cisco performance, networking supercycle, AI acceleration, silicon strategy, hyperscalers</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Cisco is entering a networking supercycle driven by strong demand and strategic innovations.
+                    </div>
+                </div>
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=8J8hawbTQjE" target="_blank">The tech takeoff: Altimeter&#x27;s Brad Gerstner on Nvidia, the Cerebras IPO and the future of AI</a>
+                    </div>
+                    <div class="snippet-meta">interview • 8m 30s • @cnbctelevision • May 14, 2026 • 125,555 views • 965 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Brad Gerstner</div>
+                    <div class="snippet-summary">In this episode, Brad Gerstner discusses Nvidia&#x27;s stock performance and the implications of the upcoming Cerebras IPO on the AI market. The conversation explores the competitive landscape of AI technology and the challenges faced by companies in the semiconductor industry.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Nvidia&#x27;s stock was flat for six months despite the semiconductor sector rallying.</li>
+                            <li>Cerebras is positioned to challenge Nvidia&#x27;s dominance in the AI market.</li>
+                            <li>The market is optimistic about Nvidia&#x27;s future earnings and growth potential.</li>
+                            <li>Companies are increasingly constrained by compute costs in AI applications.</li>
+                            <li>Cerebras has developed innovative chips that could significantly impact AI inference.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Jensen Huang, Scott</p>
+                        <p><strong>Organizations:</strong> Nvidia, Cerebras, UBS, Canaccord, Amazon, Google, Anthropic, OpenAI, Broadcom, Trainium, TPU</p>
+                        <p><strong>Topics:</strong> Nvidia stock performance, Cerebras IPO, AI market dynamics, semiconductor industry, inference technology</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The AI market is evolving rapidly, and multiple companies, including Nvidia and Cerebras, will play crucial roles in shaping its future.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">topic_Michael_Green_investor<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=K5L5aUqj3bM" target="_blank">MacroVoices #532 Mike Green: Record Mechanical Flows</a>
+                    </div>
+                    <div class="snippet-meta">interview • 106m 51s • @MacroVoices • May 14, 2026 • 8,674 views • 227 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Eric Townsend, Patrick Ceresna, Michael Green, Rory Johnston</div>
+                    <div class="snippet-summary">In this episode, Eric Townsend interviews Michael Green about the impact of passive investment flows on market behavior and the ongoing energy crisis stemming from the Hormuz conflict. Rory Johnston also provides insights on the implications for global oil markets and the potential for demand destruction.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Passive investment flows are driving market behavior more than macroeconomic analysis.</li>
+                            <li>The Hormuz crisis is not yet reflected in the S&amp;P 500&#x27;s performance.</li>
+                            <li>There is a risk of significant economic slowdown due to rising energy prices.</li>
+                            <li>China&#x27;s response to the crisis could significantly influence global oil supply.</li>
+                            <li>The market may be underestimating the likelihood of aggressive Fed rate cuts.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Kevin Worsh, Louis Gave, Donald Trump, Xi Jinping</p>
+                        <p><strong>Organizations:</strong> Simplify Asset Management, Commodity Context, Vanguard, BlackRock</p>
+                        <p><strong>Topics:</strong> passive investment flows, energy crisis, market behavior, inflation, economic slowdown, oil markets, China&#x27;s influence</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The ongoing energy crisis and passive investment dynamics could lead to a significant market correction and economic challenges.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">OTHER<span class="topic-count">(1 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">topic_Chris_Vermeulen<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card">
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=ya1wcATy_mQ" target="_blank">Piastri rumours explode 👀 SVG dominates NASCAR &amp; MotoGP legend Chris Vermeulen joins show 🔥 | MR360</a>
+                    </div>
+                    <div class="snippet-meta">panel • 48m 32s • @foxausmotorsport • May 14, 2026 • 11,147 views • 157 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Jess Yates, Paul Murray, Mark Skaife, James Phelps, Chris Vermeulen</div>
+                    <div class="snippet-summary">This episode discusses the recent successes of Shane Van Gisbergen in NASCAR and Jorge Martin in MotoGP, alongside rumors surrounding Oscar Piastri and Max Verstappen&#x27;s future in Formula 1. The panel also reflects on the evolving regulations in F1 and notable confrontations in motorsport history.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Shane Van Gisbergen&#x27;s performance at Watkins Glen is considered one of the greatest in NASCAR history.</li>
+                            <li>Jorge Martin has made a remarkable comeback in MotoGP, winning the French Grand Prix.</li>
+                            <li>There are strong rumors linking Oscar Piastri to a potential move to Red Bull.</li>
+                            <li>Max Verstappen&#x27;s future in F1 is uncertain, with speculation about a move to Ferrari.</li>
+                            <li>The FIA is planning significant changes to F1 regulations for 2027 due to current issues.</li>
+                            <li>The panel discusses various memorable confrontations in motorsport history.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Shane Van Gisbergen, Kevin Harvick, Clint Bowyer, Austin Cindric, Justin Marks, Scott McLaughlin, Matt Payne, Max Verstappen, Lewis Hamilton, Juan Pablo Montoya, Marco Bezzecchi, Marc Márquez, Damon Hill, Alain Prost, Ayrton Senna, Peter Brock, Dick Johnson, Michael McGuire, Lando Norris, Isaac Hadjar</p>
+                        <p><strong>Organizations:</strong> NASCAR, Aprilia, Yamaha, Red Bull, McLaren, Ferrari, FIA</p>
+                        <p><strong>Topics:</strong> Shane Van Gisbergen&#x27;s NASCAR success, Jorge Martin&#x27;s MotoGP performance, Max Verstappen&#x27;s future, Oscar Piastri rumors, F1 regulations changes, Motor racing confrontations</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Shane Van Gisbergen&#x27;s success in NASCAR is revitalizing interest in the sport, while the future of several key drivers in F1 remains uncertain.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <div class="footer">
+            Generated 2026-05-21 11:08:57
+        </div>
+    </div>
+</body>
+</html>
