@@ -12,14 +12,18 @@
     'use strict';
 
     var YT_API = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet';
+    var YT_LIST_API = 'https://www.googleapis.com/youtube/v3/playlistItems';  // for fetching existing items
     var SCOPE = 'https://www.googleapis.com/auth/youtube';
     var DELAY_MS = 200;  // gap between sequential inserts to stay polite
     var TOKEN_KEY = 'yt_pl_token';      // localStorage key
     var TOKEN_SAFETY_MS = 60000;        // treat as expired 1 min before real expiry
+    var DEDUP_KEY = 'yt_pl_existing';   // localStorage key for cached playlist IDs
+    var DEDUP_TTL_MS = 10 * 60 * 1000;  // refresh playlist contents every 10 min
 
     var tokenClient = null;
     var accessToken = null;
     var tokenExpiresAt = 0;             // ms since epoch; 0 means unknown/expired
+    var existingIds = null;             // Set of video IDs already in the target playlist
 
     // --- token cache (persists across page reloads) ---
     function loadStoredToken() {
@@ -49,6 +53,62 @@
     }
     function tokenIsFresh() {
         return !!accessToken && Date.now() < tokenExpiresAt - TOKEN_SAFETY_MS;
+    }
+
+    // --- playlist-contents cache (persists across page reloads, 10-min TTL) ---
+    // Lets us skip videos that are already in the target playlist before burning
+    // a 50-quota-unit playlistItems.insert call on a duplicate. The list endpoint
+    // costs 1 unit per 50-item page (negligible vs the inserts it avoids).
+    function loadCachedExistingIds() {
+        try {
+            var raw = localStorage.getItem(DEDUP_KEY);
+            if (!raw) return null;
+            var obj = JSON.parse(raw);
+            if (!obj || !obj.ids || !obj.cachedAt) return null;
+            if (obj.playlistId !== window.CONFIG.PLAYLIST_ID) return null;
+            if (Date.now() > obj.cachedAt + DEDUP_TTL_MS) return null;
+            return new Set(obj.ids);
+        } catch (e) { return null; }
+    }
+    function storeExistingIds(idSet) {
+        try {
+            localStorage.setItem(DEDUP_KEY, JSON.stringify({
+                playlistId: window.CONFIG.PLAYLIST_ID,
+                cachedAt: Date.now(),
+                ids: Array.from(idSet)
+            }));
+        } catch (e) {}
+    }
+    /**
+     * Paginate through playlistItems.list to collect every video ID already in
+     * the target playlist. Returns a Promise resolving to a Set. On failure,
+     * resolves to an empty Set so the batch can still proceed (without dedup).
+     */
+    function fetchExistingIds() {
+        var ids = new Set();
+        function fetchPage(pageToken) {
+            var url = YT_LIST_API
+                + '?part=contentDetails&maxResults=50'
+                + '&playlistId=' + encodeURIComponent(window.CONFIG.PLAYLIST_ID)
+                + (pageToken ? '&pageToken=' + encodeURIComponent(pageToken) : '');
+            return fetch(url, {
+                headers: { 'Authorization': 'Bearer ' + accessToken }
+            }).then(function (r) {
+                if (!r.ok) return null;
+                return r.json();
+            }).then(function (data) {
+                if (!data) return null;
+                (data.items || []).forEach(function (item) {
+                    var v = item && item.contentDetails && item.contentDetails.videoId;
+                    if (v) ids.add(v);
+                });
+                if (data.nextPageToken) return fetchPage(data.nextPageToken);
+                return ids;
+            }).catch(function () { return null; });
+        }
+        return fetchPage('').then(function (result) {
+            return result || new Set();  // soft-fail = empty set = no dedup applied
+        });
     }
 
     var bar = null;
@@ -179,40 +239,71 @@
         msgEl.textContent = text;
     }
 
+    /**
+     * Returns a Promise<Set> of video IDs already in the playlist, using the
+     * 10-min localStorage cache when possible. Falls back to an empty set
+     * (no dedup) if the live fetch fails — never blocks the batch.
+     */
+    function ensureExistingIds() {
+        if (existingIds) return Promise.resolve(existingIds);
+        var cached = loadCachedExistingIds();
+        if (cached) {
+            existingIds = cached;
+            return Promise.resolve(existingIds);
+        }
+        return fetchExistingIds().then(function (set) {
+            existingIds = set;
+            if (set.size > 0) storeExistingIds(set);
+            return existingIds;
+        });
+    }
+
     function runBatch() {
         var cards = selectedCards();
         if (!cards.length) return;
         btn.disabled = true;
         setBarMsg('Authorising…');
         return requestToken().then(function () {
-            setBarMsg('Adding ' + cards.length + '…');
+            setBarMsg('Checking playlist for duplicates…');
+            return ensureExistingIds();
+        }).then(function (existing) {
+            setBarMsg('Adding ' + cards.length + ' (playlist has ' + existing.size + ')…');
             return cards.reduce(function (chain, card) {
                 return chain.then(function (state) {
                     if (state.aborted) return state;
+                    var vid = card.dataset.videoId;
+                    // Short-circuit if the video is already in the playlist.
+                    if (existing.has(vid)) {
+                        setStatus(card, '↺ already in playlist', 'ok');
+                        state.dupes += 1;
+                        return state;  // no sleep — no API call was made
+                    }
                     setStatus(card, '…');
-                    return addOne(card.dataset.videoId).then(function (r) {
+                    return addOne(vid).then(function (r) {
                         if (!r.ok && r.authExpired && !state.retried) {
                             // Stored token rejected — wipe cache and request a new one.
                             state.retried = true;
                             clearStoredToken();
                             return requestToken(true).then(function () {
-                                return addOne(card.dataset.videoId);
+                                return addOne(vid);
                             }).then(function (r2) {
-                                applyResult(card, r2, state);
+                                applyResult(card, r2, state, existing, vid);
                                 return sleep(DELAY_MS).then(function () { return state; });
                             });
                         }
-                        applyResult(card, r, state);
+                        applyResult(card, r, state, existing, vid);
                         return sleep(DELAY_MS).then(function () { return state; });
                     });
                 });
-            }, Promise.resolve({ aborted: false, retried: false, done: 0, fail: 0 })).then(function (state) {
+            }, Promise.resolve({ aborted: false, retried: false, done: 0, fail: 0, dupes: 0 })).then(function (state) {
                 btn.disabled = false;
+                if (existingIds && existingIds.size > 0) storeExistingIds(existingIds);
                 if (state.aborted) {
                     setBarMsg('Quota exhausted — try again tomorrow');
                 } else {
                     var c = selectedCards().length;
-                    setBarMsg(c + ' selected · last batch: ' + state.done + ' added, ' + state.fail + ' failed');
+                    setBarMsg(c + ' selected · last batch: ' + state.done + ' added, '
+                              + state.dupes + ' duplicate, ' + state.fail + ' failed');
                 }
             });
         }).catch(function (e) {
@@ -221,10 +312,13 @@
         });
     }
 
-    function applyResult(card, r, state) {
+    function applyResult(card, r, state, existing, vid) {
         if (r.ok) {
             setStatus(card, '✓ added', 'ok');
             state.done += 1;
+            // Track this newly-added ID so a re-tick within the same batch
+            // (or a re-click of the same card) is recognised as a duplicate.
+            if (existing && vid) existing.add(vid);
         } else {
             setStatus(card, '✗ ' + r.reason, 'err');
             state.fail += 1;
