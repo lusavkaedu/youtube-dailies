@@ -14,9 +14,43 @@
     var YT_API = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet';
     var SCOPE = 'https://www.googleapis.com/auth/youtube';
     var DELAY_MS = 200;  // gap between sequential inserts to stay polite
+    var TOKEN_KEY = 'yt_pl_token';      // localStorage key
+    var TOKEN_SAFETY_MS = 60000;        // treat as expired 1 min before real expiry
 
     var tokenClient = null;
     var accessToken = null;
+    var tokenExpiresAt = 0;             // ms since epoch; 0 means unknown/expired
+
+    // --- token cache (persists across page reloads) ---
+    function loadStoredToken() {
+        try {
+            var raw = localStorage.getItem(TOKEN_KEY);
+            if (!raw) return false;
+            var obj = JSON.parse(raw);
+            if (!obj || !obj.token || !obj.expiresAt) return false;
+            if (Date.now() > obj.expiresAt - TOKEN_SAFETY_MS) return false;
+            accessToken = obj.token;
+            tokenExpiresAt = obj.expiresAt;
+            return true;
+        } catch (e) { return false; }
+    }
+    function storeToken(token, expiresInSec) {
+        var expiresAt = Date.now() + (expiresInSec || 3600) * 1000;
+        accessToken = token;
+        tokenExpiresAt = expiresAt;
+        try {
+            localStorage.setItem(TOKEN_KEY, JSON.stringify({ token: token, expiresAt: expiresAt }));
+        } catch (e) {}
+    }
+    function clearStoredToken() {
+        accessToken = null;
+        tokenExpiresAt = 0;
+        try { localStorage.removeItem(TOKEN_KEY); } catch (e) {}
+    }
+    function tokenIsFresh() {
+        return !!accessToken && Date.now() < tokenExpiresAt - TOKEN_SAFETY_MS;
+    }
+
     var bar = null;
     var btn = null;
     var countEl = null;
@@ -70,7 +104,11 @@
         });
     }
 
-    function requestToken() {
+    function requestToken(forceConsent) {
+        // Fast path: cached, still-fresh token — skip GIS entirely.
+        if (!forceConsent && tokenIsFresh()) {
+            return Promise.resolve(accessToken);
+        }
         ensureTokenClient();
         return new Promise(function (resolve, reject) {
             var settled = false;
@@ -84,15 +122,15 @@
                 settled = true;
                 clearTimeout(timer);
                 if (resp && resp.access_token) {
-                    accessToken = resp.access_token;
+                    storeToken(resp.access_token, resp.expires_in);
                     resolve(resp.access_token);
                 } else {
                     reject(new Error(resp && resp.error ? resp.error : 'Sign-in failed'));
                 }
             };
             try {
-                // Empty prompt = silent if user has consented previously.
-                tokenClient.requestAccessToken({ prompt: accessToken ? '' : 'consent' });
+                // Empty prompt lets GIS decide; only force consent on explicit retry.
+                tokenClient.requestAccessToken({ prompt: forceConsent ? 'consent' : '' });
             } catch (e) {
                 clearTimeout(timer);
                 reject(e);
@@ -154,10 +192,10 @@
                     setStatus(card, '…');
                     return addOne(card.dataset.videoId).then(function (r) {
                         if (!r.ok && r.authExpired && !state.retried) {
-                            // refresh token once, retry this item once
+                            // Stored token rejected — wipe cache and request a new one.
                             state.retried = true;
-                            accessToken = null;
-                            return requestToken().then(function () {
+                            clearStoredToken();
+                            return requestToken(true).then(function () {
                                 return addOne(card.dataset.videoId);
                             }).then(function (r2) {
                                 applyResult(card, r2, state);
@@ -200,6 +238,10 @@
         btn = document.getElementById('plBtn');
         countEl = document.getElementById('plCount');
         if (!bar || !btn || !countEl) return;  // page without the bar
+
+        // Pre-load any cached token so the first click after page reload
+        // can skip OAuth entirely (token is valid for ~1 hour).
+        loadStoredToken();
 
         // Reserve a <span> for the live message; insert it in place of the count's parent contents
         msgEl = bar.querySelector('.playlist-bar-msg');
