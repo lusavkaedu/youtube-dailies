@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Snippets - 2026-05-07</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background-color: #FFF1E0;
+            color: #3E474F;
+            line-height: 1.6;
+            padding: 24px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            padding: 32px 0;
+            border-bottom: 3px solid #3E474F;
+            margin-bottom: 32px;
+        }
+        .header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .header .date {
+            font-size: 18px;
+            color: #66737D;
+        }
+        .header .meta {
+            font-size: 14px;
+            color: #66737D;
+            margin-top: 12px;
+        }
+        .topic-section {
+            margin-bottom: 40px;
+        }
+        .topic-title {
+            font-size: 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 0;
+            border-bottom: 2px solid #F2DFCE;
+            margin-bottom: 24px;
+            color: #3E474F;
+        }
+        .channel-section {
+            margin-bottom: 28px;
+        }
+        .channel-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            margin-bottom: 16px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .snippet-card {
+            background: #FFF9F5;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border-left: 4px solid #FCD0AF;
+        }
+        .snippet-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .snippet-title a {
+            color: #0D7680;
+            text-decoration: none;
+        }
+        .snippet-title a:hover {
+            text-decoration: underline;
+        }
+        .snippet-meta {
+            font-size: 13px;
+            color: #66737D;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+        .snippet-speakers {
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .snippet-speakers strong {
+            color: #3E474F;
+        }
+        .snippet-summary {
+            font-size: 15px;
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+        .snippet-claims {
+            margin-bottom: 16px;
+        }
+        .snippet-claims-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .snippet-claims ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .snippet-claims li {
+            font-size: 14px;
+            padding: 4px 0 4px 16px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .snippet-claims li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #0D7680;
+        }
+        .snippet-details {
+            font-size: 13px;
+            color: #66737D;
+            border-top: 1px solid #F2DFCE;
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+        .snippet-details p {
+            margin-bottom: 4px;
+        }
+        .snippet-conclusion {
+            font-size: 14px;
+            font-style: italic;
+            color: #3E474F;
+            background: #F2DFCE;
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 12px;
+        }
+        .footer {
+            text-align: center;
+            padding: 24px 0;
+            border-top: 1px solid #F2DFCE;
+            margin-top: 40px;
+            font-size: 12px;
+            color: #66737D;
+        }
+        /* Collapsible sections */
+        details {
+            margin-bottom: 8px;
+        }
+        details summary {
+            cursor: pointer;
+            list-style: none;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary::before {
+            content: "▶";
+            display: inline-block;
+            margin-right: 8px;
+            transition: transform 0.2s;
+            font-size: 12px;
+        }
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
+        .topic-details {
+            border: 1px solid #F2DFCE;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            background: #FFF9F5;
+        }
+        .topic-summary {
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 16px 20px;
+            color: #3E474F;
+            background: #F2DFCE;
+            border-radius: 8px;
+        }
+        .topic-details[open] .topic-summary {
+            border-radius: 8px 8px 0 0;
+        }
+        .topic-count {
+            font-size: 14px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .topic-content {
+            padding: 16px 20px;
+        }
+        .channel-details {
+            border: 1px solid #FCD0AF;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            background: white;
+        }
+        .channel-summary {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            padding: 12px 16px;
+            background: #FFF9F5;
+            border-radius: 6px;
+        }
+        .channel-details[open] .channel-summary {
+            border-radius: 6px 6px 0 0;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .channel-count {
+            font-size: 13px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .channel-content {
+            padding: 12px 16px;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 16px;
+            }
+            .header h1 {
+                font-size: 28px;
+            }
+            .snippet-card {
+                padding: 16px;
+            }
+        }
+        /* Add-to-playlist UI */
+        .snippet-card { position: relative; }
+        .snippet-check {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            margin: 0;
+            cursor: pointer;
+        }
+        .snippet-check input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .snippet-card.selected {
+            box-shadow: inset 4px 0 0 #0D7680;
+            background: #FFFCF8;
+        }
+        .snippet-status {
+            position: absolute;
+            top: 14px;
+            right: 40px;
+            font-size: 14px;
+            color: #66737D;
+            min-width: 90px;
+            text-align: right;
+        }
+        .snippet-status.ok { color: #0D7680; }
+        .snippet-status.err { color: #c0392b; }
+        .playlist-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #3E474F;
+            color: #FFF;
+            padding: 12px 24px;
+            z-index: 100;
+            display: none;
+            font-family: Georgia, "Times New Roman", serif;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.15);
+        }
+        .playlist-bar.visible {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+        .playlist-bar-msg { font-size: 15px; }
+        .playlist-bar button {
+            background: #0D7680;
+            color: #FFF;
+            border: 0;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-family: Georgia, "Times New Roman", serif;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .playlist-bar button:disabled {
+            background: #66737D;
+            cursor: not-allowed;
+        }
+        body.has-bar { padding-bottom: 80px; }
+    </style>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Daily Snippets</h1>
+            <div class="date">Thursday, May 07, 2026</div>
+            <div class="meta">5 videos • uploaded 2026-05-07 • 5 videos</div>
+        </div>
+        <details class="topic-details">
+            <summary class="topic-summary">INVESTING<span class="topic-count">(4 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">unknown<span class="channel-count">(4 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="" target="_blank">MacroVoices #531 Louis-Vincent Gave: Semiconductors, AI &amp; Iran Conflict</a>
+                    </div>
+                    <div class="snippet-meta">interview • 79m 30s • May 07, 2026</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Eric Townsend, Patrick Ceresna, Louis Vincent Gave</div>
+                    <div class="snippet-summary">In this episode, Louis Vincent Gave discusses the implications of the ongoing Iran conflict on global markets, particularly focusing on semiconductors and the potential for strategic commodity stockpiling. The conversation also touches on the intersection of geopolitical tensions and economic trends, including the AI sector&#x27;s resilience amidst energy concerns.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The Iran conflict is causing significant market volatility, particularly in oil prices.</li>
+                            <li>Countries may need to rebuild strategic inventories of physical commodities due to geopolitical tensions.</li>
+                            <li>The semiconductor market is experiencing a surge, driven by AI demand and energy constraints.</li>
+                            <li>The market is currently pricing in a reopening of the Strait of Hormuz, but this assumption may be overly optimistic.</li>
+                            <li>The US and China may be compelled to negotiate due to the energy crisis stemming from the Iran conflict.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Matt Lazare, Charlie Munger, Trump, Xi Jinping, Netanyahu, Rory, Anas</p>
+                        <p><strong>Organizations:</strong> Gavekal, Allo Atomic</p>
+                        <p><strong>Topics:</strong> Iran conflict, semiconductors, AI, commodity stockpiling, geopolitical risks, market volatility</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The ongoing geopolitical tensions are likely to lead to a structural shift towards commodity stockpiling, impacting global markets significantly.
+                    </div>
+                </div>
+                <div class="snippet-card" data-video-id="">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="" target="_blank">Trade of The Week - MacroVoices #531</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 23m 26s • @MacroVoices • May 07, 2026</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Eric Townsend, Patrick Ceresna, Louis Gave</div>
+                    <div class="snippet-summary">This episode discusses the implications of strategic commodity stockpiling in response to geopolitical tensions, particularly focusing on oil and other essential commodities. The speakers analyze market trends and investment strategies in light of current events and economic indicators.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Louis Gave argues for a shift towards strategic commodity stockpiling.</li>
+                            <li>The Invesco DB Commodity Index Tracking Fund (DBC) is highlighted as a way to gain exposure to commodities.</li>
+                            <li>Current geopolitical tensions are affecting oil prices and market sentiment.</li>
+                            <li>Gold prices are sensitive to oil and interest rates, with potential volatility ahead.</li>
+                            <li>Uranium investments are expected to rise once the Iran conflict stabilizes.</li>
+                            <li>Copper is showing signs of a potential breakout.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Jim Bianco, Donald Trump, Matt Lozak</p>
+                        <p><strong>Organizations:</strong> MacroVoices, Big Picture Trading, Invesco</p>
+                        <p><strong>Topics:</strong> commodity stockpiling, geopolitical risks, oil prices, gold market, uranium investment, copper breakout, interest rates</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The episode emphasizes the need for strategic positioning in commodities amidst ongoing geopolitical uncertainties.
+                    </div>
+                </div>
+                <div class="snippet-card" data-video-id="">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="" target="_blank">MacroVoices #531 Louis-Vincent Gave: Semiconductors, AI &amp; Iran Conflict</a>
+                    </div>
+                    <div class="snippet-meta">interview • 79m 30s • May 07, 2026</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Eric Townsend, Patrick Ceresna, Louis Vincent Gave</div>
+                    <div class="snippet-summary">In this episode, Eric Townsend interviews Louis Vincent Gave about the implications of the ongoing Iran conflict on global markets, particularly focusing on semiconductors and the potential for strategic commodity stockpiling. The discussion also touches on the interplay between geopolitical tensions and market behavior, especially in the context of AI and energy prices.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The Iran conflict is causing significant market volatility, particularly in oil prices.</li>
+                            <li>Countries may need to rebuild strategic inventories of physical commodities due to geopolitical risks.</li>
+                            <li>The semiconductor market is experiencing a surge, driven by AI demand despite energy constraints.</li>
+                            <li>The market is currently pricing in a reopening of the Strait of Hormuz, which may not happen as quickly as expected.</li>
+                            <li>The US and China may be compelled to negotiate due to the energy crisis stemming from the Iran conflict.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Matt Lazare, Charlie Munger, Trump, Xi Jinping, Netanyahu, MBS</p>
+                        <p><strong>Organizations:</strong> Gavekal, Allo Atomic</p>
+                        <p><strong>Topics:</strong> Iran conflict, semiconductors, AI, commodity stockpiling, geopolitical risks, market volatility</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The ongoing geopolitical tensions are likely to lead to a structural shift towards strategic commodity stockpiling.
+                    </div>
+                </div>
+                <div class="snippet-card" data-video-id="">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="" target="_blank">Is Uranium About To Flip?</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 6m 4s • @Patrick_Ceresna • May 07, 2026</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">The episode discusses the recent movements in uranium and rare earth stocks, exploring whether these trends indicate the start of a new bull market. The narrator analyzes charts and market behaviors to assess potential investment opportunities.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Uranium stocks are showing signs of structural accumulation after a long consolidation period.</li>
+                            <li>Rare earth stocks are breaking out to new highs, raising questions about their future performance.</li>
+                            <li>Countries are increasingly stockpiling commodities for national security reasons.</li>
+                            <li>The narrator suggests that a bullish breakout in rare earths could be possible after a decade-long basing formation.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> Sprott Physical Uranium Trust, MP Materials, USA Rare Earths</p>
+                        <p><strong>Topics:</strong> uranium stocks, rare earths, market trends, commodity investments</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The narrator believes there are interesting investment opportunities in the commodity markets, particularly in uranium and rare earths.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">OTHER<span class="topic-count">(1 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">unknown<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="" target="_blank">McDonald&#x27;s Reveals Americans Have Hit Their Breaking Point</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 18m 49s • @eurodollaruniversity • May 07, 2026</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">The episode discusses the deteriorating consumer environment in the U.S., highlighting statements from CEOs of McDonald&#x27;s and Whirlpool regarding economic challenges. It emphasizes the impact of rising gas prices and job market instability on consumer spending and demand for big-ticket items.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>McDonald&#x27;s CEO stated the consumer environment is worsening despite better-than-expected past results.</li>
+                            <li>Whirlpool&#x27;s CEO compared the current decline in appliance demand to the global financial crisis.</li>
+                            <li>Rising gasoline prices are expected to further strain consumer budgets.</li>
+                            <li>Young adults overwhelmingly view the economy as bad or terrible, with only 2% rating it as excellent.</li>
+                            <li>Job cuts are rising, and hiring plans have significantly decreased.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Chris Kempczinski, Marc Bitzer</p>
+                        <p><strong>Organizations:</strong> McDonald&#x27;s, Whirlpool, Monetary Metals</p>
+                        <p><strong>Topics:</strong> consumer environment, economic decline, job market, gas prices, appliance demand</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The challenging consumer environment is likely to worsen as economic pressures continue to mount.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <div class="footer">
+            Generated 2026-05-27 09:31:36
+        </div>
+    </div>
+    <div class="playlist-bar" id="plBar">
+        <span class="playlist-bar-msg"><span id="plCount">0</span> selected</span>
+        <button id="plBtn" type="button">Add to playlist</button>
+    </div>
+    <script src="assets/config.js"></script>
+    <script src="assets/playlist.js"></script>
+</body>
+</html>
