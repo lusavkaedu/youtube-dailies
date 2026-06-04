@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Snippets - 2026-06-04</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background-color: #FFF1E0;
+            color: #3E474F;
+            line-height: 1.6;
+            padding: 24px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            padding: 32px 0;
+            border-bottom: 3px solid #3E474F;
+            margin-bottom: 32px;
+        }
+        .header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .header .date {
+            font-size: 18px;
+            color: #66737D;
+        }
+        .header .meta {
+            font-size: 14px;
+            color: #66737D;
+            margin-top: 12px;
+        }
+        .topic-section {
+            margin-bottom: 40px;
+        }
+        .topic-title {
+            font-size: 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 0;
+            border-bottom: 2px solid #F2DFCE;
+            margin-bottom: 24px;
+            color: #3E474F;
+        }
+        .channel-section {
+            margin-bottom: 28px;
+        }
+        .channel-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            margin-bottom: 16px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .snippet-card {
+            background: #FFF9F5;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border-left: 4px solid #FCD0AF;
+        }
+        .snippet-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .snippet-title a {
+            color: #0D7680;
+            text-decoration: none;
+        }
+        .snippet-title a:hover {
+            text-decoration: underline;
+        }
+        .snippet-meta {
+            font-size: 13px;
+            color: #66737D;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+        .snippet-speakers {
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .snippet-speakers strong {
+            color: #3E474F;
+        }
+        .snippet-summary {
+            font-size: 15px;
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+        .snippet-claims {
+            margin-bottom: 16px;
+        }
+        .snippet-claims-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .snippet-claims ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .snippet-claims li {
+            font-size: 14px;
+            padding: 4px 0 4px 16px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .snippet-claims li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #0D7680;
+        }
+        .snippet-details {
+            font-size: 13px;
+            color: #66737D;
+            border-top: 1px solid #F2DFCE;
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+        .snippet-details p {
+            margin-bottom: 4px;
+        }
+        .snippet-conclusion {
+            font-size: 14px;
+            font-style: italic;
+            color: #3E474F;
+            background: #F2DFCE;
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 12px;
+        }
+        .footer {
+            text-align: center;
+            padding: 24px 0;
+            border-top: 1px solid #F2DFCE;
+            margin-top: 40px;
+            font-size: 12px;
+            color: #66737D;
+        }
+        /* Collapsible sections */
+        details {
+            margin-bottom: 8px;
+        }
+        details summary {
+            cursor: pointer;
+            list-style: none;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary::before {
+            content: "▶";
+            display: inline-block;
+            margin-right: 8px;
+            transition: transform 0.2s;
+            font-size: 12px;
+        }
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
+        .topic-details {
+            border: 1px solid #F2DFCE;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            background: #FFF9F5;
+        }
+        .topic-summary {
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 16px 20px;
+            color: #3E474F;
+            background: #F2DFCE;
+            border-radius: 8px;
+        }
+        .topic-details[open] .topic-summary {
+            border-radius: 8px 8px 0 0;
+        }
+        .topic-count {
+            font-size: 14px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .topic-content {
+            padding: 16px 20px;
+        }
+        .channel-details {
+            border: 1px solid #FCD0AF;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            background: white;
+        }
+        .channel-summary {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            padding: 12px 16px;
+            background: #FFF9F5;
+            border-radius: 6px;
+        }
+        .channel-details[open] .channel-summary {
+            border-radius: 6px 6px 0 0;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .channel-count {
+            font-size: 13px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .channel-content {
+            padding: 12px 16px;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 16px;
+            }
+            .header h1 {
+                font-size: 28px;
+            }
+            .snippet-card {
+                padding: 16px;
+            }
+        }
+        /* Add-to-playlist UI */
+        .snippet-card { position: relative; }
+        .snippet-check {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            margin: 0;
+            cursor: pointer;
+        }
+        .snippet-check input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .snippet-card.selected {
+            box-shadow: inset 4px 0 0 #0D7680;
+            background: #FFFCF8;
+        }
+        .snippet-status {
+            position: absolute;
+            top: 14px;
+            right: 40px;
+            font-size: 14px;
+            color: #66737D;
+            min-width: 90px;
+            text-align: right;
+        }
+        .snippet-status.ok { color: #0D7680; }
+        .snippet-status.err { color: #c0392b; }
+        .playlist-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #3E474F;
+            color: #FFF;
+            padding: 12px 24px;
+            z-index: 100;
+            display: none;
+            font-family: Georgia, "Times New Roman", serif;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.15);
+        }
+        .playlist-bar.visible {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+        .playlist-bar-msg { font-size: 15px; }
+        .playlist-bar button {
+            background: #0D7680;
+            color: #FFF;
+            border: 0;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-family: Georgia, "Times New Roman", serif;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .playlist-bar button:disabled {
+            background: #66737D;
+            cursor: not-allowed;
+        }
+        body.has-bar { padding-bottom: 80px; }
+    </style>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Daily Snippets</h1>
+            <div class="date">Thursday, June 04, 2026</div>
+            <div class="meta">5 videos • uploaded 2026-06-04 • 5 videos</div>
+        </div>
+        <details class="topic-details">
+            <summary class="topic-summary">POLITICS<span class="topic-count">(2 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">IgorLipsits_1950<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="qhMYoDn-1dU">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=qhMYoDn-1dU" target="_blank">LIPSITS: INTERVIEW FOR THE &quot;HONEST WORD&quot; PROGRAM 06/03/2026</a>
+                    </div>
+                    <div class="snippet-meta">interview • 42m 38s • @IgorLipsits_1950 • Jun 04, 2026 • 5,717 views • 752 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Александр Макашец, Игорь Владимирович Липсец</div>
+                    <div class="snippet-summary">В этом эпизоде обсуждаются текущие экономические проблемы России в контексте войны в Украине и предстоящего экономического форума. Гости анализируют влияние войны на экономику и социальное неравенство в стране.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Российская экономика сталкивается с серьезными проблемами из-за войны и международных санкций.</li>
+                            <li>Бедные слои населения страдают больше всего от инфляции, которая рассматривается как налог на бедняков.</li>
+                            <li>Существуют бенефициары войны, которые извлекают выгоду из текущей ситуации.</li>
+                            <li>Нефтяная промышленность России находится в кризисе, с падением объемов добычи.</li>
+                            <li>Сокращение бюджетных расходов ожидается в связи с дефицитом бюджета.</li>
+                            <li>Статистика в России манипулируется для создания более оптимистичного образа экономики.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Владимир Путин, Дмитрий Песков, Олег Дерипаска, Вадим Машкович</p>
+                        <p><strong>Organizations:</strong> Центральный банк России, Сбербанк, Росстат, Минэкономразвития, Минфин</p>
+                        <p><strong>Topics:</strong> экономический форум, российская экономика, война в Украине, инфляция, нефтяная промышленность, бюджетный дефицит, бенефициары войны</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Путин не будет прекращать войну, пока не начнется серьезный экономический кризис.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">IgorYakovenko<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="cA8JPMHnw6Q">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=cA8JPMHnw6Q" target="_blank">ПОВЕСТКУ ПМЭФ-26 ФОРМИРУЮТ УКРАИНСКИЕ ДРОНЫ</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 94m 47s • @IgorYakovenko • Jun 04, 2026 • 16,663 views • 3,513 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Игорь Яковенко</div>
+                    <div class="snippet-summary">В этом эпизоде Игорь Яковенко обсуждает влияние украинских дронов на повестку Петербургского международного экономического форума и критикует российскую власть за её действия. Он также анализирует реакцию российских властей на удары по Санкт-Петербургу и обсуждает экономические аспекты форума.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Повестка ПМЭФ-26 в значительной степени сформирована украинскими дронами.</li>
+                            <li>Удары по Санкт-Петербургу стали центральным событием первого дня форума.</li>
+                            <li>Форум не является ни международным, ни экономическим.</li>
+                            <li>Министерство иностранных дел России заявляет о системных ответах на удары.</li>
+                            <li>Участие в форуме делает участников соучастниками войны.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Путин, Песков, Эльвира Набиулина, Маргарита Симонян, Дмитрий Киселёв, Алексей Плотников, Гунба, Пригожин, Сопчак, Шендерович, Зеленский, Андрей Беглов, Соловьёв, Жабатинский, Мельник, Бандера</p>
+                        <p><strong>Organizations:</strong> Министерство иностранных дел, Центробанк, Rusдень</p>
+                        <p><strong>Topics:</strong> ПМЭФ-26, украинские дроны, война в Украине, реакция России, экономический форум</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Украина диктует повестку форума, что подчеркивает слабость российской власти.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">INVESTING<span class="topic-count">(3 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">arcadiaeconomics<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="SFGTV3n8BGs">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=SFGTV3n8BGs" target="_blank">Silver Supply Chain Still On Fragile Ground....</a>
+                    </div>
+                    <div class="snippet-meta">interview • 39m 15s • @arcadiaeconomics • Jun 04, 2026 • 1,888 views • 132 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Chris Marcus, David Stein</div>
+                    <div class="snippet-summary">This episode discusses the current state of the silver market, focusing on supply issues and the political landscape affecting prices. Chris Marcus and David Stein analyze the implications of recent developments in India and China on silver premiums and the broader economic environment.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>India&#x27;s halt on ETF additions has led to silver supply concerns.</li>
+                            <li>Political instability is impacting confidence in the US dollar.</li>
+                            <li>Rising premiums in India and China indicate potential shortages.</li>
+                            <li>The Fed&#x27;s decisions on interest rates are crucial for precious metals.</li>
+                            <li>New uses for silver in technology could increase demand significantly.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Jerome Powell, Donald Trump, Mohamed, Bill Gross, Benjamin Franklin, Scott Bessent</p>
+                        <p><strong>Organizations:</strong> Kuya Silver, Vedanta</p>
+                        <p><strong>Topics:</strong> silver market, political impact, supply shortages, India and China, gold vs dollar, inflation concerns</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The silver market is facing significant challenges due to geopolitical factors and supply constraints, which may lead to increased prices in the future.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">topic_Jim_Cramer<span class="channel-count">(2 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="EHDhO2TEttY">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=EHDhO2TEttY" target="_blank">SpaceX To IPO At $135/share ($1.75 Trillion) - Jim Cramer WARNS It Could 2x or 3x On IPO Day</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 11m 22s • @solvingthemoneyproblem • Jun 04, 2026 • 3,579 views • 422 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Jim Cramer, Leslie Picker, Carl</div>
+                    <div class="snippet-summary">This episode discusses the upcoming SpaceX IPO, its pricing, and potential market implications. Jim Cramer warns about the possibility of the stock price doubling on IPO day due to high demand from retail investors.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>SpaceX is set to price its IPO at $135 per share, raising approximately $75 billion.</li>
+                            <li>The total valuation of SpaceX at IPO could reach $1.75 trillion.</li>
+                            <li>There is a significant concern that retail investors may place market orders that could drive the stock price up to $400 or more.</li>
+                            <li>Cramer predicts a nearly 100% chance that underwriters will exercise their option to purchase additional shares.</li>
+                            <li>The allocation for retail investors is set at 30%, which may not be sufficient to meet demand.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> SpaceX, CNBS, Reuters</p>
+                        <p><strong>Topics:</strong> SpaceX IPO, stock valuation, retail investors, market orders, investment strategy</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Cramer expresses concern that the stock could double on IPO day, potentially harming retail investors.
+                    </div>
+                </div>
+                <div class="snippet-card" data-video-id="hNHRqIXUT0o">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=hNHRqIXUT0o" target="_blank">Mad Money 06/03/26 | Audio Only</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 44m 19s • @cnbctelevision • Jun 04, 2026 • 3,706 views • 70 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Jim Kramer</div>
+                    <div class="snippet-summary">In this episode, Jim Kramer discusses the current state of the stock market, focusing on upcoming IPOs and the potential impact of new stock supply on investor demand. He emphasizes the importance of cautious investing, especially for retail investors entering the market.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Excess stock supply can lead to market downturns.</li>
+                            <li>Alphabet successfully raised $45 billion, indicating strong demand despite market conditions.</li>
+                            <li>Investors may need to sell existing stocks to participate in new IPOs.</li>
+                            <li>Nvidia could become a source of funds for new investments, impacting its stock price.</li>
+                            <li>Retail investors should be cautious with market orders during IPOs to avoid significant losses.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Chuck Robbins, David Ricks, Jensen Huang, Tony Xu, Strauss Zelnick, RFK Jr.</p>
+                        <p><strong>Organizations:</strong> Alphabet, Anthropic, OpenAI, SpaceX, Goldman Sachs, Berkshire Hathaway, Nvidia, Cisco, DoorDash, Take-Two Interactive, Eli Lilly, Applied Aerospace Defense, Prologis, CVS Caremark</p>
+                        <p><strong>Topics:</strong> IPO concerns, market dynamics, AI investments, stock supply, retail investor risks</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Investors must navigate a challenging market landscape with caution, especially regarding new IPOs and stock supply dynamics.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <div class="footer">
+            Generated 2026-06-04 09:17:56
+        </div>
+    </div>
+    <div class="playlist-bar" id="plBar">
+        <span class="playlist-bar-msg"><span id="plCount">0</span> selected</span>
+        <button id="plBtn" type="button">Add to playlist</button>
+    </div>
+    <script src="assets/config.js"></script>
+    <script src="assets/playlist.js"></script>
+</body>
+</html>
