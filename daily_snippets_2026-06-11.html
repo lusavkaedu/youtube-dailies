@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Snippets - 2026-06-11</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background-color: #FFF1E0;
+            color: #3E474F;
+            line-height: 1.6;
+            padding: 24px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            padding: 32px 0;
+            border-bottom: 3px solid #3E474F;
+            margin-bottom: 32px;
+        }
+        .header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .header .date {
+            font-size: 18px;
+            color: #66737D;
+        }
+        .header .meta {
+            font-size: 14px;
+            color: #66737D;
+            margin-top: 12px;
+        }
+        .topic-section {
+            margin-bottom: 40px;
+        }
+        .topic-title {
+            font-size: 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 0;
+            border-bottom: 2px solid #F2DFCE;
+            margin-bottom: 24px;
+            color: #3E474F;
+        }
+        .channel-section {
+            margin-bottom: 28px;
+        }
+        .channel-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            margin-bottom: 16px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .snippet-card {
+            background: #FFF9F5;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border-left: 4px solid #FCD0AF;
+        }
+        .snippet-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .snippet-title a {
+            color: #0D7680;
+            text-decoration: none;
+        }
+        .snippet-title a:hover {
+            text-decoration: underline;
+        }
+        .snippet-meta {
+            font-size: 13px;
+            color: #66737D;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+        .snippet-speakers {
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .snippet-speakers strong {
+            color: #3E474F;
+        }
+        .snippet-summary {
+            font-size: 15px;
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+        .snippet-claims {
+            margin-bottom: 16px;
+        }
+        .snippet-claims-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .snippet-claims ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .snippet-claims li {
+            font-size: 14px;
+            padding: 4px 0 4px 16px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .snippet-claims li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #0D7680;
+        }
+        .snippet-details {
+            font-size: 13px;
+            color: #66737D;
+            border-top: 1px solid #F2DFCE;
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+        .snippet-details p {
+            margin-bottom: 4px;
+        }
+        .snippet-conclusion {
+            font-size: 14px;
+            font-style: italic;
+            color: #3E474F;
+            background: #F2DFCE;
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 12px;
+        }
+        .footer {
+            text-align: center;
+            padding: 24px 0;
+            border-top: 1px solid #F2DFCE;
+            margin-top: 40px;
+            font-size: 12px;
+            color: #66737D;
+        }
+        /* Collapsible sections */
+        details {
+            margin-bottom: 8px;
+        }
+        details summary {
+            cursor: pointer;
+            list-style: none;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary::before {
+            content: "▶";
+            display: inline-block;
+            margin-right: 8px;
+            transition: transform 0.2s;
+            font-size: 12px;
+        }
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
+        .topic-details {
+            border: 1px solid #F2DFCE;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            background: #FFF9F5;
+        }
+        .topic-summary {
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 16px 20px;
+            color: #3E474F;
+            background: #F2DFCE;
+            border-radius: 8px;
+        }
+        .topic-details[open] .topic-summary {
+            border-radius: 8px 8px 0 0;
+        }
+        .topic-count {
+            font-size: 14px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .topic-content {
+            padding: 16px 20px;
+        }
+        .channel-details {
+            border: 1px solid #FCD0AF;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            background: white;
+        }
+        .channel-summary {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            padding: 12px 16px;
+            background: #FFF9F5;
+            border-radius: 6px;
+        }
+        .channel-details[open] .channel-summary {
+            border-radius: 6px 6px 0 0;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .channel-count {
+            font-size: 13px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .channel-content {
+            padding: 12px 16px;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 16px;
+            }
+            .header h1 {
+                font-size: 28px;
+            }
+            .snippet-card {
+                padding: 16px;
+            }
+        }
+        /* Add-to-playlist UI */
+        .snippet-card { position: relative; }
+        .snippet-check {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            margin: 0;
+            cursor: pointer;
+        }
+        .snippet-check input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .snippet-card.selected {
+            box-shadow: inset 4px 0 0 #0D7680;
+            background: #FFFCF8;
+        }
+        .snippet-status {
+            position: absolute;
+            top: 14px;
+            right: 40px;
+            font-size: 14px;
+            color: #66737D;
+            min-width: 90px;
+            text-align: right;
+        }
+        .snippet-status.ok { color: #0D7680; }
+        .snippet-status.err { color: #c0392b; }
+        .playlist-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #3E474F;
+            color: #FFF;
+            padding: 12px 24px;
+            z-index: 100;
+            display: none;
+            font-family: Georgia, "Times New Roman", serif;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.15);
+        }
+        .playlist-bar.visible {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+        .playlist-bar-msg { font-size: 15px; }
+        .playlist-bar button {
+            background: #0D7680;
+            color: #FFF;
+            border: 0;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-family: Georgia, "Times New Roman", serif;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .playlist-bar button:disabled {
+            background: #66737D;
+            cursor: not-allowed;
+        }
+        body.has-bar { padding-bottom: 80px; }
+    </style>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Daily Snippets</h1>
+            <div class="date">Thursday, June 11, 2026</div>
+            <div class="meta">5 videos • uploaded 2026-06-11 • 5 videos</div>
+        </div>
+        <details class="topic-details">
+            <summary class="topic-summary">INVESTING<span class="topic-count">(4 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">ForwardGuidanceBW<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="HB5rg3BjfQo">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=HB5rg3BjfQo" target="_blank">Warsh Must Choose The Dollar Or The Bond Market | Luke Gromen</a>
+                    </div>
+                    <div class="snippet-meta">interview • 52m 24s • @ForwardGuidanceBW • Jun 11, 2026 • 18 views • 3 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Luke Gromen</div>
+                    <div class="snippet-summary">In this episode, Luke Gromen discusses the challenges facing the Federal Reserve under Kevin Worsh&#x27;s leadership, particularly in balancing inflation and bond market stability amidst geopolitical tensions. The conversation explores the implications of these dynamics for various asset classes and the broader economy.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The Fed is likely to face a choice between supporting the dollar or the bond market.</li>
+                            <li>High debt levels will necessitate Fed intervention to prevent bond market dysfunction.</li>
+                            <li>The current geopolitical situation, particularly the Iran war, complicates economic policy.</li>
+                            <li>Gold and Bitcoin are signaling potential market turmoil ahead.</li>
+                            <li>Valuations in the stock market are at historically high levels, indicating a risky environment for investors.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Kevin Worsh, Scott Bessent, Donald Trump, Felix</p>
+                        <p><strong>Organizations:</strong> Blockworks</p>
+                        <p><strong>Topics:</strong> Federal Reserve, bond market, dollar, inflation, Iran war, financial warfare</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The Fed&#x27;s upcoming decisions will be critical in determining the future stability of both the dollar and the bond market.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">arcadiaeconomics<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="NAWLAoKMuTk">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=NAWLAoKMuTk" target="_blank">Gold &amp; Silver Selloff Continues...How Low Will Prices Go</a>
+                    </div>
+                    <div class="snippet-meta">interview • 35m 39s • @arcadiaeconomics • Jun 11, 2026 • 5,806 views • 289 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Chris Marcus, JP Cortez</div>
+                    <div class="snippet-summary">This episode discusses the ongoing selloff of gold and silver prices, exploring the factors influencing these trends and the potential future of precious metals investing. The speakers analyze market conditions, geopolitical uncertainties, and the implications of US debt on metal prices.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The selloff in gold and silver is influenced by geopolitical tensions and rising military budgets.</li>
+                            <li>Short-term price pressures on metals are expected to continue due to market uncertainties.</li>
+                            <li>Long-term structural drivers for higher metal prices remain intact despite current selloffs.</li>
+                            <li>Investors should view the current dip in prices as a potential buying opportunity.</li>
+                            <li>The US is approaching $40 trillion in debt, which could impact precious metals prices.</li>
+                            <li>There are concerns about the purity and auditing of US gold reserves.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Mike Tyson, Stefan, Avi Gilbert, Michael Oliver, Mike Johnson, Bill Gross, Muhammad Alerian, Jared Kushner</p>
+                        <p><strong>Organizations:</strong> Sound Money Defense League, Money Metals, Fortuna Mining</p>
+                        <p><strong>Topics:</strong> gold prices, silver prices, market trends, US debt, investment strategies, government policy</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Long-term investment in precious metals remains bullish despite current market pressures.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">topic_Jim_Cramer<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="XbU_V7TesXA">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=XbU_V7TesXA" target="_blank">HUGE CRYPTO NEWS! MASTERCARD RIPPLE XRP &amp; SOLANA, JIM CRAMER SPACEX OVER BITCOIN!</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 18m 31s • @thinkingcrypto • Jun 11, 2026 • 1,796 views • 235 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Tony Edward</div>
+                    <div class="snippet-summary">In this episode, Tony Edward discusses the current state of the cryptocurrency market, highlighting key players and trends, including Jim Cramer&#x27;s bearish stance on Bitcoin and the rise of stablecoins. He emphasizes the importance of understanding market dynamics and the potential for a bullish reversal in the near future.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Jim Cramer is bearish on Bitcoin, suggesting it is being liquidated for SpaceX.</li>
+                            <li>Tony anticipates a reversal in Bitcoin&#x27;s price due to oversold conditions.</li>
+                            <li>BlackRock and Fidelity dominate the US spot Bitcoin ETF market.</li>
+                            <li>Mastercard is launching a payment system for AI agents using crypto.</li>
+                            <li>The World Series of Poker will accept Solana payments for tournament buy-ins.</li>
+                            <li>Anchorage Digital supports the US Treasury&#x27;s proposed AML rules.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Jim Cramer, Michael Saylor, Punit Meta</p>
+                        <p><strong>Organizations:</strong> Mastercard, Coinbase, Ripple, Solana, Polygon, BlackRock, Fidelity, CME Group, NASDAQ, Anchorage Digital</p>
+                        <p><strong>Topics:</strong> Bitcoin, crypto market, investment strategies, stablecoins, AI in finance, Ethereum</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The cryptocurrency market is poised for potential growth despite current bearish sentiments.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">topic_Michael_Oliver<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="2dFQk-KeS7I">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=2dFQk-KeS7I" target="_blank">Silver to $50 or $500? Next 48hrs Critical | Michael Oliver</a>
+                    </div>
+                    <div class="snippet-meta">interview • 37m 53s • @libertyandfinance • Jun 11, 2026 • 7,801 views • 706 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Michael Oliver, Elijah K. Johnson</div>
+                    <div class="snippet-summary">In this episode, Michael Oliver discusses the potential price movements of silver and the broader implications for the market. He emphasizes the critical timeframe for bears in the silver market and the overall investment landscape.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Silver could see dramatic price movements in the near future.</li>
+                            <li>The bears have a limited time to prove their case in the silver market.</li>
+                            <li>Long-term momentum trends for silver and gold remain positive despite recent fluctuations.</li>
+                            <li>The current market environment may lead to a significant asset class shift.</li>
+                            <li>Inflation is driven by the increase in the money supply, not just rising prices.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> Momentum Structural Analysis, Liberty and Finance</p>
+                        <p><strong>Topics:</strong> silver price predictions, market trends, investment strategies, gold and silver dynamics, economic outlook</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The bears must act quickly in the silver market, or they risk losing their position as bullish trends may take over.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">RUSSIA<span class="topic-count">(1 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">IgorLipsits_1950<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="8_Y75TR36l0">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=8_Y75TR36l0" target="_blank">ЛИПСИЦ: ИНТЕРВЬЮ ЕВГЕНИЮ КИСЕЛЕВУ 10.06.2026</a>
+                    </div>
+                    <div class="snippet-meta">interview • 58m 11s • @IgorLipsits_1950 • Jun 11, 2026 • 5,742 views • 943 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Евгений Киселёв, Игорь Липсиц</div>
+                    <div class="snippet-summary">В этом эпизоде Евгений Киселёв и Игорь Липсиц обсуждают текущее состояние российской экономики на фоне войны и её влияние на различные сектора. Они также затрагивают вопросы безработицы, налоговой системы и возможных последствий для общества.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Россия сталкивается с растущей безработицей из-за экономического кризиса.</li>
+                            <li>Население возвращается к наличным расчетам, что свидетельствует о недоверии к банковской системе.</li>
+                            <li>Государство не может защитить компании от атак, что ведет к падению доходов бюджета.</li>
+                            <li>Существуют признаки бюджетной контрреволюции в России.</li>
+                            <li>Налоговые проверки бизнеса усиливаются на фоне дефицита бюджета.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Вагит Олег Перов, Богданов, Дмитрий Белоусов, Евгений Ясин, Симон Агдавич Кордонский, Сечин</p>
+                        <p><strong>Organizations:</strong> Центральный банк России, Сбербанк, Роскомнадзор, Федеральная налоговая служба</p>
+                        <p><strong>Topics:</strong> российская экономика, война и экономика, налоговая система, гражданская война, безработица, государственные финансы</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Экономическая ситуация в России ухудшается, что может привести к серьезным социальным и политическим последствиям.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <div class="footer">
+            Generated 2026-06-11 09:17:49
+        </div>
+    </div>
+    <div class="playlist-bar" id="plBar">
+        <span class="playlist-bar-msg"><span id="plCount">0</span> selected</span>
+        <button id="plBtn" type="button">Add to playlist</button>
+    </div>
+    <script src="assets/config.js"></script>
+    <script src="assets/playlist.js"></script>
+</body>
+</html>
