@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Snippets - 2026-07-23</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background-color: #FFF1E0;
+            color: #3E474F;
+            line-height: 1.6;
+            padding: 24px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            padding: 32px 0;
+            border-bottom: 3px solid #3E474F;
+            margin-bottom: 32px;
+        }
+        .header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .header .date {
+            font-size: 18px;
+            color: #66737D;
+        }
+        .header .meta {
+            font-size: 14px;
+            color: #66737D;
+            margin-top: 12px;
+        }
+        .topic-section {
+            margin-bottom: 40px;
+        }
+        .topic-title {
+            font-size: 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 0;
+            border-bottom: 2px solid #F2DFCE;
+            margin-bottom: 24px;
+            color: #3E474F;
+        }
+        .channel-section {
+            margin-bottom: 28px;
+        }
+        .channel-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            margin-bottom: 16px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .snippet-card {
+            background: #FFF9F5;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border-left: 4px solid #FCD0AF;
+        }
+        .snippet-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .snippet-title a {
+            color: #0D7680;
+            text-decoration: none;
+        }
+        .snippet-title a:hover {
+            text-decoration: underline;
+        }
+        .snippet-meta {
+            font-size: 13px;
+            color: #66737D;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+        .snippet-speakers {
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .snippet-speakers strong {
+            color: #3E474F;
+        }
+        .snippet-summary {
+            font-size: 15px;
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+        .snippet-claims {
+            margin-bottom: 16px;
+        }
+        .snippet-claims-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .snippet-claims ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .snippet-claims li {
+            font-size: 14px;
+            padding: 4px 0 4px 16px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .snippet-claims li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #0D7680;
+        }
+        .snippet-details {
+            font-size: 13px;
+            color: #66737D;
+            border-top: 1px solid #F2DFCE;
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+        .snippet-details p {
+            margin-bottom: 4px;
+        }
+        .snippet-conclusion {
+            font-size: 14px;
+            font-style: italic;
+            color: #3E474F;
+            background: #F2DFCE;
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 12px;
+        }
+        .footer {
+            text-align: center;
+            padding: 24px 0;
+            border-top: 1px solid #F2DFCE;
+            margin-top: 40px;
+            font-size: 12px;
+            color: #66737D;
+        }
+        /* Collapsible sections */
+        details {
+            margin-bottom: 8px;
+        }
+        details summary {
+            cursor: pointer;
+            list-style: none;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary::before {
+            content: "▶";
+            display: inline-block;
+            margin-right: 8px;
+            transition: transform 0.2s;
+            font-size: 12px;
+        }
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
+        .topic-details {
+            border: 1px solid #F2DFCE;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            background: #FFF9F5;
+        }
+        .topic-summary {
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 16px 20px;
+            color: #3E474F;
+            background: #F2DFCE;
+            border-radius: 8px;
+        }
+        .topic-details[open] .topic-summary {
+            border-radius: 8px 8px 0 0;
+        }
+        .topic-count {
+            font-size: 14px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .topic-content {
+            padding: 16px 20px;
+        }
+        .channel-details {
+            border: 1px solid #FCD0AF;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            background: white;
+        }
+        .channel-summary {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            padding: 12px 16px;
+            background: #FFF9F5;
+            border-radius: 6px;
+        }
+        .channel-details[open] .channel-summary {
+            border-radius: 6px 6px 0 0;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .channel-count {
+            font-size: 13px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .channel-content {
+            padding: 12px 16px;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 16px;
+            }
+            .header h1 {
+                font-size: 28px;
+            }
+            .snippet-card {
+                padding: 16px;
+            }
+        }
+        /* Add-to-playlist UI */
+        .snippet-card { position: relative; }
+        .snippet-check {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            margin: 0;
+            cursor: pointer;
+        }
+        .snippet-check input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .snippet-card.selected {
+            box-shadow: inset 4px 0 0 #0D7680;
+            background: #FFFCF8;
+        }
+        .snippet-status {
+            position: absolute;
+            top: 14px;
+            right: 40px;
+            font-size: 14px;
+            color: #66737D;
+            min-width: 90px;
+            text-align: right;
+        }
+        .snippet-status.ok { color: #0D7680; }
+        .snippet-status.err { color: #c0392b; }
+        .playlist-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #3E474F;
+            color: #FFF;
+            padding: 12px 24px;
+            z-index: 100;
+            display: none;
+            font-family: Georgia, "Times New Roman", serif;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.15);
+        }
+        .playlist-bar.visible {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+        .playlist-bar-msg { font-size: 15px; }
+        .playlist-bar button {
+            background: #0D7680;
+            color: #FFF;
+            border: 0;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-family: Georgia, "Times New Roman", serif;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .playlist-bar button:disabled {
+            background: #66737D;
+            cursor: not-allowed;
+        }
+        body.has-bar { padding-bottom: 80px; }
+    </style>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Daily Snippets</h1>
+            <div class="date">Thursday, July 23, 2026</div>
+            <div class="meta">6 videos • uploaded 2026-07-23 • 6 videos</div>
+        </div>
+        <details class="topic-details">
+            <summary class="topic-summary">INVESTING<span class="topic-count">(4 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">CRUXInvestor<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="qOkrt6slOJk">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=qOkrt6slOJk" target="_blank">Group Eleven Resources (TSXV:ZNG) - New High-Grade Lead &amp; Zinc Discovery at Stonepark</a>
+                    </div>
+                    <div class="snippet-meta">interview • 19m 15s • @CRUXInvestor • Jul 23, 2026 • 7 views</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Barski</div>
+                    <div class="snippet-summary">In this episode, Barski, CEO of Group 11 Resources, discusses a new high-grade lead and zinc discovery at Stone Park, highlighting significant drill results. The conversation covers the implications of these findings for the company&#x27;s future exploration and potential resource development.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>A new discovery was made 550 meters from the existing resource at Stone Park.</li>
+                            <li>The new drill results show 2.8 meters of 8.3% zinc and lead.</li>
+                            <li>There is significant exploration upside at Stone Park, with potential for new mineralization zones.</li>
+                            <li>The current resource at Stone Park is approximately 5 million tons at 11% zinc and lead.</li>
+                            <li>The company plans to drill 15,000 meters at Stone Park as part of their exploration strategy.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Matt</p>
+                        <p><strong>Organizations:</strong> Group 11 Resources, Glenor, Valley Wire</p>
+                        <p><strong>Topics:</strong> lead and zinc discovery, Stone Park, mineralization, drilling results, exploration upside</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The discovery at Stone Park could indicate the presence of a new mineralization pod, enhancing the project&#x27;s potential.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">arcadiaeconomics<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="kYPaK1k2Jbs">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=kYPaK1k2Jbs" target="_blank">Gold Price To Surge On July 24 China Move?!</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 15m 9s • @arcadiaeconomics • Jul 23, 2026 • 3,188 views • 310 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Chris Marcus</div>
+                    <div class="snippet-summary">In this episode, Chris Marcus discusses the potential impact of China&#x27;s ban on leveraged retail gold trading and its implications for the gold market. He reflects on historical trends and the broader economic context surrounding gold and silver investments.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>China is banning leveraged retail gold trading, which could impact the gold market.</li>
+                            <li>Predictions of gold reaching $38,000 are overly optimistic.</li>
+                            <li>Government spending and monetary policy will continue to influence gold and silver prices.</li>
+                            <li>Resetting gold prices to pay off national debt is unlikely to happen soon.</li>
+                            <li>Historical patterns suggest that economic behavior is unlikely to change significantly.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Jim Rogers, Stephan Gleason, Scott Bessent</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> gold market, China trading ban, silver prices, US debt, economic behavior</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The upcoming changes in China may affect gold prices temporarily, but the long-term trends are driven by broader economic factors.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">topic_Jim_Cramer<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="wqIw4sfmmns">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=wqIw4sfmmns" target="_blank">Mad Money 07/22/26 | Audio Only</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 44m 18s • @cnbctelevision • Jul 23, 2026 • 3,619 views • 71 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Jim Kramer</div>
+                    <div class="snippet-summary">In this episode, Jim Kramer discusses the current state of the stock market during earnings season, highlighting various companies and their performances. He emphasizes the importance of focusing on long-term investments and understanding market dynamics amidst short-term volatility.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Earnings season is causing significant volatility in stock prices.</li>
+                            <li>AI agents going rogue is a major concern for cybersecurity.</li>
+                            <li>Genova&#x27;s earnings miss does not reflect its strong backlog and future potential.</li>
+                            <li>General Motors reported a strong quarter, raising its full-year guidance.</li>
+                            <li>Investors should focus on owning good companies for the long term.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Craig, Anthony Nodal, Bill McDermott</p>
+                        <p><strong>Organizations:</strong> OpenAI, Hugging Face, CrowdStrike, Genova, Nvidia, Johnson &amp; Johnson, Salesforce, Workday, ServiceNow, General Motors, Procter &amp; Gamble, Colgate, JM Smucker, GE Vernova</p>
+                        <p><strong>Topics:</strong> earnings season, stock market analysis, AI impact, cybersecurity, automotive industry, investment strategies</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Despite short-term market noise, long-term investments in solid companies remain crucial.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">topic_Rick_Rule<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="JYkiyKmRREE">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=JYkiyKmRREE" target="_blank">Rick Rule: Top Mining Stocks as Gold Hits $4,000 - Rule Classroom Plus</a>
+                    </div>
+                    <div class="snippet-meta">Q&amp;A • 58m 40s • @inittowinit928 • Jul 23, 2026 • 1,563 views • 102 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Rick Rule, Steve Barton</div>
+                    <div class="snippet-summary">In this episode, Rick Rule answers questions from listeners about various mining stocks and investment strategies as gold prices rise. He discusses specific companies, market trends, and the implications of geopolitical factors on investments.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>CBridge is negotiating with a single party, likely Numont, for a potential deal.</li>
+                            <li>The mining industry is facing rising capital costs and inflation, impacting investment decisions.</li>
+                            <li>Rick emphasizes the importance of long-term investment strategies over short-term speculation.</li>
+                            <li>He believes that Schlumberger will benefit from underinvestment in the oil industry.</li>
+                            <li>Rick expresses skepticism about the lithium market and the impact of new extraction technologies.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Bruce Jack, Andrew Pard, Rudy, Ted, Helen G, Luis Acavo, Jean Mark Stanny, Doug Casey, David Glandon, Barb, Michelle, Jason</p>
+                        <p><strong>Organizations:</strong> CBridge, Numont, Triple Flag, O Royalty, NG Energy, Black Rock Silver, Wheat and Precious Metals, Agniko Eagle, Franco Nevada, Schlumberger, Ivanhoe, Sovereign, Riotinto, Oceanana Gold, Forces Metals, Myriad Uranium, Surge Battery Metals, Canora Copper, Fortuna Mining, King Copper Discovery, Bravo Mining, Palangio, Luca</p>
+                        <p><strong>Topics:</strong> gold prices, mining stocks, investment strategies, market analysis, royalty companies, political risks</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Investors should focus on long-term strategies and be aware of the geopolitical and economic factors affecting the mining industry.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">RUSSIA<span class="topic-count">(2 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">IgorLipsits_1950<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="3A5RCAO6m_E">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=3A5RCAO6m_E" target="_blank">LIPSITS: INTERVIEW WITH YEVGENY KISELYOV 07/22/2026</a>
+                    </div>
+                    <div class="snippet-meta">interview • 47m 23s • @IgorLipsits_1950 • Jul 23, 2026 • 8,615 views • 1,445 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Евгений Киселёв, Игорь Липсиц</div>
+                    <div class="snippet-summary">In this episode, Yevgeny Kiselyov interviews economist Igor Lipsits about the current economic and political situation in Russia, discussing the potential for a series of defaults and the implications of ongoing conflicts. They explore the concept of Russia becoming a failed state and the resulting societal impacts.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Russia is on the path to becoming a failed state due to economic mismanagement.</li>
+                            <li>The country is experiencing a series of defaults across various sectors, including retail and banking.</li>
+                            <li>The ongoing conflict with Ukraine is exacerbating economic instability.</li>
+                            <li>Black markets are emerging as the government fails to provide basic services.</li>
+                            <li>A potential civil war could arise from the struggle for control over assets.</li>
+                            <li>Inflation is rising due to a disconnect between monetary policy and economic realities.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Андрей Мельниченко, Шайгу, Гейдар Алиев, Александр Шохин</p>
+                        <p><strong>Organizations:</strong> Wildberies, НПЗ, Озон</p>
+                        <p><strong>Topics:</strong> economic collapse, failed state, deficits in Russia, black markets, banking crisis, civil war potential</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> If the current trajectory continues, Russia may face severe economic and social consequences, leading to a collapse of state functions.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">IgorYakovenko<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="7pSaIJDv678">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=7pSaIJDv678" target="_blank">НОВЫЕ ЛИШЕНЦЫ</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 68m 55s • @IgorYakovenko • Jul 23, 2026 • 16,706 views • 3,300 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Игорь Яковенко</div>
+                    <div class="snippet-summary">В этом эпизоде Игорь Яковенко обсуждает новый закон о лишении гражданства критиков власти в России, а также последствия этого закона для политической ситуации в стране. Он также анализирует риторику властей и сравнивает её с историческими примерами репрессий.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Государственная Дума приняла закон о новых лишенцах, фактически лишая гражданства критиков власти.</li>
+                            <li>Новые лишенцы будут лишены доступа к заграничным паспортам и госуслугам.</li>
+                            <li>Риторика властей по отношению к новым лишенцам напоминает сталинские времена.</li>
+                            <li>Пастухов утверждает, что обе стороны конфликта используют террор как метод достижения целей.</li>
+                            <li>Зеленский уволил министра обороны в условиях кризиса, что могло повлиять на фронт.</li>
+                            <li>Яковенко считает, что действия властей ведут к дальнейшему распаду России.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Вячеслав Володин, Гарри Каспаров, Пастухов, Ксения Собчак, Латынина, Зеленский, Фёдоров, Сырский</p>
+                        <p><strong>Organizations:</strong> Государственная Дума</p>
+                        <p><strong>Topics:</strong> новые лишенцы, политические репрессии, война в Украине, пропаганда, государственная политика</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Действия российских властей по отношению к критикам свидетельствуют о нарастающих репрессиях и политической нестабильности.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <div class="footer">
+            Generated 2026-07-23 09:12:59
+        </div>
+    </div>
+    <div class="playlist-bar" id="plBar">
+        <span class="playlist-bar-msg"><span id="plCount">0</span> selected</span>
+        <button id="plBtn" type="button">Add to playlist</button>
+    </div>
+    <script src="assets/config.js"></script>
+    <script src="assets/playlist.js"></script>
+</body>
+</html>
