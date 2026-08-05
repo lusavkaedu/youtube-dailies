@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Snippets - 2026-08-05</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background-color: #FFF1E0;
+            color: #3E474F;
+            line-height: 1.6;
+            padding: 24px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            padding: 32px 0;
+            border-bottom: 3px solid #3E474F;
+            margin-bottom: 32px;
+        }
+        .header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .header .date {
+            font-size: 18px;
+            color: #66737D;
+        }
+        .header .meta {
+            font-size: 14px;
+            color: #66737D;
+            margin-top: 12px;
+        }
+        .topic-section {
+            margin-bottom: 40px;
+        }
+        .topic-title {
+            font-size: 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 0;
+            border-bottom: 2px solid #F2DFCE;
+            margin-bottom: 24px;
+            color: #3E474F;
+        }
+        .channel-section {
+            margin-bottom: 28px;
+        }
+        .channel-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            margin-bottom: 16px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .snippet-card {
+            background: #FFF9F5;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border-left: 4px solid #FCD0AF;
+        }
+        .snippet-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .snippet-title a {
+            color: #0D7680;
+            text-decoration: none;
+        }
+        .snippet-title a:hover {
+            text-decoration: underline;
+        }
+        .snippet-meta {
+            font-size: 13px;
+            color: #66737D;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+        .snippet-speakers {
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .snippet-speakers strong {
+            color: #3E474F;
+        }
+        .snippet-summary {
+            font-size: 15px;
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+        .snippet-claims {
+            margin-bottom: 16px;
+        }
+        .snippet-claims-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .snippet-claims ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .snippet-claims li {
+            font-size: 14px;
+            padding: 4px 0 4px 16px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .snippet-claims li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #0D7680;
+        }
+        .snippet-details {
+            font-size: 13px;
+            color: #66737D;
+            border-top: 1px solid #F2DFCE;
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+        .snippet-details p {
+            margin-bottom: 4px;
+        }
+        .snippet-conclusion {
+            font-size: 14px;
+            font-style: italic;
+            color: #3E474F;
+            background: #F2DFCE;
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 12px;
+        }
+        .footer {
+            text-align: center;
+            padding: 24px 0;
+            border-top: 1px solid #F2DFCE;
+            margin-top: 40px;
+            font-size: 12px;
+            color: #66737D;
+        }
+        /* Collapsible sections */
+        details {
+            margin-bottom: 8px;
+        }
+        details summary {
+            cursor: pointer;
+            list-style: none;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary::before {
+            content: "▶";
+            display: inline-block;
+            margin-right: 8px;
+            transition: transform 0.2s;
+            font-size: 12px;
+        }
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
+        .topic-details {
+            border: 1px solid #F2DFCE;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            background: #FFF9F5;
+        }
+        .topic-summary {
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 16px 20px;
+            color: #3E474F;
+            background: #F2DFCE;
+            border-radius: 8px;
+        }
+        .topic-details[open] .topic-summary {
+            border-radius: 8px 8px 0 0;
+        }
+        .topic-count {
+            font-size: 14px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .topic-content {
+            padding: 16px 20px;
+        }
+        .channel-details {
+            border: 1px solid #FCD0AF;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            background: white;
+        }
+        .channel-summary {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            padding: 12px 16px;
+            background: #FFF9F5;
+            border-radius: 6px;
+        }
+        .channel-details[open] .channel-summary {
+            border-radius: 6px 6px 0 0;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .channel-count {
+            font-size: 13px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .channel-content {
+            padding: 12px 16px;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 16px;
+            }
+            .header h1 {
+                font-size: 28px;
+            }
+            .snippet-card {
+                padding: 16px;
+            }
+        }
+        /* Add-to-playlist UI */
+        .snippet-card { position: relative; }
+        .snippet-check {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            margin: 0;
+            cursor: pointer;
+        }
+        .snippet-check input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .snippet-card.selected {
+            box-shadow: inset 4px 0 0 #0D7680;
+            background: #FFFCF8;
+        }
+        .snippet-status {
+            position: absolute;
+            top: 14px;
+            right: 40px;
+            font-size: 14px;
+            color: #66737D;
+            min-width: 90px;
+            text-align: right;
+        }
+        .snippet-status.ok { color: #0D7680; }
+        .snippet-status.err { color: #c0392b; }
+        .playlist-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #3E474F;
+            color: #FFF;
+            padding: 12px 24px;
+            z-index: 100;
+            display: none;
+            font-family: Georgia, "Times New Roman", serif;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.15);
+        }
+        .playlist-bar.visible {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+        .playlist-bar-msg { font-size: 15px; }
+        .playlist-bar button {
+            background: #0D7680;
+            color: #FFF;
+            border: 0;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-family: Georgia, "Times New Roman", serif;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .playlist-bar button:disabled {
+            background: #66737D;
+            cursor: not-allowed;
+        }
+        body.has-bar { padding-bottom: 80px; }
+    </style>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Daily Snippets</h1>
+            <div class="date">Wednesday, August 05, 2026</div>
+            <div class="meta">7 videos • uploaded 2026-08-05 • 7 videos</div>
+        </div>
+        <details class="topic-details">
+            <summary class="topic-summary">INVESTING<span class="topic-count">(6 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">ForwardGuidanceBW<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="_48GYd4CH1k">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=_48GYd4CH1k" target="_blank">The Portfolio Built To Survive Every Crash | Jared Dillian</a>
+                    </div>
+                    <div class="snippet-meta">interview • 32m 3s • @ForwardGuidanceBW • Aug 05, 2026 • 23 views</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Jared Dillian</div>
+                    <div class="snippet-summary">In this episode, Jared Dillian discusses his new book &#x27;The Awesome Portfolio&#x27; and shares insights on investment strategies that can withstand market volatility. He also analyzes current market conditions and the implications of recent Fed policies.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Dillian&#x27;s portfolio strategy includes 20% stocks, bonds, gold, cash, and real estate, which has shown lower volatility and consistent returns.</li>
+                            <li>The worst drawdown for his portfolio was 12% in 2022, significantly better than traditional portfolios.</li>
+                            <li>Dillian argues that many financial advisors stick to 60/40 portfolios due to lack of knowledge or fear of gold&#x27;s volatility.</li>
+                            <li>He believes the current market conditions do not favor traditional investing strategies, especially with rising interest rates.</li>
+                            <li>Dillian suggests that the Fed&#x27;s recent actions are intentional to tighten monetary policy without direct rate hikes.</li>
+                            <li>He expresses skepticism about the sustainability of the current stock market rally and the resilience of retail investors.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Tony Greer, Quinn, Kevin Worsh, Ed Bradford, Dennis Gartman</p>
+                        <p><strong>Organizations:</strong> Blockworks, Reason magazine</p>
+                        <p><strong>Topics:</strong> investment strategies, portfolio management, market analysis, Fed policy, gold market, financial advice</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Dillian advocates for a diversified portfolio that minimizes risk while still providing reasonable returns, especially in uncertain market conditions.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">IgorLipsits_1950<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="LmpcgvfLUzk">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=LmpcgvfLUzk" target="_blank">LIPSITS: INTERVIEW FOR THE &quot;HONEST WORD&quot; PROGRAM 08/04/2026</a>
+                    </div>
+                    <div class="snippet-meta">interview • 45m 46s • @IgorLipsits_1950 • Aug 05, 2026 • 8,145 views • 1,017 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Александр Макашенец, Игорь Липсиц</div>
+                    <div class="snippet-summary">The episode discusses the impact of recent attacks on logistics centers in Russia, particularly focusing on the online retail giant Vailberis and its implications for the Russian economy. The conversation also touches on the banking sector&#x27;s struggles and the potential for a broader economic crisis.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The attacks on Vailberis are causing significant disruptions in the Russian economy.</li>
+                            <li>Many sellers on Vailberis are facing financial ruin due to the attacks.</li>
+                            <li>The potential bankruptcy of Vailberis could lead to a 2-3% drop in Russia&#x27;s GDP.</li>
+                            <li>The banking system is already in crisis, and the situation may worsen with Vailberis&#x27;s troubles.</li>
+                            <li>The government may struggle to provide financial support to Vailberis due to budget constraints.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Татьяна Ким, Дмитрий Потапенко, Александр Аузан, Михаил Косьянов, Иван Яковина</p>
+                        <p><strong>Organizations:</strong> Вайлберис, Сбербанк, ВТБ</p>
+                        <p><strong>Topics:</strong> Russian economy, online retail, banking crisis, political pressure, consumer market</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The ongoing attacks on logistics centers could trigger a severe economic downturn in Russia, affecting both the retail and banking sectors.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">PeakProsperity<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="FammZzQJN-g">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=FammZzQJN-g" target="_blank">Fake Markets, Real Consequences</a>
+                    </div>
+                    <div class="snippet-meta">interview • 86m 27s • @PeakProsperity • Aug 05, 2026 • 5,599 views • 498 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Chris Martenson, Philip Pilington</div>
+                    <div class="snippet-summary">In this episode, Chris Martenson interviews macroeconomist Philip Pilington about the manipulation of oil markets, the geopolitical implications of energy supply, and the potential economic consequences of current policies. They discuss the interconnectedness of energy prices, inflation, and global stability.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The oil market has been heavily manipulated, especially during geopolitical crises.</li>
+                            <li>Energy supply disruptions could lead to significant declines in living standards.</li>
+                            <li>China&#x27;s strategic decisions regarding oil imports are influencing global energy dynamics.</li>
+                            <li>The U.S. government&#x27;s approach to managing oil prices is unsustainable and could lead to a crisis.</li>
+                            <li>Inflation is primarily driven by energy prices, which are becoming increasingly volatile.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Tucker Carlson, Larry Summers, Andrew Collingwood</p>
+                        <p><strong>Organizations:</strong> OPEC, Financial Times</p>
+                        <p><strong>Topics:</strong> oil market manipulation, geopolitics, energy crisis, inflation, economic decline, China&#x27;s influence</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The current trajectory of energy policy and market manipulation is likely to result in severe economic consequences and a decline in living standards.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">SkoniecznyMariusz<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="4jDlcwAGFV8">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=4jDlcwAGFV8" target="_blank">I Like When Analysts Have Courage with Aduro Clean Technologies</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 5m 27s • @SkoniecznyMariusz • Aug 05, 2026 • 402 views • 43 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">The episode discusses a recent investment report on Aduro Clean Technologies and criticizes analysts for their lack of courage in evaluating stocks. It emphasizes the importance of focusing on a company&#x27;s fundamentals rather than current stock prices.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Analysts often adjust price targets based on current stock prices rather than fundamentals.</li>
+                            <li>Aduro Clean Technologies has a potential revenue projection of almost $2 billion by 2035.</li>
+                            <li>The narrator believes that if Aduro&#x27;s technology scales, the company could be worth between $10 to $30 billion by 2035.</li>
+                            <li>The report does not provide a price target, which the narrator appreciates.</li>
+                            <li>The narrator argues that the company will always be perceived as overvalued due to its unique technology.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> Water Tower Research, Aduro Clean Technologies</p>
+                        <p><strong>Topics:</strong> investment analysis, stock price, revenue projections, hydrocarbon chemistry, market evaluation</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Focusing on the fundamentals and potential of Aduro Clean Technologies is crucial for understanding its future value.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">capitalcosm<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="vZDbQSloAlk">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=vZDbQSloAlk" target="_blank">🔴 Michael Burry Warns of 1987 Style Crash! Korea Buys GOLD For First Time in 13 Years!</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 19m 15s • @capitalcosm • Aug 05, 2026 • 2,711 views • 320 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">The episode discusses the current state of the stock market, highlighting concerns about a potential crash similar to 1987, as well as South Korea&#x27;s recent gold purchases. The narrator analyzes various market trends and the implications of money printing on asset prices.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Michael Burry warns of a potential 1987-style market crash.</li>
+                            <li>The S&amp;P and Dow Jones have reached all-time highs amid an AI bubble.</li>
+                            <li>South Korea is buying gold for the first time in 13 years due to geopolitical risks.</li>
+                            <li>Emerging markets are beginning to outperform the S&amp;P.</li>
+                            <li>Gold miners are showing strong cash flow metrics.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Michael Burry, Soros, Tavi Costa</p>
+                        <p><strong>Organizations:</strong> Soft Bank, Ivita</p>
+                        <p><strong>Topics:</strong> stock market, AI bubble, gold purchases, Michael Burry, emerging markets</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The narrator suggests that despite interventions, a market correction may be inevitable.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">topic_Jim_Cramer<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="a-lcBZlpU2I">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=a-lcBZlpU2I" target="_blank">JIM CRAMER SAYS SELL BITCOIN ( RIPPLE JUST MADE ITS BIGGEST RLUSD MOVE)</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 13m 26s • Aug 05, 2026 • 2,198 views • 21 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">The episode discusses Jim Kramer&#x27;s intention to sell Bitcoin amidst market fluctuations and highlights Ripple&#x27;s recent advancements in stablecoin infrastructure. It emphasizes the importance of understanding market trends and investment opportunities in the current economic climate.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Jim Kramer plans to sell his Bitcoin holdings due to quantum fears.</li>
+                            <li>Ripple is enhancing its stablecoin infrastructure for financial institutions.</li>
+                            <li>The US-Japan intervention could impact Bitcoin and risk assets.</li>
+                            <li>Current market conditions present a good opportunity for accumulation.</li>
+                            <li>Salana is considered undervalued at $73 with potential for significant returns.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Jim Kramer</p>
+                        <p><strong>Organizations:</strong> Koshi, Ripple, Zillow, Zeo, Liquido, Black Rock</p>
+                        <p><strong>Topics:</strong> Bitcoin selling, Ripple updates, crypto market trends, investment strategies, macro conditions</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> If Jim Kramer is selling, it may be time to start buying.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">RUSSIA<span class="topic-count">(1 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">IgorYakovenko<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="FeWbVhs0cDI">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=FeWbVhs0cDI" target="_blank">ПУТИН И БЕНЗИН – МАГИЯ ПРИСУТСТВИЯ</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 123m 15s • @IgorYakovenko • Aug 05, 2026 • 13,257 views • 2,597 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Игорь Яковенко</div>
+                    <div class="snippet-summary">The episode discusses the current state of affairs in Russia, particularly focusing on Putin&#x27;s actions and their implications for the ongoing conflict in Ukraine. It also touches on the political landscape and the upcoming elections in Russia.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Putin has intensified attacks on Kyiv, resulting in casualties.</li>
+                            <li>Gas prices in Krasnoyarsk dropped temporarily during Putin&#x27;s visit but quickly rose again afterward.</li>
+                            <li>Ukraine has successfully targeted Russian military and energy infrastructure.</li>
+                            <li>The Russian government is attempting to suppress dissent by revoking citizenship from critics abroad.</li>
+                            <li>Public sentiment in Russia is increasingly against the war, despite government propaganda.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Путин, Зеленский, Борис Надеждин, Григорий Потёмкин</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> Putin&#x27;s policies, Ukraine conflict, Russian society, elections, energy prices</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The current political climate in Russia shows signs of discontent among the populace regarding the war and Putin&#x27;s regime.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <div class="footer">
+            Generated 2026-08-05 09:00:31
+        </div>
+    </div>
+    <div class="playlist-bar" id="plBar">
+        <span class="playlist-bar-msg"><span id="plCount">0</span> selected</span>
+        <button id="plBtn" type="button">Add to playlist</button>
+    </div>
+    <script src="assets/config.js"></script>
+    <script src="assets/playlist.js"></script>
+</body>
+</html>
