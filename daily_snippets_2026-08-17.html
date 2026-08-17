@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Snippets - 2026-08-17</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background-color: #FFF1E0;
+            color: #3E474F;
+            line-height: 1.6;
+            padding: 24px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            padding: 32px 0;
+            border-bottom: 3px solid #3E474F;
+            margin-bottom: 32px;
+        }
+        .header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .header .date {
+            font-size: 18px;
+            color: #66737D;
+        }
+        .header .meta {
+            font-size: 14px;
+            color: #66737D;
+            margin-top: 12px;
+        }
+        .topic-section {
+            margin-bottom: 40px;
+        }
+        .topic-title {
+            font-size: 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 0;
+            border-bottom: 2px solid #F2DFCE;
+            margin-bottom: 24px;
+            color: #3E474F;
+        }
+        .channel-section {
+            margin-bottom: 28px;
+        }
+        .channel-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            margin-bottom: 16px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .snippet-card {
+            background: #FFF9F5;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border-left: 4px solid #FCD0AF;
+        }
+        .snippet-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .snippet-title a {
+            color: #0D7680;
+            text-decoration: none;
+        }
+        .snippet-title a:hover {
+            text-decoration: underline;
+        }
+        .snippet-meta {
+            font-size: 13px;
+            color: #66737D;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+        .snippet-speakers {
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .snippet-speakers strong {
+            color: #3E474F;
+        }
+        .snippet-summary {
+            font-size: 15px;
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+        .snippet-claims {
+            margin-bottom: 16px;
+        }
+        .snippet-claims-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .snippet-claims ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .snippet-claims li {
+            font-size: 14px;
+            padding: 4px 0 4px 16px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .snippet-claims li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #0D7680;
+        }
+        .snippet-details {
+            font-size: 13px;
+            color: #66737D;
+            border-top: 1px solid #F2DFCE;
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+        .snippet-details p {
+            margin-bottom: 4px;
+        }
+        .snippet-conclusion {
+            font-size: 14px;
+            font-style: italic;
+            color: #3E474F;
+            background: #F2DFCE;
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 12px;
+        }
+        .footer {
+            text-align: center;
+            padding: 24px 0;
+            border-top: 1px solid #F2DFCE;
+            margin-top: 40px;
+            font-size: 12px;
+            color: #66737D;
+        }
+        /* Collapsible sections */
+        details {
+            margin-bottom: 8px;
+        }
+        details summary {
+            cursor: pointer;
+            list-style: none;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary::before {
+            content: "▶";
+            display: inline-block;
+            margin-right: 8px;
+            transition: transform 0.2s;
+            font-size: 12px;
+        }
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
+        .topic-details {
+            border: 1px solid #F2DFCE;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            background: #FFF9F5;
+        }
+        .topic-summary {
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 16px 20px;
+            color: #3E474F;
+            background: #F2DFCE;
+            border-radius: 8px;
+        }
+        .topic-details[open] .topic-summary {
+            border-radius: 8px 8px 0 0;
+        }
+        .topic-count {
+            font-size: 14px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .topic-content {
+            padding: 16px 20px;
+        }
+        .channel-details {
+            border: 1px solid #FCD0AF;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            background: white;
+        }
+        .channel-summary {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            padding: 12px 16px;
+            background: #FFF9F5;
+            border-radius: 6px;
+        }
+        .channel-details[open] .channel-summary {
+            border-radius: 6px 6px 0 0;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .channel-count {
+            font-size: 13px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .channel-content {
+            padding: 12px 16px;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 16px;
+            }
+            .header h1 {
+                font-size: 28px;
+            }
+            .snippet-card {
+                padding: 16px;
+            }
+        }
+        /* Add-to-playlist UI */
+        .snippet-card { position: relative; }
+        .snippet-check {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            margin: 0;
+            cursor: pointer;
+        }
+        .snippet-check input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .snippet-card.selected {
+            box-shadow: inset 4px 0 0 #0D7680;
+            background: #FFFCF8;
+        }
+        .snippet-status {
+            position: absolute;
+            top: 14px;
+            right: 40px;
+            font-size: 14px;
+            color: #66737D;
+            min-width: 90px;
+            text-align: right;
+        }
+        .snippet-status.ok { color: #0D7680; }
+        .snippet-status.err { color: #c0392b; }
+        .playlist-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #3E474F;
+            color: #FFF;
+            padding: 12px 24px;
+            z-index: 100;
+            display: none;
+            font-family: Georgia, "Times New Roman", serif;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.15);
+        }
+        .playlist-bar.visible {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+        .playlist-bar-msg { font-size: 15px; }
+        .playlist-bar button {
+            background: #0D7680;
+            color: #FFF;
+            border: 0;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-family: Georgia, "Times New Roman", serif;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .playlist-bar button:disabled {
+            background: #66737D;
+            cursor: not-allowed;
+        }
+        body.has-bar { padding-bottom: 80px; }
+    </style>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Daily Snippets</h1>
+            <div class="date">Monday, August 17, 2026</div>
+            <div class="meta">7 videos • uploaded 2026-08-17 • 7 videos</div>
+        </div>
+        <details class="topic-details">
+            <summary class="topic-summary">POLITICS<span class="topic-count">(1 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">IgorYakovenko<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="xvDPtYxQoK4">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=xvDPtYxQoK4" target="_blank">ТРАМПИЗМ – АБСОЛЮТНОЕ ЗЛО</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 91m 44s • @IgorYakovenko • Aug 17, 2026 • 14,555 views • 2,837 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Игорь Яковенко</div>
+                    <div class="snippet-summary">В этом эпизоде Игорь Яковенко обсуждает влияние трампизма на международные отношения и внутреннюю политику, а также эффективность британских дронов в конфликте между Украиной и Россией. Он подчеркивает, что трампизм представляет собой абсолютное зло, влияющее на различные аспекты мировой политики.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Трамп поддерживает Северную Корею и ослабляет военные учения с Южной Кореей.</li>
+                            <li>Британские дроны показывают высокую эффективность в атаке на российские цели.</li>
+                            <li>Трампизм является абсолютным злом, влияющим на международные отношения.</li>
+                            <li>Северная Корея представляет экзистенциальную угрозу для Южной Кореи.</li>
+                            <li>Поддержка Украины со стороны Великобритании включает поставки дронов.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Сергей Маратович Грабский, Игорь Наумович Айзенберг, Дональд Трамп, Ким Чен Ын, Софи Поттер, Андрей Беглов, Николай, Максим Фегин, Александр Скобов</p>
+                        <p><strong>Organizations:</strong> Чёрная Искра</p>
+                        <p><strong>Topics:</strong> трампизм, война в Украине, британские дроны, Северная Корея, политическая ситуация в России</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Трампизм негативно влияет на международные отношения и представляет угрозу для мира.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">INVESTING<span class="topic-count">(6 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">CRUXInvestor<span class="channel-count">(2 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="wAzQTgGqhPs">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=wAzQTgGqhPs" target="_blank">Asante Gold (CSE:ASE) - 4.6 Moz Gold Resource Base Anchors Disciplined 2026 Production</a>
+                    </div>
+                    <div class="snippet-meta">interview • 29m 13s • @CRUXInvestor • Aug 17, 2026 • 3 views</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Campbell Bed</div>
+                    <div class="snippet-summary">In this episode, Campbell Bed, CEO of Asante Gold, discusses the company&#x27;s current challenges and future strategies for improving gold production and reducing costs. He emphasizes the importance of focusing on key projects and leveraging existing assets to unlock the company&#x27;s potential.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Asante Gold has a significant gold resource base of 4.6 million ounces.</li>
+                            <li>The company aims to stabilize operations and reduce costs through disciplined management.</li>
+                            <li>Chirano and Bibani are key assets that will drive future production.</li>
+                            <li>The company has deferred $50 million in capital expenditures to focus on existing projects.</li>
+                            <li>The goal is to achieve a sustainable all-in sustaining cost below $3,000 per ounce by 2027.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Malik Isa, Dave Anthony, Glenn Baldwin</p>
+                        <p><strong>Organizations:</strong> Asante Gold</p>
+                        <p><strong>Topics:</strong> gold production, cost control, mining operations, capital discipline, exploration potential</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Asante Gold is focused on stabilizing its operations and unlocking the potential of its assets to drive future growth.
+                    </div>
+                </div>
+                <div class="snippet-card" data-video-id="4uKA66F7FEI">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=4uKA66F7FEI" target="_blank">TriStar Gold (TSXV:TSG) - $603M NPV, 80% Peer Discount Gold Developer Awaits Court Ruling</a>
+                    </div>
+                    <div class="snippet-meta">interview • 16m 19s • @CRUXInvestor • Aug 17, 2026 • 8 views</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Nick Appleyard</div>
+                    <div class="snippet-summary">In this episode, Nick Appleyard, CEO of Tri Star Gold, discusses the company&#x27;s gold project in Brazil and the legal challenges it faces regarding indigenous consultation. He highlights the project&#x27;s economic viability and the significant discount at which the company&#x27;s shares are currently trading due to these challenges.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Tri Star Gold&#x27;s project has a post-tax NPV of over $600 million at a base case gold price of $2200.</li>
+                            <li>The company is currently facing a legal challenge related to indigenous consultation that has impacted its market valuation.</li>
+                            <li>Nick believes the company is trading at an 80% discount compared to its peers due to the ongoing legal issues.</li>
+                            <li>The company has an active data room with potential investors monitoring the situation closely.</li>
+                            <li>Nick anticipates a resolution to the legal challenges within the next few months, which could lead to a significant re-rate of the company&#x27;s stock.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> Tri Star Gold</p>
+                        <p><strong>Topics:</strong> gold mining, legal challenges, investment potential, indigenous consultation, market valuation</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Resolving the legal challenges is crucial for unlocking the company&#x27;s value and attracting investment.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">Monetary-Matters<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="kZXjQZWUHH0">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=kZXjQZWUHH0" target="_blank">Google Has 800 Billion of Hidden &quot;AI Liabilities&quot; | Robin Wigglesworth, Author of &quot;A Fabulous Debt&quot;</a>
+                    </div>
+                    <div class="snippet-meta">interview • 65m 16s • @Monetary-Matters • Aug 17, 2026 • 3,258 views • 120 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Robin Wigglesworth</div>
+                    <div class="snippet-summary">In this episode, Robin Wigglesworth discusses the hidden liabilities associated with major tech companies&#x27; investments in AI and data centers. He explores the implications of off-balance sheet financing and the evolving landscape of private credit.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Google has $800 billion in purchase commitments related to AI and data centers.</li>
+                            <li>The off-balance sheet liabilities of hyperscalers have increased significantly, from $1 trillion to $1.5 trillion.</li>
+                            <li>Creative financing methods, such as structuring bonds as leases, can obscure true financial obligations.</li>
+                            <li>The bond market is a powerful tool for financing large capital projects, yet many companies are opting for less transparent financing methods.</li>
+                            <li>Private credit is experiencing a boom, but it carries risks that could lead to a significant default cycle.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> Google, Meta, Microsoft, Amazon, Goldman Sachs, Nvidia, Blackstone, BlackRock, KKR</p>
+                        <p><strong>Topics:</strong> AI liabilities, hyperscalers, debt markets, capital expenditure, financial transparency, private credit</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The current capex bubble in the tech industry is unsustainable and may lead to significant financial repercussions.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">OGJohnAGYT<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="JMnk7x7sitA">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=JMnk7x7sitA" target="_blank">Silver Market Just Exposed The Weak Spot - Silver Squeeze Is Over, But The Deficit Is Getting Worse</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 24m 6s • @OGJohnAGYT • Aug 17, 2026 • 806 views • 51 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">The episode discusses the current state of the silver market, highlighting a rebuild in registered inventory while the structural deficit continues to widen. The narrator reflects on their previous claims and provides insights into market dynamics and future implications.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Registered silver inventory has increased significantly over the past three months.</li>
+                            <li>The silver market is experiencing a widening structural deficit despite the inventory rebuild.</li>
+                            <li>Softer inflation data has reduced the likelihood of a rate hike, positively impacting silver prices.</li>
+                            <li>The Shanghai silver premium remains high, indicating regional scarcity.</li>
+                            <li>Geopolitical developments have not negatively affected silver prices as expected.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> COMX, Silver Institute, Patreon</p>
+                        <p><strong>Topics:</strong> silver market, inventory analysis, inflation impact, geopolitical factors, investment strategies</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The silver market shows conflicting signals with a rebuild in inventory and a widening deficit, leading to increased uncertainty about future price movements.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">capitalcosm<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="x1GQ12DUJSw">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=x1GQ12DUJSw" target="_blank">🚨 GOLD &amp; SILVER Prices Pump As Japan&#x27;s GDP Just COLLAPSED!</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 38m 3s • @capitalcosm • Aug 17, 2026 • 7,229 views • 678 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses the recent collapse of Japan&#x27;s GDP and its implications for gold and silver prices. The narrator analyzes how the weak yen and economic conditions are influencing investment strategies in precious metals.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Japan&#x27;s GDP growth missed expectations, coming in at 1.1% instead of the anticipated 2%.</li>
+                            <li>Gold prices surged by 6% following the GDP news, while silver rose by 1.6%.</li>
+                            <li>The weak yen is causing Japanese investors to buy more gold as a hedge against inflation.</li>
+                            <li>City and UBS have set high price targets for gold and silver, with UBS predicting gold could reach $5,000 by 2027.</li>
+                            <li>Continued yen weakness may lead to more intervention from the Bank of Japan, affecting gold prices.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> Bank of Japan, City, UBS, CNBC</p>
+                        <p><strong>Topics:</strong> Japan GDP, gold prices, silver prices, economic impact, investment strategies</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Japan&#x27;s economic struggles are likely to keep gold and silver prices elevated as investors seek safe havens.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">eurodollaruniversity<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="UC-16lqkzlU">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=UC-16lqkzlU" target="_blank">WTF Just Happened to Retail Sales?!</a>
+                    </div>
+                    <div class="snippet-meta">panel • 22m 44s • @eurodollaruniversity • Aug 17, 2026 • 10,771 views • 611 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator, Steve, Jeff</div>
+                    <div class="snippet-summary">The episode discusses the recent contraction in retail sales and its implications for the economy, highlighting the interconnectedness of consumer spending, labor market conditions, and inflation. The speakers analyze whether this decline is a temporary mini cycle or indicative of a more significant economic downturn.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Retail sales contracted in July, which was expected due to previous economic cycles.</li>
+                            <li>Consumer spending is weakening as tax refunds and savings are depleted.</li>
+                            <li>The labor market is showing signs of deterioration, impacting consumer confidence.</li>
+                            <li>High inflation and energy prices are contributing to demand destruction.</li>
+                            <li>There is a risk of a more prolonged economic downturn rather than just a mini cycle.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> Monetary Metals, University of Michigan</p>
+                        <p><strong>Topics:</strong> retail sales, consumer spending, labor market, economic cycles, inflation, savings rate</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The current economic indicators suggest a fragile economy that may be on the brink of a more significant downturn.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <div class="footer">
+            Generated 2026-08-17 08:53:50
+        </div>
+    </div>
+    <div class="playlist-bar" id="plBar">
+        <span class="playlist-bar-msg"><span id="plCount">0</span> selected</span>
+        <button id="plBtn" type="button">Add to playlist</button>
+    </div>
+    <script src="assets/config.js"></script>
+    <script src="assets/playlist.js"></script>
+</body>
+</html>
