@@ -74,6 +74,14 @@
         #clearFilters:hover { border-color: #0D7680; color: #0D7680; }
 
         .finder-results { min-width: 0; }
+        .results-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
         .finder-count {
             display: inline-block;
             font-weight: 600;
@@ -82,10 +90,25 @@
             border: 1px solid #F2DFCE;
             border-radius: 4px;
             padding: 6px 12px;
-            margin-bottom: 16px;
             font-size: 14px;
         }
         .finder-count:empty { display: none; }
+        .sort-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: #66737D;
+        }
+        .sort-group select {
+            border: 1px solid #FCD0AF;
+            border-radius: 4px;
+            background: #FFFFFF;
+            padding: 6px 8px;
+            font-size: 13px;
+            font-family: Georgia, "Times New Roman", serif;
+            color: #3E474F;
+        }
         .finder-empty {
             color: #66737D;
             line-height: 1.6;
@@ -183,7 +206,18 @@
             </aside>
 
             <div class="finder-results">
-                <span id="count" class="finder-count"></span>
+                <div class="results-toolbar">
+                    <span id="count" class="finder-count"></span>
+                    <div class="sort-group">
+                        <label for="sortBy">Sort</label>
+                        <select id="sortBy">
+                            <option value="newest">Newest first</option>
+                            <option value="oldest">Oldest first</option>
+                            <option value="most_liked">Most liked</option>
+                            <option value="most_viewed">Most viewed</option>
+                        </select>
+                    </div>
+                </div>
                 <div id="empty-state" class="finder-empty"></div>
                 <div id="results"></div>
             </div>
@@ -201,6 +235,7 @@
             speaker: document.getElementById('fSpeaker'),
             from: document.getElementById('fFrom'),
             to: document.getElementById('fTo'),
+            sortBy: document.getElementById('sortBy'),
         };
         const resultsEl = document.getElementById('results');
         const emptyEl = document.getElementById('empty-state');
@@ -276,9 +311,28 @@
             for (const dim of FACETS) populateFacet(dim, f);
         }
 
+        function sortMatches(matches, mode) {
+            const arr = matches.slice();
+            if (mode === 'oldest') {
+                // Missing published dates sort last here (high sentinel), not first —
+                // an empty string would otherwise outrank every real date.
+                arr.sort((a, b) => (a.published || '9999-99-99').localeCompare(b.published || '9999-99-99'));
+            } else if (mode === 'most_liked') {
+                arr.sort((a, b) => (b.likes ?? -1) - (a.likes ?? -1));
+            } else if (mode === 'most_viewed') {
+                arr.sort((a, b) => (b.views ?? -1) - (a.views ?? -1));
+            } else {
+                arr.sort((a, b) => (b.published || '').localeCompare(a.published || ''));
+            }
+            return arr;
+        }
+
         function cardHtml(rec) {
             const url = /^[A-Za-z0-9_-]+$/.test(rec.id) ? `https://www.youtube.com/watch?v=${rec.id}` : '';
-            const metaParts = [rec.type, rec.channel, rec.published].filter(Boolean);
+            const stats = [];
+            if (rec.views != null) stats.push(`${rec.views.toLocaleString()} views`);
+            if (rec.likes != null) stats.push(`${rec.likes.toLocaleString()} likes`);
+            const metaParts = [rec.type, rec.channel, rec.published, ...stats].filter(Boolean);
             const claims = (rec.claims || []).map(c => `<li>${escapeHtml(c)}</li>`).join('');
             const details = [];
             if (rec.people && rec.people.length) details.push(`<p><strong>People:</strong> ${escapeHtml(rec.people.join(', '))}</p>`);
@@ -303,8 +357,7 @@
                 countEl.textContent = '';
                 return;
             }
-            const matches = RECORDS.filter(r => recordMatches(r, f, null));
-            matches.sort((a, b) => (b.published || '').localeCompare(a.published || ''));
+            const matches = sortMatches(RECORDS.filter(r => recordMatches(r, f, null)), els.sortBy.value);
             if (matches.length === 0) {
                 resultsEl.innerHTML = '';
                 emptyEl.innerHTML = '<p>No snippets match these filters.</p>';
@@ -330,6 +383,7 @@
         els.q.addEventListener('input', applyFilter);
         els.from.addEventListener('change', applyFilter);
         els.to.addEventListener('change', applyFilter);
+        els.sortBy.addEventListener('change', applyFilter);
         for (const dim of FACETS) document.getElementById(dim.sel).addEventListener('change', applyFilter);
         document.getElementById('clearFilters').addEventListener('click', clearFilters);
 
