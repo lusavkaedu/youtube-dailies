@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search All Snippets</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background-color: #FFF1E0;
+            color: #3E474F;
+            line-height: 1.6;
+            padding: 24px;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .header {
+            text-align: center;
+            padding: 32px 0;
+            border-bottom: 3px solid #3E474F;
+            margin-bottom: 32px;
+        }
+        .header h1 { font-size: 36px; font-weight: 700; color: #3E474F; }
+        .header .meta { font-size: 14px; color: #66737D; margin-top: 12px; }
+        .site-nav { margin-top: 12px; font-size: 14px; }
+        .site-nav a { color: #0D7680; text-decoration: none; }
+        .site-nav a:hover { text-decoration: underline; }
+
+        .finder-shell {
+            display: grid;
+            grid-template-columns: minmax(15rem, 18rem) minmax(0, 1fr);
+            gap: 24px;
+            align-items: start;
+        }
+        .finder-filters {
+            position: sticky;
+            top: 24px;
+            max-height: calc(100vh - 48px);
+            overflow-y: auto;
+            border: 1px solid #F2DFCE;
+            background: #FFF9F5;
+            border-radius: 4px;
+            padding: 16px;
+            display: grid;
+            gap: 14px;
+        }
+        .finder-filters h2 { font-size: 16px; color: #3E474F; }
+        .filter-group { display: grid; gap: 5px; }
+        .filter-group label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            color: #66737D;
+        }
+        .filter-group input, .filter-group select {
+            border: 1px solid #FCD0AF;
+            border-radius: 4px;
+            background: #FFFFFF;
+            padding: 8px;
+            font-size: 14px;
+            font-family: Georgia, "Times New Roman", serif;
+            width: 100%;
+        }
+        #clearFilters {
+            border: 1px solid #FCD0AF;
+            background: transparent;
+            border-radius: 4px;
+            padding: 8px 12px;
+            font-size: 13px;
+            font-family: Georgia, "Times New Roman", serif;
+            cursor: pointer;
+            color: #3E474F;
+        }
+        #clearFilters:hover { border-color: #0D7680; color: #0D7680; }
+
+        .finder-results { min-width: 0; }
+        .finder-count {
+            display: inline-block;
+            font-weight: 600;
+            color: #0D7680;
+            background: #FFF9F5;
+            border: 1px solid #F2DFCE;
+            border-radius: 4px;
+            padding: 6px 12px;
+            margin-bottom: 16px;
+            font-size: 14px;
+        }
+        .finder-count:empty { display: none; }
+        .finder-empty {
+            color: #66737D;
+            line-height: 1.6;
+            border: 1px solid #F2DFCE;
+            background: #FFF9F5;
+            border-radius: 4px;
+            padding: 20px;
+        }
+        .finder-empty:empty { display: none; }
+
+        .snippet-card {
+            background: #FFF9F5;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border-left: 4px solid #FCD0AF;
+        }
+        .snippet-title { font-size: 18px; font-weight: 600; margin-bottom: 8px; line-height: 1.4; }
+        .snippet-title a { color: #0D7680; text-decoration: none; }
+        .snippet-title a:hover { text-decoration: underline; }
+        .snippet-meta { font-size: 13px; color: #66737D; margin-bottom: 12px; font-style: italic; }
+        .snippet-speakers { font-size: 14px; margin-bottom: 12px; }
+        .snippet-speakers strong { color: #3E474F; }
+        .snippet-summary { font-size: 15px; margin-bottom: 16px; line-height: 1.7; }
+        .snippet-claims { margin-bottom: 16px; }
+        .snippet-claims-title { font-size: 14px; font-weight: 600; margin-bottom: 8px; color: #3E474F; }
+        .snippet-claims ul { list-style: none; padding-left: 0; }
+        .snippet-claims li { font-size: 14px; padding: 4px 0 4px 16px; position: relative; line-height: 1.5; }
+        .snippet-claims li::before { content: "•"; position: absolute; left: 0; color: #0D7680; }
+        .snippet-details {
+            font-size: 13px;
+            color: #66737D;
+            border-top: 1px solid #F2DFCE;
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+        .snippet-details p { margin-bottom: 4px; }
+
+        .footer {
+            text-align: center;
+            padding: 24px 0;
+            border-top: 1px solid #F2DFCE;
+            margin-top: 40px;
+            font-size: 12px;
+            color: #66737D;
+        }
+
+        @media (max-width: 980px) {
+            .finder-shell { grid-template-columns: 1fr; }
+            .finder-filters { position: static; max-height: none; }
+        }
+        @media (max-width: 600px) {
+            body { padding: 16px; }
+            .header h1 { font-size: 28px; }
+            .snippet-card { padding: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Search All Snippets</h1>
+            <div class="meta" id="headerMeta">Loading…</div>
+            <div class="site-nav"><a href="index.html">&larr; All reports</a> &middot; <a href="recent_snippets.html">Latest catch-up</a></div>
+        </div>
+
+        <div class="finder-shell">
+            <aside class="finder-filters">
+                <h2>Filters</h2>
+                <div class="filter-group">
+                    <label for="q">Search</label>
+                    <input id="q" type="search" placeholder="Title, summary, claim...">
+                </div>
+                <div class="filter-group">
+                    <label for="fTopic">Topic</label>
+                    <select id="fTopic"><option value="">All</option></select>
+                </div>
+                <div class="filter-group">
+                    <label for="fChannel">Channel</label>
+                    <select id="fChannel"><option value="">All</option></select>
+                </div>
+                <div class="filter-group">
+                    <label for="fSpeaker">Speaker</label>
+                    <select id="fSpeaker"><option value="">All</option></select>
+                </div>
+                <div class="filter-group">
+                    <label for="fFrom">Uploaded from</label>
+                    <input id="fFrom" type="date">
+                </div>
+                <div class="filter-group">
+                    <label for="fTo">Uploaded to</label>
+                    <input id="fTo" type="date">
+                </div>
+                <button id="clearFilters" type="button">Reset filters</button>
+            </aside>
+
+            <div class="finder-results">
+                <span id="count" class="finder-count"></span>
+                <div id="empty-state" class="finder-empty"></div>
+                <div id="results"></div>
+            </div>
+        </div>
+
+        <div class="footer" id="footer"></div>
+    </div>
+
+    <script>
+        let RECORDS = [];
+        const els = {
+            q: document.getElementById('q'),
+            topic: document.getElementById('fTopic'),
+            channel: document.getElementById('fChannel'),
+            speaker: document.getElementById('fSpeaker'),
+            from: document.getElementById('fFrom'),
+            to: document.getElementById('fTo'),
+        };
+        const resultsEl = document.getElementById('results');
+        const emptyEl = document.getElementById('empty-state');
+        const countEl = document.getElementById('count');
+        const RENDER_CAP = 400;
+
+        function escapeHtml(s) {
+            return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+        }
+
+        function currentFilters() {
+            return {
+                q: els.q.value.trim().toLowerCase(),
+                topic: els.topic.value,
+                channel: els.channel.value,
+                speaker: els.speaker.value,
+                from: els.from.value,
+                to: els.to.value,
+            };
+        }
+
+        function isFilterActive(f) {
+            return !!(f.q || f.topic || f.channel || f.speaker || f.from || f.to);
+        }
+
+        function recordMatches(rec, f, exclude) {
+            if (exclude !== 'topic' && f.topic && rec.topic !== f.topic) return false;
+            if (exclude !== 'channel' && f.channel && rec.channel !== f.channel) return false;
+            if (exclude !== 'speaker' && f.speaker && !(rec.speakers || []).includes(f.speaker)) return false;
+            if (f.from && rec.published && rec.published < f.from) return false;
+            if (f.to && rec.published && rec.published > f.to) return false;
+            if (f.q) {
+                const haystack = [rec.title, rec.summary, rec.channel, ...(rec.speakers || []), ...(rec.claims || []), ...(rec.topics || [])]
+                    .join(' ').toLowerCase();
+                if (!haystack.includes(f.q)) return false;
+            }
+            return true;
+        }
+
+        const FACETS = [
+            { sel: 'fTopic', key: 'topic', valuesOf: r => [r.topic].filter(Boolean) },
+            { sel: 'fChannel', key: 'channel', valuesOf: r => [r.channel].filter(Boolean) },
+            { sel: 'fSpeaker', key: 'speaker', valuesOf: r => r.speakers || [] },
+        ];
+
+        function populateFacet(dim, f) {
+            const sel = document.getElementById(dim.sel);
+            const prev = sel.value;
+            const counts = new Map();
+            let anyCount = 0;
+            for (const rec of RECORDS) {
+                if (!recordMatches(rec, f, dim.key)) continue;
+                anyCount++;
+                for (const v of dim.valuesOf(rec)) counts.set(v, (counts.get(v) || 0) + 1);
+            }
+            const sorted = [...counts.keys()].sort((a, b) => a.localeCompare(b));
+            sel.innerHTML = '';
+            const anyOpt = document.createElement('option');
+            anyOpt.value = '';
+            anyOpt.textContent = `All (${anyCount})`;
+            sel.appendChild(anyOpt);
+            for (const v of sorted) {
+                const opt = document.createElement('option');
+                opt.value = v;
+                opt.textContent = `${v} (${counts.get(v)})`;
+                sel.appendChild(opt);
+            }
+            sel.value = prev;
+        }
+
+        function refreshFacets() {
+            const f = currentFilters();
+            for (const dim of FACETS) populateFacet(dim, f);
+        }
+
+        function cardHtml(rec) {
+            const url = /^[A-Za-z0-9_-]+$/.test(rec.id) ? `https://www.youtube.com/watch?v=${rec.id}` : '';
+            const metaParts = [rec.type, rec.channel, rec.published].filter(Boolean);
+            const claims = (rec.claims || []).map(c => `<li>${escapeHtml(c)}</li>`).join('');
+            const details = [];
+            if (rec.people && rec.people.length) details.push(`<p><strong>People:</strong> ${escapeHtml(rec.people.join(', '))}</p>`);
+            if (rec.orgs && rec.orgs.length) details.push(`<p><strong>Organizations:</strong> ${escapeHtml(rec.orgs.join(', '))}</p>`);
+            if (rec.topics && rec.topics.length) details.push(`<p><strong>Topics:</strong> ${escapeHtml(rec.topics.join(', '))}</p>`);
+            return `<div class="snippet-card">
+                <div class="snippet-title">${url ? `<a href="${escapeHtml(url)}" target="_blank">${escapeHtml(rec.title)}</a>` : escapeHtml(rec.title)}</div>
+                <div class="snippet-meta">${escapeHtml(metaParts.join(' • '))}</div>
+                ${rec.speakers && rec.speakers.length ? `<div class="snippet-speakers"><strong>Speakers:</strong> ${escapeHtml(rec.speakers.join(', '))}</div>` : ''}
+                <div class="snippet-summary">${escapeHtml(rec.summary || '')}</div>
+                ${claims ? `<div class="snippet-claims"><div class="snippet-claims-title">Key Claims:</div><ul>${claims}</ul></div>` : ''}
+                ${details.length ? `<div class="snippet-details">${details.join('')}</div>` : ''}
+            </div>`;
+        }
+
+        function applyFilter() {
+            refreshFacets();
+            const f = currentFilters();
+            if (!isFilterActive(f)) {
+                resultsEl.innerHTML = '';
+                emptyEl.innerHTML = `<p><strong>${RECORDS.length.toLocaleString()} snippets</strong> in the archive. Search or pick a filter to see results.</p>`;
+                countEl.textContent = '';
+                return;
+            }
+            const matches = RECORDS.filter(r => recordMatches(r, f, null));
+            matches.sort((a, b) => (b.published || '').localeCompare(a.published || ''));
+            if (matches.length === 0) {
+                resultsEl.innerHTML = '';
+                emptyEl.innerHTML = '<p>No snippets match these filters.</p>';
+                countEl.textContent = '';
+                return;
+            }
+            emptyEl.innerHTML = '';
+            const shown = matches.slice(0, RENDER_CAP);
+            resultsEl.innerHTML = shown.map(cardHtml).join('');
+            countEl.textContent = matches.length > RENDER_CAP
+                ? `Showing ${RENDER_CAP} of ${matches.length} matches — narrow your search to see the rest`
+                : `${matches.length} match${matches.length === 1 ? '' : 'es'}`;
+        }
+
+        function clearFilters() {
+            els.q.value = '';
+            els.from.value = '';
+            els.to.value = '';
+            for (const dim of FACETS) document.getElementById(dim.sel).value = '';
+            applyFilter();
+        }
+
+        els.q.addEventListener('input', applyFilter);
+        els.from.addEventListener('change', applyFilter);
+        els.to.addEventListener('change', applyFilter);
+        for (const dim of FACETS) document.getElementById(dim.sel).addEventListener('change', applyFilter);
+        document.getElementById('clearFilters').addEventListener('click', clearFilters);
+
+        fetch('search_data.json')
+            .then(r => r.json())
+            .then(data => {
+                RECORDS = data;
+                document.getElementById('headerMeta').textContent = `${RECORDS.length.toLocaleString()} snippets indexed`;
+                document.getElementById('footer').textContent = 'Generated ' + new Date().toISOString().slice(0, 16).replace('T', ' ');
+                applyFilter();
+            })
+            .catch(() => {
+                document.getElementById('headerMeta').textContent = 'Failed to load search_data.json';
+            });
+    </script>
+</body>
+</html>
