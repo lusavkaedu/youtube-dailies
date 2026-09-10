@@ -195,6 +195,18 @@
                     <select id="fSpeaker"><option value="">All</option></select>
                 </div>
                 <div class="filter-group">
+                    <label for="fPerson">Person mentioned</label>
+                    <select id="fPerson"><option value="">All</option></select>
+                </div>
+                <div class="filter-group">
+                    <label for="fOrg">Organization</label>
+                    <select id="fOrg"><option value="">All</option></select>
+                </div>
+                <div class="filter-group">
+                    <label for="fTag">Topic tag</label>
+                    <select id="fTag"><option value="">All</option></select>
+                </div>
+                <div class="filter-group">
                     <label for="fFrom">Uploaded from</label>
                     <input id="fFrom" type="date">
                 </div>
@@ -233,6 +245,9 @@
             topic: document.getElementById('fTopic'),
             channel: document.getElementById('fChannel'),
             speaker: document.getElementById('fSpeaker'),
+            person: document.getElementById('fPerson'),
+            org: document.getElementById('fOrg'),
+            tag: document.getElementById('fTag'),
             from: document.getElementById('fFrom'),
             to: document.getElementById('fTo'),
             sortBy: document.getElementById('sortBy'),
@@ -252,23 +267,29 @@
                 topic: els.topic.value,
                 channel: els.channel.value,
                 speaker: els.speaker.value,
+                person: els.person.value,
+                org: els.org.value,
+                tag: els.tag.value,
                 from: els.from.value,
                 to: els.to.value,
             };
         }
 
         function isFilterActive(f) {
-            return !!(f.q || f.topic || f.channel || f.speaker || f.from || f.to);
+            return !!(f.q || f.topic || f.channel || f.speaker || f.person || f.org || f.tag || f.from || f.to);
         }
 
         function recordMatches(rec, f, exclude) {
             if (exclude !== 'topic' && f.topic && rec.topic !== f.topic) return false;
             if (exclude !== 'channel' && f.channel && rec.channel !== f.channel) return false;
             if (exclude !== 'speaker' && f.speaker && !(rec.speakers || []).includes(f.speaker)) return false;
+            if (exclude !== 'person' && f.person && !(rec.people || []).includes(f.person)) return false;
+            if (exclude !== 'org' && f.org && !(rec.orgs || []).includes(f.org)) return false;
+            if (exclude !== 'tag' && f.tag && !(rec.topics || []).includes(f.tag)) return false;
             if (f.from && rec.published && rec.published < f.from) return false;
             if (f.to && rec.published && rec.published > f.to) return false;
             if (f.q) {
-                const haystack = [rec.title, rec.summary, rec.channel, ...(rec.speakers || []), ...(rec.claims || []), ...(rec.topics || [])]
+                const haystack = [rec.title, rec.summary, rec.channel, ...(rec.speakers || []), ...(rec.claims || []), ...(rec.topics || []), ...(rec.people || []), ...(rec.orgs || [])]
                     .join(' ').toLowerCase();
                 if (!haystack.includes(f.q)) return false;
             }
@@ -279,6 +300,9 @@
             { sel: 'fTopic', key: 'topic', valuesOf: r => [r.topic].filter(Boolean) },
             { sel: 'fChannel', key: 'channel', valuesOf: r => [r.channel].filter(Boolean) },
             { sel: 'fSpeaker', key: 'speaker', valuesOf: r => r.speakers || [] },
+            { sel: 'fPerson', key: 'person', valuesOf: r => r.people || [] },
+            { sel: 'fOrg', key: 'org', valuesOf: r => r.orgs || [] },
+            { sel: 'fTag', key: 'tag', valuesOf: r => r.topics || [] },
         ];
 
         function populateFacet(dim, f) {
