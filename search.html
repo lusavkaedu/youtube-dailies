@@ -61,6 +61,12 @@
             font-family: Georgia, "Times New Roman", serif;
             width: 100%;
         }
+        .facet-search {
+            margin-bottom: 4px;
+            font-size: 13px !important;
+            padding: 6px 8px !important;
+        }
+        .facet-search::placeholder { color: #A9AA9E; font-style: italic; }
         #clearFilters {
             border: 1px solid #FCD0AF;
             background: transparent;
@@ -192,18 +198,22 @@
                 </div>
                 <div class="filter-group">
                     <label for="fSpeaker">Speaker</label>
+                    <input type="text" class="facet-search" data-for="fSpeaker" placeholder="Type to narrow&hellip;">
                     <select id="fSpeaker"><option value="">All</option></select>
                 </div>
                 <div class="filter-group">
                     <label for="fPerson">Person mentioned</label>
+                    <input type="text" class="facet-search" data-for="fPerson" placeholder="Type to narrow&hellip;">
                     <select id="fPerson"><option value="">All</option></select>
                 </div>
                 <div class="filter-group">
                     <label for="fOrg">Organization</label>
+                    <input type="text" class="facet-search" data-for="fOrg" placeholder="Type to narrow&hellip;">
                     <select id="fOrg"><option value="">All</option></select>
                 </div>
                 <div class="filter-group">
                     <label for="fTag">Topic tag</label>
+                    <input type="text" class="facet-search" data-for="fTag" placeholder="Type to narrow&hellip;">
                     <select id="fTag"><option value="">All</option></select>
                 </div>
                 <div class="filter-group">
@@ -305,6 +315,24 @@
             { sel: 'fTag', key: 'tag', valuesOf: r => r.topics || [] },
         ];
 
+        // Large facets (Speaker/Person/Org/Tag can run into the thousands
+        // of options) get a companion text input that hides non-matching
+        // <option>s live — a plain <select> alone isn't browsable at that
+        // size. Re-applied after every populateFacet() rebuild below, since
+        // that regenerates the option list from scratch on every filter
+        // change (to keep live counts correct) and would otherwise wipe out
+        // whatever the user had typed.
+        function applyFacetSearch(selId) {
+            const input = document.querySelector(`.facet-search[data-for="${selId}"]`);
+            if (!input) return;
+            const query = input.value.trim().toLowerCase();
+            const sel = document.getElementById(selId);
+            for (const opt of sel.options) {
+                if (opt.value === '') { opt.hidden = false; continue; }
+                opt.hidden = query ? !opt.textContent.toLowerCase().includes(query) : false;
+            }
+        }
+
         function populateFacet(dim, f) {
             const sel = document.getElementById(dim.sel);
             const prev = sel.value;
@@ -328,6 +356,7 @@
                 sel.appendChild(opt);
             }
             sel.value = prev;
+            applyFacetSearch(dim.sel);
         }
 
         function refreshFacets() {
@@ -401,8 +430,13 @@
             els.from.value = '';
             els.to.value = '';
             for (const dim of FACETS) document.getElementById(dim.sel).value = '';
+            document.querySelectorAll('.facet-search').forEach(inp => { inp.value = ''; });
             applyFilter();
         }
+
+        document.querySelectorAll('.facet-search').forEach(inp => {
+            inp.addEventListener('input', () => applyFacetSearch(inp.dataset.for));
+        });
 
         els.q.addEventListener('input', applyFilter);
         els.from.addEventListener('change', applyFilter);
