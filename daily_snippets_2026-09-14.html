@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Snippets - 2026-09-14</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background-color: #FFF1E0;
+            color: #3E474F;
+            line-height: 1.6;
+            padding: 24px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            padding: 32px 0;
+            border-bottom: 3px solid #3E474F;
+            margin-bottom: 32px;
+        }
+        .header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .header .date {
+            font-size: 18px;
+            color: #66737D;
+        }
+        .header .meta {
+            font-size: 14px;
+            color: #66737D;
+            margin-top: 12px;
+        }
+        .topic-section {
+            margin-bottom: 40px;
+        }
+        .topic-title {
+            font-size: 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 0;
+            border-bottom: 2px solid #F2DFCE;
+            margin-bottom: 24px;
+            color: #3E474F;
+        }
+        .channel-section {
+            margin-bottom: 28px;
+        }
+        .channel-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            margin-bottom: 16px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .snippet-card {
+            background: #FFF9F5;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border-left: 4px solid #FCD0AF;
+        }
+        .snippet-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .snippet-title a {
+            color: #0D7680;
+            text-decoration: none;
+        }
+        .snippet-title a:hover {
+            text-decoration: underline;
+        }
+        .snippet-meta {
+            font-size: 13px;
+            color: #66737D;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+        .snippet-speakers {
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .snippet-speakers strong {
+            color: #3E474F;
+        }
+        .snippet-summary {
+            font-size: 15px;
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+        .snippet-claims {
+            margin-bottom: 16px;
+        }
+        .snippet-claims-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .snippet-claims ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .snippet-claims li {
+            font-size: 14px;
+            padding: 4px 0 4px 16px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .snippet-claims li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #0D7680;
+        }
+        .snippet-details {
+            font-size: 13px;
+            color: #66737D;
+            border-top: 1px solid #F2DFCE;
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+        .snippet-details p {
+            margin-bottom: 4px;
+        }
+        .snippet-conclusion {
+            font-size: 14px;
+            font-style: italic;
+            color: #3E474F;
+            background: #F2DFCE;
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 12px;
+        }
+        .footer {
+            text-align: center;
+            padding: 24px 0;
+            border-top: 1px solid #F2DFCE;
+            margin-top: 40px;
+            font-size: 12px;
+            color: #66737D;
+        }
+        .site-nav {
+            text-align: center;
+            margin-top: 12px;
+        }
+        .site-nav a {
+            color: #0D7680;
+            font-size: 14px;
+            text-decoration: none;
+        }
+        .site-nav a:hover {
+            text-decoration: underline;
+        }
+        /* Collapsible sections */
+        details {
+            margin-bottom: 8px;
+        }
+        details summary {
+            cursor: pointer;
+            list-style: none;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary::before {
+            content: "▶";
+            display: inline-block;
+            margin-right: 8px;
+            transition: transform 0.2s;
+            font-size: 12px;
+        }
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
+        .topic-details {
+            border: 1px solid #F2DFCE;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            background: #FFF9F5;
+        }
+        .topic-summary {
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 16px 20px;
+            color: #3E474F;
+            background: #F2DFCE;
+            border-radius: 8px;
+        }
+        .topic-details[open] .topic-summary {
+            border-radius: 8px 8px 0 0;
+        }
+        .topic-count {
+            font-size: 14px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .topic-content {
+            padding: 16px 20px;
+        }
+        .channel-details {
+            border: 1px solid #FCD0AF;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            background: white;
+        }
+        .channel-summary {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            padding: 12px 16px;
+            background: #FFF9F5;
+            border-radius: 6px;
+        }
+        .channel-details[open] .channel-summary {
+            border-radius: 6px 6px 0 0;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .channel-count {
+            font-size: 13px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .channel-content {
+            padding: 12px 16px;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 16px;
+            }
+            .header h1 {
+                font-size: 28px;
+            }
+            .snippet-card {
+                padding: 16px;
+            }
+        }
+        /* Add-to-playlist UI */
+        .snippet-card { position: relative; }
+        .snippet-check {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            margin: 0;
+            cursor: pointer;
+        }
+        .snippet-check input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .snippet-card.selected {
+            box-shadow: inset 4px 0 0 #0D7680;
+            background: #FFFCF8;
+        }
+        .snippet-status {
+            position: absolute;
+            top: 14px;
+            right: 40px;
+            font-size: 14px;
+            color: #66737D;
+            min-width: 90px;
+            text-align: right;
+        }
+        .snippet-status.ok { color: #0D7680; }
+        .snippet-status.err { color: #c0392b; }
+        .playlist-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #3E474F;
+            color: #FFF;
+            padding: 12px 24px;
+            z-index: 100;
+            display: none;
+            font-family: Georgia, "Times New Roman", serif;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.15);
+        }
+        .playlist-bar.visible {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+        .playlist-bar-msg { font-size: 15px; }
+        .playlist-bar button {
+            background: #0D7680;
+            color: #FFF;
+            border: 0;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-family: Georgia, "Times New Roman", serif;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .playlist-bar button:disabled {
+            background: #66737D;
+            cursor: not-allowed;
+        }
+        body.has-bar { padding-bottom: 80px; }
+    </style>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Daily Snippets</h1>
+            <div class="date">Monday, September 14, 2026</div>
+            <div class="meta">8 videos • uploaded 2026-09-14 • 8 videos</div>
+            <div class="site-nav"><a href="search.html">🔍 Search all snippets</a></div>
+        </div>
+        <details class="topic-details">
+            <summary class="topic-summary">POLITICS<span class="topic-count">(1 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">IgorYakovenko<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="3ngPDbmuZdk">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=3ngPDbmuZdk" target="_blank">НОВЫЕ ХОЗЯЕВА МИРА УСТАНАВЛИВАЮТ НОВЫЙ МИРОПОРЯДОК?</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 110m 46s • @igoryakovenko • Sep 14, 2026 • 62,229 views • 4,528 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Игорь Яковенко</div>
+                    <div class="snippet-summary">В этом эпизоде Игорь Яковенко обсуждает текущие события в Украине и России, включая военные успехи Украины и политические заявления Трампа. Также рассматривается саммит БРИКС и его влияние на мировой порядок.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Украинские беспилотники атаковали НПЗ в России, что является хорошей новостью для Украины.</li>
+                            <li>Трамп считает, что Украина должна прекратить удары по российским нефтеперерабатывающим заводам.</li>
+                            <li>На саммите БРИКС лидеры призвали к новому мировому порядку, но у них разные интересы.</li>
+                            <li>Россия, Китай и Индия имеют разные взгляды на новый миропорядок.</li>
+                            <li>Декларация БРИКС не упоминает войну в Украине и является обтекаемой.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Сергей Грабский, Дональд Трамп, Джаред Кушнер</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> война в Украине, новый миропорядок, политика России, БРИКС, Трамп и Украина</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Новый миропорядок, о котором говорят лидеры БРИКС, не будет реализован из-за противоречий между странами.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">INVESTING<span class="topic-count">(4 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">CRUXInvestor<span class="channel-count">(3 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="DBtiSHln2Go">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=DBtiSHln2Go" target="_blank">Emperor Metals (CSE:AUOZ) - AI-Driven Modelling Doubles Gold Resource in Quebec</a>
+                    </div>
+                    <div class="snippet-meta">interview • 41m 46s • @cruxinvestor • Sep 14, 2026 • 10 views</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> John Flor, Matthew</div>
+                    <div class="snippet-summary">In this episode, John Flor, president and CEO of Emperor Metals, discusses the company&#x27;s advanced gold projects in Quebec and the investment opportunities they present. He highlights the use of AI-driven modeling to enhance exploration and production strategies.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Emperor Metals has doubled its gold resource from 727,000 ounces to 1.46 million ounces.</li>
+                            <li>The company aims to build a mining operation without the need for significant capital expenditures on infrastructure.</li>
+                            <li>Dukane West is strategically located near existing mills, which could reduce operational costs.</li>
+                            <li>The company plans to increase its resource base to between 3 to 5 million ounces.</li>
+                            <li>AI has been utilized to evaluate and model the company&#x27;s deposits, revealing significant exploration potential.</li>
+                            <li>Emperor Metals is positioned to capitalize on the rising gold prices and increasing market interest.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> Emperor Metals, BHP, Plaster Dome, Barrick Tech, Detour Lake Gold, Kirkland Lake Gold, Agnico Eagle, Entourage Metals, Genesis, Northern Superior, IAMGOLD, First Mining, Stellar, Nordo</p>
+                        <p><strong>Topics:</strong> gold mining, Quebec projects, investment opportunities, AI in exploration, mineral resources, production strategy</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Emperor Metals is focused on building a significant gold mining operation in Quebec, leveraging advanced technology and strategic positioning to maximize investment returns.
+                    </div>
+                </div>
+                <div class="snippet-card" data-video-id="a_U848JbnXw">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=a_U848JbnXw" target="_blank">South Star Battery Metals (TSXV:STS) - Graphite Output Restart and Fully-Funded Expansion in Brazil</a>
+                    </div>
+                    <div class="snippet-meta">interview • 37m 32s • @cruxinvestor • Sep 14, 2026 • 6 views</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Thiago Kuna</div>
+                    <div class="snippet-summary">Thiago Kuna, CEO of Softstar Battery Metals, discusses the company&#x27;s graphite production restart and expansion plans in Brazil. He shares insights on the challenges and strategies involved in turning around the company and navigating the competitive landscape of the graphite market.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Softstar aims to reach a production capacity of 5,000 tons by the end of the year.</li>
+                            <li>China dominates the global graphite market, producing approximately 80% of the total supply.</li>
+                            <li>The company has reduced its cash costs by 60% through operational improvements.</li>
+                            <li>Softstar&#x27;s unique geology allows for cheaper surface mining without the need for underground operations.</li>
+                            <li>The company is exploring partnerships in the US and Europe for high-value graphite applications.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> Softstar Battery Metals</p>
+                        <p><strong>Topics:</strong> graphite production, Brazil mining, investment strategy, supply chain security, turnaround management</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Softstar is positioned for growth in the graphite market through strategic operational improvements and expansion plans.
+                    </div>
+                </div>
+                <div class="snippet-card" data-video-id="bcXLz2LUJ3s">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=bcXLz2LUJ3s" target="_blank">Impact Minerals (ASX:IPT) - Scoping Study Cuts High-Purity Alumina Capital Costs</a>
+                    </div>
+                    <div class="snippet-meta">interview • 24m 8s • @cruxinvestor • Sep 14, 2026 • 9 views</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Dr. Mike Jones</div>
+                    <div class="snippet-summary">Dr. Mike Jones discusses the recent scoping study results for Impact Minerals&#x27; high purity alumina project, highlighting the capital efficiency and market opportunities. The conversation covers the company&#x27;s plans for commercialization, particularly in the US market.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The scoping study indicates a capital cost of $75 million US for a 4,000 ton per year plant.</li>
+                            <li>Impact Minerals can produce high purity alumina at a significantly lower capital cost compared to competitors.</li>
+                            <li>The total market for high purity alumina is projected to reach $15 billion US by the early 2030s.</li>
+                            <li>The company has achieved low levels of uranium and thorium in its HPA, making it suitable for the semiconductor industry.</li>
+                            <li>Impact Minerals is preparing to construct a pilot plant and aims to start a demonstration plant next year.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> June</p>
+                        <p><strong>Organizations:</strong> Impact Minerals Limited, C4V, Amvest</p>
+                        <p><strong>Topics:</strong> high purity alumina, scoping study, capital costs, semiconductor market, battery technology, commercialization</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Impact Minerals is well-positioned to capitalize on the growing demand for high purity alumina in various industries.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">miningstockedu<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="6gE-sZSGHhQ">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=6gE-sZSGHhQ" target="_blank">&quot;Contango Offers the Most Leverage to Gold on a Per-Share Basis&quot; explains CEO Rick Van Nieuwenhuyse</a>
+                    </div>
+                    <div class="snippet-meta">interview • 31m 54s • @miningstockedu • Sep 14, 2026 • 209 views • 15 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Rick Van Nieuwenhuyse, Bill Powers</div>
+                    <div class="snippet-summary">In this episode, CEO Rick Van Nieuwenhuyse discusses Contango Silver and Gold&#x27;s current projects, production targets, and the advantages of their direct shipping ore (DSO) model. He also provides insights into the company&#x27;s financial outlook and permitting processes.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Contango has only 33 million shares outstanding, providing significant leverage to gold on a per-share basis.</li>
+                            <li>The company is targeting growth from 60,000 to 200,000 gold equivalent ounces per year.</li>
+                            <li>The Mancho JV is expected to produce between 40,000 to 45,000 ounces of gold this year.</li>
+                            <li>Contango&#x27;s DSO model allows for quicker production without the need for building a mill.</li>
+                            <li>The Johnson Track project is progressing under the fast 41 program to expedite permitting.</li>
+                            <li>Contango anticipates a significant increase in silver production from the Kitsalt project.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> Contango Silver and Gold, Kinross</p>
+                        <p><strong>Topics:</strong> gold production, silver production, mining projects, permitting, DSO model, financial outlook</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Contango Silver and Gold is well-positioned for growth with its unique DSO model and strong production targets.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">OTHER<span class="topic-count">(3 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">andrewgoldheretics<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="5WmGKTAy4p8">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=5WmGKTAy4p8" target="_blank">You Think It’s Your Idea. That’s How They Control You | David Wood</a>
+                    </div>
+                    <div class="snippet-meta">interview • 83m 15s • @andrewgoldheretics • Sep 14, 2026 • 3,905 views • 430 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> David Wood</div>
+                    <div class="snippet-summary">In this episode, David Wood discusses his experiences with psychopathy, his journey to Christianity, and his views on Islam and jihad. The conversation explores the complexities of morality and the psychological aspects of his life.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>David Wood describes himself as a diagnosed psychopath with antisocial personality disorder.</li>
+                            <li>He discusses the lack of empathy and emotional responses typical of psychopathy.</li>
+                            <li>Wood shares his journey to Christianity, which began during his time in prison.</li>
+                            <li>He highlights the dangers faced by Muslims who leave Islam, including death threats.</li>
+                            <li>Wood explains the three stages of jihad as outlined in Islamic teachings.</li>
+                            <li>He argues that the perception of Islam changes based on the population percentage of Muslims in a society.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Jordan Peterson, Nabil, Randy</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> psychopathy, Christianity, Islam, jihad, morality</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Psychopathy can lead to a unique perspective on morality, and understanding this can help in addressing the complexities of faith and belief systems.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">topic_Michael_Oliver<span class="channel-count">(2 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="-0LnkgAmtxY">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=-0LnkgAmtxY" target="_blank">EPIC MELTDOWN🚨 Saeed Fights Again😤 Calls Out Bruno &amp; Ferdinand❌ Terry &quot;SUE MICHAEL OLIVER!&quot;</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 22m 1s • Sep 14, 2026 • 1,856 views • 232 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">The episode discusses the recent disappointing performance of Manchester United in a derby match against Manchester City, highlighting issues with player commitment and managerial decisions. The narrator expresses frustration over the team&#x27;s lack of urgency and the controversial referee decisions that impacted the game.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Manchester United&#x27;s performance was disgraceful and lacked energy.</li>
+                            <li>The referee made a terrible decision regarding an offside goal.</li>
+                            <li>Michael Carrick&#x27;s tactics were naive and ineffective against 10 men.</li>
+                            <li>Bruno Fernandez and other key players failed to show leadership.</li>
+                            <li>Fans clapping players off after a loss is unacceptable.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Saeed, Bruno, Ferdinand, Terry, Michael Oliver, Michael Carrick, Faz, Diego Dalo, Rashford, Enzo Fernandez, Harland, Joshua Xerxi, Mason Mount, Lenny Euro, Luke Shaw</p>
+                        <p><strong>Organizations:</strong> Manchester United Football Club</p>
+                        <p><strong>Topics:</strong> Manchester United, referee decisions, player performance, managerial tactics, fan reactions</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Manchester United needs to take accountability for their poor performances and address the issues within the team.
+                    </div>
+                </div>
+                <div class="snippet-card" data-video-id="NYPjJL3LTTI">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=NYPjJL3LTTI" target="_blank">MICHAEL OLIVER BREAKS SILENCE AFTER VAR CONTROVERSY ON MANCHESTER DERBY! MAN UNITED NEWS</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 11m 26s • Sep 14, 2026 • 1,467 views • 22 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses the aftermath of the Manchester derby, focusing on the VAR controversy surrounding Michael Oliver&#x27;s decision to validate a goal by Erling Holland. It also critiques the performance of Manchester United and their manager Michael Carrick in light of the defeat.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Michael Oliver admitted to a procedural error regarding the validation of Holland&#x27;s goal.</li>
+                            <li>Manchester United failed to capitalize on having a numerical advantage during the match.</li>
+                            <li>Patrick Dorgu and Diego Dalo were heavily criticized for their performances as fullbacks.</li>
+                            <li>The decision to allow the goal sparked protests from Manchester United players and staff.</li>
+                            <li>Carrick&#x27;s management decisions were scrutinized for lacking urgency and tactical clarity.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Michael Oliver, Patrick Dorgu, Diego Dalo, Erling Holland, Phil Foden, Bruno Fernandez, Kobe Mayu, Yoshko Gvardiol, Enzo Fernandez, Michael Carrick</p>
+                        <p><strong>Organizations:</strong> Manchester United, Manchester City, Premier League</p>
+                        <p><strong>Topics:</strong> VAR controversy, Manchester derby, referee decisions, team performance, managerial scrutiny</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The defeat highlights significant issues within Manchester United&#x27;s tactics and management that need urgent addressing.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <div class="footer">
+            Generated 2026-09-14 14:01:10
+        </div>
+    </div>
+    <div class="playlist-bar" id="plBar">
+        <span class="playlist-bar-msg"><span id="plCount">0</span> selected</span>
+        <button id="plBtn" type="button">Add to playlist</button>
+    </div>
+    <script src="assets/config.js"></script>
+    <script src="assets/playlist.js"></script>
+</body>
+</html>
