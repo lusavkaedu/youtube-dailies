@@ -341,14 +341,19 @@
         msgEl = bar.querySelector('.playlist-bar-msg');
         var baseMsg = msgEl ? msgEl.innerHTML : '';
 
-        // Selection wiring
-        document.querySelectorAll('.snippet-card .vid-check').forEach(function (cb) {
-            cb.addEventListener('change', function () {
-                cb.closest('.snippet-card').classList.toggle('selected', cb.checked);
-                // Restore base message format with current count
-                if (msgEl) msgEl.innerHTML = baseMsg;
-                refreshCount();
-            });
+        // Selection wiring — delegated on document rather than bound per
+        // checkbox, so it also picks up checkboxes that appear after init()
+        // (search.html re-renders its whole results list on every filter/sort
+        // change; a direct per-checkbox binding would silently stop working
+        // for anything rendered after the initial page load).
+        document.addEventListener('change', function (e) {
+            var cb = e.target;
+            if (!cb.classList || !cb.classList.contains('vid-check')) return;
+            var card = cb.closest('.snippet-card');
+            if (card) card.classList.toggle('selected', cb.checked);
+            // Restore base message format with current count
+            if (msgEl) msgEl.innerHTML = baseMsg;
+            refreshCount();
         });
         refreshCount();
 
