@@ -134,9 +134,19 @@
             margin-bottom: 16px;
             border-left: 4px solid #FCD0AF;
         }
-        .snippet-title { font-size: 18px; font-weight: 600; margin-bottom: 8px; line-height: 1.4; }
-        .snippet-title a { color: #0D7680; text-decoration: none; }
-        .snippet-title a:hover { text-decoration: underline; }
+        .snippet-title-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
+        .snippet-title {
+            font-size: 18px; font-weight: 600; line-height: 1.4;
+            cursor: pointer; user-select: none;
+        }
+        .snippet-title::before { content: "▸ "; color: #0D7680; }
+        .snippet-card.expanded .snippet-title::before { content: "▾ "; }
+        .snippet-title:hover { text-decoration: underline; }
+        .snippet-watch {
+            flex-shrink: 0; color: #0D7680; text-decoration: none;
+            font-size: 15px; padding: 2px 2px;
+        }
+        .snippet-watch:hover { text-decoration: underline; }
         .snippet-meta { font-size: 13px; color: #66737D; margin-bottom: 12px; font-style: italic; }
         .snippet-speakers { font-size: 14px; margin-bottom: 12px; }
         .snippet-speakers strong { color: #3E474F; }
@@ -247,7 +257,7 @@
     <div class="container">
         <div class="header">
             <h1>Search All Snippets</h1>
-            <div class="meta" id="headerMeta">Last updated 15 Sep 2026, 22:05 BST · loading…</div>
+            <div class="meta" id="headerMeta">Last updated 15 Sep 2026, 22:30 BST · loading…</div>
             <div class="site-nav"><a href="index.html">&larr; All reports</a> &middot; <a href="recent_snippets.html">Latest catch-up</a></div>
         </div>
 
@@ -339,6 +349,29 @@
             const vid = card && card.dataset.videoId;
             if (!vid) return;
             if (e.target.checked) selectedIds.add(vid); else selectedIds.delete(vid);
+        });
+        // Cards render collapsed (title + metadata only) -- clicking the
+        // title unfolds the summary/claims/details, since a channel can
+        // have hundreds of matches and the full text of each makes the
+        // list too long to skim (owner report, 2026-09-15).
+        function toggleSnippetBody(titleEl) {
+            const card = titleEl.closest('.snippet-card');
+            const body = card && card.querySelector('.snippet-body');
+            if (!body) return;
+            body.hidden = !body.hidden;
+            card.classList.toggle('expanded', !body.hidden);
+            titleEl.setAttribute('aria-expanded', String(!body.hidden));
+        }
+        document.addEventListener('click', (e) => {
+            const titleEl = e.target.closest('.snippet-title');
+            if (titleEl) toggleSnippetBody(titleEl);
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key !== 'Enter' && e.key !== ' ') return;
+            const titleEl = e.target.closest('.snippet-title');
+            if (!titleEl) return;
+            e.preventDefault();
+            toggleSnippetBody(titleEl);
         });
         const els = {
             q: document.getElementById('q'),
@@ -487,12 +520,17 @@
             return `<div class="snippet-card" data-video-id="${rec.id}">
                 <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"${checkedAttr}></label>
                 <span class="snippet-status"></span>
-                <div class="snippet-title">${url ? `<a href="${escapeHtml(url)}" target="_blank">${escapeHtml(rec.title)}</a>` : escapeHtml(rec.title)}</div>
+                <div class="snippet-title-row">
+                    <div class="snippet-title" role="button" tabindex="0" aria-expanded="false" title="Click to show the full snippet">${escapeHtml(rec.title)}</div>
+                    ${url ? `<a class="snippet-watch" href="${escapeHtml(url)}" target="_blank" title="Watch on YouTube">▶</a>` : ''}
+                </div>
                 <div class="snippet-meta">${escapeHtml(metaParts.join(' • '))}</div>
                 ${rec.speakers && rec.speakers.length ? `<div class="snippet-speakers"><strong>Speakers:</strong> ${escapeHtml(rec.speakers.join(', '))}</div>` : ''}
-                <div class="snippet-summary">${escapeHtml(rec.summary || '')}</div>
-                ${claims ? `<div class="snippet-claims"><div class="snippet-claims-title">Key Claims:</div><ul>${claims}</ul></div>` : ''}
-                ${details.length ? `<div class="snippet-details">${details.join('')}</div>` : ''}
+                <div class="snippet-body" hidden>
+                    <div class="snippet-summary">${escapeHtml(rec.summary || '')}</div>
+                    ${claims ? `<div class="snippet-claims"><div class="snippet-claims-title">Key Claims:</div><ul>${claims}</ul></div>` : ''}
+                    ${details.length ? `<div class="snippet-details">${details.join('')}</div>` : ''}
+                </div>
             </div>`;
         }
 
@@ -544,8 +582,8 @@
             .then(r => r.json())
             .then(data => {
                 RECORDS = data;
-                document.getElementById('headerMeta').textContent = `${RECORDS.length.toLocaleString()} snippets indexed · Last updated 15 Sep 2026, 22:05 BST`;
-                document.getElementById('footer').textContent = 'Last updated 15 Sep 2026, 22:05 BST';
+                document.getElementById('headerMeta').textContent = `${RECORDS.length.toLocaleString()} snippets indexed · Last updated 15 Sep 2026, 22:30 BST`;
+                document.getElementById('footer').textContent = 'Last updated 15 Sep 2026, 22:30 BST';
                 applyFilter();
             })
             .catch(() => {
