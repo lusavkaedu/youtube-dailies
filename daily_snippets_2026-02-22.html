@@ -157,6 +157,18 @@
             font-size: 12px;
             color: #66737D;
         }
+        .site-nav {
+            text-align: center;
+            margin-top: 12px;
+        }
+        .site-nav a {
+            color: #0D7680;
+            font-size: 14px;
+            text-decoration: none;
+        }
+        .site-nav a:hover {
+            text-decoration: underline;
+        }
         /* Collapsible sections */
         details {
             margin-bottom: 8px;
@@ -244,7 +256,72 @@
                 padding: 16px;
             }
         }
+        /* Add-to-playlist UI */
+        .snippet-card { position: relative; }
+        .snippet-check {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            margin: 0;
+            cursor: pointer;
+        }
+        .snippet-check input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .snippet-card.selected {
+            box-shadow: inset 4px 0 0 #0D7680;
+            background: #FFFCF8;
+        }
+        .snippet-status {
+            position: absolute;
+            top: 14px;
+            right: 40px;
+            font-size: 14px;
+            color: #66737D;
+            min-width: 90px;
+            text-align: right;
+        }
+        .snippet-status.ok { color: #0D7680; }
+        .snippet-status.err { color: #c0392b; }
+        .playlist-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #3E474F;
+            color: #FFF;
+            padding: 12px 24px;
+            z-index: 100;
+            display: none;
+            font-family: Georgia, "Times New Roman", serif;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.15);
+        }
+        .playlist-bar.visible {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+        .playlist-bar-msg { font-size: 15px; }
+        .playlist-bar button {
+            background: #0D7680;
+            color: #FFF;
+            border: 0;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-family: Georgia, "Times New Roman", serif;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .playlist-bar button:disabled {
+            background: #66737D;
+            cursor: not-allowed;
+        }
+        body.has-bar { padding-bottom: 80px; }
     </style>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
     <div class="container">
@@ -252,49 +329,21 @@
             <h1>Daily Snippets</h1>
             <div class="date">Sunday, February 22, 2026</div>
             <div class="meta">22 videos • uploaded 2026-02-22 • 22 videos</div>
+            <div class="site-nav"><a href="search.html">🔍 Search all snippets</a></div>
         </div>
         <details class="topic-details">
-            <summary class="topic-summary">POLITICS<span class="topic-count">(4 videos)</span></summary>
+            <summary class="topic-summary">POLITICS<span class="topic-count">(3 videos)</span></summary>
             <div class="topic-content">
-                <details class="channel-details">
-                    <summary class="channel-summary">IgorYakovenko<span class="channel-count">(1 videos)</span></summary>
-                    <div class="channel-content">
-                <div class="snippet-card">
-                    <div class="snippet-title">
-                        <a href="https://www.youtube.com/watch?v=o97srgYeLNc" target="_blank">БЕСКОНЕЧНЫЕ ПЕРЕГОВОРЫ, ПРЕДУПРЕЖДЕНИЕ ЦРУ, &quot;ЖИЗНЬ&quot; TELEGRAM. Эфир на @The_Breakfast_Show</a>
-                    </div>
-                    <div class="snippet-meta">interview • 28m 39s • @IgorYakovenko • Feb 22, 2026 • 6,682 views • 604 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Игорь Яковенко</div>
-                    <div class="snippet-summary">The episode discusses the ongoing peace negotiations between Russia and Ukraine, the role of the US and European countries, and the implications of Telegram&#x27;s censorship in Russia. It also touches on the return of Russian athletes to international competitions amidst political tensions.</div>
-                    <div class="snippet-claims">
-                        <div class="snippet-claims-title">Key Claims:</div>
-                        <ul>
-                            <li>Negotiations between Russia and Ukraine have been ongoing for nearly a year without significant progress.</li>
-                            <li>The US is pressuring Ukraine to concede territory to Russia as part of peace talks.</li>
-                            <li>European countries have differing views on how to handle relations with Russia and support for Ukraine.</li>
-                            <li>The FSB&#x27;s involvement in censoring Telegram indicates a serious threat to the platform&#x27;s existence in Russia.</li>
-                            <li>The return of Russian athletes to international competitions reflects a shift in the Russian government&#x27;s stance on sports.</li>
-                        </ul>
-                    </div>
-                    <div class="snippet-details">
-                        <p><strong>People:</strong> Зеленский, Трамп, Дмитриев, Стив Убытков, Орбан, Мелани, Макрон, Дедиктерёв</p>
-                        <p><strong>Organizations:</strong> ЦРУ, Fox News, Евросоюз, Ми6</p>
-                        <p><strong>Topics:</strong> peace negotiations, US-Russia relations, European politics, Telegram censorship, Olympic Games</p>
-                    </div>
-                    <div class="snippet-conclusion">
-                        <strong>Conclusion:</strong> The ongoing political dynamics in Europe and the US significantly influence the situation in Ukraine and the future of platforms like Telegram.
-                    </div>
-                </div>
-                    </div>
-                </details>
                 <details class="channel-details">
                     <summary class="channel-summary">NewCultureForum<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="ldl42qf4evA">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=ldl42qf4evA" target="_blank">Douglas Murray: Ethnic vs Civic Nationalism, the NEW RIGHT + the Return of Anti-Semitism</a>
                     </div>
-                    <div class="snippet-meta">interview • 33m 38s • @NewCultureForum • Feb 22, 2026 • 26,751 views • 1,531 likes</div>
+                    <div class="snippet-meta">interview • 33m 38s • @newcultureforum • Feb 22, 2026 • 26,751 views • 1,531 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Douglas Murray</div>
                     <div class="snippet-summary">In this episode, Douglas Murray discusses the tensions between ethnic and civic nationalism, the resurgence of anti-Semitism, and the implications of migration on British identity. He reflects on generational shifts in attitudes towards Israel and the Jewish community, as well as the broader cultural and political landscape in the UK.</div>
                     <div class="snippet-claims">
@@ -322,11 +371,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">ThePodcastoftheLotusEaters<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="IaA0-z8RZ2E">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=IaA0-z8RZ2E" target="_blank">This is Democracy Manifest</a>
                     </div>
-                    <div class="snippet-meta">monologue • 27m 1s • @ThePodcastoftheLotusEaters • Feb 22, 2026 • 29,621 views • 1,633 likes</div>
+                    <div class="snippet-meta">monologue • 27m 1s • @thepodcastofthelotuseaters • Feb 22, 2026 • 29,621 views • 1,633 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">This episode discusses the upcoming bi-election in Gorton and Denton, highlighting the political dynamics and controversies surrounding the Labour Party and its candidates. The conversation critiques the state of British politics, particularly focusing on issues of voter bribery and demographic changes affecting political representation.</div>
                     <div class="snippet-claims">
@@ -335,12 +386,12 @@
                             <li>Andrew Gwyn resigned due to health issues but was actually suspended from the Labour Party.</li>
                             <li>Labour is accused of bribing voters with food in exchange for support.</li>
                             <li>The political landscape in Britain is described as unimpressive and fragmented.</li>
-                            <li>Andy Burnham is seen as a potential rival to Kia Starmer within the Labour Party.</li>
+                            <li>Andy Burnham is seen as a potential rival to Kier Starmer within the Labour Party.</li>
                             <li>Demographic changes are leading to sectarian politics in British elections.</li>
                         </ul>
                     </div>
                     <div class="snippet-details">
-                        <p><strong>People:</strong> Andrew Gwyn, Andy Burnham, Kia Starmer, Angelica Sia, Charlotte Kaden, Matt Goodwin, Nick Buckley</p>
+                        <p><strong>People:</strong> Andrew Gwyn, Andy Burnham, Keir Starmer, Angelica Sia, Charlotte Kaden, Matt Goodwin, Nick Buckley</p>
                         <p><strong>Organizations:</strong> Labour Party, Green Party, Conservative Party, Reform Party</p>
                         <p><strong>Topics:</strong> bi-election, Labour Party issues, political landscape, voter bribery, sectarian politics</p>
                     </div>
@@ -353,11 +404,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Doomberg<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="S-BVZDwCnxY">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=S-BVZDwCnxY" target="_blank">Is Canada REALLY Breaking Up With The U.S.? (ATTN Bitcoiners) | Doomberg</a>
                     </div>
-                    <div class="snippet-meta">interview • 64m 10s • Feb 22, 2026 • 2,047 views • 123 likes</div>
+                    <div class="snippet-meta">interview • 64m 10s • @canadianbitcoiners • Feb 22, 2026 • 2,047 views • 123 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Doomberg</div>
                     <div class="snippet-summary">This episode discusses the evolving political landscape in Canada, particularly focusing on Alberta&#x27;s separatist movement and the potential rise of Mark Carney as a significant political figure. The conversation also touches on the implications of AI and Bitcoin in the current economic climate.</div>
                     <div class="snippet-claims">
@@ -389,11 +442,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">CommodityCulture<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="BrvYmpEPJmI">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=BrvYmpEPJmI" target="_blank">OIL Headed Back to $100+, &#x27;Every Area&#x27; of Energy Set to Soar: Josef Schachter</a>
                     </div>
-                    <div class="snippet-meta">interview • 41m 58s • @CommodityCulture • Feb 22, 2026 • 13,022 views • 547 likes</div>
+                    <div class="snippet-meta">interview • 41m 58s • @commodityculture • Feb 22, 2026 • 13,022 views • 547 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Jesse Day, Joseph Shakar</div>
                     <div class="snippet-summary">In this episode, Jesse Day interviews oil and gas analyst Joseph Shakar about the current state of the energy sector, including oil prices, geopolitical risks, and the potential for growth in natural gas. Shakar provides insights into how global demand and supply dynamics, particularly from emerging markets, will shape the future of energy investments.</div>
                     <div class="snippet-claims">
@@ -420,11 +475,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">Finding_Finance<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="AXkTixXTKcA">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=AXkTixXTKcA" target="_blank">The Great PGM Shakeup: Platinum &amp; Palladium Market Analysis</a>
                     </div>
-                    <div class="snippet-meta">monologue • 21m 23s • @Finding_Finance • Feb 22, 2026 • 3,596 views • 288 likes</div>
+                    <div class="snippet-meta">monologue • 21m 23s • @finding_finance • Feb 22, 2026 • 3,596 views • 288 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Andy</div>
                     <div class="snippet-summary">In this episode, Andy analyzes the current trends in the platinum and palladium markets, discussing potential investment opportunities and market cycles. He also touches on energy security and the implications of supply deficits in uranium and coal.</div>
                     <div class="snippet-claims">
@@ -451,11 +508,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">OGJohnAG<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="Q1QH2kOMZ0Y">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=Q1QH2kOMZ0Y" target="_blank">Silver Is on the Verge of a Historic 10-Month Green Streak — The Data Tells a Story Most Won&#x27;t See</a>
                     </div>
-                    <div class="snippet-meta">monologue • 9m 59s • @OGJohnAG • Feb 22, 2026 • 32,378 views • 2,052 likes</div>
+                    <div class="snippet-meta">monologue • 9m 59s • @ogjohnag • Feb 22, 2026 • 32,378 views • 2,052 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> OG John AG</div>
                     <div class="snippet-summary">This episode discusses the current state of the silver and gold markets, highlighting significant trends and data that suggest a shift in investor behavior. It emphasizes the importance of understanding both fundamental and technical analysis in navigating these markets.</div>
                     <div class="snippet-claims">
@@ -483,11 +542,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">OGJohnAG_2<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="L50EHrTLQW8">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=L50EHrTLQW8" target="_blank">18 HOURS Until China Returns — The $5 Trillion Question That Decides Gold&#x27;s Fate</a>
                     </div>
-                    <div class="snippet-meta">monologue • 18m 18s • @OGJohnAG_2 • Feb 22, 2026 • 13,369 views • 968 likes</div>
+                    <div class="snippet-meta">monologue • 18m 18s • @ogjohnag_2 • Feb 22, 2026 • 13,369 views • 968 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">This episode discusses the anticipated impact of China&#x27;s return to the gold and silver markets after a trading hiatus, highlighting key market events and potential scenarios. The narrator outlines how China&#x27;s actions could influence gold and silver prices in the coming days.</div>
                     <div class="snippet-claims">
@@ -512,11 +573,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">OutlierTrading<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="_meFsIpmzXM">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=_meFsIpmzXM" target="_blank">How to Trade Earnings with Options</a>
                     </div>
-                    <div class="snippet-meta">monologue • 21m 33s • @OutlierTrading • Feb 22, 2026 • 508 views • 47 likes</div>
+                    <div class="snippet-meta">monologue • 21m 33s • @outliertrading • Feb 22, 2026 • 508 views • 47 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">This episode discusses how to profit from earnings releases using options trading strategies. The narrator explains various mechanisms and considerations for trading around earnings announcements.</div>
                     <div class="snippet-claims">
@@ -543,11 +606,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">TheAsianGuy-k9h<span class="channel-count">(2 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="DJXqjfTibNI">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=DJXqjfTibNI" target="_blank">Silver +9% With China Gone — What Happens Tuesday When Shanghai Reopens Into $93 Physical Bids</a>
                     </div>
-                    <div class="snippet-meta">monologue • 28m 8s • @THEASIANGUY-AG • Feb 22, 2026 • 915 views • 72 likes</div>
+                    <div class="snippet-meta">monologue • 28m 8s • @theasianguy-ag • Feb 22, 2026 • 915 views • 72 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">This episode discusses the current state of the silver market, particularly in light of China&#x27;s absence during the Lunar New Year and the implications of a recent Supreme Court ruling on tariffs. It explores how these factors may affect silver prices when the Shanghai market reopens.</div>
                     <div class="snippet-claims">
@@ -569,11 +634,13 @@
                         <strong>Conclusion:</strong> The silver market is poised for significant movement when Shanghai reopens, given the current supply-demand dynamics.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="yaiBjvomDxA">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=yaiBjvomDxA" target="_blank">3 Ratios. 100 Years of Data. Why Silver at $84 Is Still the Biggest Undervaluation of Your Lifetime</a>
                     </div>
-                    <div class="snippet-meta">monologue • 24m 3s • @THEASIANGUY-AG • Feb 22, 2026 • 13,990 views • 532 likes</div>
+                    <div class="snippet-meta">monologue • 24m 3s • @theasianguy-ag • Feb 22, 2026 • 13,990 views • 532 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Asian Guy</div>
                     <div class="snippet-summary">This episode discusses the undervaluation of silver and presents mathematical analyses suggesting that silver could be worth significantly more than its current price. The speaker emphasizes the importance of understanding historical ratios and market dynamics to make informed investment decisions.</div>
                     <div class="snippet-claims">
@@ -600,7 +667,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">eurodollaruniversity<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="pOBSHScLZ9c">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=pOBSHScLZ9c" target="_blank">Repo Market Stress Is Back (And Bigger Than You Think)</a>
                     </div>
@@ -631,7 +700,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">hedgeye<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="-h6NISzx7xI">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=-h6NISzx7xI" target="_blank">The AI Arms Race: How &#x27;Content Flood&#x27; Reshapes The Map | Paradigm Platforms</a>
                     </div>
@@ -662,7 +733,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">inittowinit928<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="q7F8HzRRIsQ">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=q7F8HzRRIsQ" target="_blank">Gold vs S&amp;P: Why I Still Like Miners + The $5,200 Wall ~ Monday Market Moves</a>
                     </div>
@@ -693,7 +766,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">miningstockedu<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="dw1mnHL45P0">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=dw1mnHL45P0" target="_blank">“Mega Uranium Mine Concept” via Rapid Resource Growth explained by Atomic Eagle CEO Phil Hoskins</a>
                     </div>
@@ -724,7 +799,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Michael_Howell<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="dWwDx9dkhRM">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=dWwDx9dkhRM" target="_blank">MICHAEL HOWELL  | Supreme Court, War, Warsh, &amp; China Risks Equals Gold!</a>
                     </div>
@@ -755,7 +832,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Rick_Rule<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="Y4vEiXxoWik">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=Y4vEiXxoWik" target="_blank">🔴 BIG UPDATE! Rick Rule Sold His Silver But Something BIG Is Coming NEXT</a>
                     </div>
@@ -786,11 +865,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">triANGLEINVESTOR<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="rUAn3lYQKGs">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=rUAn3lYQKGs" target="_blank">District Scale Uranium Discovery Potential - Geiger Energy (TSXV:BEEP)</a>
                     </div>
-                    <div class="snippet-meta">interview • 18m 34s • @triANGLEINVESTOR • Feb 22, 2026 • 825 views • 25 likes</div>
+                    <div class="snippet-meta">interview • 18m 34s • @triangleinvestor • Feb 22, 2026 • 825 views • 25 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Lucia Avalovich, Dr. Rebecca Hunter</div>
                     <div class="snippet-summary">This episode features an interview with Dr. Rebecca Hunter, CEO of Geiger Energy, discussing the company&#x27;s uranium exploration efforts and the significance of recent discoveries. The conversation covers drilling strategies, market trends, and the potential for significant uranium deposits.</div>
                     <div class="snippet-claims">
@@ -817,16 +898,46 @@
             </div>
         </details>
         <details class="topic-details">
-            <summary class="topic-summary">RUSSIA<span class="topic-count">(1 videos)</span></summary>
+            <summary class="topic-summary">RUSSIA<span class="topic-count">(2 videos)</span></summary>
             <div class="topic-content">
                 <details class="channel-details">
-                    <summary class="channel-summary">IgorYakovenko<span class="channel-count">(1 videos)</span></summary>
+                    <summary class="channel-summary">IgorYakovenko<span class="channel-count">(2 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="o97srgYeLNc">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=o97srgYeLNc" target="_blank">БЕСКОНЕЧНЫЕ ПЕРЕГОВОРЫ, ПРЕДУПРЕЖДЕНИЕ ЦРУ, &quot;ЖИЗНЬ&quot; TELEGRAM. Эфир на @The_Breakfast_Show</a>
+                    </div>
+                    <div class="snippet-meta">interview • 28m 39s • @igoryakovenko • Feb 22, 2026 • 6,682 views • 604 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Игорь Яковенко</div>
+                    <div class="snippet-summary">The episode discusses the ongoing peace negotiations between Russia and Ukraine, the role of the US and European countries, and the implications of Telegram&#x27;s censorship in Russia. It also touches on the return of Russian athletes to international competitions amidst political tensions.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Negotiations between Russia and Ukraine have been ongoing for nearly a year without significant progress.</li>
+                            <li>The US is pressuring Ukraine to concede territory to Russia as part of peace talks.</li>
+                            <li>European countries have differing views on how to handle relations with Russia and support for Ukraine.</li>
+                            <li>The FSB&#x27;s involvement in censoring Telegram indicates a serious threat to the platform&#x27;s existence in Russia.</li>
+                            <li>The return of Russian athletes to international competitions reflects a shift in the Russian government&#x27;s stance on sports.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Зеленский, Трамп, Дмитриев, Стив Убытков, Орбан, Мелани, Макрон, Дедиктерёв</p>
+                        <p><strong>Organizations:</strong> ЦРУ, Fox News, Евросоюз, Ми6</p>
+                        <p><strong>Topics:</strong> peace negotiations, US-Russia relations, European politics, Telegram censorship, Olympic Games</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The ongoing political dynamics in Europe and the US significantly influence the situation in Ukraine and the future of platforms like Telegram.
+                    </div>
+                </div>
+                <div class="snippet-card" data-video-id="ulGWbwW3Rf0">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=ulGWbwW3Rf0" target="_blank">ПУТИН: МИР СТРАШНЕЕ, ЧЕМ БАНКРОТСТВО</a>
                     </div>
-                    <div class="snippet-meta">interview • 19m 50s • @IgorYakovenko • Feb 22, 2026 • 1,689 views • 286 likes</div>
+                    <div class="snippet-meta">interview • 19m 50s • @igoryakovenko • Feb 22, 2026 • 1,689 views • 286 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Игорь Яковенко</div>
                     <div class="snippet-summary">В этом эпизоде обсуждаются текущие события вокруг войны в Украине, включая возможности России продолжать конфликт и последствия для экономики. Также рассматриваются потенциальные меры для прекращения войны и влияние на население.</div>
                     <div class="snippet-claims">
@@ -858,11 +969,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">LotuseatersDotCom<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="CoJZJfyLQz4">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=CoJZJfyLQz4" target="_blank">PREVIEW: Epochs #251 | The Life of Shakespeare</a>
                     </div>
-                    <div class="snippet-meta">monologue • 19m 42s • @LotuseatersDotCom • Feb 22, 2026 • 818 views • 93 likes</div>
+                    <div class="snippet-meta">monologue • 19m 42s • @lotuseatersdotcom • Feb 22, 2026 • 818 views • 93 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">This episode explores the life and career of William Shakespeare, highlighting the biographical details and the context of his time. The narrator discusses Shakespeare&#x27;s education, family background, and his rise in the London theater scene.</div>
                     <div class="snippet-claims">
@@ -890,11 +1003,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">ThePodcastoftheLotusEaters<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="oZ6hLTnkHZk">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=oZ6hLTnkHZk" target="_blank">Aliens ARE Real</a>
                     </div>
-                    <div class="snippet-meta">monologue • 26m 44s • @ThePodcastoftheLotusEaters • Feb 22, 2026 • 32,985 views • 1,740 likes</div>
+                    <div class="snippet-meta">monologue • 26m 44s • @thepodcastofthelotuseaters • Feb 22, 2026 • 32,985 views • 1,740 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">This episode discusses the reality of aliens and UFOs, referencing statements from public figures like Barack Obama and Donald Trump. The speakers explore various theories and public perceptions surrounding extraterrestrial life and government transparency.</div>
                     <div class="snippet-claims">
@@ -921,7 +1036,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">triggerpod<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="X8WxuC-GXd8">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=X8WxuC-GXd8" target="_blank">How Not To Ruin Your Marriage - World&#x27;s Leading Divorce Expert - James Sexton</a>
                     </div>
@@ -953,8 +1070,14 @@
             </div>
         </details>
         <div class="footer">
-            Generated 2026-03-14 07:03:13
+            Generated 2026-09-15 22:04:39
         </div>
     </div>
+    <div class="playlist-bar" id="plBar">
+        <span class="playlist-bar-msg"><span id="plCount">0</span> selected</span>
+        <button id="plBtn" type="button">Add to playlist</button>
+    </div>
+    <script src="assets/config.js"></script>
+    <script src="assets/playlist.js"></script>
 </body>
 </html>

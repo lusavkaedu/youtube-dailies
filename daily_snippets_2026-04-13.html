@@ -157,6 +157,18 @@
             font-size: 12px;
             color: #66737D;
         }
+        .site-nav {
+            text-align: center;
+            margin-top: 12px;
+        }
+        .site-nav a {
+            color: #0D7680;
+            font-size: 14px;
+            text-decoration: none;
+        }
+        .site-nav a:hover {
+            text-decoration: underline;
+        }
         /* Collapsible sections */
         details {
             margin-bottom: 8px;
@@ -244,26 +256,94 @@
                 padding: 16px;
             }
         }
+        /* Add-to-playlist UI */
+        .snippet-card { position: relative; }
+        .snippet-check {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            margin: 0;
+            cursor: pointer;
+        }
+        .snippet-check input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .snippet-card.selected {
+            box-shadow: inset 4px 0 0 #0D7680;
+            background: #FFFCF8;
+        }
+        .snippet-status {
+            position: absolute;
+            top: 14px;
+            right: 40px;
+            font-size: 14px;
+            color: #66737D;
+            min-width: 90px;
+            text-align: right;
+        }
+        .snippet-status.ok { color: #0D7680; }
+        .snippet-status.err { color: #c0392b; }
+        .playlist-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #3E474F;
+            color: #FFF;
+            padding: 12px 24px;
+            z-index: 100;
+            display: none;
+            font-family: Georgia, "Times New Roman", serif;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.15);
+        }
+        .playlist-bar.visible {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+        .playlist-bar-msg { font-size: 15px; }
+        .playlist-bar button {
+            background: #0D7680;
+            color: #FFF;
+            border: 0;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-family: Georgia, "Times New Roman", serif;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .playlist-bar button:disabled {
+            background: #66737D;
+            cursor: not-allowed;
+        }
+        body.has-bar { padding-bottom: 80px; }
     </style>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>Daily Snippets</h1>
             <div class="date">Monday, April 13, 2026</div>
-            <div class="meta">39 videos • uploaded 2026-04-13 • 39 videos</div>
+            <div class="meta">40 videos • uploaded 2026-04-13 • 40 videos</div>
+            <div class="site-nav"><a href="search.html">🔍 Search all snippets</a></div>
         </div>
         <details class="topic-details">
-            <summary class="topic-summary">POLITICS<span class="topic-count">(13 videos)</span></summary>
+            <summary class="topic-summary">POLITICS<span class="topic-count">(10 videos)</span></summary>
             <div class="topic-content">
                 <details class="channel-details">
                     <summary class="channel-summary">AkkadDaily<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="Wx4S2yCpgO4">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=Wx4S2yCpgO4" target="_blank">It&#x27;s So Over</a>
                     </div>
-                    <div class="snippet-meta">monologue • 13m 36s • @SargonofAkkad • Apr 13, 2026 • 34,670 views • 3,497 likes</div>
+                    <div class="snippet-meta">monologue • 13m 36s • @sargonofakkad • Apr 13, 2026 • 34,670 views • 3,497 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">This episode discusses the decline of Trump&#x27;s presidency and the shifting dynamics within the MAGA movement. The narrator expresses disappointment over Trump&#x27;s recent actions and the loss of support from his core base.</div>
                     <div class="snippet-claims">
@@ -290,11 +370,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">Con_Tomlinson<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="jrlSDg9k3Dk">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=jrlSDg9k3Dk" target="_blank">Reviewing my Debate with Professor David Starkey</a>
                     </div>
-                    <div class="snippet-meta">monologue • 153m 4s • @Con_Tomlinson • Apr 13, 2026 • 8,233 views • 558 likes</div>
+                    <div class="snippet-meta">monologue • 153m 4s • @con_tomlinson • Apr 13, 2026 • 8,233 views • 558 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">In this episode, the narrator reviews a debate with Professor David Starkey, discussing the implications of demographic changes in Britain and the challenges of cultural integration. The conversation explores the tension between maintaining national identity and accommodating diverse populations.</div>
                     <div class="snippet-claims">
@@ -319,128 +401,21 @@
                     </div>
                 </details>
                 <details class="channel-details">
-                    <summary class="channel-summary">IgorYakovenko<span class="channel-count">(4 videos)</span></summary>
-                    <div class="channel-content">
-                <div class="snippet-card">
-                    <div class="snippet-title">
-                        <a href="https://www.youtube.com/watch?v=wgzyKGqy3JE" target="_blank">ГДЕ ТРАМП ТАМ ПОБЕДА</a>
-                    </div>
-                    <div class="snippet-meta">monologue • 96m 54s • @igoryakovenko • Apr 13, 2026 • 71,222 views • 7,537 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Игорь Яковенко</div>
-                    <div class="snippet-summary">В этом эпизоде Игорь Яковенко обсуждает результаты выборов в Венгрии, которые стали значительным поражением для Дональда Трампа и Виктора Орбана. Также рассматриваются последствия для отношений Венгрии с Европейским Союзом и ситуацию с Ираном.</div>
-                    <div class="snippet-claims">
-                        <div class="snippet-claims-title">Key Claims:</div>
-                        <ul>
-                            <li>Выборы в Венгрии стали триумфом для оппозиционной партии Тиса.</li>
-                            <li>Орбан признал свое поражение и поздравил оппонента с победой.</li>
-                            <li>Победа Тисы может привести к изменению отношений Венгрии с Европейским Союзом.</li>
-                            <li>Трамп терпит поражение в переговорах с Ираном.</li>
-                            <li>Ситуация в Венгрии демонстрирует, что Европа может противостоять авторитарным режимам.</li>
-                        </ul>
-                    </div>
-                    <div class="snippet-details">
-                        <p><strong>People:</strong> Дональд Трамп, Виктор Орбан, Зеленский, Урсула Фондерляйн, Мадьяр, Михаил Валентинович Сава</p>
-                        <p><strong>Organizations:</strong> None</p>
-                        <p><strong>Topics:</strong> Трамп и Орбан, Выборы в Венгрии, Иран и США, Европейский Союз, Глобальная политика</p>
-                    </div>
-                    <div class="snippet-conclusion">
-                        <strong>Conclusion:</strong> Поражение Трампа и Орбана в Венгрии является важным сигналом для глобальной политики.
-                    </div>
-                </div>
-                <div class="snippet-card">
-                    <div class="snippet-title">
-                        <a href="https://www.youtube.com/watch?v=Rb1-3e1ur-c" target="_blank">БРЕКФЕСТ. ПРОИГРЫШ ПУТИНА - ПОРАЖЕНИЕ ОСИ ЗЛА.БЛОКИРОВКА ТРАМПОМ ПРОЛИВА НАРУКУ ПУТИНУ.</a>
-                    </div>
-                    <div class="snippet-meta">interview • 15m 10s • @igoryakovenko • Apr 13, 2026 • 13,207 views • 1,018 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Игорь Яковенко</div>
-                    <div class="snippet-summary">В этом эпизоде обсуждаются итоги выборов в Венгрии и их влияние на политическую ситуацию в Европе, а также роль Путина и Трампа в международной политике. Игорь Яковенко анализирует, как эти события могут изменить динамику отношений между странами и их лидерами.</div>
-                    <div class="snippet-claims">
-                        <div class="snippet-claims-title">Key Claims:</div>
-                        <ul>
-                            <li>Выборы в Венгрии стали поражением для Путина и его союзников.</li>
-                            <li>Путин потерял своего главного союзника в Евросоюзе.</li>
-                            <li>Трамп и Путин имеют схожие интересы в разрушении либеральной демократии.</li>
-                            <li>Иран остается важным союзником для Путина.</li>
-                            <li>Переговоры с Ираном были обречены на провал из-за отсутствия подходящих участников.</li>
-                        </ul>
-                    </div>
-                    <div class="snippet-details">
-                        <p><strong>People:</strong> Трамп, Нетаньяху, Орбан, Путин, Дмитрий Песков, Джейди Вес</p>
-                        <p><strong>Organizations:</strong> Евросоюз</p>
-                        <p><strong>Topics:</strong> выборы в Венгрии, поражение Путина, отношения с Евросоюзом, Иран, нефть</p>
-                    </div>
-                    <div class="snippet-conclusion">
-                        <strong>Conclusion:</strong> Поражение Путина и его союзников в Венгрии открывает новые возможности для восстановления отношений с Евросоюзом.
-                    </div>
-                </div>
-                <div class="snippet-card">
-                    <div class="snippet-title">
-                        <a href="https://www.youtube.com/watch?v=MQBeISg83uw" target="_blank">Венгрия вышла из протектората России.</a>
-                    </div>
-                    <div class="snippet-meta">panel • 58m 54s • @igoryakovenko • Apr 13, 2026 • 10,434 views • 975 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Игорь Ляковенко</div>
-                    <div class="snippet-summary">This episode discusses Hungary&#x27;s recent elections and the implications of the results for Russia and the European Union. The conversation highlights the significance of these elections in the context of broader geopolitical dynamics.</div>
-                    <div class="snippet-claims">
-                        <div class="snippet-claims-title">Key Claims:</div>
-                        <ul>
-                            <li>Orban&#x27;s defeat in the Hungarian elections signifies a shift away from Russian influence.</li>
-                            <li>The elections are seen as a major electoral event of the year, comparable to significant events in U.S. politics.</li>
-                            <li>The new Hungarian leadership aims to reset relations with the EU while maintaining ties with Russia.</li>
-                            <li>Support for Trump is viewed as toxic for European leaders, as evidenced by the election results in Hungary.</li>
-                            <li>The Kremlin&#x27;s response to the election results indicates a shift in its relationship with Hungary.</li>
-                        </ul>
-                    </div>
-                    <div class="snippet-details">
-                        <p><strong>People:</strong> Орбан, Трамп, Путин, Зеленский, Мадьяр, Сиярта, Гарри, Асад, Мадуро, Нитаньяху, Губрев, Кросовский, Собчак</p>
-                        <p><strong>Organizations:</strong> None</p>
-                        <p><strong>Topics:</strong> Hungary elections, Russia influence, EU relations, Ukraine conflict, Trump&#x27;s impact</p>
-                    </div>
-                    <div class="snippet-conclusion">
-                        <strong>Conclusion:</strong> The outcome of the Hungarian elections represents a significant setback for Russian and Trumpian influence in Europe.
-                    </div>
-                </div>
-                <div class="snippet-card">
-                    <div class="snippet-title">
-                        <a href="https://www.youtube.com/watch?v=9GxHGdvBTKA" target="_blank">💥ЯКОВЕНКО! КУРБАНОВА</a>
-                    </div>
-                    <div class="snippet-meta">interview • 55m 15s • @igoryakovenko • Apr 13, 2026 • 10,231 views • 1,035 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Алена Курбанова, Игорь Яковенко</div>
-                    <div class="snippet-summary">В этом эпизоде обсуждаются выборы в Венгрии и их влияние на российскую политику, а также анализируется российская пропаганда и её изменения. Игорь Яковенко делится своими взглядами на текущие события и литературу в контексте цензуры в России.</div>
-                    <div class="snippet-claims">
-                        <div class="snippet-claims-title">Key Claims:</div>
-                        <ul>
-                            <li>Выборы в Венгрии имеют мировое значение и отражают борьбу за влияние в Европе.</li>
-                            <li>Российская пропаганда теряет эффективность и сталкивается с растерянностью.</li>
-                            <li>Книги становятся врагами режима в России из-за цензуры и запретов.</li>
-                            <li>Путин не собирается прекращать войну, что является главной причиной её продолжения.</li>
-                            <li>Трамп символизирует поражение в международной политике.</li>
-                        </ul>
-                    </div>
-                    <div class="snippet-details">
-                        <p><strong>People:</strong> Дмитрий Медведев, Маргарита Симонян, Павел Губарев, Трамп, Зеленский, Аятолла Али Хаменеи, Захар Прилепин</p>
-                        <p><strong>Organizations:</strong> None</p>
-                        <p><strong>Topics:</strong> Венгерские выборы, Российская пропаганда, Книги и цензура, Игорь Яковенко, Война в Украине, Трамп и политика</p>
-                    </div>
-                    <div class="snippet-conclusion">
-                        <strong>Conclusion:</strong> Исследование зла и пропаганды важно для понимания текущих событий и их последствий.
-                    </div>
-                </div>
-                    </div>
-                </details>
-                <details class="channel-details">
                     <summary class="channel-summary">NewCultureForum<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="s16vsYcN1Dw">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=s16vsYcN1Dw" target="_blank">Orban Defeated: Is Populism on the Wane? What Next for Hungary?</a>
                     </div>
-                    <div class="snippet-meta">panel • 23m 0s • @NewCultureForum • Apr 13, 2026 • 2,932 views • 224 likes</div>
+                    <div class="snippet-meta">panel • 23m 0s • @newcultureforum • Apr 13, 2026 • 2,932 views • 224 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Harrison Pitt, David Olrody Boltz, Frank Farade</div>
-                    <div class="snippet-summary">This episode discusses the recent electoral defeat of Hungarian Prime Minister Victor Orban and its implications for populism in Hungary and the West. The panelists analyze the factors leading to Orban&#x27;s loss and the potential direction of his successor, Peter Magua.</div>
+                    <div class="snippet-summary">This episode discusses the recent electoral defeat of Hungarian Prime Minister Viktor Orbán and its implications for populism in Hungary and the West. The panelists analyze the factors leading to Orban&#x27;s loss and the potential direction of his successor, Peter Magua.</div>
                     <div class="snippet-claims">
                         <div class="snippet-claims-title">Key Claims:</div>
                         <ul>
-                            <li>Victor Orban lost the election after 16 years in power.</li>
+                            <li>Viktor Orbán lost the election after 16 years in power.</li>
                             <li>Peter Magua is expected to maintain strict immigration policies similar to Orban&#x27;s.</li>
                             <li>Orban&#x27;s defeat is celebrated by liberal elites in the West.</li>
                             <li>The Fides party lost touch with Hungarian society and younger voters.</li>
@@ -449,7 +424,7 @@
                         </ul>
                     </div>
                     <div class="snippet-details">
-                        <p><strong>People:</strong> Victor Orban, Peter Magua, Alex Soros, Ursula Vanderelion, Donald Tusk, JD Vance, Pierre Poilievre, Zelinski</p>
+                        <p><strong>People:</strong> Viktor Orbán, Peter Magua, Alex Soros, Ursula Vanderelion, Donald Tusk, JD Vance, Pierre Poilievre, Zelinski</p>
                         <p><strong>Organizations:</strong> New Culture Forum, Fides, European Commission</p>
                         <p><strong>Topics:</strong> Hungary politics, Orban&#x27;s defeat, populism, immigration policy, EU relations, economic issues</p>
                     </div>
@@ -462,7 +437,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">RaymondIbrahim-HW<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="jRrc6Oykux4">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=jRrc6Oykux4" target="_blank">The Corrosive Nature of Islam</a>
                     </div>
@@ -492,13 +469,43 @@
                     </div>
                 </details>
                 <details class="channel-details">
-                    <summary class="channel-summary">ThePodcastoftheLotusEaters<span class="channel-count">(3 videos)</span></summary>
+                    <summary class="channel-summary">ThePodcastoftheLotusEaters<span class="channel-count">(4 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="Bp9YbYVR3Is">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=Bp9YbYVR3Is" target="_blank">Breakfast With Beau | Tuesday 14th April 2026</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 67m 36s • @thepodcastofthelotuseaters • Apr 13, 2026 • 16,145 views • 1,218 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Beau</div>
+                    <div class="snippet-summary">In this episode, Beau discusses the Southport massacre and the failures of various authorities to prevent it, while also touching on the recent spat between Donald Trump and Pope Francis. The conversation critiques the culture of anti-racism and its implications on public safety and policy.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The inquiry into the Southport massacre revealed catastrophic failures by parents and authorities.</li>
+                            <li>Axel Rudakubana&#x27;s violent behavior was downplayed due to fears of racial stereotyping.</li>
+                            <li>The report criticized the lack of action taken by mental health services regarding Rudakubana&#x27;s dangerous behavior.</li>
+                            <li>Beau argues that the culture of anti-racism contributed to the tragedy by preventing proper risk assessments.</li>
+                            <li>The episode highlights the ongoing issues with immigration and the asylum system in the UK.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Harry, Axel Rudakubana, Joanne Hodgson, Samantha Steed, Sir Adrian Fulford, Alphonse Roudyka Cabana, Donald Trump, Pope Francis, Lisa Nandy, Fares</p>
+                        <p><strong>Organizations:</strong> Lancashire Police, BBC News</p>
+                        <p><strong>Topics:</strong> Southport massacre, media criticism, Trump and the Pope, anti-racism culture, mental health services, immigration issues</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The failures in the Southport case exemplify the dangers of prioritizing anti-racism over public safety.
+                    </div>
+                </div>
+                <div class="snippet-card" data-video-id="1iRum4O6GMs">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=1iRum4O6GMs" target="_blank">MAGA Has Been Subverted</a>
                     </div>
-                    <div class="snippet-meta">monologue • 26m 28s • @ThePodcastoftheLotusEaters • Apr 13, 2026 • 19,533 views • 1,143 likes</div>
+                    <div class="snippet-meta">monologue • 26m 28s • @thepodcastofthelotuseaters • Apr 13, 2026 • 19,533 views • 1,143 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">This episode discusses the subversion of the MAGA movement, particularly focusing on RFK Jr.&#x27;s transition to podcasting while in a significant government role. It critiques the current state of health policy and food quality in America, highlighting the influence of corporate interests.</div>
                     <div class="snippet-claims">
@@ -520,11 +527,13 @@
                         <strong>Conclusion:</strong> The MAGA movement has been subverted, with key figures prioritizing personal media ventures over their governmental responsibilities.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="0n29CrTISdI">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=0n29CrTISdI" target="_blank">They&#x27;ve Lost All Credibility</a>
                     </div>
-                    <div class="snippet-meta">panel • 23m 52s • @ThePodcastoftheLotusEaters • Apr 13, 2026 • 31,011 views • 1,714 likes</div>
+                    <div class="snippet-meta">panel • 23m 52s • @thepodcastofthelotuseaters • Apr 13, 2026 • 31,011 views • 1,714 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">The episode discusses the implications of the so-called &#x27;Boris wave&#x27; on British society and the political landscape, particularly focusing on the Reform Party&#x27;s stance and candidate selection. The speakers critique the party&#x27;s credibility and the contradictions in their immigration policies.</div>
                     <div class="snippet-claims">
@@ -546,11 +555,13 @@
                         <strong>Conclusion:</strong> The Reform Party&#x27;s approach to immigration and candidate selection undermines its credibility.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="huwYtRsRfSs">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=huwYtRsRfSs" target="_blank">Look At the Insane Bias</a>
                     </div>
-                    <div class="snippet-meta">monologue • 24m 5s • @ThePodcastoftheLotusEaters • Apr 13, 2026 • 54,523 views • 3,548 likes</div>
+                    <div class="snippet-meta">monologue • 24m 5s • @thepodcastofthelotuseaters • Apr 13, 2026 • 54,523 views • 3,548 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">This episode discusses a recent anti-racism protest in Swindon and the media coverage surrounding it. The speakers express their views on the bias of local media and the implications for community dynamics.</div>
                     <div class="snippet-claims">
@@ -577,7 +588,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">andrewgoldheretics<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="RxCk_QEFWtk">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=RxCk_QEFWtk" target="_blank">The Death of Britain Will Come in 2029</a>
                     </div>
@@ -609,7 +622,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Doomberg<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="4cQ5qx37F60">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=4cQ5qx37F60" target="_blank">🔴 US Navy Blockades The Strait of Hormuz As China Jumps In! | Simon Dixon</a>
                     </div>
@@ -647,7 +662,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">FelixFriends<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="YE1hxjLFxy0">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=YE1hxjLFxy0" target="_blank">If You Don&#x27;t Understand Gold, You Don&#x27;t Understand Money</a>
                     </div>
@@ -678,11 +695,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">Finding_Finance<span class="channel-count">(2 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="OxB40Hk7l-w">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=OxB40Hk7l-w" target="_blank">Commodities Update: Technical Analysis: URANIUM, PALLADIUM, SILVER, OIL LOOK SOLID</a>
                     </div>
-                    <div class="snippet-meta">monologue • 16m 33s • @Finding_Finance • Apr 13, 2026 • 1,988 views • 224 likes</div>
+                    <div class="snippet-meta">monologue • 16m 33s • @finding_finance • Apr 13, 2026 • 1,988 views • 224 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Andy</div>
                     <div class="snippet-summary">In this episode, Andy provides a technical analysis update on various commodities, including uranium, palladium, silver, and oil. He discusses market trends, potential investment opportunities, and the impact of interest rates on commodity prices.</div>
                     <div class="snippet-claims">
@@ -704,11 +723,13 @@
                         <strong>Conclusion:</strong> Overall, the commodities market appears poised for upward movement, particularly in uranium and oil.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="yc0mgHgErLg">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=yc0mgHgErLg" target="_blank">The Secret Oil Chart That Blew My Hair Back 📈</a>
                     </div>
-                    <div class="snippet-meta">monologue • 26m 8s • @Finding_Finance • Apr 13, 2026 • 3,516 views • 289 likes</div>
+                    <div class="snippet-meta">monologue • 26m 8s • @finding_finance • Apr 13, 2026 • 3,516 views • 289 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Andy</div>
                     <div class="snippet-summary">In this episode, Andy discusses the current state of oil prices and their relationship with the economy, while also sharing insights on investment strategies and market trends. He emphasizes the importance of patience and understanding market cycles for successful investing.</div>
                     <div class="snippet-claims">
@@ -735,11 +756,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">Patrick_Ceresna<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="Yj1nUtTcFxY">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=Yj1nUtTcFxY" target="_blank">$100 Oil Is Back… But This Could Send It MUCH Higher</a>
                     </div>
-                    <div class="snippet-meta">monologue • 11m 15s • @Patrick_Ceresna • Apr 13, 2026 • 2,539 views • 126 likes</div>
+                    <div class="snippet-meta">monologue • 11m 15s • @patrick_ceresna • Apr 13, 2026 • 2,539 views • 126 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">This episode discusses the recent surge in oil prices due to geopolitical tensions, particularly involving Iran, and the potential implications for the stock and interest rate markets. The narrator emphasizes the uncertainty in the market and the risks of further price increases.</div>
                     <div class="snippet-claims">
@@ -766,11 +789,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">ResourceTalks<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="J5gPHFK2PzI">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=J5gPHFK2PzI" target="_blank">Can a Junior Discover a Gold-Copper Deposit the Majors Missed? | Auriginal Mining CEO Interview</a>
                     </div>
-                    <div class="snippet-meta">interview • 53m 44s • @ResourceTalks • Apr 13, 2026 • 168 views</div>
+                    <div class="snippet-meta">interview • 53m 44s • @resourcetalks • Apr 13, 2026 • 168 views</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Peter, Antonio</div>
                     <div class="snippet-summary">In this episode, the CEO of Original Mining discusses the company&#x27;s exploration efforts for gold and copper deposits in Quebec, focusing on their VMS model. The conversation covers drilling plans, geological findings, and the potential for resource expansion.</div>
                     <div class="snippet-claims">
@@ -797,11 +822,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">TheAsianGuy-k9h<span class="channel-count">(3 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="F5c-g-yfymE">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=F5c-g-yfymE" target="_blank">Trump&#x27;s Hormuz Blockade Is a Trap for China — Silver Holders Need to See This Now</a>
                     </div>
-                    <div class="snippet-meta">monologue • 20m 58s • @THEASIANGUY-AG • Apr 13, 2026 • 17,975 views • 518 likes</div>
+                    <div class="snippet-meta">monologue • 20m 58s • @theasianguy-ag • Apr 13, 2026 • 17,975 views • 518 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">This episode discusses the implications of President Trump blockade in the Strait of Hormuz, framing it as a strategic move against China rather than Iran. It emphasizes the potential impact on silver and gold prices amid a shifting global monetary landscape.</div>
                     <div class="snippet-claims">
@@ -824,11 +851,13 @@
                         <strong>Conclusion:</strong> The structural case for holding physical silver has never been more compelling.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="_VZv32FSeVs">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=_VZv32FSeVs" target="_blank">Silver&#x27;s 50-Year Ceiling Just Broke — Here&#x27;s Why $73 Is the Setup, Not the Top</a>
                     </div>
-                    <div class="snippet-meta">monologue • 29m 53s • @THEASIANGUY-AG • Apr 13, 2026 • 3,047 views • 223 likes</div>
+                    <div class="snippet-meta">monologue • 29m 53s • @theasianguy-ag • Apr 13, 2026 • 3,047 views • 223 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">This episode discusses a significant structural change in the silver market, highlighting a historical breakout and its implications for future pricing. The analysis is based on institutional-grade data and the framework of Michael Oliver, emphasizing the undervaluation of silver relative to gold and the broader monetary environment.</div>
                     <div class="snippet-claims">
@@ -850,11 +879,13 @@
                         <strong>Conclusion:</strong> Silver&#x27;s current price is a temporary consolidation before a significant upward move.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="uxcJBSfLEJs">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=uxcJBSfLEJs" target="_blank">The Fed Printed $158B Last Week: What It Means for Gold &amp; Silver Right Now</a>
                     </div>
-                    <div class="snippet-meta">monologue • 16m 39s • @THEASIANGUY-AG • Apr 13, 2026 • 9,823 views • 377 likes</div>
+                    <div class="snippet-meta">monologue • 16m 39s • @theasianguy-ag • Apr 13, 2026 • 9,823 views • 377 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">This episode discusses the recent trends in gold and silver prices, highlighting the actions of central banks and the implications of real interest rates on these precious metals. It emphasizes the urgency for investors to act as affordability for these assets is rapidly declining.</div>
                     <div class="snippet-claims">
@@ -881,13 +912,15 @@
                 <details class="channel-details">
                     <summary class="channel-summary">TopTradersUnplugged<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="PSzkV23iT-0">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=PSzkV23iT-0" target="_blank">Finding Alpha in the Strait of Chaos ft. Andrew Beer | Systematic Investor | Ep.395</a>
                     </div>
-                    <div class="snippet-meta">interview • 76m 2s • @TopTradersUnplugged • Apr 13, 2026 • 222 views • 10 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Andrew Beer, Neils Castro Lassen</div>
-                    <div class="snippet-summary">In this episode, Andrew Beer and Neils Castro Lassen discuss the current geopolitical landscape and its implications for investors, alongside insights into trend following strategies and the performance of CTAs. They explore the complexities of the investment landscape, including the impact of AI and the evolving nature of market strategies.</div>
+                    <div class="snippet-meta">interview • 76m 2s • @toptradersunplugged • Apr 13, 2026 • 222 views • 10 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Andrew Beer, Niels Kaastrup-Larsen</div>
+                    <div class="snippet-summary">In this episode, Andrew Beer and Niels Kaastrup-Larsen discuss the current geopolitical landscape and its implications for investors, alongside insights into trend following strategies and the performance of CTAs. They explore the complexities of the investment landscape, including the impact of AI and the evolving nature of market strategies.</div>
                     <div class="snippet-claims">
                         <div class="snippet-claims-title">Key Claims:</div>
                         <ul>
@@ -912,7 +945,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">alhambrainvestments1990<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="nBkhmk-8rJs">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=nBkhmk-8rJs" target="_blank">Past Time to Diversify Away from Tech</a>
                     </div>
@@ -943,7 +978,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">eurodollaruniversity<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="g17_CXWRnxU">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=g17_CXWRnxU" target="_blank">China Is Making a DESPERATE Move to Save Its $60 Trillion Crisis</a>
                     </div>
@@ -974,11 +1011,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">miningstockedu<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="KlK562mkXaA">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=KlK562mkXaA" target="_blank">“Our Planalto Copper Project will be a Mine” explains Lara Exploration CEO Simon Ingram</a>
                     </div>
-                    <div class="snippet-meta">interview • 14m 13s • @MiningStockEdu • Apr 13, 2026 • 1,057 views • 18 likes</div>
+                    <div class="snippet-meta">interview • 14m 13s • @miningstockedu • Apr 13, 2026 • 1,057 views • 18 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Bill Powers, Simon Ingram</div>
                     <div class="snippet-summary">In this episode, Simon Ingram, CEO of Lara Exploration, discusses the recent financing of the Planalto Copper Project and the company&#x27;s transition from exploration to development. He highlights the project&#x27;s potential and the strategic partnership with Atalaya Mining Corp.</div>
                     <div class="snippet-claims">
@@ -1005,13 +1044,15 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Chris_Vermeulen<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="XndtvnRhvOE">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=XndtvnRhvOE" target="_blank">MARKETS ON EDGE: Oil, Dollar Surge &amp; the Coming Gold Reset? | Chris Vermeulen</a>
                     </div>
                     <div class="snippet-meta">interview • 24m 28s • @libertyandfinance • Apr 13, 2026 • 2,860 views • 231 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Elijah K. Johnson, Christopher Millian</div>
-                    <div class="snippet-summary">In this episode, Elijah K. Johnson interviews Christopher Millian about the current state of the markets, focusing on oil prices, precious metals, and the potential impact of geopolitical tensions. They discuss strategies for investors in light of these market dynamics.</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Elijah Johnson, Christopher Millian</div>
+                    <div class="snippet-summary">In this episode, Elijah Johnson interviews Christopher Millian about the current state of the markets, focusing on oil prices, precious metals, and the potential impact of geopolitical tensions. They discuss strategies for investors in light of these market dynamics.</div>
                     <div class="snippet-claims">
                         <div class="snippet-claims-title">Key Claims:</div>
                         <ul>
@@ -1036,7 +1077,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Jeremy_Grantham<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="UZJreocbLuQ">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=UZJreocbLuQ" target="_blank">How to separate OPPORTUNITY from HYPE in the AI boom</a>
                     </div>
@@ -1068,11 +1111,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Jim_Bianco<span class="channel-count">(2 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="q0OAIdbY65w">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=q0OAIdbY65w" target="_blank">Jim Bianco on Macro Volatility, Fed Disunity, and the New Era of Asymmetric Warfare</a>
                     </div>
-                    <div class="snippet-meta">interview • 19m 36s • @BiancoResearch • Apr 13, 2026 • 2,697 views • 93 likes</div>
+                    <div class="snippet-meta">interview • 19m 36s • @biancoresearch • Apr 13, 2026 • 2,697 views • 93 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Jim Bianco</div>
                     <div class="snippet-summary">In this episode, Jim Bianco discusses the current state of macroeconomic volatility, the disunity within the Federal Reserve, and the implications of geopolitical tensions on the oil market. He emphasizes the challenges investors face in navigating a range-bound market influenced by external headlines and uncertainties.</div>
                     <div class="snippet-claims">
@@ -1094,7 +1139,9 @@
                         <strong>Conclusion:</strong> The lack of a clear resolution to geopolitical tensions may lead to prolonged volatility in the markets.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="flOeOXiqJsI">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=flOeOXiqJsI" target="_blank">NinjaTrader Live | Futures Trading + Analysis | Jim Bianco, Tanja + Salma, and Jack + Xy (4/13/26)</a>
                     </div>
@@ -1125,7 +1172,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Jim_Cramer<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="ZJNO3IbjSDg">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=ZJNO3IbjSDg" target="_blank">Mad Money 04/13/26 | Audio Only</a>
                     </div>
@@ -1157,7 +1206,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Jim_Grant<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="73GB0nG95bs">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=73GB0nG95bs" target="_blank">The Forever Invariable Truth | James Grant on War, Inflation, and What Comes Next</a>
                     </div>
@@ -1188,12 +1239,14 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Michael_Oliver<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="vlcm5u1XW94">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=vlcm5u1XW94" target="_blank">This Hidden Bubble Is About to Break — Gold to $8,500 &amp; Stocks at Risk - Michael Oliver</a>
                     </div>
-                    <div class="snippet-meta">interview • 24m 56s • @triANGLEINVESTOR • Apr 13, 2026 • 19,397 views • 730 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Lucian Valkovich, Michael Oliver</div>
+                    <div class="snippet-meta">interview • 24m 56s • @triangleinvestor • Apr 13, 2026 • 19,397 views • 730 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Lucijan Valkovic, Michael Oliver</div>
                     <div class="snippet-summary">In this episode, market analyst Michael Oliver discusses the current state of the stock market, the implications of a potential market bubble, and the future of gold prices. He emphasizes the importance of understanding underlying market dynamics rather than reacting to headlines.</div>
                     <div class="snippet-claims">
                         <div class="snippet-claims-title">Key Claims:</div>
@@ -1219,11 +1272,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Rick_Rule<span class="channel-count">(2 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="Nw0-TUXipOQ">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=Nw0-TUXipOQ" target="_blank">Rick Rule: I&#x27;m Delighted Gold Stocks Are Falling</a>
                     </div>
-                    <div class="snippet-meta">interview • 9m 1s • @Wealthion • Apr 13, 2026 • 4,137 views • 109 likes</div>
+                    <div class="snippet-meta">interview • 9m 1s • @wealthion • Apr 13, 2026 • 4,137 views • 109 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Rick Rule</div>
                     <div class="snippet-summary">In this episode, Rick Rule discusses the current state of gold stocks and the impact of rising oil prices on their valuations. He emphasizes the importance of strategic investments in gold equities and the potential for a strong M&amp;A market in the coming years.</div>
                     <div class="snippet-claims">
@@ -1245,7 +1300,9 @@
                         <strong>Conclusion:</strong> Investors should focus on undervalued gold stocks and prepare for upcoming consolidation in the market.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="hsGhc_uS1YE">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=hsGhc_uS1YE" target="_blank">Why RICK RULE is stockpiling cash</a>
                     </div>
@@ -1276,16 +1333,140 @@
             </div>
         </details>
         <details class="topic-details">
+            <summary class="topic-summary">RUSSIA<span class="topic-count">(4 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">IgorYakovenko<span class="channel-count">(4 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="wgzyKGqy3JE">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=wgzyKGqy3JE" target="_blank">ГДЕ ТРАМП ТАМ ПОБЕДА</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 96m 54s • @igoryakovenko • Apr 13, 2026 • 71,222 views • 7,537 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Игорь Яковенко</div>
+                    <div class="snippet-summary">В этом эпизоде Игорь Яковенко обсуждает результаты выборов в Венгрии, которые стали значительным поражением для Дональд Трамп и Виктора Орбана. Также рассматриваются последствия для отношений Венгрии с Европейским Союзом и ситуацию с Ираном.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Выборы в Венгрии стали триумфом для оппозиционной партии Тиса.</li>
+                            <li>Орбан признал свое поражение и поздравил оппонента с победой.</li>
+                            <li>Победа Тисы может привести к изменению отношений Венгрии с Европейским Союзом.</li>
+                            <li>Трамп терпит поражение в переговорах с Ираном.</li>
+                            <li>Ситуация в Венгрии демонстрирует, что Европа может противостоять авторитарным режимам.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Дональд Трамп, Виктор Орбан, Зеленский, Урсула Фондерляйн, Мадьяр, Михаил Савва</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> Трамп и Орбан, Выборы в Венгрии, Иран и США, Европейский Союз, Глобальная политика</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Поражение Трампа и Орбана в Венгрии является важным сигналом для глобальной политики.
+                    </div>
+                </div>
+                <div class="snippet-card" data-video-id="Rb1-3e1ur-c">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=Rb1-3e1ur-c" target="_blank">БРЕКФЕСТ. ПРОИГРЫШ ПУТИНА - ПОРАЖЕНИЕ ОСИ ЗЛА.БЛОКИРОВКА ТРАМПОМ ПРОЛИВА НАРУКУ ПУТИНУ.</a>
+                    </div>
+                    <div class="snippet-meta">interview • 15m 10s • @igoryakovenko • Apr 13, 2026 • 13,207 views • 1,018 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Игорь Яковенко</div>
+                    <div class="snippet-summary">В этом эпизоде обсуждаются итоги выборов в Венгрии и их влияние на политическую ситуацию в Европе, а также роль Путина и Трампа в международной политике. Игорь Яковенко анализирует, как эти события могут изменить динамику отношений между странами и их лидерами.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Выборы в Венгрии стали поражением для Путина и его союзников.</li>
+                            <li>Путин потерял своего главного союзника в Евросоюзе.</li>
+                            <li>Трамп и Путин имеют схожие интересы в разрушении либеральной демократии.</li>
+                            <li>Иран остается важным союзником для Путина.</li>
+                            <li>Переговоры с Ираном были обречены на провал из-за отсутствия подходящих участников.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Трамп, Нетаньяху, Орбан, Путин, Дмитрий Песков, Джейди Вес</p>
+                        <p><strong>Organizations:</strong> Евросоюз</p>
+                        <p><strong>Topics:</strong> выборы в Венгрии, поражение Путина, отношения с Евросоюзом, Иран, нефть</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Поражение Путина и его союзников в Венгрии открывает новые возможности для восстановления отношений с Евросоюзом.
+                    </div>
+                </div>
+                <div class="snippet-card" data-video-id="MQBeISg83uw">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=MQBeISg83uw" target="_blank">Венгрия вышла из протектората России.</a>
+                    </div>
+                    <div class="snippet-meta">panel • 58m 54s • @igoryakovenko • Apr 13, 2026 • 10,434 views • 975 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Игорь Яковенко</div>
+                    <div class="snippet-summary">This episode discusses Hungary&#x27;s recent elections and the implications of the results for Russia and the European Union. The conversation highlights the significance of these elections in the context of broader geopolitical dynamics.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Orban&#x27;s defeat in the Hungarian elections signifies a shift away from Russian influence.</li>
+                            <li>The elections are seen as a major electoral event of the year, comparable to significant events in U.S. politics.</li>
+                            <li>The new Hungarian leadership aims to reset relations with the EU while maintaining ties with Russia.</li>
+                            <li>Support for Trump is viewed as toxic for European leaders, as evidenced by the election results in Hungary.</li>
+                            <li>The Kremlin&#x27;s response to the election results indicates a shift in its relationship with Hungary.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Орбан, Трамп, Путин, Зеленский, Мадьяр, Сиярта, Гарри, Асад, Мадуро, Нитаньяху, Губрев, Кросовский, Собчак</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> Hungary elections, Russia influence, EU relations, Ukraine conflict, Trump&#x27;s impact</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The outcome of the Hungarian elections represents a significant setback for Russian and Trumpian influence in Europe.
+                    </div>
+                </div>
+                <div class="snippet-card" data-video-id="9GxHGdvBTKA">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=9GxHGdvBTKA" target="_blank">💥ЯКОВЕНКО! КУРБАНОВА</a>
+                    </div>
+                    <div class="snippet-meta">interview • 55m 15s • @igoryakovenko • Apr 13, 2026 • 10,231 views • 1,035 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Алёна Курбанова, Игорь Яковенко</div>
+                    <div class="snippet-summary">В этом эпизоде обсуждаются выборы в Венгрии и их влияние на российскую политику, а также анализируется российская пропаганда и её изменения. Игорь Яковенко делится своими взглядами на текущие события и литературу в контексте цензуры в России.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Выборы в Венгрии имеют мировое значение и отражают борьбу за влияние в Европе.</li>
+                            <li>Российская пропаганда теряет эффективность и сталкивается с растерянностью.</li>
+                            <li>Книги становятся врагами режима в России из-за цензуры и запретов.</li>
+                            <li>Путин не собирается прекращать войну, что является главной причиной её продолжения.</li>
+                            <li>Трамп символизирует поражение в международной политике.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Дмитрий Медведев, Маргарита Симоньян, Павел Губарев, Трамп, Зеленский, Аятолла Али Хаменеи, Захар Прилепин</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> Венгерские выборы, Российская пропаганда, Книги и цензура, Игорь Яковенко, Война в Украине, Трамп и политика</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Исследование зла и пропаганды важно для понимания текущих событий и их последствий.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
             <summary class="topic-summary">OTHER<span class="topic-count">(5 videos)</span></summary>
             <div class="topic-content">
                 <details class="channel-details">
                     <summary class="channel-summary">HiddenForces<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="EuZDHl5C3us">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=EuZDHl5C3us" target="_blank">Who Wins and Who Loses in the AI Economy | John Burn-Murdoch</a>
                     </div>
-                    <div class="snippet-meta">interview • 57m 35s • @HiddenForces • Apr 13, 2026 • 444 views • 12 likes</div>
+                    <div class="snippet-meta">interview • 57m 35s • @hiddenforces • Apr 13, 2026 • 444 views • 12 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Demetri Kofinas, John Burn-Murdoch</div>
                     <div class="snippet-summary">In this episode, Demetri Kofinas interviews John Burn-Murdoch about the implications of artificial intelligence on the economy, jobs, and societal trends. They discuss the evolving landscape of work, the impact of AI on various sectors, and the importance of soft skills in the future job market.</div>
                     <div class="snippet-claims">
@@ -1312,11 +1493,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">ShawnRyanShow<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="vypsVdwa8wk">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=vypsVdwa8wk" target="_blank">Samuel Reineberg - They Eliminated an Active Shooter in 4 Minutes | SRS #295</a>
                     </div>
-                    <div class="snippet-meta">interview • 110m 21s • @ShawnRyanShow • Apr 13, 2026 • 129,882 views • 5,100 likes</div>
+                    <div class="snippet-meta">interview • 110m 21s • @shawnryanshow • Apr 13, 2026 • 129,882 views • 5,100 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Sam Rehabberg, Sean</div>
                     <div class="snippet-summary">In this episode, Sam Rehabberg recounts his experience during an active shooter incident at Old Dominion University, where he and his fellow cadets intervened to save lives. The discussion covers the events of that day, the aftermath, and the impact on those involved.</div>
                     <div class="snippet-claims">
@@ -1343,11 +1526,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">SkoniecznyMariusz<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="Kf0_mv1LICU">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=Kf0_mv1LICU" target="_blank">Aduro Clean Tech Chemistry Explained in Simple Terms $ADUR</a>
                     </div>
-                    <div class="snippet-meta">monologue • 23m 24s • @SkoniecznyMariusz • Apr 13, 2026 • 930 views • 94 likes</div>
+                    <div class="snippet-meta">monologue • 23m 24s • @skoniecznymariusz • Apr 13, 2026 • 930 views • 94 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">This episode explains the unique chemistry behind Aduro Clean Technologies and how it relates to plastic production. The narrator breaks down complex chemical processes into simple terms to illustrate the importance of carbon bonding in creating sustainable plastics.</div>
                     <div class="snippet-claims">
@@ -1374,7 +1559,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Chris_Vermeulen<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="JEQSN9PbwuI">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=JEQSN9PbwuI" target="_blank">MotoGP vs WSBK: The REAL Difference Explained | Ft Chris Vermeulen #177</a>
                     </div>
@@ -1394,7 +1581,7 @@
                         </ul>
                     </div>
                     <div class="snippet-details">
-                        <p><strong>People:</strong> James Toseland, Marc Marquez, Valentino Rossi, Jorge Martin, Franco Morbidelli, Jack Miller, Alex Marquez, Nori Haga, Troy Bayliss, Maverick Vinales, Alonzo Lopez, Pedro Acosta, Dani Pedrosa, Casey Stoner, Troy Bayliss, Nicky Hayden, Johann Zarco, Enea Bastianini, Fabio Quartararo, Marco Bezzecchi, Joan Mir, Tom Luthi, Gino Rea, Tommy Bridewell, Carter Thompson, Jacob Rollinson, Harry Voy, Jonathan Narlos</p>
+                        <p><strong>People:</strong> James Toseland, Marc Marquez, Valentino Rossi, Jorge Martin, Franco Morbidelli, Jack Miller, Alex Marquez, Nori Haga, Troy Bayliss, Maverick Vinales, Alonzo Lopez, Pedro Acosta, Dani Pedrosa, Casey Stoner, Nicky Hayden, Johann Zarco, Enea Bastianini, Fabio Quartararo, Marco Bezzecchi, Joan Mir, Tom Luthi, Gino Rea, Tommy Bridewell, Carter Thompson, Jacob Rollinson, Harry Voy, Jonathan Narlos</p>
                         <p><strong>Organizations:</strong> MotoGP, World Superbike, Liberty Media, Dorna, Yamaha, Honda, Suzuki, KTM</p>
                         <p><strong>Topics:</strong> MotoGP, World Superbike, Rider Performance, Team Changes, Motorcycle Technology, Racing Safety, Future of Racing</p>
                     </div>
@@ -1407,7 +1594,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Rick_Rule<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="_iqbg5C-ou8">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=_iqbg5C-ou8" target="_blank">Rick Ross ft. Meek Mill - Rule (ft. Lil Baby &amp; Lil Wayne) Music Video 2026</a>
                     </div>
@@ -1438,8 +1627,14 @@
             </div>
         </details>
         <div class="footer">
-            Generated 2026-05-03 06:52:37
+            Generated 2026-09-15 22:04:23
         </div>
     </div>
+    <div class="playlist-bar" id="plBar">
+        <span class="playlist-bar-msg"><span id="plCount">0</span> selected</span>
+        <button id="plBtn" type="button">Add to playlist</button>
+    </div>
+    <script src="assets/config.js"></script>
+    <script src="assets/playlist.js"></script>
 </body>
 </html>

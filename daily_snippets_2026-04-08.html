@@ -157,6 +157,18 @@
             font-size: 12px;
             color: #66737D;
         }
+        .site-nav {
+            text-align: center;
+            margin-top: 12px;
+        }
+        .site-nav a {
+            color: #0D7680;
+            font-size: 14px;
+            text-decoration: none;
+        }
+        .site-nav a:hover {
+            text-decoration: underline;
+        }
         /* Collapsible sections */
         details {
             margin-bottom: 8px;
@@ -244,7 +256,72 @@
                 padding: 16px;
             }
         }
+        /* Add-to-playlist UI */
+        .snippet-card { position: relative; }
+        .snippet-check {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            margin: 0;
+            cursor: pointer;
+        }
+        .snippet-check input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .snippet-card.selected {
+            box-shadow: inset 4px 0 0 #0D7680;
+            background: #FFFCF8;
+        }
+        .snippet-status {
+            position: absolute;
+            top: 14px;
+            right: 40px;
+            font-size: 14px;
+            color: #66737D;
+            min-width: 90px;
+            text-align: right;
+        }
+        .snippet-status.ok { color: #0D7680; }
+        .snippet-status.err { color: #c0392b; }
+        .playlist-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #3E474F;
+            color: #FFF;
+            padding: 12px 24px;
+            z-index: 100;
+            display: none;
+            font-family: Georgia, "Times New Roman", serif;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.15);
+        }
+        .playlist-bar.visible {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+        .playlist-bar-msg { font-size: 15px; }
+        .playlist-bar button {
+            background: #0D7680;
+            color: #FFF;
+            border: 0;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-family: Georgia, "Times New Roman", serif;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .playlist-bar button:disabled {
+            background: #66737D;
+            cursor: not-allowed;
+        }
+        body.has-bar { padding-bottom: 80px; }
     </style>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
     <div class="container">
@@ -252,18 +329,21 @@
             <h1>Daily Snippets</h1>
             <div class="date">Wednesday, April 08, 2026</div>
             <div class="meta">48 videos • uploaded 2026-04-08 • 48 videos</div>
+            <div class="site-nav"><a href="search.html">🔍 Search all snippets</a></div>
         </div>
         <details class="topic-details">
-            <summary class="topic-summary">POLITICS<span class="topic-count">(11 videos)</span></summary>
+            <summary class="topic-summary">POLITICS<span class="topic-count">(9 videos)</span></summary>
             <div class="topic-content">
                 <details class="channel-details">
                     <summary class="channel-summary">CanadianBitcoiners<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="F2KmQe1xR_A">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=F2KmQe1xR_A" target="_blank">Canada&#x27;s Collapse: Nobody&#x27;s Talking About This</a>
                     </div>
-                    <div class="snippet-meta">panel • 53m 23s • @CanadianBitcoiners • Apr 08, 2026 • 71 views • 7 likes</div>
+                    <div class="snippet-meta">panel • 53m 23s • @canadianbitcoiners • Apr 08, 2026 • 71 views • 7 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Payman Ascari, John Paul Berg</div>
                     <div class="snippet-summary">This episode discusses the perceived decline of Canada, focusing on political corruption, the influence of baby boomers, and the role of central banking. The speakers explore various historical and contemporary issues affecting Canadian society and governance.</div>
                     <div class="snippet-claims">
@@ -288,75 +368,15 @@
                     </div>
                 </details>
                 <details class="channel-details">
-                    <summary class="channel-summary">IgorLipsits_1950<span class="channel-count">(1 videos)</span></summary>
-                    <div class="channel-content">
-                <div class="snippet-card">
-                    <div class="snippet-title">
-                        <a href="https://www.youtube.com/watch?v=Bqk7bk5ijfo" target="_blank">ЛИПСИЦ: ИНТЕРВЬЮ ЛЮДМИЛЕ НЕМИРЯ 07.04.2026</a>
-                    </div>
-                    <div class="snippet-meta">interview • 44m 40s • @igorlipsits_1950 • Apr 08, 2026 • 57,749 views • 3,486 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Игорь Липсиц</div>
-                    <div class="snippet-summary">В этом эпизоде Игорь Липсиц обсуждает влияние Ближневосточных конфликтов на мировую экономику, особенно в контексте Китая и России. Он также затрагивает вопросы устойчивости тоталитарных режимов и будущее технологий в России.</div>
-                    <div class="snippet-claims">
-                        <div class="snippet-claims-title">Key Claims:</div>
-                        <ul>
-                            <li>Китай становится главным бенефициаром войны на Ближнем Востоке.</li>
-                            <li>Высокие цены на нефть могут привести к экономическим трудностям для нефтедобывающих стран.</li>
-                            <li>Россия теряет свой интеллектуальный потенциал из-за репрессий против ученых.</li>
-                            <li>Тоталитарные режимы могут быть устойчивыми, даже если экономика страдает.</li>
-                            <li>Существует разница в восприятии человеческой жизни между архаичными и современными странами.</li>
-                        </ul>
-                    </div>
-                    <div class="snippet-details">
-                        <p><strong>People:</strong> Трамп, Путин, Наталья Касперская, Шерх Емания</p>
-                        <p><strong>Organizations:</strong> None</p>
-                        <p><strong>Topics:</strong> Китай и Ближний Восток, нефтяная политика, экономика России, интернет и IT, война и режимы</p>
-                    </div>
-                    <div class="snippet-conclusion">
-                        <strong>Conclusion:</strong> Мир движется к большему количеству войн и меньшему количеству мирного сосуществования.
-                    </div>
-                </div>
-                    </div>
-                </details>
-                <details class="channel-details">
-                    <summary class="channel-summary">IgorYakovenko<span class="channel-count">(1 videos)</span></summary>
-                    <div class="channel-content">
-                <div class="snippet-card">
-                    <div class="snippet-title">
-                        <a href="https://www.youtube.com/watch?v=_PJFRgjSa1I" target="_blank">ДУМАЕМ ВМЕСТЕ С ЮРИЕМ ФЕДОРОВЫМ</a>
-                    </div>
-                    <div class="snippet-meta">interview • 52m 57s • @igoryakovenko • Apr 08, 2026 • 43,679 views • 2,818 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Игорь Иковинко, Юрий Евгеньевич Фёдоров</div>
-                    <div class="snippet-summary">В этом эпизоде обсуждаются текущие политические события на Ближнем Востоке, включая конфликты между Ираном, Израилем и США, а также роль Дональда Трампа в этих событиях. Спикеры анализируют последствия недавних заявлений Трампа и их влияние на международные отношения.</div>
-                    <div class="snippet-claims">
-                        <div class="snippet-claims-title">Key Claims:</div>
-                        <ul>
-                            <li>Трамп потерпел личное поражение в переговорах с Ираном.</li>
-                            <li>Иран укрепил свои позиции после конфликта.</li>
-                            <li>Перемирие между Ираном и США может быть нестабильным.</li>
-                            <li>Израиль не согласен с условиями перемирия.</li>
-                            <li>Трамп ведет себя истерично и непредсказуемо в своей политике.</li>
-                        </ul>
-                    </div>
-                    <div class="snippet-details">
-                        <p><strong>People:</strong> Дональд Трамп, Путин, Пригожин</p>
-                        <p><strong>Organizations:</strong> None</p>
-                        <p><strong>Topics:</strong> Иран и США, Трамп и политика, Конфликт на Ближнем Востоке, Переговоры и мир, Израиль и Иран</p>
-                    </div>
-                    <div class="snippet-conclusion">
-                        <strong>Conclusion:</strong> Текущая политическая ситуация на Ближнем Востоке указывает на ослабление позиций США и усиление Ирана.
-                    </div>
-                </div>
-                    </div>
-                </details>
-                <details class="channel-details">
                     <summary class="channel-summary">KontrarianKorner<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="W0FSApdAkqk">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=W0FSApdAkqk" target="_blank">Dexter White | International Choke Points, AI And Media &amp; The Great Power Competition With China</a>
                     </div>
-                    <div class="snippet-meta">interview • 98m 16s • @KontrarianKorner • Apr 08, 2026 • 1,447 views • 83 likes</div>
+                    <div class="snippet-meta">interview • 98m 16s • @kontrariankorner • Apr 08, 2026 • 1,447 views • 83 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Ben Kellerin, Dexter White</div>
                     <div class="snippet-summary">In this episode, Ben Kellerin interviews Dexter White about international choke points, the implications of AI, and the ongoing great power competition with China. They discuss the geopolitical landscape, particularly focusing on Iran and the strategic importance of energy supplies.</div>
                     <div class="snippet-claims">
@@ -383,7 +403,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">RaymondIbrahim-HW<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="l3vabkVS2H4">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=l3vabkVS2H4" target="_blank">When Ideology Overrides Safety: Europe’s Crisis Is Not Accidental</a>
                     </div>
@@ -414,11 +436,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">ThePodcastoftheLotusEaters<span class="channel-count">(3 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="mKaeFgtE-Wc">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=mKaeFgtE-Wc" target="_blank">A Surprisingly Good day for America First</a>
                     </div>
-                    <div class="snippet-meta">monologue • 32m 8s • @ThePodcastoftheLotusEaters • Apr 08, 2026 • 29,368 views • 1,997 likes</div>
+                    <div class="snippet-meta">monologue • 32m 8s • @thepodcastofthelotuseaters • Apr 08, 2026 • 29,368 views • 1,997 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">This episode discusses the implications of a New York Times article revealing insider details about the Trump administration&#x27;s dealings with Israel regarding Iran. It highlights the political fallout and the shifting dynamics within the America First movement.</div>
                     <div class="snippet-claims">
@@ -440,11 +464,13 @@
                         <strong>Conclusion:</strong> The political disaster for Israel may paradoxically strengthen the America First agenda.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="ZNmifiUzLDY">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=ZNmifiUzLDY" target="_blank">Iran</a>
                     </div>
-                    <div class="snippet-meta">panel • 42m 38s • @ThePodcastoftheLotusEaters • Apr 08, 2026 • 40,026 views • 2,252 likes</div>
+                    <div class="snippet-meta">panel • 42m 38s • @thepodcastofthelotuseaters • Apr 08, 2026 • 40,026 views • 2,252 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">The episode discusses the complexities of U.S.-Iran relations, particularly in the context of Trump&#x27;s foreign policy and the implications of a potential ceasefire in the Middle East. The speakers analyze the geopolitical landscape and the shifting power dynamics in the region.</div>
                     <div class="snippet-claims">
@@ -466,11 +492,13 @@
                         <strong>Conclusion:</strong> The U.S. has suffered a strategic loss in the Middle East, allowing Iran to assert greater influence.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="aafdCZ3StgQ">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=aafdCZ3StgQ" target="_blank">Breakfast With Beau | Thursday 9th April 2026</a>
                     </div>
-                    <div class="snippet-meta">monologue • 108m 42s • @ThePodcastoftheLotusEaters • Apr 08, 2026 • 12,897 views • 893 likes</div>
+                    <div class="snippet-meta">monologue • 108m 42s • @thepodcastofthelotuseaters • Apr 08, 2026 • 12,897 views • 893 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">This episode discusses the fragile ceasefire in the Middle East, particularly focusing on the ongoing conflict involving Iran and Israel. The narrator critiques the mainstream media&#x27;s portrayal of the situation and expresses skepticism about the effectiveness of diplomatic efforts.</div>
                     <div class="snippet-claims">
@@ -497,7 +525,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Doomberg<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="kTDK7awyD78">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=kTDK7awyD78" target="_blank">World War III Started in 2014- Doomberg and Dave Collum</a>
                     </div>
@@ -529,7 +559,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Lyn_Alden<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="E9BpaSnIUPU">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=E9BpaSnIUPU" target="_blank">Trump-Iran Deal Just Confirmed But Now There’s No Going Back | Luke Gromen vs Lyn Alden</a>
                     </div>
@@ -560,7 +592,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">triggerpod<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="jarpULCVr8Y">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=jarpULCVr8Y" target="_blank">DEBATE: Are Podcasters Destroying MAGA? - Batya Ungar-Sargon</a>
                     </div>
@@ -579,7 +613,7 @@
                         </ul>
                     </div>
                     <div class="snippet-details">
-                        <p><strong>People:</strong> Tucker Carlson, Ben Shapiro, JD Vance, Mark Levin, Megan Kelly, Nick Fuentes, Kevin Roberts, Donald Trump, Virginia Guffy</p>
+                        <p><strong>People:</strong> Tucker Carlson, Ben Shapiro, JD Vance, Mark Levin, Megyn Kelly, Nick Fuentes, Kevin Roberts, Donald Trump, Virginia Guffy</p>
                         <p><strong>Organizations:</strong> None</p>
                         <p><strong>Topics:</strong> MAGA voters, podcast influence, foreign policy, anti-semitism, Trump administration, Iran war, media narratives</p>
                     </div>
@@ -597,11 +631,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">CommodityCulture<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="MiCwmh3M1NQ">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=MiCwmh3M1NQ" target="_blank">Don&#x27;t Count Out GOLD and SILVER, Long Term Trend &#x27;Extremely Constructive&#x27;: Sheldon Inwentash</a>
                     </div>
-                    <div class="snippet-meta">interview • 21m 20s • @CommodityCulture • Apr 08, 2026 • 1,713 views • 78 likes</div>
+                    <div class="snippet-meta">interview • 21m 20s • @commodityculture • Apr 08, 2026 • 1,713 views • 78 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Jesse Day, Sheldon Inwentash</div>
                     <div class="snippet-summary">In this episode, Jesse Day interviews Sheldon Inwentash about the current state and future prospects of various commodities, including gold, silver, uranium, and copper. They discuss market trends, investment opportunities, and the impact of geopolitical events on commodity prices.</div>
                     <div class="snippet-claims">
@@ -629,11 +665,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">Finding_Finance<span class="channel-count">(2 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="CJTLWOBfiSA">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=CJTLWOBfiSA" target="_blank">Understanding the Fiat Illusion (Before It&#x27;s Too Late)</a>
                     </div>
-                    <div class="snippet-meta">monologue • 31m 40s • @Finding_Finance • Apr 08, 2026 • 3,178 views • 286 likes</div>
+                    <div class="snippet-meta">monologue • 31m 40s • @finding_finance • Apr 08, 2026 • 3,178 views • 286 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Andy</div>
                     <div class="snippet-summary">In this episode, Andy discusses the current state of the oil market, housing market dynamics, and the implications of inflation on investments. He emphasizes the importance of understanding market flows and historical trends in making investment decisions.</div>
                     <div class="snippet-claims">
@@ -655,11 +693,13 @@
                         <strong>Conclusion:</strong> The fiat illusion is leading to a mispricing of energy assets, and significant market shifts are imminent.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="WZVxRBIkA1U">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=WZVxRBIkA1U" target="_blank">Commodities Update: Technical Analysis: GOLD AND SILVER UP ON CEASEFIRE INFORMATION</a>
                     </div>
-                    <div class="snippet-meta">monologue • 14m 7s • @Finding_Finance • Apr 08, 2026 • 1,876 views • 186 likes</div>
+                    <div class="snippet-meta">monologue • 14m 7s • @finding_finance • Apr 08, 2026 • 1,876 views • 186 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Andy</div>
                     <div class="snippet-summary">In this episode, Andy provides a technical analysis of commodities, focusing on gold and silver, while discussing market movements influenced by recent ceasefire news. He shares insights on yields, the dollar, and various commodities, predicting potential upward trends despite short-term fluctuations.</div>
                     <div class="snippet-claims">
@@ -686,7 +726,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">ILTB_Podcast<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="5RnPko2HviQ">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=5RnPko2HviQ" target="_blank">Alan Waxman on the History and Future of Private Capital</a>
                     </div>
@@ -719,11 +761,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">LaDucTrading<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="iH57iWgEBQU">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=iH57iWgEBQU" target="_blank">&quot;CEASEFIRE&quot; and SPX 6800 – Now What?</a>
                     </div>
-                    <div class="snippet-meta">monologue • 10m 17s • @LaDucTrading • Apr 08, 2026 • 543 views • 43 likes</div>
+                    <div class="snippet-meta">monologue • 10m 17s • @laductrading • Apr 08, 2026 • 543 views • 43 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">The episode discusses the implications of a recent ceasefire announcement and its impact on market volatility and oil prices. The speaker expresses skepticism about the ceasefire&#x27;s effectiveness and offers trading strategies in light of current market conditions.</div>
                     <div class="snippet-claims">
@@ -750,11 +794,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">Monetary-Matters<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="Vs7UxJszuFg">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=Vs7UxJszuFg" target="_blank">The Truth About Private Credit | Michael Haynes of Beach Point Capital</a>
                     </div>
-                    <div class="snippet-meta">interview • 68m 45s • @Monetary-Matters • Apr 08, 2026 • 1,004 views • 30 likes</div>
+                    <div class="snippet-meta">interview • 68m 45s • @monetary-matters • Apr 08, 2026 • 1,004 views • 30 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Michael Haynes</div>
                     <div class="snippet-summary">In this episode, Michael Haynes discusses the intricacies of private credit and the current investment landscape. He shares insights on direct lending, market opportunities, and the potential impact of future credit cycles.</div>
                     <div class="snippet-claims">
@@ -781,11 +827,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">OutlierTrading<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="ayqbZirKPkM">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=ayqbZirKPkM" target="_blank">Agustin Lebron on Building a Trading Strategy | The Outlier Podcast</a>
                     </div>
-                    <div class="snippet-meta">interview • 65m 0s • @OutlierTrading • Apr 08, 2026 • 493 views • 33 likes</div>
+                    <div class="snippet-meta">interview • 65m 0s • @outliertrading • Apr 08, 2026 • 493 views • 33 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Agustin Lebron, unnamed narrator</div>
                     <div class="snippet-summary">In this episode, Agustin Lebron discusses the development of a trading strategy focused on momentum and sector rotation. The conversation emphasizes practical approaches to strategy formulation and the importance of research in trading.</div>
                     <div class="snippet-claims">
@@ -812,11 +860,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">OxbowAdvisors<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="BX77QUsWeSs">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=BX77QUsWeSs" target="_blank">Ted Oakley - Oxbow Advisors  - Market Update - April 2026</a>
                     </div>
-                    <div class="snippet-meta">monologue • 12m 51s • @OxbowAdvisors • Apr 08, 2026 • 4,540 views • 525 likes</div>
+                    <div class="snippet-meta">monologue • 12m 51s • @oxbowadvisors • Apr 08, 2026 • 4,540 views • 525 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Ted Oakley</div>
                     <div class="snippet-summary">In this episode, Ted Oakley provides a market update discussing various economic factors affecting investments, including interest rates, the housing market, and private credit. He emphasizes the importance of staying flexible and prepared for potential market corrections.</div>
                     <div class="snippet-claims">
@@ -843,11 +893,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">Patrick_Ceresna<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="5PnHY62RFdg">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=5PnHY62RFdg" target="_blank">Oil Crashes After US/Iran Ceasfire! (What You Need To Know)</a>
                     </div>
-                    <div class="snippet-meta">monologue • 10m 29s • @Patrick_Ceresna • Apr 08, 2026 • 2,099 views • 142 likes</div>
+                    <div class="snippet-meta">monologue • 10m 29s • @patrick_ceresna • Apr 08, 2026 • 2,099 views • 142 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">This episode discusses the recent crash in oil prices following a temporary ceasefire between the US and Iran, and its implications for the stock market. The narrator analyzes potential outcomes and investment strategies in light of ongoing geopolitical tensions.</div>
                     <div class="snippet-claims">
@@ -873,11 +925,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">ResourceTalks<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="XxXM_cWIwTw">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=XxXM_cWIwTw" target="_blank">Can 1 Explorer Really Advance 19 Projects? | Yukon Metals CEO Interview</a>
                     </div>
-                    <div class="snippet-meta">interview • 80m 29s • @ResourceTalks • Apr 08, 2026 • 156 views</div>
+                    <div class="snippet-meta">interview • 80m 29s • @resourcetalks • Apr 08, 2026 • 156 views</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Jim, unnamed narrator</div>
                     <div class="snippet-summary">In this episode, Yukon Metals CEO Jim discusses the company&#x27;s 19 mining projects in the Yukon, focusing on their exploration strategies and the challenges of the mining industry. The conversation covers the company&#x27;s financial status, drilling plans, and the importance of geological data in making informed investment decisions.</div>
                     <div class="snippet-claims">
@@ -904,11 +958,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">TheAsianGuy-k9h<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="3WFG_FR3eoc">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=3WFG_FR3eoc" target="_blank">IT&#x27;S HAPPENING: US-Iran Ceasefire Sends Gold &amp; Silver SOARING — Here&#x27;s Everything You Need to Know</a>
                     </div>
-                    <div class="snippet-meta">monologue • 25m 26s • @THEASIANGUY-AG • Apr 08, 2026 • 7,402 views • 277 likes</div>
+                    <div class="snippet-meta">monologue • 25m 26s • @theasianguy-ag • Apr 08, 2026 • 7,402 views • 277 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">This episode discusses the impact of a recent US-Iran ceasefire on precious metals, particularly gold and silver, and the broader market implications. It analyzes the economic mechanisms at play and what to watch for in the coming weeks.</div>
                     <div class="snippet-claims">
@@ -935,12 +991,14 @@
                 <details class="channel-details">
                     <summary class="channel-summary">WTFinancepodcast<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="7w00GAK1u6M">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=7w00GAK1u6M" target="_blank">Bubba Horwitz Warns: Expect a Brutal Market Downturn</a>
                     </div>
-                    <div class="snippet-meta">interview • 27m 46s • @WTFinancepodcast • Apr 08, 2026 • 6,375 views • 242 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Anthony Fatsies, Todd Bubba Hoitz</div>
+                    <div class="snippet-meta">interview • 27m 46s • @wtfinancepodcast • Apr 08, 2026 • 6,375 views • 242 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Anthony Fauci, Todd Bubba Hoitz</div>
                     <div class="snippet-summary">In this episode, Todd Bubba Hoitz discusses the potential for a significant market downturn and the factors contributing to economic instability. He shares insights on inflation, job losses, and the impact of geopolitical tensions on the markets.</div>
                     <div class="snippet-claims">
                         <div class="snippet-claims-title">Key Claims:</div>
@@ -966,11 +1024,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">Wealthion<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="Zipjo8XCwlU">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=Zipjo8XCwlU" target="_blank">Markets Won&#x27;t Stop Swinging. 3 Questions You Must Ask Your Advisor Now</a>
                     </div>
-                    <div class="snippet-meta">Q&amp;A • 5m 27s • @Wealthion • Apr 08, 2026 • 415 views • 11 likes</div>
+                    <div class="snippet-meta">Q&amp;A • 5m 27s • @wealthion • Apr 08, 2026 • 415 views • 11 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Brandy</div>
                     <div class="snippet-summary">This episode discusses the current volatile market conditions and emphasizes the importance of asking the right questions to financial advisors. It aims to provide investors with peace of mind during uncertain times.</div>
                     <div class="snippet-claims">
@@ -997,7 +1057,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">arcadiaeconomics<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="rVi3OlDH_MM">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=rVi3OlDH_MM" target="_blank">Gold, Silver Surge &amp; Then Fall As Ceasefire Violated After Just 1 Day…</a>
                     </div>
@@ -1028,7 +1090,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">eurodollaruniversity<span class="channel-count">(2 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="-J65XyUCCOU">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=-J65XyUCCOU" target="_blank">Asia Is Running Out of Dollars (Here’s What That Means)</a>
                     </div>
@@ -1054,7 +1118,9 @@
                         <strong>Conclusion:</strong> The dollar strain on Asian currencies is expected to persist, leading to potential financial volatility.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="RKfryWfGCns">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=RKfryWfGCns" target="_blank">&quot;Jet Fuel Is Running Out&quot; The Airline Collapse No One Is Pricing In</a>
                     </div>
@@ -1085,7 +1151,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">inittowinit928<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="yehbyjsXEr4">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=yehbyjsXEr4" target="_blank">How to Survive a Market Crash With the Right Mining Stocks ~ Mining Stock Monkey</a>
                     </div>
@@ -1116,7 +1184,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">thecontrariancapitalist<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="9uGuGwrpo5w">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=9uGuGwrpo5w" target="_blank">Relief rally in stocks? Bullion bids, Oil slumps. Mid-week macro 8th April</a>
                     </div>
@@ -1147,7 +1217,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Henrik_Zeberg<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="YBuD9oUF2U8">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=YBuD9oUF2U8" target="_blank">Henrik Zeberg: &quot;We Have Not Seen The Top Yet&quot; — Why The Nasdaq Could Rally 30%</a>
                     </div>
@@ -1179,7 +1251,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Jared_Dillian<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="jmjdnpbkSx8">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=jmjdnpbkSx8" target="_blank">Did Stocks &amp; Oil Overreact to the Iran Ceasefire? | With Jared Dillian</a>
                     </div>
@@ -1211,7 +1285,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Jeff_Gundlach<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="bEL4hoi5oRo">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=bEL4hoi5oRo" target="_blank">Jeffrey Sherman on Oil, Deficits and the Private Credit Liquidity Trap | Bloomberg</a>
                     </div>
@@ -1242,7 +1318,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Jim_Cramer<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="wYidr1VpMYI">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=wYidr1VpMYI" target="_blank">Mad Money 04/08/26 | Audio Only</a>
                     </div>
@@ -1273,7 +1351,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Marc_Faber<span class="channel-count">(2 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="LpJ9n7FRbP4">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=LpJ9n7FRbP4" target="_blank">THIS IS CRAZY! Silver Price to Shock Everyone | Marc Faber</a>
                     </div>
@@ -1299,7 +1379,9 @@
                         <strong>Conclusion:</strong> Everyone should own some gold and silver as a hedge against the potential collapse of paper money.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="trJ1KaURzSs">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=trJ1KaURzSs" target="_blank">Marc Faber discusses investing in emerging markets.  Why it&#x27;s different this time.</a>
                     </div>
@@ -1330,7 +1412,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Michael_Howell<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="UIhieMtB_A0">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=UIhieMtB_A0" target="_blank">The Everything Bubble Is Over: Michael Howell’s Warning for 2026</a>
                     </div>
@@ -1361,7 +1445,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Michael_Oliver<span class="channel-count">(3 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="Y6k4xRP73jY">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=Y6k4xRP73jY" target="_blank">Unimaginable Silver Revaluation! Silver Stackers Must Watch This Urgent Update | Michael Oliver</a>
                     </div>
@@ -1387,7 +1473,9 @@
                         <strong>Conclusion:</strong> The current market conditions present a major crisis, and investors should act quickly to secure precious metals.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="khHFS7cLy24">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=khHFS7cLy24" target="_blank">Michael Oliver: Silver Could Hit $300–$500 by Summer 2026 — What Happens After?</a>
                     </div>
@@ -1413,7 +1501,9 @@
                         <strong>Conclusion:</strong> The commodity market, particularly silver, is poised for significant growth despite current economic uncertainties.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="v7YKvA4FNbI">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=v7YKvA4FNbI" target="_blank">🔥2026’da 300–500$ Gümüş: Michael Oliver’ın En Agresif Tahmini – Kanıtlar Ortaya Çıktı</a>
                     </div>
@@ -1445,7 +1535,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Rick_Rule<span class="channel-count">(3 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="-tSbu8Qlv4I">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=-tSbu8Qlv4I" target="_blank">Gold Has “Done Its Job” — Rick Rule on Market Shift After Ceasefire</a>
                     </div>
@@ -1471,7 +1563,9 @@
                         <strong>Conclusion:</strong> Gold&#x27;s value is likely to be influenced by the deterioration of purchasing power in fiat currencies.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="7dZAKsOqEL0">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=7dZAKsOqEL0" target="_blank">Rick Rule and Lobo Tiggre: What We&#x27;re Buying, Selling, and Watching as War Not Stopping</a>
                     </div>
@@ -1497,7 +1591,9 @@
                         <strong>Conclusion:</strong> Investors should remain cautious and prepared for potential market volatility while considering strategic opportunities in precious metals and energy.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="v4rIwMSOlUM">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=v4rIwMSOlUM" target="_blank">🔴 Rick Rule URGENT Warning: Gold, Silver, Oil, &amp; What Comes NEXT</a>
                     </div>
@@ -1528,7 +1624,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Russell_Napier<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="5gfBLVrkXzU">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=5gfBLVrkXzU" target="_blank">The CIO View: Conversations with Saftar Sarwar. Episode 2: Russell Napier</a>
                     </div>
@@ -1559,11 +1657,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">triANGLEINVESTOR<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="hDt6nBJ-zoo">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=hDt6nBJ-zoo" target="_blank">Tokenized Metals: How to Invest in Uranium, Gold &amp; Rare Earths</a>
                     </div>
-                    <div class="snippet-meta">interview • 33m 6s • @triANGLEINVESTOR • Apr 08, 2026 • 405 views • 8 likes</div>
+                    <div class="snippet-meta">interview • 33m 6s • @triangleinvestor • Apr 08, 2026 • 405 views • 8 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Lucian Ambulovich, Ben Elvich</div>
                     <div class="snippet-summary">This episode features an interview with Ben Elvich, discussing the launch of metals.io, a platform for trading tokenized metals including uranium, gold, and rare earths. The conversation covers the evolution of the platform, market demand, and the challenges of tokenizing physical assets.</div>
                     <div class="snippet-claims">
@@ -1592,17 +1692,80 @@
             </div>
         </details>
         <details class="topic-details">
-            <summary class="topic-summary">RUSSIA<span class="topic-count">(1 videos)</span></summary>
+            <summary class="topic-summary">RUSSIA<span class="topic-count">(3 videos)</span></summary>
             <div class="topic-content">
                 <details class="channel-details">
-                    <summary class="channel-summary">IgorYakovenko<span class="channel-count">(1 videos)</span></summary>
+                    <summary class="channel-summary">IgorLipsits_1950<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="Bqk7bk5ijfo">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=Bqk7bk5ijfo" target="_blank">ЛИПСИЦ: ИНТЕРВЬЮ ЛЮДМИЛЕ НЕМИРЯ 07.04.2026</a>
+                    </div>
+                    <div class="snippet-meta">interview • 44m 40s • @igorlipsits_1950 • Apr 08, 2026 • 57,749 views • 3,486 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Игорь Липсиц</div>
+                    <div class="snippet-summary">В этом эпизоде Игорь Липсиц обсуждает влияние Ближневосточных конфликтов на мировую экономику, особенно в контексте Китая и России. Он также затрагивает вопросы устойчивости тоталитарных режимов и будущее технологий в России.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Китай становится главным бенефициаром войны на Ближнем Востоке.</li>
+                            <li>Высокие цены на нефть могут привести к экономическим трудностям для нефтедобывающих стран.</li>
+                            <li>Россия теряет свой интеллектуальный потенциал из-за репрессий против ученых.</li>
+                            <li>Тоталитарные режимы могут быть устойчивыми, даже если экономика страдает.</li>
+                            <li>Существует разница в восприятии человеческой жизни между архаичными и современными странами.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Трамп, Путин, Наталья Касперская, Шерх Емания</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> Китай и Ближний Восток, нефтяная политика, экономика России, интернет и IT, война и режимы</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Мир движется к большему количеству войн и меньшему количеству мирного сосуществования.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">IgorYakovenko<span class="channel-count">(2 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="_PJFRgjSa1I">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=_PJFRgjSa1I" target="_blank">ДУМАЕМ ВМЕСТЕ С ЮРИЕМ ФЕДОРОВЫМ</a>
+                    </div>
+                    <div class="snippet-meta">interview • 52m 57s • @igoryakovenko • Apr 08, 2026 • 43,679 views • 2,818 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Игорь Яковенко, Юрий Евгеньевич Фёдоров</div>
+                    <div class="snippet-summary">В этом эпизоде обсуждаются текущие политические события на Ближнем Востоке, включая конфликты между Ираном, Израилем и США, а также роль Дональд Трамп в этих событиях. Спикеры анализируют последствия недавних заявлений Трампа и их влияние на международные отношения.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Трамп потерпел личное поражение в переговорах с Ираном.</li>
+                            <li>Иран укрепил свои позиции после конфликта.</li>
+                            <li>Перемирие между Ираном и США может быть нестабильным.</li>
+                            <li>Израиль не согласен с условиями перемирия.</li>
+                            <li>Трамп ведет себя истерично и непредсказуемо в своей политике.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Дональд Трамп, Путин, Пригожин</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> Иран и США, Трамп и политика, Конфликт на Ближнем Востоке, Переговоры и мир, Израиль и Иран</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Текущая политическая ситуация на Ближнем Востоке указывает на ослабление позиций США и усиление Ирана.
+                    </div>
+                </div>
+                <div class="snippet-card" data-video-id="x4vUjw0z2Fo">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=x4vUjw0z2Fo" target="_blank">⚡️КРОВАВАЯ МАНИЛОВЩИНА СОЛОВЬЕВА АМЕРИКА ПРОИГРАЛА СВО? КОНСЕНСУС  ZET- БЛОГОСФЕРЫ.</a>
                     </div>
                     <div class="snippet-meta">panel • 44m 49s • @igoryakovenko • Apr 08, 2026 • 14,568 views • 1,515 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Игорь Яковенко, Ерина Валерьевна</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Игорь Яковенко, Екатерина Валерьевна</div>
                     <div class="snippet-summary">В этом эпизоде обсуждаются текущие события вокруг специальной военной операции России и её последствия, а также критика действий российских властей и их пропаганды. Говорится о растерянности и унынии в российской патриотической среде, а также о возможных изменениях в политической ситуации.</div>
                     <div class="snippet-claims">
                         <div class="snippet-claims-title">Key Claims:</div>
@@ -1635,11 +1798,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">AkkadDaily<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="8e0UzxBui4U">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=8e0UzxBui4U" target="_blank">Finally, We&#x27;re Getting Youth Clubs!</a>
                     </div>
-                    <div class="snippet-meta">monologue • 12m 55s • @SargonofAkkad • Apr 08, 2026 • 30,113 views • 2,253 likes</div>
+                    <div class="snippet-meta">monologue • 12m 55s • @sargonofakkad • Apr 08, 2026 • 30,113 views • 2,253 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">The episode discusses the perceived link between the lack of youth clubs and rising crime among urban youth. The speaker argues that simply providing youth clubs will not address the deeper cultural and social issues at play.</div>
                     <div class="snippet-claims">
@@ -1666,7 +1831,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">SpaceWeatherNewsS0s<span class="channel-count">(2 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="Rf-I-ISulDQ">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=Rf-I-ISulDQ" target="_blank">Leave Breadcrumbs For Your Loved Ones</a>
                     </div>
@@ -1692,7 +1859,9 @@
                         <strong>Conclusion:</strong> Starting to leave breadcrumbs now can lead to better understanding and preparedness in the future.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="wh8K-TC2d8M">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=wh8K-TC2d8M" target="_blank">Observers Live #31 - Leaving Breadcrumbs</a>
                     </div>
@@ -1722,8 +1891,14 @@
             </div>
         </details>
         <div class="footer">
-            Generated 2026-04-28 07:06:39
+            Generated 2026-09-15 22:04:24
         </div>
     </div>
+    <div class="playlist-bar" id="plBar">
+        <span class="playlist-bar-msg"><span id="plCount">0</span> selected</span>
+        <button id="plBtn" type="button">Add to playlist</button>
+    </div>
+    <script src="assets/config.js"></script>
+    <script src="assets/playlist.js"></script>
 </body>
 </html>

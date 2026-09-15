@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Snippets - 2026-05-05</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background-color: #FFF1E0;
+            color: #3E474F;
+            line-height: 1.6;
+            padding: 24px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            padding: 32px 0;
+            border-bottom: 3px solid #3E474F;
+            margin-bottom: 32px;
+        }
+        .header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .header .date {
+            font-size: 18px;
+            color: #66737D;
+        }
+        .header .meta {
+            font-size: 14px;
+            color: #66737D;
+            margin-top: 12px;
+        }
+        .topic-section {
+            margin-bottom: 40px;
+        }
+        .topic-title {
+            font-size: 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 0;
+            border-bottom: 2px solid #F2DFCE;
+            margin-bottom: 24px;
+            color: #3E474F;
+        }
+        .channel-section {
+            margin-bottom: 28px;
+        }
+        .channel-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            margin-bottom: 16px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .snippet-card {
+            background: #FFF9F5;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border-left: 4px solid #FCD0AF;
+        }
+        .snippet-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .snippet-title a {
+            color: #0D7680;
+            text-decoration: none;
+        }
+        .snippet-title a:hover {
+            text-decoration: underline;
+        }
+        .snippet-meta {
+            font-size: 13px;
+            color: #66737D;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+        .snippet-speakers {
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .snippet-speakers strong {
+            color: #3E474F;
+        }
+        .snippet-summary {
+            font-size: 15px;
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+        .snippet-claims {
+            margin-bottom: 16px;
+        }
+        .snippet-claims-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .snippet-claims ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .snippet-claims li {
+            font-size: 14px;
+            padding: 4px 0 4px 16px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .snippet-claims li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #0D7680;
+        }
+        .snippet-details {
+            font-size: 13px;
+            color: #66737D;
+            border-top: 1px solid #F2DFCE;
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+        .snippet-details p {
+            margin-bottom: 4px;
+        }
+        .snippet-conclusion {
+            font-size: 14px;
+            font-style: italic;
+            color: #3E474F;
+            background: #F2DFCE;
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 12px;
+        }
+        .footer {
+            text-align: center;
+            padding: 24px 0;
+            border-top: 1px solid #F2DFCE;
+            margin-top: 40px;
+            font-size: 12px;
+            color: #66737D;
+        }
+        .site-nav {
+            text-align: center;
+            margin-top: 12px;
+        }
+        .site-nav a {
+            color: #0D7680;
+            font-size: 14px;
+            text-decoration: none;
+        }
+        .site-nav a:hover {
+            text-decoration: underline;
+        }
+        /* Collapsible sections */
+        details {
+            margin-bottom: 8px;
+        }
+        details summary {
+            cursor: pointer;
+            list-style: none;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary::before {
+            content: "▶";
+            display: inline-block;
+            margin-right: 8px;
+            transition: transform 0.2s;
+            font-size: 12px;
+        }
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
+        .topic-details {
+            border: 1px solid #F2DFCE;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            background: #FFF9F5;
+        }
+        .topic-summary {
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 16px 20px;
+            color: #3E474F;
+            background: #F2DFCE;
+            border-radius: 8px;
+        }
+        .topic-details[open] .topic-summary {
+            border-radius: 8px 8px 0 0;
+        }
+        .topic-count {
+            font-size: 14px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .topic-content {
+            padding: 16px 20px;
+        }
+        .channel-details {
+            border: 1px solid #FCD0AF;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            background: white;
+        }
+        .channel-summary {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            padding: 12px 16px;
+            background: #FFF9F5;
+            border-radius: 6px;
+        }
+        .channel-details[open] .channel-summary {
+            border-radius: 6px 6px 0 0;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .channel-count {
+            font-size: 13px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .channel-content {
+            padding: 12px 16px;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 16px;
+            }
+            .header h1 {
+                font-size: 28px;
+            }
+            .snippet-card {
+                padding: 16px;
+            }
+        }
+        /* Add-to-playlist UI */
+        .snippet-card { position: relative; }
+        .snippet-check {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            margin: 0;
+            cursor: pointer;
+        }
+        .snippet-check input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .snippet-card.selected {
+            box-shadow: inset 4px 0 0 #0D7680;
+            background: #FFFCF8;
+        }
+        .snippet-status {
+            position: absolute;
+            top: 14px;
+            right: 40px;
+            font-size: 14px;
+            color: #66737D;
+            min-width: 90px;
+            text-align: right;
+        }
+        .snippet-status.ok { color: #0D7680; }
+        .snippet-status.err { color: #c0392b; }
+        .playlist-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #3E474F;
+            color: #FFF;
+            padding: 12px 24px;
+            z-index: 100;
+            display: none;
+            font-family: Georgia, "Times New Roman", serif;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.15);
+        }
+        .playlist-bar.visible {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+        .playlist-bar-msg { font-size: 15px; }
+        .playlist-bar button {
+            background: #0D7680;
+            color: #FFF;
+            border: 0;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-family: Georgia, "Times New Roman", serif;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .playlist-bar button:disabled {
+            background: #66737D;
+            cursor: not-allowed;
+        }
+        body.has-bar { padding-bottom: 80px; }
+    </style>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Daily Snippets</h1>
+            <div class="date">Tuesday, May 05, 2026</div>
+            <div class="meta">8 videos • uploaded 2026-05-05 • 8 videos</div>
+            <div class="site-nav"><a href="search.html">🔍 Search all snippets</a></div>
+        </div>
+        <details class="topic-details">
+            <summary class="topic-summary">POLITICS<span class="topic-count">(4 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">AkkadDaily<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="VkEyXykqzTs">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=VkEyXykqzTs" target="_blank">The Fix Everything Experiment Has Been Run</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 15m 51s • @sargonofakkad • May 05, 2026 • 115,005 views • 9,014 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses the drastic measures taken by Nayib Bukele to reduce gang violence in El Salvador, including mass arrests and militarization of the police. It examines the implications of these actions on human rights and public safety.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>El Salvador&#x27;s homicide rate dropped from over 100 per 100,000 to 1.3 by 2025.</li>
+                            <li>Nayib Bukele&#x27;s policies led to the arrest of 66,000 individuals to combat gang violence.</li>
+                            <li>The approval rating for Bukele consistently exceeds 90% among the Salvadoran population.</li>
+                            <li>Critics argue that Bukele&#x27;s methods violate human rights, while supporters claim they are necessary for public safety.</li>
+                            <li>Mass arrests have resulted in the lowest homicide tally since tracking began.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Nayib Bukele</p>
+                        <p><strong>Organizations:</strong> BBC, The Guardian, The Economist</p>
+                        <p><strong>Topics:</strong> El Salvador, gang violence, Nayib Bukele, human rights, crime rates</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Nayib Bukele&#x27;s approach, while controversial, has significantly reduced violence in El Salvador.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">ThePodcastoftheLotusEaters<span class="channel-count">(3 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="98tsPmA7XJA">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=98tsPmA7XJA" target="_blank">It’s Another Cover Up</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 26m 13s • @thepodcastofthelotuseaters • May 05, 2026 • 69,635 views • 4,072 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses the Labour government&#x27;s inquiry into grooming gangs, suggesting it is a cover-up rather than a genuine investigation. The narrator critiques the handling of the issue by various political figures and institutions over the years.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The Labour government&#x27;s inquiry into grooming gangs is expected to be another cover-up.</li>
+                            <li>Shabana Mahmood&#x27;s credibility as Home Secretary is questioned due to her background and previous statements.</li>
+                            <li>The inquiry&#x27;s timeline conveniently defers findings until after the next general election.</li>
+                            <li>Historical evidence shows that grooming gangs have been known since the 1970s, contradicting the inquiry&#x27;s starting point of 1996.</li>
+                            <li>Previous inquiries have been criticized for whitewashing the involvement of Pakistani men in grooming gangs.</li>
+                            <li>The inquiry is limited to only three locations, despite evidence of widespread issues across the country.</li>
+                            <li>Political figures have been aware of the abuse for decades but have failed to act due to fears of rocking the multicultural community boat.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Shabana Mahmood, Yvette Cooper, Sue Berelowitz, David Blunkett, Dennis MacShane, Simon Danczuk, Barry Sheerman, Nigel Farage, Peter McLoughlin</p>
+                        <p><strong>Organizations:</strong> Labour Party, Home Office, National Crime Agency, Children&#x27;s Commissioner</p>
+                        <p><strong>Topics:</strong> grooming gangs, government cover-up, Pakistani community, inquiry findings, child exploitation, political accountability</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The inquiry is unlikely to address the root causes of grooming gang issues and is seen as a political maneuver.
+                    </div>
+                </div>
+                <div class="snippet-card" data-video-id="IQfgc0t49zs">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=IQfgc0t49zs" target="_blank">Breakfast With Beau | Tuesday 5th May 2026</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 70m 11s • @thepodcastofthelotuseaters • May 05, 2026 • 9,194 views • 801 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">In this episode, the host discusses the current political landscape in the UK, focusing on Labour leader Kier Starmer&#x27;s challenges and the ongoing tensions in Iran. The conversation also touches on local election predictions and the implications of Brexit.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Kier Starmer is facing significant pressure within the Labour Party as local elections approach.</li>
+                            <li>There are rumors of a potential leadership challenge against Starmer from within his party.</li>
+                            <li>The situation in Iran is escalating, with claims and counterclaims between Iran and the US.</li>
+                            <li>Oil prices remain volatile amid geopolitical tensions.</li>
+                            <li>Starmer&#x27;s attempts to align closer with the EU are seen as undermining Brexit.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Keir Starmer, Angela Rayner, Wes Streeting, Andrew Tate, David Attenborough, Donald Trump, Nicole Kidman, Bobby Sands, Madeleine McCann, Richard Hall, John Curtice, Olukemi Badenoch, Nigel Farage</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> UK politics, Labour Party, Iran conflict, oil prices, local elections, Brexit, media criticism</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Kier Starmer&#x27;s leadership is increasingly precarious as the Labour Party prepares for potentially devastating local election results.
+                    </div>
+                </div>
+                <div class="snippet-card" data-video-id="ExUsunRSEqY">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=ExUsunRSEqY" target="_blank">Your Next Prime Minister</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 26m 57s • @thepodcastofthelotuseaters • May 05, 2026 • 54,790 views • 2,579 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses the potential political future of Kier Starmer and the likelihood of Angela Rayner becoming the next British Prime Minister. The narrator critiques Rayner&#x27;s qualifications and the Labour Party&#x27;s current situation.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>There is a 91% chance Kier Starmer will be out by the next election.</li>
+                            <li>Angela Rayner is currently favored to replace Starmer as Prime Minister.</li>
+                            <li>Rayner&#x27;s qualifications and past experiences are questioned throughout the discussion.</li>
+                            <li>The Labour Party is facing significant challenges ahead of the next election.</li>
+                            <li>Many believe that Starmer&#x27;s poor leadership will prevent Labour from winning.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Keir Starmer, Wes Streeting, Peter Mandelson, Angela Rayner, Ed Miliband, David Lammy, Nayib Bukele, Donald Trump, Vladimir Putin, Xi Jinping, Allison Pearson</p>
+                        <p><strong>Organizations:</strong> Polymarket, Unison</p>
+                        <p><strong>Topics:</strong> Kier Starmer&#x27;s leadership, Angela Rayner&#x27;s qualifications, Labour Party dynamics, Betting markets, Political analysis</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Angela Rayner&#x27;s potential rise to Prime Minister is seen as problematic due to her lack of substantial achievements.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">INVESTING<span class="topic-count">(4 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">LaDucTrading<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="8YZFxlOmoI0">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=8YZFxlOmoI0" target="_blank">Raging Bulls Run On Groupthink</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 12m 3s • @laductrading • May 05, 2026 • 480 views • 29 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses the recent historic market rally driven by passive investment flows and the implications of AI and large IPOs on the market. The narrator highlights the disconnect between market pricing and actual earnings, emphasizing the role of groupthink in the current investing climate.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The recent market rally is largely driven by passive investment flows rather than fundamentals.</li>
+                            <li>This rally is unprecedented, with the largest inflow of systematic capital into markets ever recorded.</li>
+                            <li>Major tech companies are seeing earnings boosted by equity stakes in private companies.</li>
+                            <li>The S&amp;P 500 committee is proposing rule changes to facilitate large IPOs, which could further increase passive investment.</li>
+                            <li>There is a growing concern about the fragility of the current market rally and potential economic challenges ahead.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Jee Carson, Michael Green</p>
+                        <p><strong>Organizations:</strong> Bank of America, SpaceX, OpenAI, Anthropic</p>
+                        <p><strong>Topics:</strong> market rally, passive investing, AI investment, S&amp;P 500, earnings revisions</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The market is currently experiencing a bull run driven by groupthink and passive investment, but this may not be sustainable.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">OGJohnAGOfficial<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="x0IjoecX_k4">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=x0IjoecX_k4" target="_blank">Something Big Happens to Silver on May 15 — And Nobody Is Prepared for It</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 21m 18s • @ogjohnagofficial • May 05, 2026 • 18,925 views • 606 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses the upcoming changes in the Federal Reserve leadership and their potential impact on the silver market. It highlights the uncertainty surrounding interest rates and the structural fundamentals of silver amidst recent price corrections.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>May 15th marks a significant change in the Federal Reserve with Kevin Warsh expected to take over from Jerome Powell.</li>
+                            <li>Silver prices have dropped nearly 40% from their January peak of $121, currently trading near $74.</li>
+                            <li>The market&#x27;s reaction to Warsh&#x27;s nomination was driven by expectations of interest rate changes.</li>
+                            <li>Warsh&#x27;s historical stance as an inflation hawk creates uncertainty about future rate cuts.</li>
+                            <li>The structural demand for silver remains strong despite recent price declines.</li>
+                            <li>The Federal Reserve&#x27;s decision-making process may slow down due to internal resistance against rate cuts.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Jerome Powell, Kevin Warsh</p>
+                        <p><strong>Organizations:</strong> Federal Reserve, Invesco, Deutsche Bank, J.P. Morgan, Hoover Institution, The Wall Street Journal, Silver Institute</p>
+                        <p><strong>Topics:</strong> silver market, interest rates, Federal Reserve, investment strategies, geopolitical risks</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The silver market is at a decision point, and the actions of the new Federal Reserve Chair will significantly influence its future.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">Wealthion<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="t-rjalknOO8">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=t-rjalknOO8" target="_blank">The ‘Molecular War’ Has Begun | The Supply Chain Crisis No One Sees | Nick Lawson &amp; Ben Finegold</a>
+                    </div>
+                    <div class="snippet-meta">interview • 29m 30s • @wealthion • May 05, 2026 • 4,577 views • 117 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Nick Lawson, Ben Finegold, Trey Reich</div>
+                    <div class="snippet-summary">This episode discusses the ongoing supply chain crisis, particularly focusing on critical materials like helium, tungsten, and metallurgical coal. The speakers explore the implications of geopolitical conflicts on these resources and their importance in various industries.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The Iranian strikes caused a significant reduction in global helium supply.</li>
+                            <li>Helium is essential for industries like semiconductors and MRI cooling.</li>
+                            <li>China controls a large portion of the tungsten market, impacting global supply.</li>
+                            <li>Metallurgical coal is crucial for steel production and defense infrastructure.</li>
+                            <li>The demand for helium is projected to increase significantly in the coming years.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> OceanWall, MoneyWeek, ExxonMobil, Air Liquide, Air Products, Linde, ASPI Isotopes</p>
+                        <p><strong>Topics:</strong> helium supply crisis, molecular war, metallurgical coal, tungsten market, investment strategies, global supply chains</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The ongoing geopolitical tensions are reshaping the supply landscape for critical materials, presenting both challenges and investment opportunities.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">eurodollaruniversity<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="5kjTt_hv3fo">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=5kjTt_hv3fo" target="_blank">Gas Prices Are About To EXPLODE… And This Could Be Just The Beginning</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 19m 47s • @eurodollaruniversity • May 05, 2026 • 58,697 views • 2,148 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses the impending surge in gasoline prices and its potential impact on consumer behavior and the economy. It highlights the relationship between wholesale and retail gas prices and the broader implications for inflation and market confidence.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The national average retail price of gasoline is projected to reach around $5 per gallon soon.</li>
+                            <li>Current wholesale gas prices indicate a significant increase in retail costs due to falling inventories.</li>
+                            <li>Consumer confidence is likely to decline as gas prices rise, leading to demand destruction.</li>
+                            <li>The stock market&#x27;s recent rally is narrow and reminiscent of the dot-com bubble, raising concerns among investors.</li>
+                            <li>Historical patterns show that energy shocks often precede recessions.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Jean-Claude Trichet, Jeff, Beth, Ben Snyder</p>
+                        <p><strong>Organizations:</strong> US Energy Information Administration, Augusta Precious Metals, Euro Dollar University, Goldman Sachs, Bank of America Global Research, Merrill Seebert</p>
+                        <p><strong>Topics:</strong> gas prices, energy shock, consumer behavior, stock market, inflation, demand destruction</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The rise to $5 per gallon gasoline will fundamentally alter consumer perceptions and economic behavior.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <div class="footer">
+            Generated 2026-09-15 22:04:15
+        </div>
+    </div>
+    <div class="playlist-bar" id="plBar">
+        <span class="playlist-bar-msg"><span id="plCount">0</span> selected</span>
+        <button id="plBtn" type="button">Add to playlist</button>
+    </div>
+    <script src="assets/config.js"></script>
+    <script src="assets/playlist.js"></script>
+</body>
+</html>

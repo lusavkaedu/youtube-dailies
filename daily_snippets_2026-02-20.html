@@ -157,6 +157,18 @@
             font-size: 12px;
             color: #66737D;
         }
+        .site-nav {
+            text-align: center;
+            margin-top: 12px;
+        }
+        .site-nav a {
+            color: #0D7680;
+            font-size: 14px;
+            text-decoration: none;
+        }
+        .site-nav a:hover {
+            text-decoration: underline;
+        }
         /* Collapsible sections */
         details {
             margin-bottom: 8px;
@@ -244,7 +256,72 @@
                 padding: 16px;
             }
         }
+        /* Add-to-playlist UI */
+        .snippet-card { position: relative; }
+        .snippet-check {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            margin: 0;
+            cursor: pointer;
+        }
+        .snippet-check input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .snippet-card.selected {
+            box-shadow: inset 4px 0 0 #0D7680;
+            background: #FFFCF8;
+        }
+        .snippet-status {
+            position: absolute;
+            top: 14px;
+            right: 40px;
+            font-size: 14px;
+            color: #66737D;
+            min-width: 90px;
+            text-align: right;
+        }
+        .snippet-status.ok { color: #0D7680; }
+        .snippet-status.err { color: #c0392b; }
+        .playlist-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #3E474F;
+            color: #FFF;
+            padding: 12px 24px;
+            z-index: 100;
+            display: none;
+            font-family: Georgia, "Times New Roman", serif;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.15);
+        }
+        .playlist-bar.visible {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+        .playlist-bar-msg { font-size: 15px; }
+        .playlist-bar button {
+            background: #0D7680;
+            color: #FFF;
+            border: 0;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-family: Georgia, "Times New Roman", serif;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .playlist-bar button:disabled {
+            background: #66737D;
+            cursor: not-allowed;
+        }
+        body.has-bar { padding-bottom: 80px; }
     </style>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
     <div class="container">
@@ -252,18 +329,21 @@
             <h1>Daily Snippets</h1>
             <div class="date">Friday, February 20, 2026</div>
             <div class="meta">41 videos • uploaded 2026-02-20 • 41 videos</div>
+            <div class="site-nav"><a href="search.html">🔍 Search all snippets</a></div>
         </div>
         <details class="topic-details">
-            <summary class="topic-summary">POLITICS<span class="topic-count">(7 videos)</span></summary>
+            <summary class="topic-summary">POLITICS<span class="topic-count">(6 videos)</span></summary>
             <div class="topic-content">
                 <details class="channel-details">
                     <summary class="channel-summary">AkkadDaily<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="mezHzkwf4G8">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=mezHzkwf4G8" target="_blank">Oh Look, They Want a Mercenary Army</a>
                     </div>
-                    <div class="snippet-meta">monologue • 15m 50s • @SargonofAkkad • Feb 20, 2026 • 54,120 views • 4,927 likes</div>
+                    <div class="snippet-meta">monologue • 15m 50s • @sargonofakkad • Feb 20, 2026 • 54,120 views • 4,927 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">The episode discusses the implications of using immigrants as a solution to Europe&#x27;s military manpower crisis, questioning the motivations and potential risks involved. It critiques the idea of integrating foreign soldiers into European armies and reflects on historical precedents.</div>
                     <div class="snippet-claims">
@@ -288,44 +368,15 @@
                     </div>
                 </details>
                 <details class="channel-details">
-                    <summary class="channel-summary">IgorYakovenko<span class="channel-count">(1 videos)</span></summary>
-                    <div class="channel-content">
-                <div class="snippet-card">
-                    <div class="snippet-title">
-                        <a href="https://www.youtube.com/watch?v=spySqEMTpL4" target="_blank">СОВЕТ МИРА ИМЕНИ ТРАМПА СТАНЕТ СЛЕДИТЬ ЗА ООН</a>
-                    </div>
-                    <div class="snippet-meta">monologue • 115m 23s • @IgorYakovenko • Feb 20, 2026 • 44,129 views • 4,767 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Игорь Яковенко</div>
-                    <div class="snippet-summary">В этом эпизоде Игорь Яковенко обсуждает заседание Совета мира, инициированное Дональдом Трампом, и его влияние на Организацию Объединённых Наций. Также рассматриваются вопросы гуманитарной помощи и международной безопасности в контексте конфликта в Газе.</div>
-                    <div class="snippet-claims">
-                        <div class="snippet-claims-title">Key Claims:</div>
-                        <ul>
-                            <li>Трамп заявил, что Совет мира будет следить за ООН.</li>
-                            <li>Девять стран выделили более 7 миллиардов долларов на гуманитарную помощь Газе.</li>
-                            <li>Трамп остановил семь войн и заявил о необходимости порядка в Газе.</li>
-                            <li>Индонезия, Марокко, Албания, Косово и Казахстан направят военных для поддержания порядка в Газе.</li>
-                            <li>Путин готов выделить миллиард из замороженных средств для помощи.</li>
-                        </ul>
-                    </div>
-                    <div class="snippet-details">
-                        <p><strong>People:</strong> Дональд Трамп, Владимир Путин, Марк Рубио, Сергей Маратович Грабский, Максим Рыженков, Илья Юрий Фёдоров, Андрей Андреевич Пиантковский</p>
-                        <p><strong>Organizations:</strong> Совет мира, ООН</p>
-                        <p><strong>Topics:</strong> Совет мира, Трамп, ООН, гуманитарная помощь, война в Газе</p>
-                    </div>
-                    <div class="snippet-conclusion">
-                        <strong>Conclusion:</strong> Совет мира, инициированный Трампом, может оказать значительное влияние на международные отношения и безопасность.
-                    </div>
-                </div>
-                    </div>
-                </details>
-                <details class="channel-details">
                     <summary class="channel-summary">ThePodcastoftheLotusEaters<span class="channel-count">(3 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="4bRLSXtCW5g">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=4bRLSXtCW5g" target="_blank">Look Who’s Actually Running the Country</a>
                     </div>
-                    <div class="snippet-meta">monologue • 17m 33s • @ThePodcastoftheLotusEaters • Feb 20, 2026 • 34,449 views • 1,755 likes</div>
+                    <div class="snippet-meta">monologue • 17m 33s • @thepodcastofthelotuseaters • Feb 20, 2026 • 34,449 views • 1,755 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">This episode discusses the appointment of Antonia Romeo as the new cabinet secretary and the implications of her controversial background and views on gender and inclusivity. The speakers express concerns about her influence on the civil service and the political landscape.</div>
                     <div class="snippet-claims">
@@ -339,7 +390,7 @@
                         </ul>
                     </div>
                     <div class="snippet-details">
-                        <p><strong>People:</strong> Antonia Romeo, Chris Wormald, Dominick Cummings, Kier Starmer, Lord Macdonald, Damian Green, Nadim Zahawi, Zia Yusuf</p>
+                        <p><strong>People:</strong> Antonia Romeo, Chris Wormald, Dominick Cummings, Keir Starmer, Lord Macdonald, Damian Green, Nadim Zahawi, Zia Yusuf</p>
                         <p><strong>Organizations:</strong> Telegraph, Stonewall, Department for International Trade, Ministry of Justice</p>
                         <p><strong>Topics:</strong> Antonia Romeo, civil service, woke culture, political appointments, gender issues</p>
                     </div>
@@ -347,11 +398,13 @@
                         <strong>Conclusion:</strong> The speakers believe that Antonia Romeo&#x27;s appointment reflects a troubling trend in the civil service towards prioritizing woke ideology over competence.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="dnhD2vogk6g">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=dnhD2vogk6g" target="_blank">We Have a Serious Choice to Make</a>
                     </div>
-                    <div class="snippet-meta">monologue • 32m 17s • @ThePodcastoftheLotusEaters • Feb 20, 2026 • 51,450 views • 2,898 likes</div>
+                    <div class="snippet-meta">monologue • 32m 17s • @thepodcastofthelotuseaters • Feb 20, 2026 • 51,450 views • 2,898 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">This episode discusses the current political landscape in Britain, focusing on the contrasting approaches of various political figures and parties. It critiques the authenticity of political messaging and the implications of immigration policies.</div>
                     <div class="snippet-claims">
@@ -365,7 +418,7 @@
                         </ul>
                     </div>
                     <div class="snippet-details">
-                        <p><strong>People:</strong> Sir Arthur Wellsley, David Starkey, Peter Hitchens, Zack Polansky, Rupert Lowe, Nigel Farage, Matt Goodwin</p>
+                        <p><strong>People:</strong> Sir Arthur Wellsley, David Starkey, Peter Hitchens, Zack Polanski, Rupert Lowe, Nigel Farage, Matt Goodwin</p>
                         <p><strong>Organizations:</strong> Green Party</p>
                         <p><strong>Topics:</strong> British politics, Tory views, Green Party critique, immigration policy, political authenticity</p>
                     </div>
@@ -373,11 +426,13 @@
                         <strong>Conclusion:</strong> The episode concludes that the political center is collapsing, leading to a rise in alternative parties that reflect more traditional or radical views.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="EcbaATPQqt0">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=EcbaATPQqt0" target="_blank">Breakfast With Beau | Friday 20th February 2026</a>
                     </div>
-                    <div class="snippet-meta">monologue • 73m 58s • @ThePodcastoftheLotusEaters • Feb 20, 2026 • 12,912 views • 1,154 likes</div>
+                    <div class="snippet-meta">monologue • 73m 58s • @thepodcastofthelotuseaters • Feb 20, 2026 • 12,912 views • 1,154 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator, Harry</div>
                     <div class="snippet-summary">In this episode, the host discusses the recent arrest of Prince Andrew and the media&#x27;s portrayal of the event. The conversation also touches on broader political themes, including the implications for the royal family and international relations.</div>
                     <div class="snippet-claims">
@@ -406,11 +461,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">ThinkingClass<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="IWG6zPX0EpE">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=IWG6zPX0EpE" target="_blank">A Better Life? Lionel Shriver on Immigration, Demography, and Belonging In The West</a>
                     </div>
-                    <div class="snippet-meta">interview • 61m 5s • @ThinkingClass • Feb 20, 2026 • 7,071 views • 304 likes</div>
+                    <div class="snippet-meta">interview • 61m 5s • @thinkingclass • Feb 20, 2026 • 7,071 views • 304 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Lionel Shriver</div>
                     <div class="snippet-summary">In this episode, Lionel Shriver discusses her novel &#x27;A Better Life&#x27;, which explores the complexities of immigration and its impact on Western societies. Through the lens of a fictional family, she examines the moral and social implications of mass immigration and the narratives surrounding it.</div>
                     <div class="snippet-claims">
@@ -438,7 +495,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">davidstarkeytalks<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="uhHPEeDxQ3s">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=uhHPEeDxQ3s" target="_blank">&quot;You&#x27;re going to SPLIT the Right!&quot; | David Starkey Talks... to RESTORE BRITAIN founder Rupert Lowe</a>
                     </div>
@@ -475,7 +534,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">CRUXInvestor<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="X0IIFzuikyU">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=X0IIFzuikyU" target="_blank">Standard Uranium (TSXV:STND) - JV Funded Exploration &amp; Drilling</a>
                     </div>
@@ -506,11 +567,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">CommodityCulture<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="2KD94dz7Fuc">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=2KD94dz7Fuc" target="_blank">CRASH &#x27;Worse Than Great Depression&#x27; Ahead, Then $20k Gold, $500 Silver: David Hunter</a>
                     </div>
-                    <div class="snippet-meta">interview • 35m 56s • @CommodityCulture • Feb 20, 2026 • 29,158 views • 1,477 likes</div>
+                    <div class="snippet-meta">interview • 35m 56s • @commodityculture • Feb 20, 2026 • 29,158 views • 1,477 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Jesse Day, David Hunter</div>
                     <div class="snippet-summary">In this episode, David Hunter discusses his predictions for a global economic bust worse than the Great Depression, followed by a significant rise in commodity prices, particularly gold and silver. He shares insights on the current state of the market, interest rates, and the implications for investors.</div>
                     <div class="snippet-claims">
@@ -537,11 +600,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">Finding_Finance<span class="channel-count">(2 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="8ixYcPfY9c8">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=8ixYcPfY9c8" target="_blank">Commodities Update: Technical Analysis: GOLD AND SILVER MUCH HIGHER, HOW SUSTAINING IS IT?</a>
                     </div>
-                    <div class="snippet-meta">monologue • 19m 15s • @Finding_Finance • Feb 20, 2026 • 2,410 views • 237 likes</div>
+                    <div class="snippet-meta">monologue • 19m 15s • @finding_finance • Feb 20, 2026 • 2,410 views • 237 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Andy</div>
                     <div class="snippet-summary">In this episode, Andy provides a technical analysis update on commodities, focusing on gold and silver prices, as well as market yields. He discusses potential future movements in these assets and shares his investment insights.</div>
                     <div class="snippet-claims">
@@ -563,11 +628,13 @@
                         <strong>Conclusion:</strong> Long-term conditions for gold to rise remain favorable despite short-term uncertainties.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="mcPuNfFEdhY">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=mcPuNfFEdhY" target="_blank">HERE COMES THE ENERGY BOOM 💥 | Unstoppable Vibe</a>
                     </div>
-                    <div class="snippet-meta">monologue • 20m 46s • @Finding_Finance • Feb 20, 2026 • 2,864 views • 275 likes</div>
+                    <div class="snippet-meta">monologue • 20m 46s • @finding_finance • Feb 20, 2026 • 2,864 views • 275 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Andy</div>
                     <div class="snippet-summary">In this episode, Andy discusses the current trends in the energy market, focusing on oil, uranium, and coal. He emphasizes the potential for significant investment opportunities as demand for energy rises amidst supply constraints.</div>
                     <div class="snippet-claims">
@@ -594,11 +661,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">LaDucTrading<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="-tv_D8c2438">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=-tv_D8c2438" target="_blank">Historic Dispersion From Growth To Value Rotation</a>
                     </div>
-                    <div class="snippet-meta">monologue • 9m 32s • @LaDucTrading • Feb 20, 2026 • 448 views • 14 likes</div>
+                    <div class="snippet-meta">monologue • 9m 32s • @laductrading • Feb 20, 2026 • 448 views • 14 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">The episode discusses the historic dispersion from growth to value in the market and the implications of geopolitical tensions, particularly regarding Iran. It highlights the current market conditions, including the impact of negative gamma and the potential for volatility in the coming weeks.</div>
                     <div class="snippet-claims">
@@ -625,12 +694,14 @@
                 <details class="channel-details">
                     <summary class="channel-summary">Movchans<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="vHjw_SPKZvQ">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=vHjw_SPKZvQ" target="_blank">The market is down, but we&#x27;re up. How to profit from volatility in 2026?</a>
                     </div>
-                    <div class="snippet-meta">interview • 22m 13s • @Movchans • Feb 20, 2026 • 849 views • 27 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Надя Грошева, Михаил Портной</div>
+                    <div class="snippet-meta">interview • 22m 13s • @movchans • Feb 20, 2026 • 849 views • 27 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Надежда Грошева, Михаил Портной</div>
                     <div class="snippet-summary">В этом эпизоде обсуждаются рыночные перспективы на 2026 год и возможности, которые предоставляет волатильность для инвесторов. Спикеры анализируют влияние искусственного интеллекта и геополитических рисков на рынок.</div>
                     <div class="snippet-claims">
                         <div class="snippet-claims-title">Key Claims:</div>
@@ -656,11 +727,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">OGJohnAG<span class="channel-count">(2 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="V4QlxJ7C3_U">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=V4QlxJ7C3_U" target="_blank">Silver Hits $80: COMEX Registered Silver Plunging Toward ZERO? – Will It Hit Empty by Feb 27?</a>
                     </div>
-                    <div class="snippet-meta">monologue • 10m 49s • @OGJohnAG • Feb 20, 2026 • 30,377 views • 1,836 likes</div>
+                    <div class="snippet-meta">monologue • 10m 49s • @ogjohnag • Feb 20, 2026 • 30,377 views • 1,836 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">This episode discusses the current state of the silver market, focusing on the declining COMEX registered silver inventory and potential implications for future prices. It also examines macroeconomic factors and geopolitical risks affecting the market.</div>
                     <div class="snippet-claims">
@@ -682,11 +755,13 @@
                         <strong>Conclusion:</strong> The structural thesis for silver remains intact, but the market faces significant risks ahead.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="hQUepN_eOdA">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=hQUepN_eOdA" target="_blank">SILVER’S WILD REVERSAL: $79 SCOTUS DUMP THEN $84 SURGE. Physical Crushing Paper?</a>
                     </div>
-                    <div class="snippet-meta">monologue • 9m 16s • @OGJohnAG • Feb 20, 2026 • 14,933 views • 1,280 likes</div>
+                    <div class="snippet-meta">monologue • 9m 16s • @ogjohnag • Feb 20, 2026 • 14,933 views • 1,280 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">This episode discusses the recent Supreme Court ruling on tariffs and its impact on the silver and gold markets. The narrator analyzes market reactions and provides insights into the structural deficits in silver production.</div>
                     <div class="snippet-claims">
@@ -713,11 +788,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">OGJohnAG_2<span class="channel-count">(3 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="Pi_HD68wMiA">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=Pi_HD68wMiA" target="_blank">China Returns in 72 Hours to $4,990 Gold — Do They Buy or Crash It? — 8 Days Until COMEX Delivery</a>
                     </div>
-                    <div class="snippet-meta">monologue • 16m 42s • @OGJohnAG_2 • Feb 20, 2026 • 1,355 views • 171 likes</div>
+                    <div class="snippet-meta">monologue • 16m 42s • @ogjohnag_2 • Feb 20, 2026 • 1,355 views • 171 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">This episode discusses China&#x27;s imminent return to the gold and silver markets and its potential impact on global prices. The narrator outlines scenarios based on China&#x27;s buying behavior and its implications for upcoming COMEX delivery dates.</div>
                     <div class="snippet-claims">
@@ -739,11 +816,13 @@
                         <strong>Conclusion:</strong> China&#x27;s decision on whether to buy or wait will significantly influence gold and silver prices.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="kQZNpQyAHOs">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=kQZNpQyAHOs" target="_blank">Gold REJECTED $5,000 Three Times — Hong Kong Opens Tomorrow &amp; Changes Everything</a>
                     </div>
-                    <div class="snippet-meta">monologue • 19m 18s • @OGJohnAG_2 • Feb 20, 2026 • 6,930 views • 519 likes</div>
+                    <div class="snippet-meta">monologue • 19m 18s • @ogjohnag_2 • Feb 20, 2026 • 6,930 views • 519 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">This episode discusses the recent attempts of gold to break the $5,000 resistance level and the implications of Hong Kong&#x27;s reopening for gold trading. The narrator analyzes market conditions and potential outcomes based on upcoming economic data and trading behavior.</div>
                     <div class="snippet-claims">
@@ -765,11 +844,13 @@
                         <strong>Conclusion:</strong> The next 24 hours are crucial for gold&#x27;s price direction, hinging on Hong Kong&#x27;s trading activity and US economic data.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="EuLD_Y9O03c">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=EuLD_Y9O03c" target="_blank">7 DAYS Until COMEX Has No Silver Left — Here&#x27;s What Happens February 27</a>
                     </div>
-                    <div class="snippet-meta">monologue • 10m 39s • @OGJohnAG_2 • Feb 20, 2026 • 7,496 views • 655 likes</div>
+                    <div class="snippet-meta">monologue • 10m 39s • @ogjohnag_2 • Feb 20, 2026 • 7,496 views • 655 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">This episode discusses the impending crisis in the silver market as Comex approaches a critical date with drastically low registered silver inventory. The narrator outlines potential scenarios and implications for investors as demand for physical silver surges against dwindling supply.</div>
                     <div class="snippet-claims">
@@ -797,11 +878,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">RealVisionPresents<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="Gc0WnUUG13k">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=Gc0WnUUG13k" target="_blank">BREAKPOINT 2025: Drift ft. Cindy Leow</a>
                     </div>
-                    <div class="snippet-meta">monologue • 6m 38s • @RealVisionPresents • Feb 20, 2026 • 355 views • 10 likes</div>
+                    <div class="snippet-meta">monologue • 6m 38s • @realvisionpresents • Feb 20, 2026 • 355 views • 10 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Cindy Leow</div>
                     <div class="snippet-summary">In this episode, Cindy Leow discusses the advancements and features of Drift V3, the latest version of their perpetual exchange on Salana. The episode highlights the improvements made to enhance trader experience and performance.</div>
                     <div class="snippet-claims">
@@ -828,11 +911,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">ResourceTalks<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="djbZ5Q02VdM">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=djbZ5Q02VdM" target="_blank">Can a Junior Really Prove a Multi-Porphyry District in BC? | Torr Metals CEO Interview</a>
                     </div>
-                    <div class="snippet-meta">interview • 71m 29s • @ResourceTalks • Feb 20, 2026 • 171 views</div>
+                    <div class="snippet-meta">interview • 71m 29s • @resourcetalks • Feb 20, 2026 • 171 views</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Antonio, Malcolm</div>
                     <div class="snippet-summary">In this episode, the CEO of Torr Metals discusses the company&#x27;s exploration efforts for copper and gold in British Columbia and Ontario, focusing on their Bertha and Fillian projects. The conversation covers drilling results, market reactions, and future plans for further exploration.</div>
                     <div class="snippet-claims">
@@ -859,11 +944,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">TheAsianGuy-k9h<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="UfcZRfv1tOk">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=UfcZRfv1tOk" target="_blank">War in 48hrs: Gold at $5,000 and Silver at $80 — The 4-Scenario Matrix You Need</a>
                     </div>
-                    <div class="snippet-meta">monologue • 28m 27s • @THEASIANGUY-AG • Feb 20, 2026 • 20,668 views • 705 likes</div>
+                    <div class="snippet-meta">monologue • 28m 27s • @theasianguy-ag • Feb 20, 2026 • 20,668 views • 705 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">This episode discusses the potential impact of simultaneous geopolitical and market events on gold and silver prices. The narrator outlines four scenarios that could unfold in the coming days, emphasizing the urgency for investors to act based on current market conditions.</div>
                     <div class="snippet-claims">
@@ -890,13 +977,15 @@
                 <details class="channel-details">
                     <summary class="channel-summary">WTFinancepodcast<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="VphEmEmJ9FQ">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=VphEmEmJ9FQ" target="_blank">US Debt Crisis to Trigger Currency Collapse | Francis Hunt</a>
                     </div>
-                    <div class="snippet-meta">interview • 48m 44s • @WTFinancepodcast • Feb 20, 2026 • 4,125 views • 259 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Anthony Fats, Francis Hunt</div>
-                    <div class="snippet-summary">In this episode, Anthony Fats interviews Francis Hunt about the implications of the US debt crisis and the potential for a currency collapse. They discuss the debasement of fiat currencies, the performance of precious metals, and the broader economic landscape.</div>
+                    <div class="snippet-meta">interview • 48m 44s • @wtfinancepodcast • Feb 20, 2026 • 4,125 views • 259 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Anthony Fauci, Francis Hunt</div>
+                    <div class="snippet-summary">In this episode, Anthony Fauci interviews Francis Hunt about the implications of the US debt crisis and the potential for a currency collapse. They discuss the debasement of fiat currencies, the performance of precious metals, and the broader economic landscape.</div>
                     <div class="snippet-claims">
                         <div class="snippet-claims-title">Key Claims:</div>
                         <ul>
@@ -923,7 +1012,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">arcadiaeconomics<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="WMtzE711hEc">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=WMtzE711hEc" target="_blank">Why Metals War With China Is Just Getting Started...</a>
                     </div>
@@ -954,13 +1045,15 @@
                 <details class="channel-details">
                     <summary class="channel-summary">capitalcosm<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="6Z_jdwvA7OI">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
-                        <a href="https://www.youtube.com/watch?v=6Z_jdwvA7OI" target="_blank">🔴 Gold &amp; Silver Buyers Need To Take Look At These Oil Stocks | Chris Macintosh</a>
+                        <a href="https://www.youtube.com/watch?v=6Z_jdwvA7OI" target="_blank">🔴 Gold &amp; Silver Buyers Need To Take Look At These Oil Stocks | Chris MacIntosh</a>
                     </div>
                     <div class="snippet-meta">interview • 47m 24s • @capitalcosm • Feb 20, 2026 • 7,434 views • 493 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Chris Macintosh, Brad McFaten</div>
-                    <div class="snippet-summary">In this episode, Chris Macintosh and Brad McFaten discuss the potential for significant capital rotation into the energy sector and emerging markets, highlighting the current undervaluation of oil stocks. They analyze market trends and the implications for investors looking to capitalize on upcoming opportunities.</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Chris MacIntosh, Brad McFadden</div>
+                    <div class="snippet-summary">In this episode, Chris MacIntosh and Brad McFadden discuss the potential for significant capital rotation into the energy sector and emerging markets, highlighting the current undervaluation of oil stocks. They analyze market trends and the implications for investors looking to capitalize on upcoming opportunities.</div>
                     <div class="snippet-claims">
                         <div class="snippet-claims-title">Key Claims:</div>
                         <ul>
@@ -985,7 +1078,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">miningstockedu<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="BR1IZfoX3T4">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=BR1IZfoX3T4" target="_blank">When to Bet Big on Junior Mining Stocks with Investor Erik Wetterling</a>
                     </div>
@@ -1016,7 +1111,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Chris_Vermeulen<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="uZYwCw28zt4">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=uZYwCw28zt4" target="_blank">Chris Vermeulen: Silver Manipulation, Oil &#x27;Breaking Out&#x27; &amp; Why Big Moves Are Ahead for Gold</a>
                     </div>
@@ -1047,7 +1144,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Eric_Sprott<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="Yo8s_2c-LOs">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=Yo8s_2c-LOs" target="_blank">🚨Eric Sprott Reveals the Silver Stocks He Owns!</a>
                     </div>
@@ -1079,11 +1178,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Jim_Bianco<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="aYcIBaptqrk">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=aYcIBaptqrk" target="_blank">Jim Bianco: Why 2026 Is a COMPLETELY Different Economy – AI, Inflation &amp; Rotation</a>
                     </div>
-                    <div class="snippet-meta">interview • 38m 17s • @BiancoResearch • Feb 20, 2026 • 3,534 views • 182 likes</div>
+                    <div class="snippet-meta">interview • 38m 17s • @biancoresearch • Feb 20, 2026 • 3,534 views • 182 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Jim Bianco</div>
                     <div class="snippet-summary">In this episode, Jim Bianco discusses the evolving economic landscape post-COVID, highlighting shifts in financial markets, inflation, and the impact of AI on software costs. He also provides insights into geopolitical issues affecting economies, particularly in the US and Europe.</div>
                     <div class="snippet-claims">
@@ -1097,7 +1198,7 @@
                         </ul>
                     </div>
                     <div class="snippet-details">
-                        <p><strong>People:</strong> Christine Lagarde, Marine Le Pen, Kier Starmer, Chris Waller</p>
+                        <p><strong>People:</strong> Christine Lagarde, Marine Le Pen, Keir Starmer, Chris Waller</p>
                         <p><strong>Organizations:</strong> Jim Bianco Research, European Central Bank, Bloomberg, Salesforce, WisdomTree</p>
                         <p><strong>Topics:</strong> post-COVID economy, financial markets, AI impact, China&#x27;s economy, Japan&#x27;s recovery, US dollar</p>
                     </div>
@@ -1110,7 +1211,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Lyn_Alden<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="G-MUaWP9myY">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=G-MUaWP9myY" target="_blank">Lyn Alden: Why the Fed WON&#x27;T Do a Nuclear Print (And What That Means)</a>
                     </div>
@@ -1142,11 +1245,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Michael_Oliver<span class="channel-count">(2 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="ffmgfomoA3s">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=ffmgfomoA3s" target="_blank">Unimaginable Silver Revaluation! I Am Extremely Bullish On Silver Miners | Michael Oliver Silver</a>
                     </div>
-                    <div class="snippet-meta">interview • 21m 59s • Feb 20, 2026 • 1,428 views • 63 likes</div>
+                    <div class="snippet-meta">interview • 21m 59s • @goldsilvermining • Feb 20, 2026 • 1,428 views • 63 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Michael Oliver</div>
                     <div class="snippet-summary">In this episode, Michael Oliver discusses the current state of Bitcoin and the broader cryptocurrency market, predicting a significant downturn. He also shares insights on oil prices and the potential for gold and silver investments.</div>
                     <div class="snippet-claims">
@@ -1168,11 +1273,13 @@
                         <strong>Conclusion:</strong> Investors should focus on gold and silver investments as they are expected to perform well in the current economic climate.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="4UqfpDuI6pY">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=4UqfpDuI6pY" target="_blank">This Is My URGENT Update for ALL Small Silver Holders in Feb – Michael Oliver Reveals What&#x27;s Coming</a>
                     </div>
-                    <div class="snippet-meta">monologue • 14m 15s • Feb 20, 2026 • 1,752 views • 197 likes</div>
+                    <div class="snippet-meta">monologue • 14m 15s • @simplecurrencyyt • Feb 20, 2026 • 1,752 views • 197 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> John AG</div>
                     <div class="snippet-summary">John AG provides an urgent update for small silver holders, discussing insights from analyst Michael Oliver regarding the current state and future predictions of the silver market. He emphasizes the importance of not panicking during market corrections and maintaining a disciplined investment strategy.</div>
                     <div class="snippet-claims">
@@ -1199,11 +1306,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Rick_Rule<span class="channel-count">(3 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="hWlgd__-1I0">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=hWlgd__-1I0" target="_blank">Gold and Silver: What Just Happened? - Rick Rule | GG Podcast #44</a>
                     </div>
-                    <div class="snippet-meta">interview • 56m 55s • Feb 20, 2026 • 1,091 views • 52 likes</div>
+                    <div class="snippet-meta">interview • 56m 55s • @garygillx • Feb 20, 2026 • 1,091 views • 52 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Rick Rule</div>
                     <div class="snippet-summary">In this episode, Rick Rule discusses the dynamics of investing in gold and silver, including market trends and the impact of political risk on resource investments. He shares insights on his investment strategies and the cyclical nature of precious metals.</div>
                     <div class="snippet-claims">
@@ -1225,7 +1334,9 @@
                         <strong>Conclusion:</strong> Understanding the cyclical nature of precious metals and the influence of market sentiment is crucial for successful investing.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="w0x2E7sc5ns">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=w0x2E7sc5ns" target="_blank">$250B Copper Shortfall Forces New Era of Streaming Deals | Rick Rule</a>
                     </div>
@@ -1252,7 +1363,9 @@
                         <strong>Conclusion:</strong> The future of copper investment will heavily rely on innovative financing methods, including streaming deals and digital asset integration.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="obSTFQVFWL4">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=obSTFQVFWL4" target="_blank">Rick Rule: Where We Stand in the Gold &amp; Silver Bull Market — Top Opportunities for 2026</a>
                     </div>
@@ -1283,7 +1396,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Stephanie_Pomboy<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="rbBVUtspp8Q">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=rbBVUtspp8Q" target="_blank">Stephanie Pomboy: Expect GDP To Run Hot...Until Inflation Spikes Or The Markets Plunge</a>
                     </div>
@@ -1301,7 +1416,7 @@
                         </ul>
                     </div>
                     <div class="snippet-details">
-                        <p><strong>People:</strong> Grant Williams, Dave Iben, Luke Gromen, Pippa Malgrim, Michael Green, Andrew McDonald, Tom Hanik, Tom Mlelen, Kevin Worsh, Michael Green, Kevin Hassett</p>
+                        <p><strong>People:</strong> Grant Williams, Dave Iben, Luke Gromen, Pippa Malgrim, Michael Green, Andrew McDonald, Tom Hanik, Tom Mlelen, Kevin Worsh, Kevin Hassett</p>
                         <p><strong>Organizations:</strong> Capernic</p>
                         <p><strong>Topics:</strong> GDP growth, inflation, economic policies, market predictions, stable coins, Federal Reserve</p>
                     </div>
@@ -1314,12 +1429,14 @@
                 <details class="channel-details">
                     <summary class="channel-summary">triANGLEINVESTOR<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="YrQHGwQgkIU">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=YrQHGwQgkIU" target="_blank">Double Disaster Incoming‼️AI Job Apocalypse + Stock Market Meltdown ! Todd Horwitz</a>
                     </div>
-                    <div class="snippet-meta">interview • 23m 31s • @triANGLEINVESTOR • Feb 20, 2026 • 522 views • 29 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Todd Horwitz, Lucian Walovich</div>
+                    <div class="snippet-meta">interview • 23m 31s • @triangleinvestor • Feb 20, 2026 • 522 views • 29 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Todd Horwitz, Lucijan Valkovic</div>
                     <div class="snippet-summary">In this episode, Todd Horwitz discusses the current state of the market, highlighting risks associated with inflation, AI job displacement, and overvalued equities. He emphasizes the importance of discipline in trading and the potential for a significant market correction.</div>
                     <div class="snippet-claims">
                         <div class="snippet-claims-title">Key Claims:</div>
@@ -1345,17 +1462,19 @@
             </div>
         </details>
         <details class="topic-details">
-            <summary class="topic-summary">RUSSIA<span class="topic-count">(3 videos)</span></summary>
+            <summary class="topic-summary">RUSSIA<span class="topic-count">(4 videos)</span></summary>
             <div class="topic-content">
                 <details class="channel-details">
                     <summary class="channel-summary">IgorLipsits_1950<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="P_FZWSXQESY">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=P_FZWSXQESY" target="_blank">LIPSITS: INTERVIEW WITH ANASTASIA NORITSYNA, 02/18/2026</a>
                     </div>
-                    <div class="snippet-meta">interview • 44m 19s • @IgorLipsits_1950 • Feb 20, 2026 • 3,039 views • 417 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Анастасия Нарицина, Игорь Элипсис</div>
+                    <div class="snippet-meta">interview • 44m 19s • @igorlipsits_1950 • Feb 20, 2026 • 3,039 views • 417 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Анастасия Нарицина, Игорь Липсиц</div>
                     <div class="snippet-summary">The episode discusses the current economic crisis in Russia, focusing on rising utility tariffs, inflation, and the impact of the ongoing war. Experts analyze the potential for social unrest and the government&#x27;s response to the deteriorating living conditions.</div>
                     <div class="snippet-claims">
                         <div class="snippet-claims-title">Key Claims:</div>
@@ -1379,15 +1498,17 @@
                     </div>
                 </details>
                 <details class="channel-details">
-                    <summary class="channel-summary">IgorYakovenko<span class="channel-count">(2 videos)</span></summary>
+                    <summary class="channel-summary">IgorYakovenko<span class="channel-count">(3 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="EELq7BU2IlI">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=EELq7BU2IlI" target="_blank">ДУМАЕМ ВМЕСТЕ С АНДРЕЕМ ПИОНТКОВСКИМ</a>
                     </div>
-                    <div class="snippet-meta">interview • 38m 3s • @IgorYakovenko • Feb 20, 2026 • 14,139 views • 1,633 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Андрей Пиантковский, Игорь Яковенко</div>
-                    <div class="snippet-summary">In this episode, Igor Yakovenko interviews Andrey Piontkovsky about the changes in global politics over the past four years of war, focusing on Ukraine&#x27;s pivotal role and the implications for Europe and the United States. They discuss the evolving dynamics between Russia, China, and the West, particularly in the context of military and political alliances.</div>
+                    <div class="snippet-meta">interview • 38m 3s • @igoryakovenko • Feb 20, 2026 • 14,139 views • 1,633 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Андрей Пионтковский, Игорь Яковенко</div>
+                    <div class="snippet-summary">In this episode, Игорь Яковенко interviews Andrey Piontkovsky about the changes in global politics over the past four years of war, focusing on Ukraine&#x27;s pivotal role and the implications for Europe and the United States. They discuss the evolving dynamics between Russia, China, and the West, particularly in the context of military and political alliances.</div>
                     <div class="snippet-claims">
                         <div class="snippet-claims-title">Key Claims:</div>
                         <ul>
@@ -1407,11 +1528,41 @@
                         <strong>Conclusion:</strong> The war will end with Ukraine&#x27;s victory, leading to a new political order in the world.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="spySqEMTpL4">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=spySqEMTpL4" target="_blank">СОВЕТ МИРА ИМЕНИ ТРАМПА СТАНЕТ СЛЕДИТЬ ЗА ООН</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 115m 23s • @igoryakovenko • Feb 20, 2026 • 44,129 views • 4,767 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Игорь Яковенко</div>
+                    <div class="snippet-summary">В этом эпизоде Игорь Яковенко обсуждает заседание Совета мира, инициированное Дональдом Трампом, и его влияние на Организацию Объединённых Наций. Также рассматриваются вопросы гуманитарной помощи и международной безопасности в контексте конфликта в Газе.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Трамп заявил, что Совет мира будет следить за ООН.</li>
+                            <li>Девять стран выделили более 7 миллиардов долларов на гуманитарную помощь Газе.</li>
+                            <li>Трамп остановил семь войн и заявил о необходимости порядка в Газе.</li>
+                            <li>Индонезия, Марокко, Албания, Косово и Казахстан направят военных для поддержания порядка в Газе.</li>
+                            <li>Путин готов выделить миллиард из замороженных средств для помощи.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Дональд Трамп, Владимир Путин, Марк Рубио, Сергей Грабский, Максим Рыженков, Илья Юрий Фёдоров, Андрей Андреевич Пиантковский</p>
+                        <p><strong>Organizations:</strong> Совет мира, ООН</p>
+                        <p><strong>Topics:</strong> Совет мира, Трамп, ООН, гуманитарная помощь, война в Газе</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Совет мира, инициированный Трампом, может оказать значительное влияние на международные отношения и безопасность.
+                    </div>
+                </div>
+                <div class="snippet-card" data-video-id="Eo0EZAbxMj8">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=Eo0EZAbxMj8" target="_blank">Интервью с Игорем Эйдманом</a>
                     </div>
-                    <div class="snippet-meta">interview • 15m 17s • @IgorYakovenko • Feb 20, 2026 • 5,690 views • 918 likes</div>
+                    <div class="snippet-meta">interview • 15m 17s • @igoryakovenko • Feb 20, 2026 • 5,690 views • 918 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Игорь Эйдман</div>
                     <div class="snippet-summary">In this episode, Igor Eidman discusses the current state of the war in Ukraine and the implications for Russia and Europe. He emphasizes the importance of supporting Ukraine to prevent further aggression from Russia.</div>
                     <div class="snippet-claims">
@@ -1443,11 +1594,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">ShawnRyanShow<span class="channel-count">(2 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="XxAN2HJrvbY">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=XxAN2HJrvbY" target="_blank">What Does War Do to the Most Elite Warfighters on the Planet?</a>
                     </div>
-                    <div class="snippet-meta">interview • 12m 21s • @ShawnRyanShow • Feb 20, 2026 • 229,248 views • 6,315 likes</div>
+                    <div class="snippet-meta">interview • 12m 21s • @shawnryanshow • Feb 20, 2026 • 229,248 views • 6,315 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">The episode explores the long-term psychological effects of trauma on elite warfighters, particularly focusing on personal stories of loss and resilience. It delves into the complexities of familial relationships and the impact of upbringing on personal motivation.</div>
                     <div class="snippet-claims">
@@ -1469,11 +1622,13 @@
                         <strong>Conclusion:</strong> Trauma and personal history significantly shape the lives and motivations of elite warfighters.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="GCkLWS6YgHY">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=GCkLWS6YgHY" target="_blank">Cybersecurity Expert&#x27;s AI Warning | Official Preview</a>
                     </div>
-                    <div class="snippet-meta">interview • 5m 49s • @ShawnRyanShow • Feb 20, 2026 • 98,733 views • 2,909 likes</div>
+                    <div class="snippet-meta">interview • 5m 49s • @shawnryanshow • Feb 20, 2026 • 98,733 views • 2,909 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Nick Cther Ramen</div>
                     <div class="snippet-summary">In this episode, Nick Cther Ramen discusses his experiences in cybersecurity and military operations, alongside philosophical reflections on reality. The conversation touches on significant historical events and personal anecdotes that shape his views on technology and existence.</div>
                     <div class="snippet-claims">
@@ -1497,8 +1652,14 @@
             </div>
         </details>
         <div class="footer">
-            Generated 2026-03-12 06:40:04
+            Generated 2026-09-15 22:04:40
         </div>
     </div>
+    <div class="playlist-bar" id="plBar">
+        <span class="playlist-bar-msg"><span id="plCount">0</span> selected</span>
+        <button id="plBtn" type="button">Add to playlist</button>
+    </div>
+    <script src="assets/config.js"></script>
+    <script src="assets/playlist.js"></script>
 </body>
 </html>

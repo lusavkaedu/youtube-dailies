@@ -157,6 +157,18 @@
             font-size: 12px;
             color: #66737D;
         }
+        .site-nav {
+            text-align: center;
+            margin-top: 12px;
+        }
+        .site-nav a {
+            color: #0D7680;
+            font-size: 14px;
+            text-decoration: none;
+        }
+        .site-nav a:hover {
+            text-decoration: underline;
+        }
         /* Collapsible sections */
         details {
             margin-bottom: 8px;
@@ -244,7 +256,72 @@
                 padding: 16px;
             }
         }
+        /* Add-to-playlist UI */
+        .snippet-card { position: relative; }
+        .snippet-check {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            margin: 0;
+            cursor: pointer;
+        }
+        .snippet-check input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .snippet-card.selected {
+            box-shadow: inset 4px 0 0 #0D7680;
+            background: #FFFCF8;
+        }
+        .snippet-status {
+            position: absolute;
+            top: 14px;
+            right: 40px;
+            font-size: 14px;
+            color: #66737D;
+            min-width: 90px;
+            text-align: right;
+        }
+        .snippet-status.ok { color: #0D7680; }
+        .snippet-status.err { color: #c0392b; }
+        .playlist-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #3E474F;
+            color: #FFF;
+            padding: 12px 24px;
+            z-index: 100;
+            display: none;
+            font-family: Georgia, "Times New Roman", serif;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.15);
+        }
+        .playlist-bar.visible {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+        .playlist-bar-msg { font-size: 15px; }
+        .playlist-bar button {
+            background: #0D7680;
+            color: #FFF;
+            border: 0;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-family: Georgia, "Times New Roman", serif;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .playlist-bar button:disabled {
+            background: #66737D;
+            cursor: not-allowed;
+        }
+        body.has-bar { padding-bottom: 80px; }
     </style>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
     <div class="container">
@@ -252,6 +329,7 @@
             <h1>Daily Snippets</h1>
             <div class="date">Monday, December 29, 2025</div>
             <div class="meta">26 videos • uploaded 2025-12-29 • 26 videos</div>
+            <div class="site-nav"><a href="search.html">🔍 Search all snippets</a></div>
         </div>
         <details class="topic-details">
             <summary class="topic-summary">POLITICS<span class="topic-count">(5 videos)</span></summary>
@@ -259,11 +337,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">LotuseatersDotCom<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="Fb8JxnonpRA">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=Fb8JxnonpRA" target="_blank">Was EuroMaidan a False Flag?</a>
                     </div>
-                    <div class="snippet-meta">panel • 10m 33s • @LotuseatersDotCom • Dec 29, 2025 • 3,740 views • 256 likes</div>
+                    <div class="snippet-meta">panel • 10m 33s • @lotuseatersdotcom • Dec 29, 2025 • 3,740 views • 256 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> N/A</div>
                     <div class="snippet-summary">The episode discusses the events surrounding the EuroMaidan protests and the alleged involvement of various political actors, including the U.S. government. It highlights claims of manipulation and the lack of investigation into the violence that occurred during the protests.</div>
                     <div class="snippet-claims">
@@ -290,11 +370,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">RaymondIbrahim-HW<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="T1Sdgr4WJ04">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=T1Sdgr4WJ04" target="_blank">The War on Masculinity</a>
                     </div>
-                    <div class="snippet-meta">monologue • 12m 13s • @RaymondIbrahim-HW • Dec 29, 2025 • 6,925 views • 821 likes</div>
+                    <div class="snippet-meta">monologue • 12m 13s • @raymondibrahim-hw • Dec 29, 2025 • 6,925 views • 821 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> N/A</div>
                     <div class="snippet-summary">The episode discusses the perceived emasculation of men in Western society and its implications for culture and control. It critiques the glorification of weakness and explores historical perspectives on masculinity and societal values.</div>
                     <div class="snippet-claims">
@@ -321,11 +403,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">ThePodcastoftheLotusEaters<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="bFEEbEt2AcU">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=bFEEbEt2AcU" target="_blank">Trump’s Final Christmas Present</a>
                     </div>
-                    <div class="snippet-meta">monologue • 28m 13s • @ThePodcastoftheLotusEaters • Dec 29, 2025 • 18,222 views • 1,056 likes</div>
+                    <div class="snippet-meta">monologue • 28m 13s • @thepodcastofthelotuseaters • Dec 29, 2025 • 18,222 views • 1,056 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Unknown</div>
                     <div class="snippet-summary">This episode discusses Donald Trump controversial pardon of former Honduran president Juan Orlando Hernandez, who was implicated in drug trafficking and corruption. The conversation explores the implications of this pardon on US-Honduran relations and the broader context of drug-related politics in Latin America.</div>
                     <div class="snippet-claims">
@@ -352,7 +436,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">andrewgoldheretics<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="GSuXaBpGlA4">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=GSuXaBpGlA4" target="_blank">I Confront Britain&#x27;s Biggest RAC*ST</a>
                     </div>
@@ -383,7 +469,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Doomberg<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="y7loHvSPydY">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=y7loHvSPydY" target="_blank">‘Act Of War’: U.S. Strikes Venezuela, Will Full-Blown Conflict Crash Markets? | Doomberg</a>
                     </div>
@@ -419,11 +507,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">Finding_Finance<span class="channel-count">(2 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="OFUsyVIAwYg">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=OFUsyVIAwYg" target="_blank">WAKE UP: Silver Fraud Exposes Rot in the ENTIRE Market, Margin HIKES Trying TO SLOW Move DOWN</a>
                     </div>
-                    <div class="snippet-meta">monologue • 31m 13s • @Finding_Finance • Dec 29, 2025 • 6,324 views • 410 likes</div>
+                    <div class="snippet-meta">monologue • 31m 13s • @finding_finance • Dec 29, 2025 • 6,324 views • 410 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Andy</div>
                     <div class="snippet-summary">In this episode, Andy discusses the current state of the silver market, the impact of margin hikes, and the broader implications for commodities and the financial system. He emphasizes the importance of physical silver demand over paper speculation and shares his investment strategies.</div>
                     <div class="snippet-claims">
@@ -445,11 +535,13 @@
                         <strong>Conclusion:</strong> The silver market is poised for a significant rally as physical demand outstrips paper speculation.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="4JEWLxYDd9M">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=4JEWLxYDd9M" target="_blank">Commodities Update: Technical Analysis: SILVER AND PLATINUM MELTDOWN (CME Margin HIKE Shock)</a>
                     </div>
-                    <div class="snippet-meta">monologue • 18m 1s • @Finding_Finance • Dec 29, 2025 • 3,631 views • 304 likes</div>
+                    <div class="snippet-meta">monologue • 18m 1s • @finding_finance • Dec 29, 2025 • 3,631 views • 304 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Andy</div>
                     <div class="snippet-summary">In this episode, Andy provides a technical analysis of commodities, focusing on the recent downturn in silver and platinum due to margin hikes. He discusses various market signals and potential investment opportunities amidst volatility.</div>
                     <div class="snippet-claims">
@@ -476,11 +568,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">HiddenForces<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="kOvgtjhxAFg">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=kOvgtjhxAFg" target="_blank">Late-Cycle Investment Theory: Foundations for the Coming Decade | Nicolas Colin</a>
                     </div>
-                    <div class="snippet-meta">interview • 48m 19s • @HiddenForces • Dec 29, 2025 • 995 views • 36 likes</div>
+                    <div class="snippet-meta">interview • 48m 19s • @hiddenforces • Dec 29, 2025 • 995 views • 36 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Demetri Kofinas, Nicolola Kolan</div>
                     <div class="snippet-summary">In this episode, Demetri Kofinas interviews Nicolola Kolan about his late cycle investment theory, exploring its implications for investors and the broader financial system. They discuss the historical context of technological revolutions and the current economic landscape shaped by AI and geopolitical tensions.</div>
                     <div class="snippet-claims">
@@ -507,11 +601,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">Monetary-Matters<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="cH8jDr1t9So">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=cH8jDr1t9So" target="_blank">Investors: Prepare For A World That Gets Much, Much Older | Maria Vassalou</a>
                     </div>
-                    <div class="snippet-meta">interview • 82m 26s • @Monetary-Matters • Dec 29, 2025 • 3,532 views • 81 likes</div>
+                    <div class="snippet-meta">interview • 82m 26s • @monetary-matters • Dec 29, 2025 • 3,532 views • 81 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Maria Vassalou, Jack</div>
                     <div class="snippet-summary">This episode discusses the implications of global demographic changes, particularly aging populations, on economic growth and investment strategies. Maria Vassalou emphasizes the intersection of demographics and technology as a potential solution to productivity challenges.</div>
                     <div class="snippet-claims">
@@ -538,11 +634,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">StansberryMedia<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="0r6XtFc1BE4">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=0r6XtFc1BE4" target="_blank">AI Is the &#x27;Special Forces&#x27; of Investing</a>
                     </div>
-                    <div class="snippet-meta">interview • 73m 18s • @StansberryMedia • Dec 29, 2025 • 808 views • 33 likes</div>
+                    <div class="snippet-meta">interview • 73m 18s • @stansberrymedia • Dec 29, 2025 • 808 views • 33 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Dan Ferris, Cory McGlaclin, John Viola</div>
                     <div class="snippet-summary">This episode features a discussion with AI expert John Viola about the transformative impact of AI on investing and the labor market. The conversation covers the need for companies to adapt to hybrid models of human and digital workers and the implications for various industries.</div>
                     <div class="snippet-claims">
@@ -569,7 +667,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">arcadiaeconomics<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="1p77eza6SQo">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=1p77eza6SQo" target="_blank">Silver Gets Hammered After Someone Gets Liquidated On Sunday Night Open</a>
                     </div>
@@ -600,7 +700,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">capitalcosm<span class="channel-count">(2 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="RFEnATOUcJQ">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=RFEnATOUcJQ" target="_blank">🔴 Someone BIG Wants HIGHER SILVER PRICES! (here&#x27;s who) | Eric Yeung</a>
                     </div>
@@ -626,7 +728,9 @@
                         <strong>Conclusion:</strong> The upcoming changes in export controls and geopolitical dynamics will likely lead to a sustained divergence in silver prices between China and the West.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="QG3gtnY77OM">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=QG3gtnY77OM" target="_blank">🔴 BREAKING! SILVER Price Making MASSIVE Moves!</a>
                     </div>
@@ -657,7 +761,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">eurodollaruniversity<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="kgCfbTn9SLA">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=kgCfbTn9SLA" target="_blank">HOLY SH*T! Repo Fails Just Exploded Bigger Than March 2020</a>
                     </div>
@@ -675,7 +781,7 @@
                         </ul>
                     </div>
                     <div class="snippet-details">
-                        <p><strong>People:</strong> Hugh Henry, George Gammon, Michael Green, Brent Johnson, Mr. Van Meter, Emaran Seabold, Daniel Chu</p>
+                        <p><strong>People:</strong> Hugh Hendry, George Gammon, Michael Green, Brent Johnson, Mr. Van Meter, Emaran Seabold, Daniel Chu</p>
                         <p><strong>Organizations:</strong> Federal Reserve Bank of New York, Waterfall Asset Management, KKR</p>
                         <p><strong>Topics:</strong> repo fails, credit markets, liquidity issues, economic indicators, collateral flow, financial fraud</p>
                     </div>
@@ -688,7 +794,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Henrik_Zeberg<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="Gu1RDstaEG4">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=Gu1RDstaEG4" target="_blank">Francis Hunt, Henrik Zeberg, Matthew Piepenburg: FINAL ACT in 2026?</a>
                     </div>
@@ -720,7 +828,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Lyn_Alden<span class="channel-count">(5 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="TDlFefbDyO8">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=TDlFefbDyO8" target="_blank">This is What Nobody is Telling You About BITCOIN - Lyn Alden</a>
                     </div>
@@ -746,7 +856,9 @@
                         <strong>Conclusion:</strong> Both gold and Bitcoin are essential for preserving value in a world of rising fiscal dominance and currency risk.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="LZcXRAdJBJM">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=LZcXRAdJBJM" target="_blank">“This Is the 4th Turning &amp; Only People Who Do This Will Survive” - Lyn Alden</a>
                     </div>
@@ -772,11 +884,13 @@
                         <strong>Conclusion:</strong> Alden predicts that in a fiscally dominant world, hard assets like gold and Bitcoin will play crucial roles in investment strategies.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="Ylxoos0xkc8">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=Ylxoos0xkc8" target="_blank">Why Silver Investors Are Paying Attention Now — Ed Steer &amp; Lyn Alden Explains</a>
                     </div>
-                    <div class="snippet-meta">interview • 14m 20s • Dec 29, 2025 • 1,040 views • 16 likes</div>
+                    <div class="snippet-meta">interview • 14m 20s • @metalmovesofficial • Dec 29, 2025 • 1,040 views • 16 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Ed Steer, Lyn Alden</div>
                     <div class="snippet-summary">This episode discusses the rising demand for silver and its implications for prices, alongside a comparison with gold and Bitcoin as investment assets. Analysts highlight the tightening supply chains and the potential for significant price increases in silver due to unprecedented demand.</div>
                     <div class="snippet-claims">
@@ -798,7 +912,9 @@
                         <strong>Conclusion:</strong> The silver market is approaching a critical inflection point, with potential for triple-digit prices due to soaring demand.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="ROFX5xWVudU">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=ROFX5xWVudU" target="_blank">Lyn Alden: “This Is the 4th Turning — Only Investors Who Do THIS Will Survive What’s Coming”</a>
                     </div>
@@ -824,7 +940,9 @@
                         <strong>Conclusion:</strong> Investors must adapt to a slow evolution in monetary policy and recognize the importance of liquidity in preserving value.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="czHi3E94unI">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=czHi3E94unI" target="_blank">&quot;The Pressure Is Building: Why Institutions Are Moving Toward Bitcoin” - Lyn Alden Bitcoin Interview</a>
                     </div>
@@ -856,11 +974,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Rick_Rule<span class="channel-count">(2 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="QZnYh1u7yBQ">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=QZnYh1u7yBQ" target="_blank">Wealthion&#x27;s Best of 2025: Gold&#x27;s Asymmetric Opportunity in a New Macro Regime (Rick Rule Symposium)</a>
                     </div>
-                    <div class="snippet-meta">panel • 46m 19s • @Wealthion • Dec 29, 2025 • 2,143 views • 54 likes</div>
+                    <div class="snippet-meta">panel • 46m 19s • @wealthion • Dec 29, 2025 • 2,143 views • 54 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Rick Rule, Trey, Jim Anthony</div>
                     <div class="snippet-summary">The episode discusses the future of gold in the context of a declining US dollar and increasing central bank purchases. The speakers explore the implications of macroeconomic trends on gold prices and the potential for a financial crisis.</div>
                     <div class="snippet-claims">
@@ -882,7 +1002,9 @@
                         <strong>Conclusion:</strong> Gold is expected to play a significant role in the evolving global financial system as confidence in the US dollar wanes.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="MuSGxES-QME">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=MuSGxES-QME" target="_blank">&quot;This Is How COMEX Billionaires Plan to Bring Down Silver THIS WEEK!&quot; - Clive Thompson</a>
                     </div>
@@ -913,7 +1035,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Stephanie_Pomboy<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="emPu570-ke0">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=emPu570-ke0" target="_blank">&quot;What&#x27;s Ahead Is Worse Than A Recession&quot; - Stephanie Pomboy</a>
                     </div>
@@ -949,12 +1073,14 @@
                 <details class="channel-details">
                     <summary class="channel-summary">IgorLipsits_1950<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="JsqEGhLeg5Q">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
-                        <a href="https://www.youtube.com/watch?v=JsqEGhLeg5Q" target="_blank">Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Липсиц: ИНТЕРВЬЮ ДЛЯ КАНАЛА &quot;ХОДОРКОВСКИЙ LIVE&quot; 26.12.2025</a>
+                        <a href="https://www.youtube.com/watch?v=JsqEGhLeg5Q" target="_blank">Игорь Липсиц: ИНТЕРВЬЮ ДЛЯ КАНАЛА &quot;ХОДОРКОВСКИЙ LIVE&quot; 26.12.2025</a>
                     </div>
-                    <div class="snippet-meta">interview • 14m 30s • @IgorLipsits_1950 • Dec 29, 2025 • 18,035 views • 1,392 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Липсиц</div>
+                    <div class="snippet-meta">interview • 14m 30s • @igorlipsits_1950 • Dec 29, 2025 • 18,035 views • 1,392 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Игорь Липсиц</div>
                     <div class="snippet-summary">The episode features economist Igor Lipsitz discussing the current state of the Russian economy, highlighting issues such as inflation, industrial decline, and government policies affecting businesses. Lipsitz provides insights into the challenges faced by various sectors and the potential for future tax increases.</div>
                     <div class="snippet-claims">
                         <div class="snippet-claims-title">Key Claims:</div>
@@ -980,7 +1106,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">pastukhov_kitchen<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="tMgeNtD_Vro">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=tMgeNtD_Vro" target="_blank">Удар по Валдаю. Трамп в ярости? Лавров угрожает ответом по Киеву. Пастуховская Кухня.</a>
                     </div>
@@ -1016,11 +1144,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">SpaceWeatherNewsS0s<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="8EwKHa4fiNw">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=8EwKHa4fiNw" target="_blank">Solar Flare, Micronova Bombshell, Pole Shift Discoveries | S0 News Dec.29.2025</a>
                     </div>
-                    <div class="snippet-meta">monologue • 5m 3s • @SpaceWeatherNewsS0s • Dec 29, 2025 • 5,105 views • 1,344 likes</div>
+                    <div class="snippet-meta">monologue • 5m 3s • @spaceweathernewss0s • Dec 29, 2025 • 5,105 views • 1,344 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unknown</div>
                     <div class="snippet-summary">This episode discusses recent developments in solar activity, including solar flares and micronova events, while also touching on weather patterns and magnetic pole shifts. The speaker emphasizes the importance of understanding these phenomena for survival and preparedness.</div>
                     <div class="snippet-claims">
@@ -1047,8 +1177,14 @@
             </div>
         </details>
         <div class="footer">
-            Generated 2026-02-25 06:45:36
+            Generated 2026-09-15 22:04:57
         </div>
     </div>
+    <div class="playlist-bar" id="plBar">
+        <span class="playlist-bar-msg"><span id="plCount">0</span> selected</span>
+        <button id="plBtn" type="button">Add to playlist</button>
+    </div>
+    <script src="assets/config.js"></script>
+    <script src="assets/playlist.js"></script>
 </body>
 </html>

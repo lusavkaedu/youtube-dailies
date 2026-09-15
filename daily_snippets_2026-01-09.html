@@ -157,6 +157,18 @@
             font-size: 12px;
             color: #66737D;
         }
+        .site-nav {
+            text-align: center;
+            margin-top: 12px;
+        }
+        .site-nav a {
+            color: #0D7680;
+            font-size: 14px;
+            text-decoration: none;
+        }
+        .site-nav a:hover {
+            text-decoration: underline;
+        }
         /* Collapsible sections */
         details {
             margin-bottom: 8px;
@@ -244,57 +256,94 @@
                 padding: 16px;
             }
         }
+        /* Add-to-playlist UI */
+        .snippet-card { position: relative; }
+        .snippet-check {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            margin: 0;
+            cursor: pointer;
+        }
+        .snippet-check input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .snippet-card.selected {
+            box-shadow: inset 4px 0 0 #0D7680;
+            background: #FFFCF8;
+        }
+        .snippet-status {
+            position: absolute;
+            top: 14px;
+            right: 40px;
+            font-size: 14px;
+            color: #66737D;
+            min-width: 90px;
+            text-align: right;
+        }
+        .snippet-status.ok { color: #0D7680; }
+        .snippet-status.err { color: #c0392b; }
+        .playlist-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #3E474F;
+            color: #FFF;
+            padding: 12px 24px;
+            z-index: 100;
+            display: none;
+            font-family: Georgia, "Times New Roman", serif;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.15);
+        }
+        .playlist-bar.visible {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+        .playlist-bar-msg { font-size: 15px; }
+        .playlist-bar button {
+            background: #0D7680;
+            color: #FFF;
+            border: 0;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-family: Georgia, "Times New Roman", serif;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .playlist-bar button:disabled {
+            background: #66737D;
+            cursor: not-allowed;
+        }
+        body.has-bar { padding-bottom: 80px; }
     </style>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>Daily Snippets</h1>
             <div class="date">Friday, January 09, 2026</div>
-            <div class="meta">33 videos • uploaded 2026-01-09 • 33 videos</div>
+            <div class="meta">29 videos • uploaded 2026-01-09 • 29 videos</div>
+            <div class="site-nav"><a href="search.html">🔍 Search all snippets</a></div>
         </div>
         <details class="topic-details">
-            <summary class="topic-summary">POLITICS<span class="topic-count">(8 videos)</span></summary>
+            <summary class="topic-summary">POLITICS<span class="topic-count">(6 videos)</span></summary>
             <div class="topic-content">
-                <details class="channel-details">
-                    <summary class="channel-summary">IgorYakovenko<span class="channel-count">(1 videos)</span></summary>
-                    <div class="channel-content">
-                <div class="snippet-card">
-                    <div class="snippet-title">
-                        <a href="https://www.youtube.com/watch?v=be-dxMKHFy0" target="_blank">⚡Эфир на @24Канал</a>
-                    </div>
-                    <div class="snippet-meta">interview • 30m 3s • @IgorYakovenko • Jan 09, 2026 • 19,560 views • 1,643 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Игорь Гавращак, Игорь Якувенко</div>
-                    <div class="snippet-summary">The episode discusses recent US Navy actions against Russian-flagged tankers and the implications for international relations, particularly regarding Russia and Ukraine. The speakers analyze the effectiveness of diplomatic meetings and the need for military support for Ukraine.</div>
-                    <div class="snippet-claims">
-                        <div class="snippet-claims-title">Key Claims:</div>
-                        <ul>
-                            <li>The US Navy&#x27;s actions against Russian-flagged tankers demonstrate Russia&#x27;s vulnerability.</li>
-                            <li>Russia&#x27;s response to US actions reveals its weakness on the international stage.</li>
-                            <li>Diplomatic meetings are insufficient without concrete military support for Ukraine.</li>
-                            <li>The presence of British and French troops in Ukraine post-war is questioned regarding its necessity.</li>
-                            <li>The current geopolitical situation shows that international law is often disregarded.</li>
-                        </ul>
-                    </div>
-                    <div class="snippet-details">
-                        <p><strong>People:</strong> Трамп, Мадуро, Кириллом Дмитриевым, Стив Витко, Джаред Кушнер, Владимир Зеленский, Эммануэль Макрон</p>
-                        <p><strong>Organizations:</strong> 24 канал, МИД России</p>
-                        <p><strong>Topics:</strong> US Navy actions, Russia&#x27;s response, international law, Ukraine conflict, Paris meeting</p>
-                    </div>
-                    <div class="snippet-conclusion">
-                        <strong>Conclusion:</strong> Military support is essential for Ukraine to achieve a favorable outcome in the ongoing conflict.
-                    </div>
-                </div>
-                    </div>
-                </details>
                 <details class="channel-details">
                     <summary class="channel-summary">LotuseatersDotCom<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="pBmi8qkeEyY">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=pBmi8qkeEyY" target="_blank">Who Sits Atop the Elite Pyramid?</a>
                     </div>
-                    <div class="snippet-meta">panel • 16m 22s • @LotuseatersDotCom • Jan 09, 2026 • 8,511 views • 492 likes</div>
+                    <div class="snippet-meta">panel • 16m 22s • @lotuseatersdotcom • Jan 09, 2026 • 8,511 views • 492 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> N/A</div>
                     <div class="snippet-summary">This episode discusses the dynamics of elite influence in politics, particularly focusing on how billionaires and corporations shape political outcomes through financial backing. The conversation explores historical and contemporary examples of this influence, including the case of Venezuela and the role of major tech companies.</div>
                     <div class="snippet-claims">
@@ -321,11 +370,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">ThePodcastoftheLotusEaters<span class="channel-count">(2 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="tp9hBppEAcY">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=tp9hBppEAcY" target="_blank">Minorities for Remigration</a>
                     </div>
-                    <div class="snippet-meta">panel • 22m 43s • @ThePodcastoftheLotusEaters • Jan 09, 2026 • 57,544 views • 3,578 likes</div>
+                    <div class="snippet-meta">panel • 22m 43s • @thepodcastofthelotuseaters • Jan 09, 2026 • 57,544 views • 3,578 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Tony, Nick</div>
                     <div class="snippet-summary">This episode discusses the concept of &#x27;minorities for remigration&#x27; and the implications of demographic changes in Western countries. The speakers explore the contradictions in leftist views on immigration and the perceived decline of Western culture.</div>
                     <div class="snippet-claims">
@@ -347,17 +398,19 @@
                         <strong>Conclusion:</strong> The demographic changes in Western countries are prompting some minorities to advocate for the preservation of the white majority.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="VMIbawm26EU">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=VMIbawm26EU" target="_blank">Reform’s Totally Based Female Muslim Candidate</a>
                     </div>
-                    <div class="snippet-meta">panel • 28m 33s • @ThePodcastoftheLotusEaters • Jan 09, 2026 • 21,212 views • 1,167 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Laya Cunningham, Fraser, Dan Wooden, Harry Cole</div>
-                    <div class="snippet-summary">This episode discusses Laya Cunningham&#x27;s candidacy for mayor of London and the political implications of her being a female Muslim candidate. The panel debates her qualifications, public perception, and the broader context of representation in British politics.</div>
+                    <div class="snippet-meta">panel • 28m 33s • @thepodcastofthelotuseaters • Jan 09, 2026 • 21,212 views • 1,167 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Laila Cunningham, Fraser, Dan Wooden, Harry Cole</div>
+                    <div class="snippet-summary">This episode discusses Laila Cunningham candidacy for mayor of London and the political implications of her being a female Muslim candidate. The panel debates her qualifications, public perception, and the broader context of representation in British politics.</div>
                     <div class="snippet-claims">
                         <div class="snippet-claims-title">Key Claims:</div>
                         <ul>
-                            <li>Laya Cunningham is seen as a potential candidate to improve law and order in London.</li>
+                            <li>Laila Cunningham is seen as a potential candidate to improve law and order in London.</li>
                             <li>Critics argue that her candidacy represents a capitulation to Islamist politics.</li>
                             <li>There is skepticism about whether she can appeal to both conservative and liberal voters.</li>
                             <li>The panel discusses the implications of having a Muslim candidate in a predominantly white political landscape.</li>
@@ -367,10 +420,10 @@
                     <div class="snippet-details">
                         <p><strong>People:</strong> Nigel Farage, Ant Middleton, Connor, Aaron Bastani, Rachel Reeves</p>
                         <p><strong>Organizations:</strong> Reform UK, Telegraph, GB News</p>
-                        <p><strong>Topics:</strong> London mayoral race, Laya Cunningham, crime and safety, political representation, Islam in politics</p>
+                        <p><strong>Topics:</strong> London mayoral race, Laila Cunningham, crime and safety, political representation, Islam in politics</p>
                     </div>
                     <div class="snippet-conclusion">
-                        <strong>Conclusion:</strong> While Laya Cunningham may be better than the current mayor, her candidacy raises questions about representation and political alignment.
+                        <strong>Conclusion:</strong> While Laila Cunningham may be better than the current mayor, her candidacy raises questions about representation and political alignment.
                     </div>
                 </div>
                     </div>
@@ -378,7 +431,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">capitalcosm<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="ACPE2tGkBjE">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=ACPE2tGkBjE" target="_blank">🔴 Why America is PLANNED For COLLAPSE (Here&#x27;s Who&#x27;s Behind It) | Prof Jiang &amp; Simon Dixon</a>
                     </div>
@@ -407,32 +462,34 @@
                     </div>
                 </details>
                 <details class="channel-details">
-                    <summary class="channel-summary">pastukhov_kitchen<span class="channel-count">(1 videos)</span></summary>
+                    <summary class="channel-summary">naturalresourcestocks<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="9Y5XmSQShhY">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
-                        <a href="https://www.youtube.com/watch?v=AbTFQpV32nI" target="_blank">Трамп разбушевался: Венесуэла, танкеры, Иран. Путин ответил Орешником по Парижу? Пастуховская Кухня</a>
+                        <a href="https://www.youtube.com/watch?v=9Y5XmSQShhY" target="_blank">Oil Shock Alert: Iran Risk Explained</a>
                     </div>
-                    <div class="snippet-meta">monologue • 48m 39s • @pastukhov_kitchen • Jan 09, 2026 • 62,257 views • 4,319 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Трамп, Орешник</div>
-                    <div class="snippet-summary">В этом эпизоде обсуждаются действия Трампа в контексте Венесуэлы, Ирана и других стран, а также его влияние на внутреннюю и внешнюю политику. Спикеры анализируют политическую ситуацию и возможные последствия для США и Европы.</div>
+                    <div class="snippet-meta">interview • 45m 43s • @naturalresourcestocks • Jan 09, 2026 • 2,296 views • 157 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Simon Hunt</div>
+                    <div class="snippet-summary">This episode discusses the geopolitical implications of recent events in Venezuela and the potential risks associated with Iran&#x27;s position in the BRICS alliance. The conversation highlights the US&#x27;s strategic interests in controlling oil resources and the broader impact on global politics.</div>
                     <div class="snippet-claims">
                         <div class="snippet-claims-title">Key Claims:</div>
                         <ul>
-                            <li>Трамп использует внешнюю политику для повышения своего рейтинга.</li>
-                            <li>Существуют параллели между Трампом и Путиным в их подходах к власти.</li>
-                            <li>Трамп может вмешиваться в дела других стран, чтобы укрепить свою репутацию.</li>
-                            <li>Политическая логика Трампа может привести к непредсказуемым последствиям.</li>
-                            <li>Европа должна сделать сложный выбор между угрозами от России и США.</li>
+                            <li>The US aims to control Venezuela to counteract Chinese and Russian influence.</li>
+                            <li>Iran is seen as a weak link in the BRICS alliance by Washington.</li>
+                            <li>The protests in Iran are against the president, not the Supreme Leader.</li>
+                            <li>A military strike by Israel and the US on Iran is considered highly likely.</li>
+                            <li>The BRICS nations are expected to gain influence as tensions rise.</li>
                         </ul>
                     </div>
                     <div class="snippet-details">
-                        <p><strong>People:</strong> Джон Болтон, Иван Грозный, Борис Акунин, Зеленский, Навальный, Ходорковский, Каспаров</p>
-                        <p><strong>Organizations:</strong> None</p>
-                        <p><strong>Topics:</strong> Трамп и Венесуэла, Иран и США, Политическая логика, Геополитика, Россия и Европа</p>
+                        <p><strong>People:</strong> Maduro, Trump, Netanyahu</p>
+                        <p><strong>Organizations:</strong> BRICS, NATO</p>
+                        <p><strong>Topics:</strong> Venezuela crisis, Iran relations, US foreign policy, BRICS dynamics, Middle East tensions</p>
                     </div>
                     <div class="snippet-conclusion">
-                        <strong>Conclusion:</strong> Текущая политическая ситуация требует внимательного анализа и может привести к неожиданным результатам.
+                        <strong>Conclusion:</strong> The geopolitical landscape is shifting, with potential conflicts looming over Iran and Venezuela.
                     </div>
                 </div>
                     </div>
@@ -440,7 +497,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Marc_Faber<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="WJsuheBK5uQ">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=WJsuheBK5uQ" target="_blank">Marc Faber: &quot;Conditions for World War III Are Perfect&quot; – Raw Truth on Trump, China &amp; 2026 Markets</a>
                     </div>
@@ -469,50 +528,21 @@
                 </div>
                     </div>
                 </details>
-                <details class="channel-details">
-                    <summary class="channel-summary">unknown<span class="channel-count">(1 videos)</span></summary>
-                    <div class="channel-content">
-                <div class="snippet-card">
-                    <div class="snippet-title">
-                        <a href="" target="_blank">Oil Shock Alert: Iran Risk Explained</a>
-                    </div>
-                    <div class="snippet-meta">interview • 45m 43s • @naturalresourcestocks • Jan 09, 2026</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Simon Hunt</div>
-                    <div class="snippet-summary">This episode discusses the geopolitical implications of recent events in Venezuela and the potential risks associated with Iran&#x27;s position in the BRICS alliance. The conversation highlights the US&#x27;s strategic interests in controlling oil resources and the broader impact on global politics.</div>
-                    <div class="snippet-claims">
-                        <div class="snippet-claims-title">Key Claims:</div>
-                        <ul>
-                            <li>The US aims to control Venezuela to counteract Chinese and Russian influence.</li>
-                            <li>Iran is seen as a weak link in the BRICS alliance by Washington.</li>
-                            <li>The protests in Iran are against the president, not the Supreme Leader.</li>
-                            <li>A military strike by Israel and the US on Iran is considered highly likely.</li>
-                            <li>The BRICS nations are expected to gain influence as tensions rise.</li>
-                        </ul>
-                    </div>
-                    <div class="snippet-details">
-                        <p><strong>People:</strong> Maduro, Trump, Netanyahu</p>
-                        <p><strong>Organizations:</strong> BRICS, NATO</p>
-                        <p><strong>Topics:</strong> Venezuela crisis, Iran relations, US foreign policy, BRICS dynamics, Middle East tensions</p>
-                    </div>
-                    <div class="snippet-conclusion">
-                        <strong>Conclusion:</strong> The geopolitical landscape is shifting, with potential conflicts looming over Iran and Venezuela.
-                    </div>
-                </div>
-                    </div>
-                </details>
             </div>
         </details>
         <details class="topic-details">
-            <summary class="topic-summary">INVESTING<span class="topic-count">(24 videos)</span></summary>
+            <summary class="topic-summary">INVESTING<span class="topic-count">(19 videos)</span></summary>
             <div class="topic-content">
                 <details class="channel-details">
                     <summary class="channel-summary">Finding_Finance<span class="channel-count">(2 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="z11Sj07WSUM">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=z11Sj07WSUM" target="_blank">Is THIS the Most Asymmetric Opportunity for 2026 Investors?</a>
                     </div>
-                    <div class="snippet-meta">monologue • 24m 9s • @Finding_Finance • Jan 09, 2026 • 4,410 views • 338 likes</div>
+                    <div class="snippet-meta">monologue • 24m 9s • @finding_finance • Jan 09, 2026 • 4,410 views • 338 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Andy</div>
                     <div class="snippet-summary">In this episode, Andy discusses the current state of the silver market and broader commodity trends, emphasizing the importance of positioning for future investment opportunities. He shares insights on market dynamics, potential shortages, and the significance of understanding fundamental realities over mere chart analysis.</div>
                     <div class="snippet-claims">
@@ -526,7 +556,7 @@
                         </ul>
                     </div>
                     <div class="snippet-details">
-                        <p><strong>People:</strong> Eric Young, Trump, Grant Isaac Kamako</p>
+                        <p><strong>People:</strong> Eric Yeung, Trump, Grant Isaac Kamako</p>
                         <p><strong>Organizations:</strong> Finding Value, Bullion Star</p>
                         <p><strong>Topics:</strong> silver market, commodity bull market, investment strategies, market cycles, oil prices</p>
                     </div>
@@ -534,11 +564,13 @@
                         <strong>Conclusion:</strong> The largest asymmetric opportunities in the market today are in sectors that are currently overlooked.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="bF7XxTVJozM">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=bF7XxTVJozM" target="_blank">Commodities Update: Technical Analysis: IRON ORE, COPPER, ALUMINUM ALL BULLISH</a>
                     </div>
-                    <div class="snippet-meta">monologue • 14m 33s • @Finding_Finance • Jan 09, 2026 • 1,682 views • 169 likes</div>
+                    <div class="snippet-meta">monologue • 14m 33s • @finding_finance • Jan 09, 2026 • 1,682 views • 169 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Andy</div>
                     <div class="snippet-summary">In this episode, Andy provides a technical analysis of various commodities, including iron ore, copper, and aluminum, highlighting their bullish trends. He discusses market indicators and potential investment opportunities while sharing his financial opinions.</div>
                     <div class="snippet-claims">
@@ -565,11 +597,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">ForwardGuidanceBW<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="9qf8SvtzmtQ">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=9qf8SvtzmtQ" target="_blank">Commodities &amp; Cyclicals Are 2026’s Mega-Cap Tech | Weekly Roundup</a>
                     </div>
-                    <div class="snippet-meta">panel • 53m 29s • @ForwardGuidanceBW • Jan 09, 2026 • 6,808 views • 308 likes</div>
+                    <div class="snippet-meta">panel • 53m 29s • @forwardguidancebw • Jan 09, 2026 • 6,808 views • 308 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Tyler, Felix, Quinn, Carson</div>
                     <div class="snippet-summary">The episode discusses the current state of the commodities and cyclical markets, emphasizing the potential for growth in these sectors amid geopolitical changes and economic shifts. The speakers analyze the implications of government spending and market dynamics for investors looking to navigate the evolving landscape.</div>
                     <div class="snippet-claims">
@@ -596,13 +630,15 @@
                 <details class="channel-details">
                     <summary class="channel-summary">RealVisionFinance<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="3lkERbyR1BI">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
-                        <a href="https://www.youtube.com/watch?v=3lkERbyR1BI" target="_blank">Crypto in &#x27;26: Raoul&#x27;s Vision or We Get Rekt? | Raoul Paul and Mando | REKT Vision (January 09, 2025)</a>
+                        <a href="https://www.youtube.com/watch?v=3lkERbyR1BI" target="_blank">Crypto in &#x27;26: Raoul&#x27;s Vision or We Get Rekt? | Raoul Pal and Mando | REKT Vision (January 09, 2025)</a>
                     </div>
-                    <div class="snippet-meta">interview • 58m 14s • @RealVisionFinance • Jan 09, 2026 • 3,999 views • 291 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Raoul Paul, Mando</div>
-                    <div class="snippet-summary">In this episode, Raoul Paul and Mando discuss the current state of the crypto market, the impact of AI on investing, and the importance of human connections in a technology-driven world. They explore potential future trends and investment opportunities in both crypto and traditional markets.</div>
+                    <div class="snippet-meta">interview • 58m 14s • @realvisionfinance • Jan 09, 2026 • 3,999 views • 291 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Raoul Pal, Mando</div>
+                    <div class="snippet-summary">In this episode, Raoul Pal and Mando discuss the current state of the crypto market, the impact of AI on investing, and the importance of human connections in a technology-driven world. They explore potential future trends and investment opportunities in both crypto and traditional markets.</div>
                     <div class="snippet-claims">
                         <div class="snippet-claims-title">Key Claims:</div>
                         <ul>
@@ -627,11 +663,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">WTFinancepodcast<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="0P8HSeHq9fI">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=0P8HSeHq9fI" target="_blank">Debt Crisis Triggering Monetary Revolution? with Jeff Park</a>
                     </div>
-                    <div class="snippet-meta">interview • 32m 17s • @WTFinancepodcast • Jan 09, 2026 • 393 views • 23 likes</div>
+                    <div class="snippet-meta">interview • 32m 17s • @wtfinancepodcast • Jan 09, 2026 • 393 views • 23 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Jeff Park</div>
                     <div class="snippet-summary">In this episode, Jeff Park discusses the shifting landscape of global monetary policy and the implications for investors. He emphasizes the rise of ideological investing driven by geopolitical changes and technological advancements, particularly in AI.</div>
                     <div class="snippet-claims">
@@ -658,11 +696,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">Wealthion<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="e-NVbXsyZu4">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=e-NVbXsyZu4" target="_blank">Market Recap: Insights From Marko Papic, Jacob Shapiro, Jonathan Wellum, Steven Feldman &amp; Marc Faber</a>
                     </div>
-                    <div class="snippet-meta">panel • 48m 30s • @Wealthion • Jan 09, 2026 • 1,168 views • 30 likes</div>
+                    <div class="snippet-meta">panel • 48m 30s • @wealthion • Jan 09, 2026 • 1,168 views • 30 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Marko Papic, Jacob Shapiro, Jonathan Wellum, Steven Feldman, Marc Faber</div>
                     <div class="snippet-summary">The episode discusses the current investment landscape, focusing on opportunities in Latin America, AI, and commodities amidst geopolitical tensions. The speakers emphasize the importance of active investment strategies in a multipolar world.</div>
                     <div class="snippet-claims">
@@ -689,7 +729,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">arcadiaeconomics<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="npg1eH9M084">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=npg1eH9M084" target="_blank">Bank Of America Calls For $130-$300 In Silver</a>
                     </div>
@@ -720,7 +762,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">eurodollaruniversity<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="1Y2X3ieHMEY">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=1Y2X3ieHMEY" target="_blank">Something Is Breaking in Private Credit</a>
                     </div>
@@ -738,7 +782,7 @@
                         </ul>
                     </div>
                     <div class="snippet-details">
-                        <p><strong>People:</strong> Jamie Dimon, Jerome Powell, Michael Green, Hugh Henry, Steve Van Meter, Brent Johnson, George Gammon</p>
+                        <p><strong>People:</strong> Jamie Dimon, Jerome Powell, Michael Green, Hugh Hendry, Steven Van Metre, Brent Johnson, George Gammon</p>
                         <p><strong>Organizations:</strong> Blue Owl, UBS, Blackstone</p>
                         <p><strong>Topics:</strong> credit cycle, investor withdrawals, private credit, market downturn, distressed sales</p>
                     </div>
@@ -751,7 +795,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Lyn_Alden<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="4P26S39xTaE">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=4P26S39xTaE" target="_blank">&quot;This Bitcoin Cycle Is Being Completely Misunderstood” - Lyn Alden Bitcoin Interview</a>
                     </div>
@@ -780,9 +826,11 @@
                     </div>
                 </details>
                 <details class="channel-details">
-                    <summary class="channel-summary">topic_Michael_Oliver<span class="channel-count">(6 videos)</span></summary>
+                    <summary class="channel-summary">topic_Michael_Oliver<span class="channel-count">(3 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="_sPypE8ODuw">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=_sPypE8ODuw" target="_blank">&quot;UNBELIEVABLE! Silver Is About to Do Something it Has Never Done Before&quot; - Michael Oliver</a>
                     </div>
@@ -808,7 +856,9 @@
                         <strong>Conclusion:</strong> 2026 is expected to be a defining year for silver, with potential for explosive price increases.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="FL7RYfNiUsw">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=FL7RYfNiUsw" target="_blank">“The 2026 Physical SILVER SQUEEZE Has Already Begun”: Michael Oliver | Silver Price 2026</a>
                     </div>
@@ -834,59 +884,9 @@
                         <strong>Conclusion:</strong> The silver market is on the brink of a significant shift as physical demand outstrips supply, leading to potential price surges.
                     </div>
                 </div>
-                <div class="snippet-card">
-                    <div class="snippet-title">
-                        <a href="https://www.youtube.com/watch?v=mx5Ho8nDn7A" target="_blank">You Are About To Lose Your SILVER! - Michael Oliver Silver Price Prediction</a>
-                    </div>
-                    <div class="snippet-meta">monologue • 14m 26s • @finemetalsofficial • Jan 09, 2026 • 4,017 views • 87 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Michael Oliver, Vince Lanci</div>
-                    <div class="snippet-summary">Michael Oliver discusses the potential for silver prices to surge to $500 within six months, driven by market dynamics and historical patterns. He emphasizes the importance of physical assets and the changing landscape of investment strategies in response to economic conditions.</div>
-                    <div class="snippet-claims">
-                        <div class="snippet-claims-title">Key Claims:</div>
-                        <ul>
-                            <li>Silver could reach $500 due to a historic breakout.</li>
-                            <li>There is a physical shortage of silver compared to gold.</li>
-                            <li>The dollar index is in a bear market, impacting other markets.</li>
-                            <li>Momentum patterns suggest a significant shift in asset allocation.</li>
-                            <li>Institutional investment in gold and silver is increasing.</li>
-                        </ul>
-                    </div>
-                    <div class="snippet-details">
-                        <p><strong>People:</strong> None</p>
-                        <p><strong>Organizations:</strong> None</p>
-                        <p><strong>Topics:</strong> silver price prediction, market trends, gold and silver, financialization, investment strategies</p>
-                    </div>
-                    <div class="snippet-conclusion">
-                        <strong>Conclusion:</strong> Investors should focus on gold and silver as they are likely to thrive despite potential market corrections.
-                    </div>
-                </div>
-                <div class="snippet-card">
-                    <div class="snippet-title">
-                        <a href="https://www.youtube.com/watch?v=pwOJCrVhluI" target="_blank">Breakout Confirmed! $8,000 Gold Changes Everything For Silver - Michael Oliver &amp; Gareth Soloway</a>
-                    </div>
-                    <div class="snippet-meta">interview • 14m 15s • @themetalwar • Jan 09, 2026 • 1,051 views • 49 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Michael Oliver, Gareth Soloway</div>
-                    <div class="snippet-summary">In this episode, Michael Oliver and Gareth Soloway discuss the significant changes in the gold and silver markets, highlighting silver&#x27;s recent outperformance and the implications for future price movements. They analyze historical trends and technical indicators to forecast potential price targets for both metals.</div>
-                    <div class="snippet-claims">
-                        <div class="snippet-claims-title">Key Claims:</div>
-                        <ul>
-                            <li>Silver has recently outperformed gold, indicating a shift in market leadership.</li>
-                            <li>If gold matches its previous bull market dimensions, it could exceed $8,000 per ounce.</li>
-                            <li>Silver&#x27;s breakout from a long-term base suggests explosive price movements ahead.</li>
-                            <li>Technical analysis indicates a potential correction in gold if it breaks below $4,400.</li>
-                            <li>The current market setup for silver is stronger than in past cycles.</li>
-                        </ul>
-                    </div>
-                    <div class="snippet-details">
-                        <p><strong>People:</strong> None</p>
-                        <p><strong>Organizations:</strong> None</p>
-                        <p><strong>Topics:</strong> gold price, silver performance, market trends, technical analysis, investment strategies</p>
-                    </div>
-                    <div class="snippet-conclusion">
-                        <strong>Conclusion:</strong> The dynamics in the precious metals market suggest significant upside potential for both gold and silver.
-                    </div>
-                </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="iWUjoMpNBBY">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=iWUjoMpNBBY" target="_blank">&quot;UNBELIEVABLE! You Don&#x27;t Know What&#x27;s About to Hit Silver in 2 WEEKS&quot; - Michael Oliver</a>
                     </div>
@@ -913,38 +913,14 @@
                         <strong>Conclusion:</strong> Silver is poised for a significant price increase due to macroeconomic stress and historical price patterns.
                     </div>
                 </div>
-                <div class="snippet-card">
-                    <div class="snippet-title">
-                        <a href="https://www.youtube.com/watch?v=n7_xGVNitR8" target="_blank">MARK OUR WORDS! Silver About to Be the BIGGEST BREAKOUT STORY In History -Rick Rule &amp; Michael Oliver</a>
-                    </div>
-                    <div class="snippet-meta">interview • 12m 57s • @themetalbarofficial • Jan 09, 2026 • 3,441 views • 77 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Rick Rule, Michael Oliver</div>
-                    <div class="snippet-summary">In this episode, Rick Rule and Michael Oliver discuss the potential for silver to become a major investment opportunity due to its unique industrial applications and recent market disruptions. They analyze historical price movements and current market conditions that suggest a significant price increase for silver in the near future.</div>
-                    <div class="snippet-claims">
-                        <div class="snippet-claims-title">Key Claims:</div>
-                        <ul>
-                            <li>Silver&#x27;s demand in solar applications remains inelastic up to $135 per ounce.</li>
-                            <li>Recent market disruptions have revealed a structural imbalance in silver supply.</li>
-                            <li>The rise of a multi-polar silver market is changing traditional pricing dynamics.</li>
-                            <li>Historical patterns suggest silver could reach $500 per ounce if current trends continue.</li>
-                            <li>Technical analysis indicates a bullish outlook for silver following recent breakouts.</li>
-                        </ul>
-                    </div>
-                    <div class="snippet-details">
-                        <p><strong>People:</strong> Frank Gustra</p>
-                        <p><strong>Organizations:</strong> LBMA, Euro</p>
-                        <p><strong>Topics:</strong> silver market, price potential, industrial demand, supply chain, market disruption</p>
-                    </div>
-                    <div class="snippet-conclusion">
-                        <strong>Conclusion:</strong> Silver is entering a powerful new phase of revaluation driven by industrial demand and market disruptions.
-                    </div>
-                </div>
                     </div>
                 </details>
                 <details class="channel-details">
-                    <summary class="channel-summary">topic_Rick_Rule<span class="channel-count">(9 videos)</span></summary>
+                    <summary class="channel-summary">topic_Rick_Rule<span class="channel-count">(7 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="shcGE5ujHeQ">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=shcGE5ujHeQ" target="_blank">Rick Rule: Analyzing Mining Stocks, Gold, Silver, Oil &amp; U.S. Capturing Oil Tankers</a>
                     </div>
@@ -970,7 +946,9 @@
                         <strong>Conclusion:</strong> Investors should focus on understanding their investments and be cautious in the current market environment.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="Gi-HTG0g2gs">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=Gi-HTG0g2gs" target="_blank">COMEX &amp; LBMA Just Lost Silver Pricing — China and Dubai NOW DECIDE! - Rick Rule</a>
                     </div>
@@ -988,7 +966,7 @@
                         </ul>
                     </div>
                     <div class="snippet-details">
-                        <p><strong>People:</strong> Frank Gustra, Warren Buffett</p>
+                        <p><strong>People:</strong> Frank Giustra, Warren Buffett</p>
                         <p><strong>Organizations:</strong> LBMA, COMEX</p>
                         <p><strong>Topics:</strong> silver market disruption, China&#x27;s silver role, Dubai trading, silver lease rates, industrial demand</p>
                     </div>
@@ -996,7 +974,9 @@
                         <strong>Conclusion:</strong> The silver market is undergoing a fundamental shift that will likely lead to structural repricing.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="F8CWyktqDac">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=F8CWyktqDac" target="_blank">Silver Is Setting a Trap — A Violent Shakeout Ahead | Chris Vermeulen &amp; Rick Rule</a>
                     </div>
@@ -1022,7 +1002,9 @@
                         <strong>Conclusion:</strong> Investors should prepare for volatility in the precious metals market and manage their positions carefully.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="z7SoRw01qeM">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=z7SoRw01qeM" target="_blank">Silver Is No Longer Priced in the West — Here’s Why | Rick Rule</a>
                     </div>
@@ -1040,7 +1022,7 @@
                         </ul>
                     </div>
                     <div class="snippet-details">
-                        <p><strong>People:</strong> Warren Buffett, Frank Gustra</p>
+                        <p><strong>People:</strong> Warren Buffett, Frank Giustra</p>
                         <p><strong>Organizations:</strong> LBMA, COMEX</p>
                         <p><strong>Topics:</strong> silver market dynamics, physical vs paper, geopolitical shifts, industrial demand, investment strategy</p>
                     </div>
@@ -1048,60 +1030,9 @@
                         <strong>Conclusion:</strong> Investors need to adapt to the new reality of physical metal markets rather than relying on outdated paper contracts.
                     </div>
                 </div>
-                <div class="snippet-card">
-                    <div class="snippet-title">
-                        <a href="https://www.youtube.com/watch?v=ahZ8DpFceRg" target="_blank">Silver Just Triggered the Condition That Historically Ends the Trade | Rick Rule</a>
-                    </div>
-                    <div class="snippet-meta">monologue • 11m 48s • @2dollarsinvesting • Jan 09, 2026 • 8,174 views • 173 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Rick Rule</div>
-                    <div class="snippet-summary">In this episode, Rick Rule discusses the current state of the silver market, highlighting structural disruptions and the implications of global demand shifts. He also explores the historical context of US dollar inflation and its impact on investment strategies.</div>
-                    <div class="snippet-claims">
-                        <div class="snippet-claims-title">Key Claims:</div>
-                        <ul>
-                            <li>The silver market is experiencing structural disruptions due to overleveraging and short supply.</li>
-                            <li>China is becoming a major player in the silver market, controlling a significant portion of refined silver.</li>
-                            <li>There is a lack of demand elasticity for silver in industrial applications, particularly in solar energy.</li>
-                            <li>The US dollar has lost 97% of its purchasing power since the Federal Reserve&#x27;s establishment in 1913.</li>
-                            <li>Inflation may be used to reduce the real value of US obligations, similar to strategies used in the 1970s.</li>
-                        </ul>
-                    </div>
-                    <div class="snippet-details">
-                        <p><strong>People:</strong> Frank Gustra, Warren Buffett, Mr. Trump, Eisenhower, Reagan</p>
-                        <p><strong>Organizations:</strong> Sprat, LBMA</p>
-                        <p><strong>Topics:</strong> silver market dynamics, investment strategies, US dollar inflation, China&#x27;s silver production, global silver demand</p>
-                    </div>
-                    <div class="snippet-conclusion">
-                        <strong>Conclusion:</strong> The current fiscal situation suggests that inflation may be the only viable solution to address the US&#x27;s growing debt and obligations.
-                    </div>
-                </div>
-                <div class="snippet-card">
-                    <div class="snippet-title">
-                        <a href="https://www.youtube.com/watch?v=a2ZGKkhOR6E" target="_blank">I&#x27;ve NEVER Seen Anything Like This in Silver – Prices Will Change FOREVER | Rick Rule</a>
-                    </div>
-                    <div class="snippet-meta">monologue • 17m 2s • @themetal_mindset • Jan 09, 2026 • 1,053 views • 41 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Rick Rule</div>
-                    <div class="snippet-summary">In this episode, Rick Rule discusses the current state of the gold and silver markets, emphasizing the implications of rising prices and the undervaluation of mining equities. He explores the complexities of silver&#x27;s market structure and the impact of geopolitical shifts on precious metals investing.</div>
-                    <div class="snippet-claims">
-                        <div class="snippet-claims-title">Key Claims:</div>
-                        <ul>
-                            <li>Gold and silver prices have surged, but many producing companies remain undervalued.</li>
-                            <li>The gold bull market has been unfolding for over two decades.</li>
-                            <li>Silver&#x27;s market structure is complex, straddling both monetary and industrial uses.</li>
-                            <li>Recent disruptions in silver markets reveal underlying fragility.</li>
-                            <li>Higher silver prices do not necessarily dampen consumption due to inelastic demand.</li>
-                            <li>Emerging markets, particularly India, play a significant role in silver demand.</li>
-                        </ul>
-                    </div>
-                    <div class="snippet-details">
-                        <p><strong>People:</strong> Frank Gustra, Warren Buffett</p>
-                        <p><strong>Organizations:</strong> Rule Investment Media, Sprat, LBMA</p>
-                        <p><strong>Topics:</strong> gold market, silver prices, investment strategies, market dynamics, geopolitical factors</p>
-                    </div>
-                    <div class="snippet-conclusion">
-                        <strong>Conclusion:</strong> The future of silver and gold investing hinges on fiscal realities and the slow erosion of purchasing power.
-                    </div>
-                </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="RYeHiMdXx58">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=RYeHiMdXx58" target="_blank">Huge Price ALERT! If You Own GOLD or SILVER, Watch This NOW | Rick Rule</a>
                     </div>
@@ -1127,7 +1058,9 @@
                         <strong>Conclusion:</strong> Precious metals are positioned for a significant bull market driven by structural economic factors.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="vLhB6v3RIQw">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=vLhB6v3RIQw" target="_blank">RICK RULE | We needed to begin the CAPEX cycle 15-20 years ago!</a>
                     </div>
@@ -1154,7 +1087,9 @@
                         <strong>Conclusion:</strong> The next decade will be marked by significant changes in the natural resources market, driven by underinvestment and increasing demand.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="LU2-q4s3Lws">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=LU2-q4s3Lws" target="_blank">&quot;If You Have Silver, You HAVE ONLY 3 Days to Act... WATCH THIS NOW&quot; - Andy Schectman</a>
                     </div>
@@ -1185,17 +1120,19 @@
             </div>
         </details>
         <details class="topic-details">
-            <summary class="topic-summary">RUSSIA<span class="topic-count">(1 videos)</span></summary>
+            <summary class="topic-summary">RUSSIA<span class="topic-count">(3 videos)</span></summary>
             <div class="topic-content">
                 <details class="channel-details">
                     <summary class="channel-summary">IgorLipsits_1950<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="ribFT1QUOnY">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
-                        <a href="https://www.youtube.com/watch?v=ribFT1QUOnY" target="_blank">Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Липсиц: СТРИМ С ВЛАДИСЛАВОМ ЖУКОВСКИМ 06.01.2026</a>
+                        <a href="https://www.youtube.com/watch?v=ribFT1QUOnY" target="_blank">Игорь Липсиц: СТРИМ С ВЛАДИСЛАВОМ ЖУКОВСКИМ 06.01.2026</a>
                     </div>
-                    <div class="snippet-meta">interview • 57m 53s • @IgorLipsits_1950 • Jan 09, 2026 • 6,586 views • 1,013 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Владислав Жуковский, Игорь Владимирович Липс</div>
+                    <div class="snippet-meta">interview • 57m 53s • @igorlipsits_1950 • Jan 09, 2026 • 6,586 views • 1,013 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Владислав Жуковский, Игорь Липсиц</div>
                     <div class="snippet-summary">В этом эпизоде обсуждаются текущие проблемы российской экономики, включая падение нефтяных доходов и влияние внешних факторов, таких как политика США и ситуация в Венесуэле. Эксперты предсказывают ухудшение экономической ситуации и возможные последствия для бюджета России.</div>
                     <div class="snippet-claims">
                         <div class="snippet-claims-title">Key Claims:</div>
@@ -1220,11 +1157,120 @@
                 </div>
                     </div>
                 </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">IgorYakovenko<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="be-dxMKHFy0">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=be-dxMKHFy0" target="_blank">⚡Эфир на @24Канал</a>
+                    </div>
+                    <div class="snippet-meta">interview • 30m 3s • @igoryakovenko • Jan 09, 2026 • 19,560 views • 1,643 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Игорь Гаврищак, Игорь Яковенко</div>
+                    <div class="snippet-summary">The episode discusses recent US Navy actions against Russian-flagged tankers and the implications for international relations, particularly regarding Russia and Ukraine. The speakers analyze the effectiveness of diplomatic meetings and the need for military support for Ukraine.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The US Navy&#x27;s actions against Russian-flagged tankers demonstrate Russia&#x27;s vulnerability.</li>
+                            <li>Russia&#x27;s response to US actions reveals its weakness on the international stage.</li>
+                            <li>Diplomatic meetings are insufficient without concrete military support for Ukraine.</li>
+                            <li>The presence of British and French troops in Ukraine post-war is questioned regarding its necessity.</li>
+                            <li>The current geopolitical situation shows that international law is often disregarded.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Трамп, Мадуро, Кириллом Дмитриевым, Стив Витко, Джаред Кушнер, Владимир Зеленский, Эммануэль Макрон</p>
+                        <p><strong>Organizations:</strong> 24 канал, МИД России</p>
+                        <p><strong>Topics:</strong> US Navy actions, Russia&#x27;s response, international law, Ukraine conflict, Paris meeting</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Military support is essential for Ukraine to achieve a favorable outcome in the ongoing conflict.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">pastukhov_kitchen<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="AbTFQpV32nI">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=AbTFQpV32nI" target="_blank">Трамп разбушевался: Венесуэла, танкеры, Иран. Путин ответил Орешником по Парижу? Пастуховская Кухня</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 48m 39s • @pastukhov_kitchen • Jan 09, 2026 • 62,257 views • 4,319 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Трамп, Орешник</div>
+                    <div class="snippet-summary">В этом эпизоде обсуждаются действия Трампа в контексте Венесуэлы, Ирана и других стран, а также его влияние на внутреннюю и внешнюю политику. Спикеры анализируют политическую ситуацию и возможные последствия для США и Европы.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Трамп использует внешнюю политику для повышения своего рейтинга.</li>
+                            <li>Существуют параллели между Трампом и Путиным в их подходах к власти.</li>
+                            <li>Трамп может вмешиваться в дела других стран, чтобы укрепить свою репутацию.</li>
+                            <li>Политическая логика Трампа может привести к непредсказуемым последствиям.</li>
+                            <li>Европа должна сделать сложный выбор между угрозами от России и США.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Джон Болтон, Иван Грозный, Борис Акунин, Зеленский, Навальный, Ходорковский, Каспаров</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> Трамп и Венесуэла, Иран и США, Политическая логика, Геополитика, Россия и Европа</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Текущая политическая ситуация требует внимательного анализа и может привести к неожиданным результатам.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">OTHER<span class="topic-count">(1 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">ThePodcastoftheLotusEaters<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="wSGL7IuQ9h4">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=wSGL7IuQ9h4" target="_blank">Pubs Are Going Extinct! | Breakfast With Beau | Friday 9th January 2026</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 61m 51s • @thepodcastofthelotuseaters • Jan 09, 2026 • 16,322 views • 1,541 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Beau</div>
+                    <div class="snippet-summary">In this episode, Beau discusses the recent U-turn on pub taxes by the UK government and shares news about Katherine Middleton&#x27;s health and public appearances. He also covers various news stories including the ICE shooting incident and military budget concerns.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The UK government has reversed its decision on increasing taxes for pubs.</li>
+                            <li>Katherine Middleton has recently recovered from cancer and visited a hospital.</li>
+                            <li>The ICE shooting incident in Minneapolis has sparked protests and discussions about police actions.</li>
+                            <li>Military chiefs in the UK are calling for an additional £28 billion to address budget shortfalls.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Jack, Harry, Rupert Lowe, Rachel Reeves, Katherine Middleton, Donald Trump, Nigel Farage</p>
+                        <p><strong>Organizations:</strong> Lotus Eaters, Islander magazine</p>
+                        <p><strong>Topics:</strong> pub tax U-turn, Katherine Middleton, ICE shooting, military budget, Iran protests</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The U-turn on pub taxes is seen as a necessary move to support struggling pubs across the UK.
+                    </div>
+                </div>
+                    </div>
+                </details>
             </div>
         </details>
         <div class="footer">
-            Generated 2026-02-25 06:45:34
+            Generated 2026-09-15 22:04:53
         </div>
     </div>
+    <div class="playlist-bar" id="plBar">
+        <span class="playlist-bar-msg"><span id="plCount">0</span> selected</span>
+        <button id="plBtn" type="button">Add to playlist</button>
+    </div>
+    <script src="assets/config.js"></script>
+    <script src="assets/playlist.js"></script>
 </body>
 </html>

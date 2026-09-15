@@ -157,6 +157,18 @@
             font-size: 12px;
             color: #66737D;
         }
+        .site-nav {
+            text-align: center;
+            margin-top: 12px;
+        }
+        .site-nav a {
+            color: #0D7680;
+            font-size: 14px;
+            text-decoration: none;
+        }
+        .site-nav a:hover {
+            text-decoration: underline;
+        }
         /* Collapsible sections */
         details {
             margin-bottom: 8px;
@@ -244,14 +256,80 @@
                 padding: 16px;
             }
         }
+        /* Add-to-playlist UI */
+        .snippet-card { position: relative; }
+        .snippet-check {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            margin: 0;
+            cursor: pointer;
+        }
+        .snippet-check input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .snippet-card.selected {
+            box-shadow: inset 4px 0 0 #0D7680;
+            background: #FFFCF8;
+        }
+        .snippet-status {
+            position: absolute;
+            top: 14px;
+            right: 40px;
+            font-size: 14px;
+            color: #66737D;
+            min-width: 90px;
+            text-align: right;
+        }
+        .snippet-status.ok { color: #0D7680; }
+        .snippet-status.err { color: #c0392b; }
+        .playlist-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #3E474F;
+            color: #FFF;
+            padding: 12px 24px;
+            z-index: 100;
+            display: none;
+            font-family: Georgia, "Times New Roman", serif;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.15);
+        }
+        .playlist-bar.visible {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+        .playlist-bar-msg { font-size: 15px; }
+        .playlist-bar button {
+            background: #0D7680;
+            color: #FFF;
+            border: 0;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-family: Georgia, "Times New Roman", serif;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .playlist-bar button:disabled {
+            background: #66737D;
+            cursor: not-allowed;
+        }
+        body.has-bar { padding-bottom: 80px; }
     </style>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>Daily Snippets</h1>
             <div class="date">Saturday, February 07, 2026</div>
-            <div class="meta">35 videos • uploaded 2026-02-07 • 35 videos</div>
+            <div class="meta">32 videos • uploaded 2026-02-07 • 32 videos</div>
+            <div class="site-nav"><a href="search.html">🔍 Search all snippets</a></div>
         </div>
         <details class="topic-details">
             <summary class="topic-summary">POLITICS<span class="topic-count">(3 videos)</span></summary>
@@ -259,11 +337,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">AkkadDaily<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="_SkIXD1x7HM">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=_SkIXD1x7HM" target="_blank">They Will Ban X</a>
                     </div>
-                    <div class="snippet-meta">monologue • 13m 54s • @SargonofAkkad • Feb 07, 2026 • 50,639 views • 4,140 likes</div>
+                    <div class="snippet-meta">monologue • 13m 54s • @sargonofakkad • Feb 07, 2026 • 50,639 views • 4,140 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Elon Musk, EU, Twitter</div>
                     <div class="snippet-summary">The episode discusses the perceived threats to social media platforms like Twitter (X) from European elites who feel insecure about their power. It highlights the political maneuvers aimed at controlling information flow and the implications for free speech in Europe.</div>
                     <div class="snippet-claims">
@@ -291,11 +371,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">ThePodcastoftheLotusEaters<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="JmZchK3wYuY">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=JmZchK3wYuY" target="_blank">The Attempt to Destroy X</a>
                     </div>
-                    <div class="snippet-meta">monologue • 21m 51s • @ThePodcastoftheLotusEaters • Feb 07, 2026 • 1,969 views • 224 likes</div>
+                    <div class="snippet-meta">monologue • 21m 51s • @thepodcastofthelotuseaters • Feb 07, 2026 • 1,969 views • 224 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> N/A</div>
                     <div class="snippet-summary">The episode discusses the political motivations behind the attempts to regulate and potentially destroy the social media platform X, formerly known as Twitter. It highlights the implications of government actions and the role of AI in generating controversial content.</div>
                     <div class="snippet-claims">
@@ -309,7 +391,7 @@
                         </ul>
                     </div>
                     <div class="snippet-details">
-                        <p><strong>People:</strong> Elon Musk, Liz Kendall, Kia Starmer, Pavl Durov</p>
+                        <p><strong>People:</strong> Elon Musk, Liz Kendall, Keir Starmer, Pavl Durov</p>
                         <p><strong>Organizations:</strong> X, Ofcom, US State Department</p>
                         <p><strong>Topics:</strong> political motivations, social media regulation, AI image generation, freedom of speech, government intervention</p>
                     </div>
@@ -322,7 +404,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">winston_marshall<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="3NC-NA2WZws">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=3NC-NA2WZws" target="_blank">Why Britain Turned on Winston Churchill in 1945 - Lord Andrew Roberts</a>
                     </div>
@@ -353,16 +437,18 @@
             </div>
         </details>
         <details class="topic-details">
-            <summary class="topic-summary">INVESTING<span class="topic-count">(27 videos)</span></summary>
+            <summary class="topic-summary">INVESTING<span class="topic-count">(24 videos)</span></summary>
             <div class="topic-content">
                 <details class="channel-details">
                     <summary class="channel-summary">ActionableIntelligenceAlert<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="XTgwJB69zqY">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=XTgwJB69zqY" target="_blank">Offshore drilling, along with services, are poised for a terrific 2026. AIA Weekly Report 2.7.26</a>
                     </div>
-                    <div class="snippet-meta">monologue • 49m 23s • @ActionableIntelligenceAlert • Feb 07, 2026 • 649 views • 101 likes</div>
+                    <div class="snippet-meta">monologue • 49m 23s • @actionableintelligencealert • Feb 07, 2026 • 649 views • 101 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> John Polomny</div>
                     <div class="snippet-summary">In this episode, John Polomny discusses the current state of the gold market, offshore drilling, and the potential for a recovery in energy stocks. He emphasizes the importance of understanding market volatility and the implications of geopolitical events on investments.</div>
                     <div class="snippet-claims">
@@ -389,11 +475,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">FelixFriends<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="JPjzgzYzUbg">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=JPjzgzYzUbg" target="_blank">Silver Runs Out on THIS Date… Most Aren&#x27;t Ready</a>
                     </div>
-                    <div class="snippet-meta">monologue • 35m 26s • @FelixFriends • Feb 07, 2026 • 448,812 views • 15,490 likes</div>
+                    <div class="snippet-meta">monologue • 35m 26s • @felixfriends • Feb 07, 2026 • 448,812 views • 15,490 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Felix Prehn, Winston</div>
                     <div class="snippet-summary">This episode discusses the current state of the silver market, focusing on the impending delivery crisis at COMEX and its implications for investors. The hosts provide insights into market dynamics and strategies for positioning oneself ahead of potential volatility.</div>
                     <div class="snippet-claims">
@@ -421,11 +509,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">Finding_Finance<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="sPWlaTyS0Qk">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=sPWlaTyS0Qk" target="_blank">It&#x27;s Happening: The Ultimate Energy Boom is Here!</a>
                     </div>
-                    <div class="snippet-meta">monologue • 19m 30s • @Finding_Finance • Feb 07, 2026 • 2,355 views • 256 likes</div>
+                    <div class="snippet-meta">monologue • 19m 30s • @finding_finance • Feb 07, 2026 • 2,355 views • 256 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Andy</div>
                     <div class="snippet-summary">In this episode, Andy discusses the current energy boom and its implications for investing, particularly in commodities. He emphasizes the potential of AI and the impact of a collapsing dollar on various asset classes.</div>
                     <div class="snippet-claims">
@@ -450,13 +540,48 @@
                     </div>
                 </details>
                 <details class="channel-details">
+                    <summary class="channel-summary">LaDucTrading<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="ts3chHwYILU">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=ts3chHwYILU" target="_blank">Software Needs An Intervention</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 5m 27s • @laductrading • Feb 07, 2026 • 370 views • 16 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">The episode discusses the current state of the software market and the potential for intervention by government and financial institutions. It analyzes market trends and the impact of various economic factors on software investments.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The market is experiencing a strong rotation to value investments.</li>
+                            <li>There is a lack of intermarket tells indicating a market bottom.</li>
+                            <li>Central bank interventions have previously influenced market stability.</li>
+                            <li>The software sector is currently facing significant selling pressure.</li>
+                            <li>Investors are uncertain about future growth and pricing in risks.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Matt King, Trump</p>
+                        <p><strong>Organizations:</strong> leuktrading.com, YouTube, City Bank, Thompson Reuters</p>
+                        <p><strong>Topics:</strong> market intervention, software sector, investment strategies, economic indicators, trading analysis</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The software market is broken and requires intervention to stabilize.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
                     <summary class="channel-summary">OGJohnAG_2<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="ulNQDBef0NY">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=ulNQDBef0NY" target="_blank">Welcome to the OG John AG Backup Channel!</a>
                     </div>
-                    <div class="snippet-meta">monologue • 11m 43s • @OGJohnAG_2 • Feb 07, 2026 • 1,383 views • 293 likes</div>
+                    <div class="snippet-meta">monologue • 11m 43s • @ogjohnag_2 • Feb 07, 2026 • 1,383 views • 293 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> OG John AG</div>
                     <div class="snippet-summary">In this episode, OG John AG discusses the creation of a backup channel due to issues faced by the main channel, including subscriber loss and content suppression. He emphasizes the importance of community engagement and staying informed about investment opportunities.</div>
                     <div class="snippet-claims">
@@ -483,11 +608,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">RealVisionFinance<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="XB2_GzzZyQk">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=XB2_GzzZyQk" target="_blank">Bitcoin Gets Rekt in an Epic Sell-Off | REKT Vision</a>
                     </div>
-                    <div class="snippet-meta">panel • 67m 58s • @RealVisionFinance • Feb 07, 2026 • 4,283 views • 151 likes</div>
+                    <div class="snippet-meta">panel • 67m 58s • @realvisionfinance • Feb 07, 2026 • 4,283 views • 151 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Mando, Stats</div>
                     <div class="snippet-summary">This episode discusses the recent significant drop in Bitcoin&#x27;s price and the factors contributing to the volatility in the cryptocurrency market. The speakers analyze market trends, potential recovery, and the implications of external economic factors.</div>
                     <div class="snippet-claims">
@@ -514,7 +641,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">adam.taggart<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="Lo-8TRHdcIs">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=Lo-8TRHdcIs" target="_blank">Is The Market Topped Out? Or Is It Poised To Bounce From Here? | Lance Roberts</a>
                     </div>
@@ -545,7 +674,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">capitalcosm<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="MC5yjPbEhTI">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=MC5yjPbEhTI" target="_blank">🔴 Did China Just Set A HUGE TRAP On America With Silver? | Alasdair Macleod</a>
                     </div>
@@ -576,12 +707,14 @@
                 <details class="channel-details">
                     <summary class="channel-summary">eurodollaruniversity<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="9hLOTHIJn-o">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=9hLOTHIJn-o" target="_blank">You Won’t Believe What European Banks Just Did</a>
                     </div>
                     <div class="snippet-meta">monologue • 17m 56s • @eurodollaruniversity • Feb 07, 2026 • 18,101 views • 1,136 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Christine Lagarde, </div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Christine Lagarde</div>
                     <div class="snippet-summary">The episode discusses the unexpected tightening of corporate credit standards by European banks despite claims of economic stability by the ECB. It highlights the cautious approach of banks in response to market volatility and liquidity risks.</div>
                     <div class="snippet-claims">
                         <div class="snippet-claims-title">Key Claims:</div>
@@ -607,7 +740,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">hedgeye<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="GhpmwzlIcQw">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=GhpmwzlIcQw" target="_blank">&quot;A Gothic Horror In The Middle of a Pretty Good Time&quot; | Protect The Pile: Episode 6</a>
                     </div>
@@ -639,7 +774,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Eric_Sprott<span class="channel-count">(2 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="fPTgpOOzpBw">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=fPTgpOOzpBw" target="_blank">FINAL HOURS: Silver Gaps Above $80 FOREVER 9AM Monday - ACT NOW! - Peter Schiff</a>
                     </div>
@@ -665,7 +802,9 @@
                         <strong>Conclusion:</strong> The real opportunity now is in physical metals and mining stocks, not in panic selling.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="IvPXg0CzzCc">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=IvPXg0CzzCc" target="_blank">That Was The FINAL SHAKEOUT - Silver&#x27;s Next Move Will Be ABSOLUTELY PARABOLIC! - Michael Oliver</a>
                     </div>
@@ -694,40 +833,11 @@
                     </div>
                 </details>
                 <details class="channel-details">
-                    <summary class="channel-summary">topic_Jim_Cramer<span class="channel-count">(1 videos)</span></summary>
-                    <div class="channel-content">
-                <div class="snippet-card">
-                    <div class="snippet-title">
-                        <a href="https://www.youtube.com/watch?v=rCxGQRzsUrQ" target="_blank">🧃 Juicy News 🔴 BTC $69K, CRYPTO HEALING, Jim Cramer, Arthur Hayes, Software Collapse, StableCoins</a>
-                    </div>
-                    <div class="snippet-meta">monologue • 32m 44s • @yourfriendsommi • Feb 07, 2026 • 2,530 views • 300 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> N/A</div>
-                    <div class="snippet-summary">This episode discusses the current state of the cryptocurrency market, focusing on Bitcoin&#x27;s price movements and the influence of various market players. It also critiques the narratives pushed by crypto influencers and speculates on future trends in the market.</div>
-                    <div class="snippet-claims">
-                        <div class="snippet-claims-title">Key Claims:</div>
-                        <ul>
-                            <li>Bitcoin is currently experiencing significant price fluctuations.</li>
-                            <li>Many crypto influencers are predicting further declines in Bitcoin&#x27;s value.</li>
-                            <li>Jim Cramer suggested that Trump purchased Bitcoin for the US Strategic Reserve, which is disputed.</li>
-                            <li>The software sector is facing a collapse that is impacting crypto markets.</li>
-                            <li>The US Fed&#x27;s monetary policy is shifting towards deflationary measures.</li>
-                        </ul>
-                    </div>
-                    <div class="snippet-details">
-                        <p><strong>People:</strong> Jim Cramer, Arthur Hayes, Donald Trump, Peter Schiff, Michael Saylor, Scott Bessent</p>
-                        <p><strong>Organizations:</strong> Tether, US Fed, Claude AI</p>
-                        <p><strong>Topics:</strong> Bitcoin price analysis, Crypto influencers, Market trends, Stablecoins, Software collapse, Economic predictions</p>
-                    </div>
-                    <div class="snippet-conclusion">
-                        <strong>Conclusion:</strong> The podcast emphasizes the need for a contrarian mindset in investing, particularly in the volatile crypto market.
-                    </div>
-                </div>
-                    </div>
-                </details>
-                <details class="channel-details">
                     <summary class="channel-summary">topic_Lyn_Alden<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="FQehtVWO9bk">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=FQehtVWO9bk" target="_blank">&quot;HIGH ALERT! The Bitcoin Crash Is About to Get Much Worse...&quot; Lyn Alden &amp; Mike Novogratz</a>
                     </div>
@@ -759,11 +869,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Michael_Howell<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="deD0BXhQ-hc">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=deD0BXhQ-hc" target="_blank">“Liquidity Is Peaking — This Will Hurt Markets” | Michael Howell on Bitcoin, Gold &amp; Fed Policy</a>
                     </div>
-                    <div class="snippet-meta">interview • 61m 12s • Feb 07, 2026 • 11,484 views • 553 likes</div>
+                    <div class="snippet-meta">interview • 61m 12s • @bureaupodcast • Feb 07, 2026 • 11,484 views • 553 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Michael Howell</div>
                     <div class="snippet-summary">In this episode, Michael Howell discusses the current state of global liquidity and its implications for various asset classes, including Bitcoin and gold. He emphasizes the importance of understanding liquidity cycles in making investment decisions.</div>
                     <div class="snippet-claims">
@@ -788,39 +900,15 @@
                     </div>
                 </details>
                 <details class="channel-details">
-                    <summary class="channel-summary">topic_Michael_Oliver<span class="channel-count">(11 videos)</span></summary>
+                    <summary class="channel-summary">topic_Michael_Oliver<span class="channel-count">(9 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
-                    <div class="snippet-title">
-                        <a href="https://www.youtube.com/watch?v=bRrV3HR8Ar8" target="_blank">If You Own GOLD, You Have Just Days To Prepare For This Price SHOCK -Andy Schectman &amp; Michael Oliver</a>
-                    </div>
-                    <div class="snippet-meta">interview • 14m 24s • @themetalbarofficial • Feb 07, 2026 • 2,719 views • 117 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Andy Schectman, Michael Oliver</div>
-                    <div class="snippet-summary">In this episode, Andy Schectman and Michael Oliver discuss the potential for a significant revaluation of gold and silver prices as the US dollar weakens. They analyze market dynamics, institutional behaviors, and legislative changes affecting precious metals.</div>
-                    <div class="snippet-claims">
-                        <div class="snippet-claims-title">Key Claims:</div>
-                        <ul>
-                            <li>JPMorgan has set a gold price target of $8,000 to $8,500.</li>
-                            <li>VANC Funds predicts gold could reach $180,000 if the dollar loses its reserve status.</li>
-                            <li>The US is intentionally devaluing the dollar to enhance manufacturing competitiveness.</li>
-                            <li>Recent silver deliveries indicate strong institutional demand.</li>
-                            <li>Silver has been reclassified as a critical mineral, prompting discussions of price floors.</li>
-                        </ul>
-                    </div>
-                    <div class="snippet-details">
-                        <p><strong>People:</strong> None</p>
-                        <p><strong>Organizations:</strong> JPMorgan, VANC Funds, COMEX, LBMA</p>
-                        <p><strong>Topics:</strong> gold price prediction, silver market analysis, US dollar devaluation, critical minerals, market corrections</p>
-                    </div>
-                    <div class="snippet-conclusion">
-                        <strong>Conclusion:</strong> The current market environment suggests a significant upside for silver and gold as institutional demand and legislative support grow.
-                    </div>
-                </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="7Xk89EBERUQ">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=7Xk89EBERUQ" target="_blank">$500 „Odrodzenie” Srebra Po Korekcie – Cena Docelowa 500 Dolarów Potwierdzona Przez Michaela Olivera</a>
                     </div>
-                    <div class="snippet-meta">monologue • 24m 43s • Feb 07, 2026 • 6,594 views • 227 likes</div>
+                    <div class="snippet-meta">monologue • 24m 43s • @ekonomia_bez_filtra • Feb 07, 2026 • 6,594 views • 227 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">The episode discusses the potential for silver prices to reach $500 per ounce by 2026, as predicted by analyst Michael Oliver. It explores the structural changes in the silver market and the implications of increasing industrial demand amidst limited supply.</div>
                     <div class="snippet-claims">
@@ -843,11 +931,13 @@
                         <strong>Conclusion:</strong> The silver market is undergoing a significant transformation, positioning it as a key player in the global economy.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="AWVdTTsloVY">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=AWVdTTsloVY" target="_blank">$500 Bombshell: Silver&#x27;s &quot;Rebirth&quot; After Correction – $500 Price Target Confirmed by Michael Oliver</a>
                     </div>
-                    <div class="snippet-meta">monologue • 23m 13s • Feb 07, 2026 • 41,636 views • 1,466 likes</div>
+                    <div class="snippet-meta">monologue • 23m 13s • @theasianguy-ag • Feb 07, 2026 • 41,636 views • 1,466 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Michael Oliver</div>
                     <div class="snippet-summary">This episode discusses Michael Oliver analysis of the silver market, highlighting a potential price surge to $500 per ounce following a recent correction. The conversation emphasizes the structural changes in the market and the increasing industrial demand for silver.</div>
                     <div class="snippet-claims">
@@ -869,7 +959,9 @@
                         <strong>Conclusion:</strong> Silver is poised for a dramatic price increase due to structural changes and increasing demand.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="BBH1wDg9Ll4">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=BBH1wDg9Ll4" target="_blank">YOU HAVE 72 HOURS to PREPARE! The Next Silver Move Won’t Be Subtle | Michael Oliver &amp; Gary Wagner</a>
                     </div>
@@ -895,35 +987,9 @@
                         <strong>Conclusion:</strong> The silver market is under significant stress, and the upcoming delivery obligations could lead to a major price shift.
                     </div>
                 </div>
-                <div class="snippet-card">
-                    <div class="snippet-title">
-                        <a href="https://www.youtube.com/watch?v=sV8yIoP5_sU" target="_blank">7000% SILVER Revaluation to $500 - Every SILVER &amp; GOLD Stacker Needs To Hear This | Michael Oliver</a>
-                    </div>
-                    <div class="snippet-meta">monologue • 15m 4s • @finemetalsofficial • Feb 07, 2026 • 1,971 views • 68 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Michael Oliver</div>
-                    <div class="snippet-summary">In this episode, Michael Oliver discusses the potential for silver to reach $300 to $500 per ounce by summer 2026, driven by market dynamics and historical patterns. He also predicts gold could hit $8,500, emphasizing the impact of manipulation and economic factors on these precious metals.</div>
-                    <div class="snippet-claims">
-                        <div class="snippet-claims-title">Key Claims:</div>
-                        <ul>
-                            <li>Silver could reach $300 to $500 per ounce by summer 2026.</li>
-                            <li>Gold is expected to rise to $8,500 as part of a normal bull market move.</li>
-                            <li>The correction in the silver market is largely over.</li>
-                            <li>Old norms of overbought conditions in silver and gold are being shattered.</li>
-                            <li>Market manipulation has failed to control silver prices.</li>
-                            <li>The dollar&#x27;s value is declining, impacting investor confidence.</li>
-                            <li>There is a significant supply-demand deficit in the silver market.</li>
-                        </ul>
-                    </div>
-                    <div class="snippet-details">
-                        <p><strong>People:</strong> None</p>
-                        <p><strong>Organizations:</strong> JPMorgan, Fine Metals</p>
-                        <p><strong>Topics:</strong> silver price surge, gold price prediction, market manipulation, supply and demand, economic trends</p>
-                    </div>
-                    <div class="snippet-conclusion">
-                        <strong>Conclusion:</strong> The upcoming surge in silver and gold prices will redefine market expectations and challenge previous norms.
-                    </div>
-                </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="ZOfZEQPwQ6U">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=ZOfZEQPwQ6U" target="_blank">Silver’s Pullback Was a Trap — A Massive Surge Is Coming Next | Michael Oliver</a>
                     </div>
@@ -949,11 +1015,13 @@
                         <strong>Conclusion:</strong> The current market conditions signal the early stages of a much larger move in silver and mining stocks.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="q__eGfgBjM4">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=q__eGfgBjM4" target="_blank">$500 Bombe: Silbers „Wiedergeburt“ nach Korrektur — 500-$-Ziel von Michael Oliver bestätigt</a>
                     </div>
-                    <div class="snippet-meta">monologue • 16m 50s • Feb 07, 2026 • 8,834 views • 316 likes</div>
+                    <div class="snippet-meta">monologue • 16m 50s • @japantricks • Feb 07, 2026 • 8,834 views • 316 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Michael Oliver</div>
                     <div class="snippet-summary">This episode discusses Michael Oliver analysis of the silver market, predicting a significant price increase following a recent correction. It explores the structural factors driving demand and the implications for investors.</div>
                     <div class="snippet-claims">
@@ -975,7 +1043,9 @@
                         <strong>Conclusion:</strong> The structural conditions for a major upward movement in the silver market are present, with $500 as a minimum target.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="SiAeAI00_S8">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=SiAeAI00_S8" target="_blank">Stop Everything! Prepare For The BIGGEST BULLRUN in Gold &amp; Silver -- Piepenburg &amp; Michael Oliver</a>
                     </div>
@@ -1001,7 +1071,9 @@
                         <strong>Conclusion:</strong> Gold and silver are undervalued and poised for significant price increases due to central bank demand and historical trends.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="6tGwM10kt0M">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=6tGwM10kt0M" target="_blank">$500 Silver CONFIRMED? Michael Oliver Breaks Silence After the Correction | Kevin O’Leary</a>
                     </div>
@@ -1027,11 +1099,13 @@
                         <strong>Conclusion:</strong> The $500 price target for silver is confirmed based on market dynamics and historical analysis.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="ROgpZ3kaXS0">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=ROgpZ3kaXS0" target="_blank">$500 Silver by Summer? Why the &quot;Old Reality&quot; is About to Shatter (Michael Oliver)</a>
                     </div>
-                    <div class="snippet-meta">monologue • 19m 38s • Feb 07, 2026 • 9,740 views • 554 likes</div>
+                    <div class="snippet-meta">monologue • 19m 38s • @whatchanges • Feb 07, 2026 • 9,740 views • 554 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> May, Michael Oliver</div>
                     <div class="snippet-summary">This episode discusses a potential dramatic increase in silver prices, forecasting values between $300 to $500 per ounce by summer, based on insights from Michael Oliver. The conversation emphasizes the importance of understanding market momentum and the structural shifts affecting precious metals.</div>
                     <div class="snippet-claims">
@@ -1054,11 +1128,13 @@
                         <strong>Conclusion:</strong> The old reality of silver prices is ending, and a new, volatile market driven by commodities is emerging.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="QqQNbC3kjXc">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=QqQNbC3kjXc" target="_blank">¿Puede la Plata Llegar a $500 con la Predicción de Michael Oliver?</a>
                     </div>
-                    <div class="snippet-meta">monologue • 14m 47s • Feb 07, 2026 • 1,157 views</div>
+                    <div class="snippet-meta">monologue • 14m 47s • @k4balofc • Feb 07, 2026 • 1,157 views</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> N/A</div>
                     <div class="snippet-summary">This episode discusses a bold prediction by analyst Michael Oliver regarding the price of silver potentially reaching $500 per ounce in the near future. It explores the underlying market dynamics and structural changes that could lead to significant price movements.</div>
                     <div class="snippet-claims">
@@ -1084,44 +1160,15 @@
                     </div>
                 </details>
                 <details class="channel-details">
-                    <summary class="channel-summary">topic_Rick_Rule<span class="channel-count">(1 videos)</span></summary>
-                    <div class="channel-content">
-                <div class="snippet-card">
-                    <div class="snippet-title">
-                        <a href="https://www.youtube.com/watch?v=rBQ25tJjVZA" target="_blank">&quot;These Silver Miners &amp; 2 Other Assets Are Set To Outperform Every Other Asset In 2026&quot; | Rick Rule</a>
-                    </div>
-                    <div class="snippet-meta">interview • 11m 30s • @2dollarsinvesting • Feb 07, 2026 • 1,007 views • 49 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Rick Rule</div>
-                    <div class="snippet-summary">In this episode, Rick Rule discusses the future of precious metals and industrial commodities, emphasizing the impact of the US dollar&#x27;s purchasing power. He highlights the underinvestment in key resources and the potential for significant market changes in the coming years.</div>
-                    <div class="snippet-claims">
-                        <div class="snippet-claims-title">Key Claims:</div>
-                        <ul>
-                            <li>The next decade will favor precious metals due to a declining US dollar.</li>
-                            <li>Copper has suffered from 30 years of neglect, leading to supply deficits.</li>
-                            <li>The US government is shifting its foreign policy to strengthen access to global supply chains.</li>
-                            <li>The uranium market is becoming more predictable with long-term contracts.</li>
-                            <li>Investment opportunities will arise as the market transitions from hate to acceptance.</li>
-                        </ul>
-                    </div>
-                    <div class="snippet-details">
-                        <p><strong>People:</strong> Nomi, Trump</p>
-                        <p><strong>Organizations:</strong> Meteoric Resources, Kamako, Brookfield</p>
-                        <p><strong>Topics:</strong> precious metals, copper market, uranium industry, US dollar, investment strategies</p>
-                    </div>
-                    <div class="snippet-conclusion">
-                        <strong>Conclusion:</strong> Investors should focus on underappreciated resources like copper and uranium for future gains.
-                    </div>
-                </div>
-                    </div>
-                </details>
-                <details class="channel-details">
                     <summary class="channel-summary">topic_Stephanie_Pomboy<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="oz2Y5xKXXkM">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=oz2Y5xKXXkM" target="_blank">Stephanie Pomboy: Is This The Breaking Point?</a>
                     </div>
-                    <div class="snippet-meta">interview • 68m 10s • Feb 07, 2026 • 2,219 views • 69 likes</div>
+                    <div class="snippet-meta">interview • 68m 10s • @explosionoflaughter.56 • Feb 07, 2026 • 2,219 views • 69 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Stephanie Pomboy, Adam Taggart</div>
                     <div class="snippet-summary">In this episode, Stephanie Pomboy discusses the current economic landscape, focusing on Japan&#x27;s rising bond yields, the implications for the U.S. economy, and the potential for a market correction. The conversation also touches on consumer sentiment, fiscal dominance, and the future of AI investments.</div>
                     <div class="snippet-claims">
@@ -1153,11 +1200,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">ThePodcastoftheLotusEaters<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="tVlvgHYoKcE">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=tVlvgHYoKcE" target="_blank">The First Detransition Trial Victory</a>
                     </div>
-                    <div class="snippet-meta">monologue • 18m 22s • @ThePodcastoftheLotusEaters • Feb 07, 2026 • 17,841 views • 1,819 likes</div>
+                    <div class="snippet-meta">monologue • 18m 22s • @thepodcastofthelotuseaters • Feb 07, 2026 • 17,841 views • 1,819 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Fox Varian</div>
                     <div class="snippet-summary">This episode discusses the recent victory of a detransitioner in a malpractice lawsuit against doctors who performed surgery on her as a minor. The conversation explores the implications of this case on medical practices and the broader societal issues surrounding gender identity and treatment.</div>
                     <div class="snippet-claims">
@@ -1189,12 +1238,14 @@
                 <details class="channel-details">
                     <summary class="channel-summary">IgorLipsits_1950<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="ARBwMeekdhU">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=ARBwMeekdhU" target="_blank">LIPSITS: INTERVIEW WITH ANASTASIA NORITSYNA 06.02.2026</a>
                     </div>
-                    <div class="snippet-meta">interview • 46m 35s • @IgorLipsits_1950 • Feb 07, 2026 • 43,462 views • 3,378 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Анастасия Нарицина, Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Липсиц</div>
+                    <div class="snippet-meta">interview • 46m 35s • @igorlipsits_1950 • Feb 07, 2026 • 43,462 views • 3,378 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Анастасия Нарицина, Игорь Липсиц</div>
                     <div class="snippet-summary">In this episode, Anastasia Noritsyna interviews Igor Lipsits about the current state of the Russian economy, discussing inflation, government policies, and the impact of the ongoing war. They explore the challenges faced by ordinary Russians, including rising prices and employment issues.</div>
                     <div class="snippet-claims">
                         <div class="snippet-claims-title">Key Claims:</div>
@@ -1220,12 +1271,14 @@
                 <details class="channel-details">
                     <summary class="channel-summary">IgorYakovenko<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="hh8zSCUqMYc">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=hh8zSCUqMYc" target="_blank">ДУМАЕМ ВМЕСТЕ С МАРКОМ ФЕЙГИНЫМ</a>
                     </div>
-                    <div class="snippet-meta">interview • 50m 4s • @IgorYakovenko • Feb 07, 2026 • 72,619 views • 7,091 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Мар Захарович Фегин, Игорь Яковенко</div>
+                    <div class="snippet-meta">interview • 50m 4s • @igoryakovenko • Feb 07, 2026 • 72,619 views • 7,091 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Марк Фейгин, Игорь Яковенко</div>
                     <div class="snippet-summary">В этом эпизоде обсуждаются вопросы работы платформы оппозиционных сил России в ПАС, её влияние на ситуацию в Украине и необходимость выборов для повышения легитимности. Мар Фегин делится своими взглядами на политическую ситуацию и роль оппозиции.</div>
                     <div class="snippet-claims">
                         <div class="snippet-claims-title">Key Claims:</div>
@@ -1256,11 +1309,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">LotuseatersDotCom<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="dfQm0N6YUIM">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=dfQm0N6YUIM" target="_blank">A Beautiful Story About Beheading</a>
                     </div>
-                    <div class="snippet-meta">monologue • 18m 59s • @LotuseatersDotCom • Feb 07, 2026 • 1,340 views • 143 likes</div>
+                    <div class="snippet-meta">monologue • 18m 59s • @lotuseatersdotcom • Feb 07, 2026 • 1,340 views • 143 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> N/A</div>
                     <div class="snippet-summary">This episode explores the story of the Green Knight and the beheading game within the context of Arthurian legend and Celtic mythology. It delves into the symbolism of the Green Knight and the implications of his challenge to King Arthur and his court.</div>
                     <div class="snippet-claims">
@@ -1287,11 +1342,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">OGJohnAG<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="xSbbsXvQQYI">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=xSbbsXvQQYI" target="_blank">This Might Be My Final Upload — Please Watch Carefully</a>
                     </div>
-                    <div class="snippet-meta">monologue • 9m 30s • @OGJohnAG • Feb 07, 2026 • 97,915 views • 15,628 likes</div>
+                    <div class="snippet-meta">monologue • 9m 30s • @ogjohnag • Feb 07, 2026 • 97,915 views • 15,628 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> OG</div>
                     <div class="snippet-summary">In this episode, OG discusses the potential shutdown of his channel due to unusual activity and engagement issues. He emphasizes the importance of community support and outlines steps viewers can take to help.</div>
                     <div class="snippet-claims">
@@ -1318,8 +1375,14 @@
             </div>
         </details>
         <div class="footer">
-            Generated 2026-02-27 08:18:11
+            Generated 2026-09-15 22:04:44
         </div>
     </div>
+    <div class="playlist-bar" id="plBar">
+        <span class="playlist-bar-msg"><span id="plCount">0</span> selected</span>
+        <button id="plBtn" type="button">Add to playlist</button>
+    </div>
+    <script src="assets/config.js"></script>
+    <script src="assets/playlist.js"></script>
 </body>
 </html>

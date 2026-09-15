@@ -157,6 +157,18 @@
             font-size: 12px;
             color: #66737D;
         }
+        .site-nav {
+            text-align: center;
+            margin-top: 12px;
+        }
+        .site-nav a {
+            color: #0D7680;
+            font-size: 14px;
+            text-decoration: none;
+        }
+        .site-nav a:hover {
+            text-decoration: underline;
+        }
         /* Collapsible sections */
         details {
             margin-bottom: 8px;
@@ -244,26 +256,94 @@
                 padding: 16px;
             }
         }
+        /* Add-to-playlist UI */
+        .snippet-card { position: relative; }
+        .snippet-check {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            margin: 0;
+            cursor: pointer;
+        }
+        .snippet-check input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .snippet-card.selected {
+            box-shadow: inset 4px 0 0 #0D7680;
+            background: #FFFCF8;
+        }
+        .snippet-status {
+            position: absolute;
+            top: 14px;
+            right: 40px;
+            font-size: 14px;
+            color: #66737D;
+            min-width: 90px;
+            text-align: right;
+        }
+        .snippet-status.ok { color: #0D7680; }
+        .snippet-status.err { color: #c0392b; }
+        .playlist-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #3E474F;
+            color: #FFF;
+            padding: 12px 24px;
+            z-index: 100;
+            display: none;
+            font-family: Georgia, "Times New Roman", serif;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.15);
+        }
+        .playlist-bar.visible {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+        .playlist-bar-msg { font-size: 15px; }
+        .playlist-bar button {
+            background: #0D7680;
+            color: #FFF;
+            border: 0;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-family: Georgia, "Times New Roman", serif;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .playlist-bar button:disabled {
+            background: #66737D;
+            cursor: not-allowed;
+        }
+        body.has-bar { padding-bottom: 80px; }
     </style>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>Daily Snippets</h1>
             <div class="date">Wednesday, April 29, 2026</div>
-            <div class="meta">47 videos • uploaded 2026-04-29 • 47 videos</div>
+            <div class="meta">48 videos • uploaded 2026-04-29 • 48 videos</div>
+            <div class="site-nav"><a href="search.html">🔍 Search all snippets</a></div>
         </div>
         <details class="topic-details">
-            <summary class="topic-summary">POLITICS<span class="topic-count">(11 videos)</span></summary>
+            <summary class="topic-summary">POLITICS<span class="topic-count">(10 videos)</span></summary>
             <div class="topic-content">
                 <details class="channel-details">
                     <summary class="channel-summary">AkkadDaily<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="3sQrqTfduBw">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=3sQrqTfduBw" target="_blank">The Most Hilarious Elections I&#x27;ve Ever Seen</a>
                     </div>
-                    <div class="snippet-meta">monologue • 16m 33s • @SargonofAkkad • Apr 29, 2026 • 39,307 views • 2,958 likes</div>
+                    <div class="snippet-meta">monologue • 16m 33s • @sargonofakkad • Apr 29, 2026 • 39,307 views • 2,958 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">This episode humorously critiques the absurdity of the upcoming Welsh Senate elections, highlighting the ridiculousness of candidates and their claims. The narrator expresses frustration over the state of Welsh politics and the confusion surrounding national identity.</div>
                     <div class="snippet-claims">
@@ -291,11 +371,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">Con_Tomlinson<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="pKJKDEbynfE">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=pKJKDEbynfE" target="_blank">Is This A Joke</a>
                     </div>
-                    <div class="snippet-meta">monologue • 28m 17s • @Con_Tomlinson • Apr 29, 2026 • 32,185 views • 2,559 likes</div>
+                    <div class="snippet-meta">monologue • 28m 17s • @con_tomlinson • Apr 29, 2026 • 32,185 views • 2,559 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">This episode discusses the upcoming local elections and the performance of the Reform UK party, highlighting concerns about their candidates and strategies. The narrator critiques the party&#x27;s reliance on foreign candidates and their handling of internal issues.</div>
                     <div class="snippet-claims">
@@ -309,7 +391,7 @@
                         </ul>
                     </div>
                     <div class="snippet-details">
-                        <p><strong>People:</strong> Aayesha Gulati, Nigel Farage, Aaron Roy, Laya Cunningham, David Prior, Matt Goodwin, Rupert Lowe</p>
+                        <p><strong>People:</strong> Aayesha Gulati, Nigel Farage, Aaron Roy, Laila Cunningham, David Prior, Matt Goodwin, Rupert Lowe</p>
                         <p><strong>Organizations:</strong> New Statesman, UNESCO, Hope Not Hate</p>
                         <p><strong>Topics:</strong> local elections, Reform UK, political candidates, immigration, voter sentiment</p>
                     </div>
@@ -320,44 +402,15 @@
                     </div>
                 </details>
                 <details class="channel-details">
-                    <summary class="channel-summary">IgorYakovenko<span class="channel-count">(1 videos)</span></summary>
-                    <div class="channel-content">
-                <div class="snippet-card">
-                    <div class="snippet-title">
-                        <a href="https://www.youtube.com/watch?v=JlmBDvoyW8o" target="_blank">ДУМАЕМ ВМЕСТЕ С ЛАРИСОЙ ВОЛОШИНОЙ</a>
-                    </div>
-                    <div class="snippet-meta">interview • 60m 37s • @igoryakovenko • Apr 29, 2026 • 38,708 views • 4,447 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Игорь Яковенко, Лариса Волошина</div>
-                    <div class="snippet-summary">В этом эпизоде Игорь Яковенко и Лариса Волошина обсуждают влияние визита Карла II на политику США и международные отношения, а также критикуют действия Дональда Трампа и его поддержку Путина. Они анализируют текущие политические события и их последствия для Европы и Израиля.</div>
-                    <div class="snippet-claims">
-                        <div class="snippet-claims-title">Key Claims:</div>
-                        <ul>
-                            <li>Визит Карла II подчеркивает важность лидерства и достоинства в международной политике.</li>
-                            <li>Дональд Трамп рассматривается как провокатор, который создает конфликты.</li>
-                            <li>Израильская дипломатия под руководством Нетаньяху вызывает критику за игнорирование украинских интересов.</li>
-                            <li>Трамп теряет поддержку в Республиканской партии и становится токсичным для своих соратников.</li>
-                            <li>Глобальные конфликты усугубляются из-за неадекватного поведения лидеров.</li>
-                        </ul>
-                    </div>
-                    <div class="snippet-details">
-                        <p><strong>People:</strong> Дональд Трамп, Карл II, Владимир Зеленский, Милей, Кушнер, Боб Вудвард, Реджеп Тайип Эрдоган, Нетаньяху, Орбан, Шольц, Макрон</p>
-                        <p><strong>Organizations:</strong> None</p>
-                        <p><strong>Topics:</strong> Трамп и Путин, политика США, израильская дипломатия, глобальные конфликты, монархия и лидерство, европейская политика</p>
-                    </div>
-                    <div class="snippet-conclusion">
-                        <strong>Conclusion:</strong> Дональд Трамп и его политика создают серьезные проблемы как для США, так и для международных отношений.
-                    </div>
-                </div>
-                    </div>
-                </details>
-                <details class="channel-details">
                     <summary class="channel-summary">LotuseatersDotCom<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="aJjKAZtMBZE">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=aJjKAZtMBZE" target="_blank">Are Voters Less Informed Than Non-Voters?</a>
                     </div>
-                    <div class="snippet-meta">monologue • 10m 7s • @LotuseatersDotCom • Apr 29, 2026 • 2,460 views • 199 likes</div>
+                    <div class="snippet-meta">monologue • 10m 7s • @lotuseatersdotcom • Apr 29, 2026 • 2,460 views • 199 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">This episode discusses the disparity in political knowledge between voters and non-voters, exploring how psychological factors influence voting behavior and perceptions of information. It highlights the tendency of voters to rely on superficial cues rather than informed policy understanding.</div>
                     <div class="snippet-claims">
@@ -384,11 +437,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">ThePodcastoftheLotusEaters<span class="channel-count">(3 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="m-iX1yTTQ2I">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=m-iX1yTTQ2I" target="_blank">They Are Abolishing Our Country</a>
                     </div>
-                    <div class="snippet-meta">monologue • 23m 5s • @ThePodcastoftheLotusEaters • Apr 29, 2026 • 38,779 views • 1,903 likes</div>
+                    <div class="snippet-meta">monologue • 23m 5s • @thepodcastofthelotuseaters • Apr 29, 2026 • 38,779 views • 1,903 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">The episode discusses the role of hereditary peers in the British political system, particularly focusing on the Earl of Devon and the implications of their diminishing power. It critiques modern politics&#x27; short-termism and the historical context of aristocracy in governance.</div>
                     <div class="snippet-claims">
@@ -410,11 +465,13 @@
                         <strong>Conclusion:</strong> The decline of hereditary peers reflects a broader trend of diminishing historical continuity in British governance.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="sYwq_ipqvQk">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=sYwq_ipqvQk" target="_blank">Is This Man Welsh?</a>
                     </div>
-                    <div class="snippet-meta">panel • 21m 39s • @ThePodcastoftheLotusEaters • Apr 29, 2026 • 16,862 views • 1,180 likes</div>
+                    <div class="snippet-meta">panel • 21m 39s • @thepodcastofthelotuseaters • Apr 29, 2026 • 16,862 views • 1,180 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">The episode discusses the complexities of Welsh nationalism and the implications of ethnic identity in political contexts. It explores the contradictions within nationalist movements and the perceptions of Welshness in relation to immigration and heritage.</div>
                     <div class="snippet-claims">
@@ -436,11 +493,13 @@
                         <strong>Conclusion:</strong> Welsh identity should be rooted in historical and cultural heritage rather than solely in civic claims.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="_ckLRv3-hBk">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=_ckLRv3-hBk" target="_blank">The Last Stand of the Epstein Network</a>
                     </div>
-                    <div class="snippet-meta">panel • 72m 39s • @ThePodcastoftheLotusEaters • Apr 29, 2026 • 32,824 views • 1,800 likes</div>
+                    <div class="snippet-meta">panel • 72m 39s • @thepodcastofthelotuseaters • Apr 29, 2026 • 32,824 views • 1,800 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator, Dan</div>
                     <div class="snippet-summary">The episode discusses the internal conflicts within the Labor Party, focusing on Kier Starmer leadership and the influence of the Epstein network. It highlights various political scandals and the implications for the party&#x27;s future.</div>
                     <div class="snippet-claims">
@@ -454,7 +513,7 @@
                         </ul>
                     </div>
                     <div class="snippet-details">
-                        <p><strong>People:</strong> Kier Starmer, Peter Mandleson, Ollie Robbins, Emily Thornbury, Diane Abbott, John McDonald, Angela Rayner, Ed Miliband, David Lammy, Morgan Mcweeny, Matthew Doyle, Donald Trump, Jeffrey Epstein</p>
+                        <p><strong>People:</strong> Keir Starmer, Peter Mandleson, Ollie Robbins, Emily Thornbury, Diane Abbott, John McDonald, Angela Rayner, Ed Miliband, David Lammy, Morgan Mcweeny, Matthew Doyle, Donald Trump, Jeffrey Epstein</p>
                         <p><strong>Organizations:</strong> Labor Party</p>
                         <p><strong>Topics:</strong> Labor Party dynamics, Kier Starmer leadership, Epstein network influence, political scandals, civil service relations</p>
                     </div>
@@ -467,7 +526,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">capitalcosm<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="KYI-oDrS9Io">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=KYI-oDrS9Io" target="_blank">🔴 Are The Elite Trying To Destroy The World...On Purpose? | Simon Dixon &amp; Simon Michaux</a>
                     </div>
@@ -498,7 +559,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">davidstarkeytalks<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="jqvrqtA2Z_w">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=jqvrqtA2Z_w" target="_blank">&quot;Labour lemmings still lack the guts to remove Starmer&quot; | Starkey &amp; Mogg</a>
                     </div>
@@ -516,7 +579,7 @@
                         </ul>
                     </div>
                     <div class="snippet-details">
-                        <p><strong>People:</strong> Kier Starmer, Boris Johnson, Gordon Brown, John Major, Alistair Campbell, Neil Kinnock, David Miliband, Robin Butler</p>
+                        <p><strong>People:</strong> Keir Starmer, Boris Johnson, Gordon Brown, John Major, Alastair Campbell, Neil Kinnock, David Miliband, Robin Butler</p>
                         <p><strong>Organizations:</strong> Labour Party, Equality and Human Rights Commission</p>
                         <p><strong>Topics:</strong> Labour leadership, Starmer&#x27;s performance, political ambition, government incompetence, new Labour, political corruption</p>
                     </div>
@@ -529,11 +592,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Jim_Bianco<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="8X7Qfuckhas">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=8X7Qfuckhas" target="_blank">The Fed&#x27;s Leadership Crisis: Politics, Power, and Jerome Powell</a>
                     </div>
-                    <div class="snippet-meta">panel • 8m 22s • @BiancoResearch • Apr 29, 2026 • 1,705 views • 65 likes</div>
+                    <div class="snippet-meta">panel • 8m 22s • @biancoresearch • Apr 29, 2026 • 1,705 views • 65 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Jim Bianco, Mike McKee</div>
                     <div class="snippet-summary">This episode discusses the challenges facing the Federal Reserve under Jerome Powell leadership, particularly regarding its independence and political pressures. The panelists analyze the implications of Powell&#x27;s decisions and the current economic landscape, including rising oil prices and inflation.</div>
                     <div class="snippet-claims">
@@ -560,7 +625,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">winston_marshall<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="hlkfBQiyOV4">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=hlkfBQiyOV4" target="_blank">Why This Matters (from The White House)</a>
                     </div>
@@ -591,16 +658,18 @@
             </div>
         </details>
         <details class="topic-details">
-            <summary class="topic-summary">INVESTING<span class="topic-count">(32 videos)</span></summary>
+            <summary class="topic-summary">INVESTING<span class="topic-count">(33 videos)</span></summary>
             <div class="topic-content">
                 <details class="channel-details">
                     <summary class="channel-summary">CRUXInvestor<span class="channel-count">(4 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="Dq9JFMyQKV8">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=Dq9JFMyQKV8" target="_blank">Nickel Enters a New Era as Indonesia Tightens Supply and Prices Surge</a>
                     </div>
-                    <div class="snippet-meta">interview • 16m 8s • @CRUXInvestor • Apr 29, 2026 • 346 views</div>
+                    <div class="snippet-meta">interview • 16m 8s • @cruxinvestor • Apr 29, 2026 • 346 views</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Mark Selby, Matthew Gordon</div>
                     <div class="snippet-summary">This episode discusses the current state of the nickel market, focusing on Indonesia&#x27;s tightening supply and its impact on prices. The speakers analyze various factors influencing nickel prices and the implications for mining operations.</div>
                     <div class="snippet-claims">
@@ -623,11 +692,13 @@
                         <strong>Conclusion:</strong> Indonesia&#x27;s control over nickel supply is likely to sustain higher prices in the market.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="AfRhxzy4JHE">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=AfRhxzy4JHE" target="_blank">Group Eleven Resources (TSXV:ZNG) - $18M Funds 70,000m Drill Program</a>
                     </div>
-                    <div class="snippet-meta">interview • 21m 31s • @CRUXInvestor • Apr 29, 2026 • 360 views</div>
+                    <div class="snippet-meta">interview • 21m 31s • @cruxinvestor • Apr 29, 2026 • 360 views</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Bartsorski, Matthew</div>
                     <div class="snippet-summary">In this episode, Bartsorski, CEO of Group 11 Resources, discusses the significant mineral discoveries in Ireland, focusing on the expansion of their drilling program and the potential for copper and silver alongside zinc. The conversation highlights the geological findings and the strategic importance of these resources in the context of the EU&#x27;s critical raw materials act.</div>
                     <div class="snippet-claims">
@@ -650,11 +721,13 @@
                         <strong>Conclusion:</strong> The exploration efforts are expected to significantly enhance the company&#x27;s resource potential and attract more investment.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="t436laMSOr4">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=t436laMSOr4" target="_blank">Ur-Energy (AMEX:URG) - One of Few U.S. Uranium Producers Scaling Up</a>
                     </div>
-                    <div class="snippet-meta">interview • 31m 4s • @CRUXInvestor • Apr 29, 2026 • 153 views</div>
+                    <div class="snippet-meta">interview • 31m 4s • @cruxinvestor • Apr 29, 2026 • 153 views</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Matthew Gilly</div>
                     <div class="snippet-summary">Matthew Gilly, CEO of UR Energy, discusses the company&#x27;s growth in uranium production and the significance of their new operations at Shirley Basin. He highlights the increasing demand for US-produced uranium and the challenges of scaling operations in a complex regulatory environment.</div>
                     <div class="snippet-claims">
@@ -676,11 +749,13 @@
                         <strong>Conclusion:</strong> UR Energy is positioned to significantly contribute to the US uranium supply amidst growing demand.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="JovEuItkfCo">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=JovEuItkfCo" target="_blank">Omai Gold Mines (TSXV:OMG) - 8Moz Gold Project Advancing Rapidly</a>
                     </div>
-                    <div class="snippet-meta">interview • 31m 5s • @CRUXInvestor • Apr 29, 2026 • 285 views</div>
+                    <div class="snippet-meta">interview • 31m 5s • @cruxinvestor • Apr 29, 2026 • 285 views</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Elaine Nellingham</div>
                     <div class="snippet-summary">Elaine Nellingham, CEO of Omine Goldmines, discusses the company&#x27;s significant gold resource in Guyana and the steps being taken towards a preliminary economic assessment. The conversation covers drilling efforts, resource conversion, and the economic implications of the project.</div>
                     <div class="snippet-claims">
@@ -707,11 +782,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">CommodityCulture<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="YjwyXU6Md_g">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=YjwyXU6Md_g" target="_blank">&#x27;SILVER Will Outpace Gold&#x27; as Paper Games COLLAPSE - &#x27;Perfect Setup&#x27;: Matthew Piepenburg</a>
                     </div>
-                    <div class="snippet-meta">interview • 46m 27s • @CommodityCulture • Apr 29, 2026 • 24,408 views • 1,169 likes</div>
+                    <div class="snippet-meta">interview • 46m 27s • @commodityculture • Apr 29, 2026 • 24,408 views • 1,169 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Jesse Day, Matthew Piepenburg</div>
                     <div class="snippet-summary">In this episode, Matthew Piepenburg discusses the dynamics of the silver and gold markets, the impact of geopolitical events on precious metals, and the looming risks in the bond market. He emphasizes the importance of understanding supply and demand fundamentals in the context of investing in precious metals.</div>
                     <div class="snippet-claims">
@@ -739,12 +816,14 @@
                 <details class="channel-details">
                     <summary class="channel-summary">FelixFriends<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="Hu9V6YdNBKU">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=Hu9V6YdNBKU" target="_blank">Leaked: Trump’s Energy Law - Most Investors Aren&#x27;t Ready!</a>
                     </div>
                     <div class="snippet-meta">monologue • 24m 34s • @felixfriends • Apr 29, 2026 • 131,701 views • 4,470 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Felix Pamx, Winston</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Felix Prehn, Winston</div>
                     <div class="snippet-summary">This episode discusses the recent executive order signed by Donald Trump aimed at revitalizing America&#x27;s power grid, which is under strain from AI data centers. The hosts outline investment opportunities in sectors benefiting from this policy change and provide insights on how to identify profitable stocks.</div>
                     <div class="snippet-claims">
                         <div class="snippet-claims-title">Key Claims:</div>
@@ -770,11 +849,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">Finding_Finance<span class="channel-count">(2 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="I_q55ZMEAHY">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=I_q55ZMEAHY" target="_blank">How to Master the Long-Term Commodity Trend (Hold Longer, Gain More)</a>
                     </div>
-                    <div class="snippet-meta">monologue • 28m 35s • @Finding_Finance • Apr 29, 2026 • 2,438 views • 233 likes</div>
+                    <div class="snippet-meta">monologue • 28m 35s • @finding_finance • Apr 29, 2026 • 2,438 views • 233 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Andy</div>
                     <div class="snippet-summary">In this episode, Andy discusses strategies for investing in commodities and the importance of identifying long-term trends. He critiques Bitcoin&#x27;s value proposition and emphasizes the significance of risk management in investment decisions.</div>
                     <div class="snippet-claims">
@@ -796,11 +877,13 @@
                         <strong>Conclusion:</strong> To maximize investment returns, one must identify and ride long-term trends while managing risk effectively.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="J5uTd4eZkI8">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=J5uTd4eZkI8" target="_blank">Commodities Update: Technical Analysis: OIL SOARING HIGHER WITH YIELDS</a>
                     </div>
-                    <div class="snippet-meta">monologue • 14m 42s • @Finding_Finance • Apr 29, 2026 • 1,516 views • 158 likes</div>
+                    <div class="snippet-meta">monologue • 14m 42s • @finding_finance • Apr 29, 2026 • 1,516 views • 158 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Andy</div>
                     <div class="snippet-summary">In this episode, Andy provides a technical analysis of commodities, focusing on the impact of rising oil prices and yields on various markets. He discusses investment strategies and market conditions affecting precious metals and other commodities.</div>
                     <div class="snippet-claims">
@@ -827,11 +910,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">ForwardGuidanceBW<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="kqdeBukSvho">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=kqdeBukSvho" target="_blank">The AI Bubble Is Widely Misunderstood | Steve Hou</a>
                     </div>
-                    <div class="snippet-meta">interview • 55m 43s • @ForwardGuidanceBW • Apr 29, 2026 • 2,594 views • 72 likes</div>
+                    <div class="snippet-meta">interview • 55m 43s • @forwardguidancebw • Apr 29, 2026 • 2,594 views • 72 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Steve Hoe</div>
                     <div class="snippet-summary">In this episode, Steve Hoe discusses the complexities of the AI bubble, its economic implications, and the intersection of AI with macroeconomics. He emphasizes the importance of understanding the investment cycles and the potential long-term impacts of AI on productivity and labor markets.</div>
                     <div class="snippet-claims">
@@ -858,11 +943,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">LaDucTrading<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="RDl83WsUyng">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=RDl83WsUyng" target="_blank">The Stealth Buyer Is Still In The Room</a>
                     </div>
-                    <div class="snippet-meta">monologue • 7m 25s • @LaDucTrading • Apr 29, 2026 • 273 views • 23 likes</div>
+                    <div class="snippet-meta">monologue • 7m 25s • @laductrading • Apr 29, 2026 • 273 views • 23 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">The episode discusses the current state of the market, particularly focusing on semiconductors and upcoming earnings reports. It highlights the fragile upside in the market and the potential impact of major tech companies on volatility.</div>
                     <div class="snippet-claims">
@@ -889,11 +976,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">MacroDirtCast<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="81B2In6HP7U">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=81B2In6HP7U" target="_blank">Sleepwalking at the S&amp;P High</a>
                     </div>
-                    <div class="snippet-meta">monologue • 26m 16s • @MacroDirtCast • Apr 29, 2026 • 2,988 views • 195 likes</div>
+                    <div class="snippet-meta">monologue • 26m 16s • @macrodirtcast • Apr 29, 2026 • 2,988 views • 195 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator, JD</div>
                     <div class="snippet-summary">In this episode, the hosts discuss recent market trends, particularly focusing on the performance of semiconductors and oil prices. They also share personal anecdotes related to trading experiences and cultural references from 1994.</div>
                     <div class="snippet-claims">
@@ -920,11 +1009,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">Monetary-Matters<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="zyJck24QgCc">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=zyJck24QgCc" target="_blank">How to Ride the Next Massive Market Theme | Kieran Cavanna | Old Farm Partners</a>
                     </div>
-                    <div class="snippet-meta">interview • 61m 14s • @Monetary-Matters • Apr 29, 2026 • 619 views • 28 likes</div>
+                    <div class="snippet-meta">interview • 61m 14s • @monetary-matters • Apr 29, 2026 • 619 views • 28 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Kieran Cavanna, Maxy</div>
                     <div class="snippet-summary">In this episode, Kieran Cavanna discusses his investment strategies and insights on the current market themes, particularly focusing on AI capital expenditures and the importance of manager selection. He shares his experiences from working at Soros Fund Management and how they influence his approach at Old Farm Partners.</div>
                     <div class="snippet-claims">
@@ -949,13 +1040,76 @@
                     </div>
                 </details>
                 <details class="channel-details">
+                    <summary class="channel-summary">OGJohnAGOfficial<span class="channel-count">(2 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="O9MDhYuN7ZM">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=O9MDhYuN7ZM" target="_blank">China Just Cut Silver&#x27;s Supply Chain — Nobody Has Connected the Dots Yet</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 20m 4s • @ogjohnagofficial • Apr 29, 2026 • 2,746 views • 105 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses the recent restrictions by China on sulfuric acid exports and their potential impact on the global silver supply chain. The narrator explains the interconnectedness of copper and silver production and the implications for investors.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>China has restricted sulfuric acid exports, affecting copper and silver production.</li>
+                            <li>20-25% of silver is produced as a byproduct of copper mining, reliant on sulfuric acid.</li>
+                            <li>Sulfuric acid pricing in South America has increased by 40-44% recently.</li>
+                            <li>Chilean mining operations are flagging sulfuric acid availability as a potential constraint.</li>
+                            <li>Silver demand is accelerating due to industries like solar and EV manufacturing.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> Codelco, BHP, Glencore, Freeport-McMoRan</p>
+                        <p><strong>Topics:</strong> silver supply chain, China export restrictions, sulfuric acid, copper production, market dynamics</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The conditions for a potential supply shock in silver are forming, but the market has not yet priced in this risk.
+                    </div>
+                </div>
+                <div class="snippet-card" data-video-id="8ZBPR6Wsjps">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=8ZBPR6Wsjps" target="_blank">Silver Just Got The Most Divided Fed Signal Since 1992 — And The Market Has No Idea What&#x27;s Coming</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 43m 21s • @ogjohnagofficial • Apr 29, 2026 • 1,779 views • 71 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses the recent FOMC meeting and its implications for silver prices amidst a divided Federal Reserve. The narrator analyzes the conflicting signals from the Fed and the market&#x27;s confusion regarding future monetary policy.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The FOMC&#x27;s 8-4 vote split is the most significant since 1992, indicating internal disagreement on monetary policy.</li>
+                            <li>Jerome Powell&#x27;s final press conference revealed that the executive branch is undermining the Federal Reserve.</li>
+                            <li>Silver prices are currently flat due to market uncertainty about inflation and growth risks.</li>
+                            <li>The upcoming GDP data will be crucial in determining the Fed&#x27;s next steps regarding interest rates.</li>
+                            <li>The transition to Kevin Warsh as Fed Chair may lead to a more accommodative monetary policy.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Jerome Powell, Kevin Warsh, Bill Clinton, Anthony Noto</p>
+                        <p><strong>Organizations:</strong> Federal Reserve, Senate Banking Committee, CME FedWatch, CNBC, IMF, IEA, SoFi Technologies</p>
+                        <p><strong>Topics:</strong> Federal Reserve, silver price, monetary policy, FOMC meeting, stagflation, market uncertainty</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The market is in a state of confusion due to the Federal Reserve&#x27;s divided signals, and clarity will come from upcoming economic data.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
                     <summary class="channel-summary">Patrick_Ceresna<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="WbY7EDSh3FI">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=WbY7EDSh3FI" target="_blank">The Market’s Biggest Risk Isn’t Earnings… It’s This</a>
                     </div>
-                    <div class="snippet-meta">monologue • 9m 29s • @Patrick_Ceresna • Apr 29, 2026 • 1,526 views • 110 likes</div>
+                    <div class="snippet-meta">monologue • 9m 29s • @patrick_ceresna • Apr 29, 2026 • 1,526 views • 110 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">This episode discusses the upcoming earnings reports of major tech companies and their implications for the market, particularly focusing on AI spending. The narrator analyzes the potential market reactions based on these earnings and the broader economic context.</div>
                     <div class="snippet-claims">
@@ -982,11 +1136,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">RealVisionFinance<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="_kQiFNElFF8">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=_kQiFNElFF8" target="_blank">How a Crypto Pro Uses AI | Trading the Markets with AI</a>
                     </div>
-                    <div class="snippet-meta">interview • 33m 20s • @RealVisionFinance • Apr 29, 2026 • 338 views • 18 likes</div>
+                    <div class="snippet-meta">interview • 33m 20s • @realvisionfinance • Apr 29, 2026 • 338 views • 18 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Chris Bulock, Jamie Coots</div>
                     <div class="snippet-summary">This episode discusses the intersection of AI and investing, focusing on the implications of AI advancements on market valuations and the ongoing legal battle involving OpenAI and Elon Musk. The speakers also explore how AI is reshaping financial strategies and the future of mobile technology.</div>
                     <div class="snippet-claims">
@@ -1013,11 +1169,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">ResourceTalks<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="QUYY0FM-d5U">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=QUYY0FM-d5U" target="_blank">Is There Gold Left in Suriname After 100 Years of Artisanal Mining? | Miata Metals CEO Interview</a>
                     </div>
-                    <div class="snippet-meta">interview • 79m 49s • @ResourceTalks • Apr 29, 2026 • 179 views</div>
+                    <div class="snippet-meta">interview • 79m 49s • @resourcetalks • Apr 29, 2026 • 179 views</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Antonio, Gab</div>
                     <div class="snippet-summary">This episode features an interview with the CEO of Miata Metals discussing the potential for gold mining in Suriname after a century of artisanal mining. The conversation covers the company&#x27;s exploration strategies, geological insights, and the challenges of operating in the region.</div>
                     <div class="snippet-claims">
@@ -1045,11 +1203,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">SkoniecznyMariusz<span class="channel-count">(2 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="AZ9OwT6DmWA">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=AZ9OwT6DmWA" target="_blank">Aduro Upside Just Keeps Getting Better</a>
                     </div>
-                    <div class="snippet-meta">monologue • 12m 48s • @SkoniecznyMariusz • Apr 29, 2026 • 665 views • 77 likes</div>
+                    <div class="snippet-meta">monologue • 12m 48s • @skoniecznymariusz • Apr 29, 2026 • 665 views • 77 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">The episode discusses Aduro&#x27;s potential revenue from plastic waste processing and the economic implications of their operations. It highlights estimates of production capacity and financial projections based on past data.</div>
                     <div class="snippet-claims">
@@ -1071,11 +1231,13 @@
                         <strong>Conclusion:</strong> If Aduro&#x27;s operations are successful, the market cap could reach billions.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="H6Hifon-9bY">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=H6Hifon-9bY" target="_blank">Goat Industries Business vs Stock Price</a>
                     </div>
-                    <div class="snippet-meta">interview • 33m 41s • @SkoniecznyMariusz • Apr 29, 2026 • 192 views • 8 likes</div>
+                    <div class="snippet-meta">interview • 33m 41s • @skoniecznymariusz • Apr 29, 2026 • 192 views • 8 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">This episode features an interview discussing the current state of Goat Industries amidst stock price uncertainty and the potential for investment. The conversation highlights the company&#x27;s advertising strategies and revenue opportunities within the betting and casino markets.</div>
                     <div class="snippet-claims">
@@ -1102,11 +1264,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">TheAsianGuy-k9h<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="SIaYqVLhupg">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=SIaYqVLhupg" target="_blank">OPEC Exits, Energy Shifts, and a Silver Shortage Nobody Sees Coming</a>
                     </div>
-                    <div class="snippet-meta">monologue • 29m 38s • @THEASIANGUY-AG • Apr 29, 2026 • 11,155 views • 530 likes</div>
+                    <div class="snippet-meta">monologue • 29m 38s • @theasianguy-ag • Apr 29, 2026 • 11,155 views • 530 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">This episode discusses the current state of the silver market amidst significant geopolitical and economic shifts, including the UAE&#x27;s exit from OPEC and the Federal Reserve&#x27;s leadership transition. It highlights the implications of these events on silver pricing and broader market dynamics.</div>
                     <div class="snippet-claims">
@@ -1133,12 +1297,14 @@
                 <details class="channel-details">
                     <summary class="channel-summary">WTFinancepodcast<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="_Mt1CE8mmYA">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=_Mt1CE8mmYA" target="_blank">Credit Cycle Rollover Incoming: Edward Dowd on 2026 Recession</a>
                     </div>
-                    <div class="snippet-meta">interview • 33m 29s • @WTFinancepodcast • Apr 29, 2026 • 20,710 views • 1,109 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Edward Dowd, Anthony Fatsies</div>
+                    <div class="snippet-meta">interview • 33m 29s • @wtfinancepodcast • Apr 29, 2026 • 20,710 views • 1,109 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Edward Dowd, Anthony Fauci</div>
                     <div class="snippet-summary">In this episode, Edward Dowd discusses the impending credit cycle rollover and the factors contributing to a potential recession in 2026. He highlights the impact of geopolitical events, inflation, and the housing market on the economy.</div>
                     <div class="snippet-claims">
                         <div class="snippet-claims-title">Key Claims:</div>
@@ -1164,12 +1330,14 @@
                 <details class="channel-details">
                     <summary class="channel-summary">Wealthion<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="OIZgIZy2FnQ">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=OIZgIZy2FnQ" target="_blank">The AI Boom Is Real — But Investors Are Missing The Risk</a>
                     </div>
-                    <div class="snippet-meta">interview • 25m 15s • @Wealthion • Apr 29, 2026 • 544 views • 21 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Maggie Lake, Brent Reameister</div>
+                    <div class="snippet-meta">interview • 25m 15s • @wealthion • Apr 29, 2026 • 544 views • 21 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Maggie Lake, Brett Rentmeester</div>
                     <div class="snippet-summary">This episode discusses the transformative impact of AI on investing and the associated risks and opportunities. Brent Reameister shares insights on navigating the current investment landscape amidst rapid technological change.</div>
                     <div class="snippet-claims">
                         <div class="snippet-claims-title">Key Claims:</div>
@@ -1195,7 +1363,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">adam.taggart<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="wk39Eegkn7E">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=wk39Eegkn7E" target="_blank">SPECIAL REPORT: Chaos At The Fed? Record Dissents In Powell&#x27;s Last Meeting | Axel Merk</a>
                     </div>
@@ -1226,7 +1396,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">arcadiaeconomics<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="1a9PKb-GNm4">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=1a9PKb-GNm4" target="_blank">Gold &amp; Silver PLUNGE As Oil Spikes on Latest Trump Threat</a>
                     </div>
@@ -1258,7 +1430,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">eurodollaruniversity<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="x0KLFK7nWdU">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=x0KLFK7nWdU" target="_blank">OMG!! Did You See What Just Happened To European Banks?!</a>
                     </div>
@@ -1289,7 +1463,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">hedgeye<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="PfPjYaWBYqY">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=PfPjYaWBYqY" target="_blank">Hedgeye Investing Summit Spring 2026 | Chris Whalen, Chairman of Whalen Global Advisors</a>
                     </div>
@@ -1321,12 +1497,14 @@
                 <details class="channel-details">
                     <summary class="channel-summary">sprottmoneyltd<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="fJZ2JJbMc3A">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=fJZ2JJbMc3A" target="_blank">$300 Oil, $75 Silver and $4,700 Gold? David Jensen on the Future of Real Assets</a>
                     </div>
                     <div class="snippet-meta">interview • 28m 57s • @sprottmoneyltd • Apr 29, 2026 • 3,333 views • 190 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Craig Hemky, David Jensen</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Craig Hemke, David Jensen</div>
                     <div class="snippet-summary">In this episode, Craig Hemky interviews David Jensen about the current state of real assets, focusing on the prices of oil, silver, and gold amidst geopolitical tensions. They discuss the implications of these prices on the global economy and the mining sector.</div>
                     <div class="snippet-claims">
                         <div class="snippet-claims-title">Key Claims:</div>
@@ -1350,40 +1528,11 @@
                     </div>
                 </details>
                 <details class="channel-details">
-                    <summary class="channel-summary">topic_Chris_Vermeulen<span class="channel-count">(1 videos)</span></summary>
-                    <div class="channel-content">
-                <div class="snippet-card">
-                    <div class="snippet-title">
-                        <a href="https://www.youtube.com/watch?v=l6OVHsGluVU" target="_blank">!AI Bubble in Trouble? Stocks Drop as Oil Explodes || Chris Vermeulen &amp; Gareth Soloway</a>
-                    </div>
-                    <div class="snippet-meta">interview • 18m 40s • @goldsilver_truth • Apr 29, 2026 • 1,347 views • 73 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Chris Vermeulen, Gareth Soloway</div>
-                    <div class="snippet-summary">This episode discusses the recent decline in the NASDAQ and the impact of rising oil prices and AI market concerns on investor sentiment. The speakers analyze the current market dynamics and the potential implications for various sectors.</div>
-                    <div class="snippet-claims">
-                        <div class="snippet-claims-title">Key Claims:</div>
-                        <ul>
-                            <li>The NASDAQ is experiencing a sharp sell-off due to missed targets by Open AI.</li>
-                            <li>Oil prices have surged by 4.5%, contributing to market volatility.</li>
-                            <li>Investor sentiment is shifting from optimism to caution in the tech sector.</li>
-                            <li>The concentration of capital in leading tech stocks is at levels similar to the dot-com bubble.</li>
-                            <li>Defensive sectors like utilities are holding steady while tech stocks face selling pressure.</li>
-                        </ul>
-                    </div>
-                    <div class="snippet-details">
-                        <p><strong>People:</strong> Elon Musk</p>
-                        <p><strong>Organizations:</strong> Open AI, Nvidia</p>
-                        <p><strong>Topics:</strong> NASDAQ performance, AI market trends, oil prices, investor sentiment, market volatility</p>
-                    </div>
-                    <div class="snippet-conclusion">
-                        <strong>Conclusion:</strong> The market is entering a more volatile phase as geopolitical and economic factors create uncertainty.
-                    </div>
-                </div>
-                    </div>
-                </details>
-                <details class="channel-details">
                     <summary class="channel-summary">topic_Eric_Sprott<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="kz7mQ9h0CKg">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=kz7mQ9h0CKg" target="_blank">STOP Everything!   If You Own SILVER, You Need to See THIS NOW!   Eric Sprott</a>
                     </div>
@@ -1414,7 +1563,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Jim_Cramer<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="5-rWrj-ZgK8">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=5-rWrj-ZgK8" target="_blank">Mad Money 04/29/26 | Audio Only</a>
                     </div>
@@ -1445,7 +1596,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Lyn_Alden<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="3FD-09asomw">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=3FD-09asomw" target="_blank">“Why the Economy Looks Great on Paper but Feels Like a Collapse&quot;- Lyn Alden</a>
                     </div>
@@ -1477,7 +1630,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Martin_Armstrong_economist<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="L_XyFoz3of0">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=L_XyFoz3of0" target="_blank">MARTIN ARMSTRONG  | Gold and the stock market will rise together!</a>
                     </div>
@@ -1508,7 +1663,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Rick_Rule<span class="channel-count">(2 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="QcyP1m-gjpE">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=QcyP1m-gjpE" target="_blank">Rick Rule And Mike Rothman Say The Oil Market Is About To Break Wide Open</a>
                     </div>
@@ -1534,7 +1691,9 @@
                         <strong>Conclusion:</strong> The oil market is entering a phase of significant price increases due to supply constraints and ongoing geopolitical tensions.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="6vv7EzRIgoU">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=6vv7EzRIgoU" target="_blank">BUY HATE OR DIE POOR — RICK RULE’S 6 RULES</a>
                     </div>
@@ -1568,13 +1727,15 @@
             <summary class="topic-summary">HEALTH<span class="topic-count">(1 videos)</span></summary>
             <div class="topic-content">
                 <details class="channel-details">
-                    <summary class="channel-summary">unknown<span class="channel-count">(1 videos)</span></summary>
+                    <summary class="channel-summary">Drberg<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="RN3P3Ra513M">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
-                        <a href="" target="_blank">The $19 Billion Dollar Lie</a>
+                        <a href="https://www.youtube.com/watch?v=RN3P3Ra513M" target="_blank">The $19 Billion Dollar Lie</a>
                     </div>
-                    <div class="snippet-meta">monologue • 8m 32s • @Doomberg • Apr 29, 2026</div>
+                    <div class="snippet-meta">monologue • 8m 32s • @doomberg • Apr 29, 2026 • 37,448 views • 3,613 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">This episode discusses the misleading nature of informed consent in antidepressant treatments and the significant role of placebo effects. It highlights the discrepancies in published data and the potential harms of antidepressants that patients are often unaware of.</div>
                     <div class="snippet-claims">
@@ -1601,12 +1762,42 @@
             </div>
         </details>
         <details class="topic-details">
-            <summary class="topic-summary">RUSSIA<span class="topic-count">(1 videos)</span></summary>
+            <summary class="topic-summary">RUSSIA<span class="topic-count">(2 videos)</span></summary>
             <div class="topic-content">
                 <details class="channel-details">
-                    <summary class="channel-summary">IgorYakovenko<span class="channel-count">(1 videos)</span></summary>
+                    <summary class="channel-summary">IgorYakovenko<span class="channel-count">(2 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="JlmBDvoyW8o">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=JlmBDvoyW8o" target="_blank">ДУМАЕМ ВМЕСТЕ С ЛАРИСОЙ ВОЛОШИНОЙ</a>
+                    </div>
+                    <div class="snippet-meta">interview • 60m 37s • @igoryakovenko • Apr 29, 2026 • 38,708 views • 4,447 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Игорь Яковенко, Лариса Волошина</div>
+                    <div class="snippet-summary">В этом эпизоде Игорь Яковенко и Лариса Волошина обсуждают влияние визита Карла II на политику США и международные отношения, а также критикуют действия Дональд Трамп и его поддержку Путина. Они анализируют текущие политические события и их последствия для Европы и Израиля.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Визит Карла II подчеркивает важность лидерства и достоинства в международной политике.</li>
+                            <li>Дональд Трамп рассматривается как провокатор, который создает конфликты.</li>
+                            <li>Израильская дипломатия под руководством Нетаньяху вызывает критику за игнорирование украинских интересов.</li>
+                            <li>Трамп теряет поддержку в Республиканской партии и становится токсичным для своих соратников.</li>
+                            <li>Глобальные конфликты усугубляются из-за неадекватного поведения лидеров.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Дональд Трамп, Карл II, Владимир Зеленский, Милей, Кушнер, Боб Вудвард, Реджеп Тайип Эрдоган, Нетаньяху, Орбан, Шольц, Макрон</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> Трамп и Путин, политика США, израильская дипломатия, глобальные конфликты, монархия и лидерство, европейская политика</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Дональд Трамп и его политика создают серьезные проблемы как для США, так и для международных отношений.
+                    </div>
+                </div>
+                <div class="snippet-card" data-video-id="jqGr92HDgz0">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=jqGr92HDgz0" target="_blank">ТУАПСЕ КАК ОБРАЗ ПРЕКРАСНОЙ РОССИИ БУДУЩЕГО</a>
                     </div>
@@ -1642,11 +1833,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">ShawnRyanShow<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="JW_2L3kR0QI">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=JW_2L3kR0QI" target="_blank">Shawn Ryan Shoots a M249 SAW for the First Time in 15 Years</a>
                     </div>
-                    <div class="snippet-meta">monologue • 8m 59s • @ShawnRyanShow • Apr 29, 2026 • 81,171 views • 6,147 likes</div>
+                    <div class="snippet-meta">monologue • 8m 59s • @shawnryanshow • Apr 29, 2026 • 81,171 views • 6,147 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">In this episode, the narrator shares their experience shooting various firearms, including the M249 SAW, after a long hiatus. The discussion includes insights on different weapons and their functionalities.</div>
                     <div class="snippet-claims">
@@ -1669,7 +1862,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">triggerpod<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="Fj8CyHn-jtM">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=Fj8CyHn-jtM" target="_blank">Triggernometry Meets Hilarious Boyscast - Ryan Long &amp; Danny Polishchuk</a>
                     </div>
@@ -1687,7 +1882,7 @@
                         </ul>
                     </div>
                     <div class="snippet-details">
-                        <p><strong>People:</strong> Jake Tapper, Mark Levin, Megan Kelly, Stephen Colbert, Bill Maher, Tucker Carlson, Maxime Bernier, Olivia Chow</p>
+                        <p><strong>People:</strong> Jake Tapper, Mark Levin, Megyn Kelly, Stephen Colbert, Bill Maher, Tucker Carlson, Maxime Bernier, Olivia Chow</p>
                         <p><strong>Organizations:</strong> None</p>
                         <p><strong>Topics:</strong> comedy culture, podcasting, AI impact, political commentary, gender issues, Canada politics, social media</p>
                     </div>
@@ -1700,8 +1895,14 @@
             </div>
         </details>
         <div class="footer">
-            Generated 2026-05-03 06:52:27
+            Generated 2026-09-15 22:04:17
         </div>
     </div>
+    <div class="playlist-bar" id="plBar">
+        <span class="playlist-bar-msg"><span id="plCount">0</span> selected</span>
+        <button id="plBtn" type="button">Add to playlist</button>
+    </div>
+    <script src="assets/config.js"></script>
+    <script src="assets/playlist.js"></script>
 </body>
 </html>

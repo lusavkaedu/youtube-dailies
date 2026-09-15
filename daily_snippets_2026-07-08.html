@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Snippets - 2026-07-08</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background-color: #FFF1E0;
+            color: #3E474F;
+            line-height: 1.6;
+            padding: 24px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            padding: 32px 0;
+            border-bottom: 3px solid #3E474F;
+            margin-bottom: 32px;
+        }
+        .header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .header .date {
+            font-size: 18px;
+            color: #66737D;
+        }
+        .header .meta {
+            font-size: 14px;
+            color: #66737D;
+            margin-top: 12px;
+        }
+        .topic-section {
+            margin-bottom: 40px;
+        }
+        .topic-title {
+            font-size: 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 0;
+            border-bottom: 2px solid #F2DFCE;
+            margin-bottom: 24px;
+            color: #3E474F;
+        }
+        .channel-section {
+            margin-bottom: 28px;
+        }
+        .channel-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            margin-bottom: 16px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .snippet-card {
+            background: #FFF9F5;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border-left: 4px solid #FCD0AF;
+        }
+        .snippet-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .snippet-title a {
+            color: #0D7680;
+            text-decoration: none;
+        }
+        .snippet-title a:hover {
+            text-decoration: underline;
+        }
+        .snippet-meta {
+            font-size: 13px;
+            color: #66737D;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+        .snippet-speakers {
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .snippet-speakers strong {
+            color: #3E474F;
+        }
+        .snippet-summary {
+            font-size: 15px;
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+        .snippet-claims {
+            margin-bottom: 16px;
+        }
+        .snippet-claims-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .snippet-claims ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .snippet-claims li {
+            font-size: 14px;
+            padding: 4px 0 4px 16px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .snippet-claims li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #0D7680;
+        }
+        .snippet-details {
+            font-size: 13px;
+            color: #66737D;
+            border-top: 1px solid #F2DFCE;
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+        .snippet-details p {
+            margin-bottom: 4px;
+        }
+        .snippet-conclusion {
+            font-size: 14px;
+            font-style: italic;
+            color: #3E474F;
+            background: #F2DFCE;
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 12px;
+        }
+        .footer {
+            text-align: center;
+            padding: 24px 0;
+            border-top: 1px solid #F2DFCE;
+            margin-top: 40px;
+            font-size: 12px;
+            color: #66737D;
+        }
+        .site-nav {
+            text-align: center;
+            margin-top: 12px;
+        }
+        .site-nav a {
+            color: #0D7680;
+            font-size: 14px;
+            text-decoration: none;
+        }
+        .site-nav a:hover {
+            text-decoration: underline;
+        }
+        /* Collapsible sections */
+        details {
+            margin-bottom: 8px;
+        }
+        details summary {
+            cursor: pointer;
+            list-style: none;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary::before {
+            content: "▶";
+            display: inline-block;
+            margin-right: 8px;
+            transition: transform 0.2s;
+            font-size: 12px;
+        }
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
+        .topic-details {
+            border: 1px solid #F2DFCE;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            background: #FFF9F5;
+        }
+        .topic-summary {
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 16px 20px;
+            color: #3E474F;
+            background: #F2DFCE;
+            border-radius: 8px;
+        }
+        .topic-details[open] .topic-summary {
+            border-radius: 8px 8px 0 0;
+        }
+        .topic-count {
+            font-size: 14px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .topic-content {
+            padding: 16px 20px;
+        }
+        .channel-details {
+            border: 1px solid #FCD0AF;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            background: white;
+        }
+        .channel-summary {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            padding: 12px 16px;
+            background: #FFF9F5;
+            border-radius: 6px;
+        }
+        .channel-details[open] .channel-summary {
+            border-radius: 6px 6px 0 0;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .channel-count {
+            font-size: 13px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .channel-content {
+            padding: 12px 16px;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 16px;
+            }
+            .header h1 {
+                font-size: 28px;
+            }
+            .snippet-card {
+                padding: 16px;
+            }
+        }
+        /* Add-to-playlist UI */
+        .snippet-card { position: relative; }
+        .snippet-check {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            margin: 0;
+            cursor: pointer;
+        }
+        .snippet-check input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .snippet-card.selected {
+            box-shadow: inset 4px 0 0 #0D7680;
+            background: #FFFCF8;
+        }
+        .snippet-status {
+            position: absolute;
+            top: 14px;
+            right: 40px;
+            font-size: 14px;
+            color: #66737D;
+            min-width: 90px;
+            text-align: right;
+        }
+        .snippet-status.ok { color: #0D7680; }
+        .snippet-status.err { color: #c0392b; }
+        .playlist-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #3E474F;
+            color: #FFF;
+            padding: 12px 24px;
+            z-index: 100;
+            display: none;
+            font-family: Georgia, "Times New Roman", serif;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.15);
+        }
+        .playlist-bar.visible {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+        .playlist-bar-msg { font-size: 15px; }
+        .playlist-bar button {
+            background: #0D7680;
+            color: #FFF;
+            border: 0;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-family: Georgia, "Times New Roman", serif;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .playlist-bar button:disabled {
+            background: #66737D;
+            cursor: not-allowed;
+        }
+        body.has-bar { padding-bottom: 80px; }
+    </style>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Daily Snippets</h1>
+            <div class="date">Wednesday, July 08, 2026</div>
+            <div class="meta">10 videos • uploaded 2026-07-08 • 10 videos</div>
+            <div class="site-nav"><a href="search.html">🔍 Search all snippets</a></div>
+        </div>
+        <details class="topic-details">
+            <summary class="topic-summary">POLITICS<span class="topic-count">(4 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">ThePodcastoftheLotusEaters<span class="channel-count">(4 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="CvH-lU_FDMs">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=CvH-lU_FDMs" target="_blank">Farage&#x27;s Mad Lad Moment</a>
+                    </div>
+                    <div class="snippet-meta">panel • 36m 30s • @thepodcastofthelotuseaters • Jul 08, 2026 • 55,405 views • 2,460 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses Nigel Farage&#x27;s recent financial controversies and the media&#x27;s aggressive tactics against him. It explores the implications of his resignation and the upcoming bi-election as a challenge to the political establishment.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Farage is accused of receiving undeclared donations from various sources.</li>
+                            <li>The National Crime Agency is investigating suspicious transactions related to Farage.</li>
+                            <li>Media outlets like Sky News are criticized for their aggressive reporting tactics.</li>
+                            <li>Farage&#x27;s resignation is seen as a strategic move to challenge the establishment.</li>
+                            <li>There are allegations of coordinated efforts to undermine Farage&#x27;s political career.</li>
+                            <li>Public sentiment may favor Farage despite the controversies surrounding him.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Nigel Farage, George Kotrol, Christopher Harbourne, Richard Tice, Andrew Bailey, Angela Rayner, Dominic Cummings, Boris Johnson, Kimmy Bay, Ed Davey, Rupert Lowe, Zia Yusuf, Charlie Kirk, Robert Jenrick, Fiona Kotrol, Melania Trump, Count Binface</p>
+                        <p><strong>Organizations:</strong> Parliamentary Standards Commission, National Crime Agency, Sky News, Times, Labour Party, Conservative Party, Liberal Democrats, Reform</p>
+                        <p><strong>Topics:</strong> Farage&#x27;s finances, media tactics, political establishment, bi-election strategy, donations controversy, public perception, political narratives</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Farage&#x27;s gambit to frame his situation as a battle against the establishment could strengthen his political narrative.
+                    </div>
+                </div>
+                <div class="snippet-card" data-video-id="y-BtFVPOAg0">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=y-BtFVPOAg0" target="_blank">Farage&#x27;s Biggest Gamble Yet</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 88m 28s • @thepodcastofthelotuseaters • Jul 08, 2026 • 14,501 views • 1,350 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses the political implications of Nigel Farage&#x27;s recent resignation as MP and the surrounding controversies, including his financial dealings and the reactions from other political parties. It also touches on Prince Harry&#x27;s court case and Marine Le Pen&#x27;s political situation in France.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Nigel Farage resigned as MP for Clacton, triggering a bi-election.</li>
+                            <li>Farage faces scrutiny over a £5 million gift and potential corruption.</li>
+                            <li>Prince Harry lost a court case against the Daily Mail regarding privacy violations.</li>
+                            <li>Marine Le Pen has decided to run for president despite legal challenges.</li>
+                            <li>All major parties have opted not to contest the Clacton bi-election.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Nigel Farage, Prince Harry, Marine Le Pen, Elton John, David Furnish, Simon Hughes, Sadie Frost, Liz Curley, George Kotrrell, Dan Hodges</p>
+                        <p><strong>Organizations:</strong> Daily Mail, Fleet Street, Reform UK</p>
+                        <p><strong>Topics:</strong> Nigel Farage, Marine Le Pen, Prince Harry, political scandal, bi-election</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Farage&#x27;s political maneuvering may backfire as he faces ongoing scrutiny over his financial dealings.
+                    </div>
+                </div>
+                <div class="snippet-card" data-video-id="9wjBxzX0On0">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=9wjBxzX0On0" target="_blank">The Battle of Clacton</a>
+                    </div>
+                    <div class="snippet-meta">panel • 72m 42s • @thepodcastofthelotuseaters • Jul 08, 2026 • 74,378 views • 3,339 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator, Dan</div>
+                    <div class="snippet-summary">This episode discusses the political situation surrounding Nigel Farage&#x27;s resignation and the upcoming bi-election in Clacton. The speakers analyze the implications of media scrutiny and public perception on Farage&#x27;s political career.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Nigel Farage is under pressure due to his financial dealings and media scrutiny.</li>
+                            <li>The media&#x27;s portrayal of Farage is affecting his approval ratings.</li>
+                            <li>Farage&#x27;s decision to resign and call a bi-election is a strategic move to regain control of the narrative.</li>
+                            <li>The presence of Count Binface as a candidate could undermine Farage&#x27;s legitimacy.</li>
+                            <li>Farage&#x27;s financial dealings are not illegal but have raised ethical questions.</li>
+                            <li>The political landscape in Clacton is shifting, with potential implications for Farage&#x27;s future.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Nigel Farage, Anthony Eden, Winston Churchill, Enoch Powell, George Kotrrell, Christopher Harborn, Peter Thiel, Andy Burnham, Dominic Cummings, Beth Riby, Count Binface, Michael Gove, Robert Jenrick, Loza Fox</p>
+                        <p><strong>Organizations:</strong> GB News</p>
+                        <p><strong>Topics:</strong> Nigel Farage, Clacton bi-election, British politics, media scrutiny, political influence, public perception, celebrity culture</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Farage&#x27;s political future is precarious, and the upcoming bi-election could either solidify or undermine his position.
+                    </div>
+                </div>
+                <div class="snippet-card" data-video-id="dRdHXvawoWQ">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=dRdHXvawoWQ" target="_blank">Gearing Up for the Charlie Kirk Trial</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 17m 31s • @thepodcastofthelotuseaters • Jul 08, 2026 • 36,088 views • 1,818 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses the ongoing preliminary hearings for the Charlie Kirk trial, focusing on the evidence against Tyler Robinson and the implications of public opinion on the trial. The narrator speculates on the potential outcomes and the role of various individuals and organizations in the case.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The trial against Tyler Robinson is seen as open and shut due to his confession and evidence.</li>
+                            <li>Defense attorneys are considering a guilty plea to avoid the death penalty.</li>
+                            <li>Public speculation may affect the jury selection process.</li>
+                            <li>New evidence, including DNA and surveillance footage, is being presented by prosecutors.</li>
+                            <li>The judge has ruled against removing the death penalty as a possible punishment.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Charlie Kirk, Tyler Robinson, Candace Owens, Jordan Peterson, Steven Miller, Hassan Per, Vorch, Onion Person</p>
+                        <p><strong>Organizations:</strong> TPUSA, Daily Mail</p>
+                        <p><strong>Topics:</strong> Charlie Kirk trial, legal proceedings, public opinion, media coverage, conspiracy theories</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The evidence against Tyler Robinson appears strong, and the trial is likely to proceed unless he pleads guilty.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">INVESTING<span class="topic-count">(5 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">LaDucTrading<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="5wcCZoL9LQM">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=5wcCZoL9LQM" target="_blank">Pigs Get Slaughtered</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 5m 17s • @laductrading • Jul 08, 2026 • 586 views • 22 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses current trends in the semiconductor market and provides insights on trading strategies. The narrator emphasizes caution in the face of market volatility and potential downturns.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The SPX is struggling to maintain levels above 7460.</li>
+                            <li>If the Qs break below 701, they could fall to 676.73.</li>
+                            <li>The Nasdaq composite is at risk of breaking below its 10-week EMA.</li>
+                            <li>Memory plays need to prove their support at the 10-week level.</li>
+                            <li>The market has seen a significant advance in one quarter, which raises concerns.</li>
+                            <li>Pigs get slaughtered in the market, indicating a potential downturn.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> laduketrading.com, YouTube, Western Digital, Micron, Samsung, Seagate, SanDisk, EWI</p>
+                        <p><strong>Topics:</strong> market analysis, trading strategies, semiconductor trends, volatility, AI trade</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Caution is advised as the market shows signs of potential decline.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">OxbowAdvisors<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="H2AETtJ4K6w">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=H2AETtJ4K6w" target="_blank">Ted Oakley - Oxbow Advisors - Market Update - July 2026</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 15m 5s • @oxbowadvisors • Jul 08, 2026 • 10,637 views • 1,004 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Ted Oakley</div>
+                    <div class="snippet-summary">In this episode, Ted Oakley provides a market update for July 2026, discussing various economic indicators and trends affecting investments. He highlights concerns about US debt, real estate inventory, and speculative trading behaviors in the stock market.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>US debt is growing at a rate faster than the economy&#x27;s nominal GDP.</li>
+                            <li>The delinquency rate on commercial mortgage-backed securities is at 12%, higher than during the financial crisis.</li>
+                            <li>Speculative trading, particularly in options, has reached unprecedented levels.</li>
+                            <li>Households now own a record 73% of equities as financial assets.</li>
+                            <li>The concentration of wealth in the stock market is heavily skewed towards a few large companies.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Adrian Day, Jimmy Carter</p>
+                        <p><strong>Organizations:</strong> Oxbow Advisors, SpaceX, UBS</p>
+                        <p><strong>Topics:</strong> US economy, debt crisis, real estate, semiconductors, oil prices, stock market</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Investors should be cautious of market speculation and consider maintaining a large cash reserve.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">ResourceTalks<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="3EJHeIOYYAM">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=3EJHeIOYYAM" target="_blank">Portfolio of Gold Projects in Canada, But Is There Enough Focus? | Epic Gold CEO Interview</a>
+                    </div>
+                    <div class="snippet-meta">interview • 98m 15s • @resourcetalks • Jul 08, 2026 • 1,669 views</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Rod, unnamed narrator</div>
+                    <div class="snippet-summary">In this episode, Epic Gold CEO Rod discusses the company&#x27;s focus on various gold projects in Canada, including Fenton, Wilson, and Hawkins. He shares insights on the exploration strategy, market conditions, and the importance of resource assessments.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Epic Gold is focusing on the Fenton gold project, which has shown promising results from recent drilling.</li>
+                            <li>The company has a strong financial position with cash and shares worth approximately $7.5 to $8 million.</li>
+                            <li>Rod emphasizes the importance of understanding geological systems to improve exploration success.</li>
+                            <li>The company plans to update resource estimates for Fenton and Wilson in the coming months.</li>
+                            <li>Hawkins is highlighted as a potentially significant project due to its shallow high-grade gold zones.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Eric Sprott, Lawrence Dor, John Zerni, Bob Hunter, Elena Tanzola, Jeff, Antonios</p>
+                        <p><strong>Organizations:</strong> Epic Gold, Tero Hutton, New Found Gold, CARCH, ASI, Deutsche Bank, Integra Resources, Cipher Research, Exploits, Helostar, Cartier, Sitka Gold, Banyan, Snow Line</p>
+                        <p><strong>Topics:</strong> gold exploration, mining projects, investment strategy, resource assessment, market trends</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Epic Gold is strategically positioned to enhance its projects and attract investment through effective exploration and resource assessment.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">eurodollaruniversity<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="aOYRaNIz-NY">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=aOYRaNIz-NY" target="_blank">HSBC Just Issued A Dire Warning To The Entire Banking System</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 17m 27s • @eurodollaruniversity • Jul 08, 2026 • 46,412 views • 1,975 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">The episode discusses HSBC&#x27;s recent decision to halt lending to riskier private credit funds, signaling a potential downturn in the credit cycle. It contrasts the cautious actions of banks with the complacency observed in public credit markets.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>HSBC is not renewing credit facilities for some private credit borrowers.</li>
+                            <li>The bank is pulling back leverage from risky private credit funds.</li>
+                            <li>Private credit funds depend heavily on banks for credit lines and leverage.</li>
+                            <li>HSBC&#x27;s decision indicates a broader concern about the risk-adjusted returns from private credit.</li>
+                            <li>Public credit markets remain tight despite banks reducing their exposure to private credit.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> HSBC, Financial Times, JP Morgan, Goldman Sachs, Barclays, Monetary Metals, Apollo</p>
+                        <p><strong>Topics:</strong> private credit, banking system, credit markets, collateral values, liquidity risk</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The actions of banks like HSBC suggest a significant shift in the credit landscape, with insiders pulling back while public markets remain complacent.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">thecontrariancapitalist<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="N1AtPXYE0lQ">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=N1AtPXYE0lQ" target="_blank">Mid-Week Macro 08/07/2026 - A GOLDEN OPPORTUNITY?</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 28m 36s • @thecontrariancapitalist • Jul 08, 2026 • 11 views • 2 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses the current state of the gold market and the implications of US debt and geopolitical tensions on asset prices. The narrator also touches on energy prices and government surveillance measures in the EU.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Gold is currently down, presenting a potential buying opportunity.</li>
+                            <li>The US cannot afford rate hikes or a prolonged costly war due to high debt levels.</li>
+                            <li>Gold is in a secular bull market despite recent sell-offs.</li>
+                            <li>Renewable energy mandates have contributed to higher electricity prices in the US and UK.</li>
+                            <li>New EU regulations will increase surveillance on citizens.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Tavi Costa, Adam Fired, Tola Wonga, Alex Cranmer, Lord Beebe</p>
+                        <p><strong>Organizations:</strong> Contrarian Capitalist, ZeroHedge, AG News, Institute of Energy Research</p>
+                        <p><strong>Topics:</strong> gold market, US debt, rate hikes, Middle East tensions, energy prices, surveillance</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The current market conditions present a golden opportunity for investors in gold and other commodities.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">OTHER<span class="topic-count">(1 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">AkkadDaily<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="N4zMOX8aJx4">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=N4zMOX8aJx4" target="_blank">Guess How I Know Nolan&#x27;s Odyssey is Terrible</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 13m 44s • @sargonofakkad • Jul 08, 2026 • 169,289 views • 8,805 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">The episode critiques the trailer for Christopher Nolan&#x27;s &#x27;The Odyssey&#x27; and discusses the overwhelming praise it has received from critics despite perceived flaws. The narrator expresses skepticism about the film&#x27;s quality based on the reactions and trends in Hollywood.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The trailer for &#x27;The Odyssey&#x27; is poorly edited and lacks genuine excitement.</li>
+                            <li>Critics are praising the film to align with cultural trends, despite its apparent flaws.</li>
+                            <li>The film&#x27;s early reviews suggest it may be a significant failure.</li>
+                            <li>Praise for the film lacks specificity and seems to mask its shortcomings.</li>
+                            <li>The film is criticized for promoting a feminist interpretation of the source material.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Christopher Nolan, Matt Damon, Robert Pattinson, Tom Holland, Anne Hathaway, Elliot Page, Emily Wilson</p>
+                        <p><strong>Organizations:</strong> The Guardian, Variety</p>
+                        <p><strong>Topics:</strong> film criticism, Nolan&#x27;s films, trailer analysis, Hollywood trends, cultural commentary</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The narrator believes &#x27;The Odyssey&#x27; will be a disappointing film despite the positive reviews.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <div class="footer">
+            Generated 2026-09-15 22:03:53
+        </div>
+    </div>
+    <div class="playlist-bar" id="plBar">
+        <span class="playlist-bar-msg"><span id="plCount">0</span> selected</span>
+        <button id="plBtn" type="button">Add to playlist</button>
+    </div>
+    <script src="assets/config.js"></script>
+    <script src="assets/playlist.js"></script>
+</body>
+</html>

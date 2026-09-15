@@ -157,6 +157,18 @@
             font-size: 12px;
             color: #66737D;
         }
+        .site-nav {
+            text-align: center;
+            margin-top: 12px;
+        }
+        .site-nav a {
+            color: #0D7680;
+            font-size: 14px;
+            text-decoration: none;
+        }
+        .site-nav a:hover {
+            text-decoration: underline;
+        }
         /* Collapsible sections */
         details {
             margin-bottom: 8px;
@@ -244,7 +256,72 @@
                 padding: 16px;
             }
         }
+        /* Add-to-playlist UI */
+        .snippet-card { position: relative; }
+        .snippet-check {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            margin: 0;
+            cursor: pointer;
+        }
+        .snippet-check input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .snippet-card.selected {
+            box-shadow: inset 4px 0 0 #0D7680;
+            background: #FFFCF8;
+        }
+        .snippet-status {
+            position: absolute;
+            top: 14px;
+            right: 40px;
+            font-size: 14px;
+            color: #66737D;
+            min-width: 90px;
+            text-align: right;
+        }
+        .snippet-status.ok { color: #0D7680; }
+        .snippet-status.err { color: #c0392b; }
+        .playlist-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #3E474F;
+            color: #FFF;
+            padding: 12px 24px;
+            z-index: 100;
+            display: none;
+            font-family: Georgia, "Times New Roman", serif;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.15);
+        }
+        .playlist-bar.visible {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+        .playlist-bar-msg { font-size: 15px; }
+        .playlist-bar button {
+            background: #0D7680;
+            color: #FFF;
+            border: 0;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-family: Georgia, "Times New Roman", serif;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .playlist-bar button:disabled {
+            background: #66737D;
+            cursor: not-allowed;
+        }
+        body.has-bar { padding-bottom: 80px; }
     </style>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
     <div class="container">
@@ -252,18 +329,21 @@
             <h1>Daily Snippets</h1>
             <div class="date">Sunday, April 26, 2026</div>
             <div class="meta">32 videos • uploaded 2026-04-26 • 32 videos</div>
+            <div class="site-nav"><a href="search.html">🔍 Search all snippets</a></div>
         </div>
         <details class="topic-details">
-            <summary class="topic-summary">POLITICS<span class="topic-count">(9 videos)</span></summary>
+            <summary class="topic-summary">POLITICS<span class="topic-count">(7 videos)</span></summary>
             <div class="topic-content">
                 <details class="channel-details">
                     <summary class="channel-summary">AkkadDaily<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="fMttD0aZvBA">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=fMttD0aZvBA" target="_blank">Even Our Right Wing is Left Wing</a>
                     </div>
-                    <div class="snippet-meta">monologue • 11m 47s • @SargonofAkkad • Apr 26, 2026 • 35,425 views • 2,397 likes</div>
+                    <div class="snippet-meta">monologue • 11m 47s • @sargonofakkad • Apr 26, 2026 • 35,425 views • 2,397 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">The episode critiques the promotion of woke feminism within British conservative media, particularly regarding women&#x27;s sexuality and relationships. It questions the implications of these narratives for future generations and traditional conservative values.</div>
                     <div class="snippet-claims">
@@ -290,11 +370,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">Con_Tomlinson<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="HWYzVRFe7pM">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=HWYzVRFe7pM" target="_blank">It&#x27;s Not Going To Work</a>
                     </div>
-                    <div class="snippet-meta">interview • 106m 36s • @Con_Tomlinson • Apr 26, 2026 • 21,626 views • 1,555 likes</div>
+                    <div class="snippet-meta">interview • 106m 36s • @con_tomlinson • Apr 26, 2026 • 21,626 views • 1,555 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Danny Krueger, Emma Webb Trimble</div>
                     <div class="snippet-summary">This episode features an interview between Danny Krueger and Emma Webb Trimble discussing the implications of demographic changes in the UK, the challenges of immigration, and the philosophical underpinnings of political ideologies. The conversation critiques the current political landscape and the responses of parties like Reform UK to these pressing issues.</div>
                     <div class="snippet-claims">
@@ -319,70 +401,15 @@
                     </div>
                 </details>
                 <details class="channel-details">
-                    <summary class="channel-summary">IgorYakovenko<span class="channel-count">(2 videos)</span></summary>
-                    <div class="channel-content">
-                <div class="snippet-card">
-                    <div class="snippet-title">
-                        <a href="https://www.youtube.com/watch?v=QpB_zLVhDdg" target="_blank">⚡️ЯКОВЕНКО:СОЛОВЬЕВ ТРЕБУЕТ ПРЕКРАТИТЬ ОТНОШЕНИЯ С ЕВРОПОЙ. РОССИЯ ИЩЕТ ОБХОДНЫЕ ТРОПЫ</a>
-                    </div>
-                    <div class="snippet-meta">monologue • 23m 37s • @igoryakovenko • Apr 26, 2026 • 1,457 views • 239 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
-                    <div class="snippet-summary">The episode discusses the implications of the latest sanctions package from the EU on Russia and the responses from Russian officials. It critiques the effectiveness of these sanctions and the rhetoric used by prominent figures like Vladimir Solovyov.</div>
-                    <div class="snippet-claims">
-                        <div class="snippet-claims-title">Key Claims:</div>
-                        <ul>
-                            <li>The 20th sanctions package from the EU is seen as ineffective and lacking in significant targets.</li>
-                            <li>Russia has adapted to previous sanctions and continues to find ways to circumvent them.</li>
-                            <li>The rhetoric from figures like Solovyov generates hatred and distracts from the real issues facing the Russian economy.</li>
-                            <li>Public sentiment in Russia is shifting, with increasing recognition of the war&#x27;s futility.</li>
-                            <li>Putin&#x27;s approval ratings are declining, indicating growing discontent among the populace.</li>
-                        </ul>
-                    </div>
-                    <div class="snippet-details">
-                        <p><strong>People:</strong> Владимир Соловьёв, Дмитрий Медведев, Мария Захарова, Эльвира Набиулина, Геннадий Зюганов</p>
-                        <p><strong>Organizations:</strong> Евросоюз, Центробанк</p>
-                        <p><strong>Topics:</strong> sanctions, Russia, Europe relations, political commentary, media influence</p>
-                    </div>
-                    <div class="snippet-conclusion">
-                        <strong>Conclusion:</strong> The ongoing sanctions struggle reflects a deeper crisis within Russia, exacerbated by ineffective leadership and public disillusionment.
-                    </div>
-                </div>
-                <div class="snippet-card">
-                    <div class="snippet-title">
-                        <a href="https://www.youtube.com/watch?v=MQj8KKf2acc" target="_blank">ИТОГИ НЕДЕЛИ-195. ГЛОБАЛЬНЫЙ КРИЗИС ПЕРЕГОВОРНОГО ЖАНРА</a>
-                    </div>
-                    <div class="snippet-meta">panel • 41m 42s • @igoryakovenko • Apr 26, 2026 • 22,151 views • 2,466 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Игорь Яковенко, Михаил Валентинович Сава</div>
-                    <div class="snippet-summary">В этом эпизоде обсуждаются текущие кризисы переговоров в контексте войны в Украине и ситуации в Иране, а также влияние блокировки интернета на общественное мнение в России. Спикеры анализируют, как эти факторы могут повлиять на политическую стабильность и протестные настроения.</div>
-                    <div class="snippet-claims">
-                        <div class="snippet-claims-title">Key Claims:</div>
-                        <ul>
-                            <li>Кризис переговорного процесса между Украиной и Россией является устойчивой тенденцией.</li>
-                            <li>Иран использует текущее перемирие для восстановления своего ракетного потенциала.</li>
-                            <li>Блокировка интернета в России вызывает недовольство среди различных социальных групп.</li>
-                            <li>Недовольство из-за блокировки интернета может стать катализатором протестов против режима Путина.</li>
-                            <li>Ситуация в Иране может ухудшиться из-за экономических проблем и внутреннего недовольства.</li>
-                        </ul>
-                    </div>
-                    <div class="snippet-details">
-                        <p><strong>People:</strong> Трамп, Зеленский, Путин, Виктория Боня, Зюганов</p>
-                        <p><strong>Organizations:</strong> None</p>
-                        <p><strong>Topics:</strong> глобальный кризис, переговоры, война в Украине, ситуация в Иране, интернет в России, протесты</p>
-                    </div>
-                    <div class="snippet-conclusion">
-                        <strong>Conclusion:</strong> Кризисы в переговорах и блокировка интернета могут привести к значительным изменениям в политической ситуации как в России, так и в Иране.
-                    </div>
-                </div>
-                    </div>
-                </details>
-                <details class="channel-details">
                     <summary class="channel-summary">LotuseatersDotCom<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="JGL8y6iDONc">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=JGL8y6iDONc" target="_blank">How Britain Fell Into the Pension Trap</a>
                     </div>
-                    <div class="snippet-meta">monologue • 11m 15s • @LotuseatersDotCom • Apr 26, 2026 • 2,594 views • 197 likes</div>
+                    <div class="snippet-meta">monologue • 11m 15s • @lotuseatersdotcom • Apr 26, 2026 • 2,594 views • 197 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">This episode discusses the implications of the pension triple lock in Britain, highlighting its benefits for retirees and the financial strain it places on younger generations. The narrator argues that the system is unsustainable and creates a wealth transfer from young people to older generations.</div>
                     <div class="snippet-claims">
@@ -409,11 +436,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">NewCultureForum<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="Hk9U9N7ruHM">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=Hk9U9N7ruHM" target="_blank">Google Privately Admitted to CHANGING Human Behaviour to Align with its Progressive Values</a>
                     </div>
-                    <div class="snippet-meta">interview • 65m 30s • @NewCultureForum • Apr 26, 2026 • 3,958 views • 375 likes</div>
+                    <div class="snippet-meta">interview • 65m 30s • @newcultureforum • Apr 26, 2026 • 3,958 views • 375 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Dr. Robert Epstein</div>
                     <div class="snippet-summary">In this episode, Dr. Robert Epstein discusses how Google manipulates voter behavior and opinions through its search engine and other platforms. He highlights the extensive surveillance capabilities of big tech and the potential dangers of AI.</div>
                     <div class="snippet-claims">
@@ -440,11 +469,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">ThePodcastoftheLotusEaters<span class="channel-count">(2 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="oBjZQ6PSFoQ">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=oBjZQ6PSFoQ" target="_blank">Please Stop Falling for This</a>
                     </div>
-                    <div class="snippet-meta">monologue • 18m 36s • @ThePodcastoftheLotusEaters • Apr 26, 2026 • 20,494 views • 1,174 likes</div>
+                    <div class="snippet-meta">monologue • 18m 36s • @thepodcastofthelotuseaters • Apr 26, 2026 • 20,494 views • 1,174 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">This episode discusses the rise of AI-generated influencers in political campaigns, particularly in the context of the upcoming midterm elections. It explores the implications of these fake personas on democracy and the potential for scams targeting conservative audiences.</div>
                     <div class="snippet-claims">
@@ -466,11 +497,13 @@
                         <strong>Conclusion:</strong> The use of AI in political influence campaigns is both a scam and a significant threat to democracy.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="5ZTgkwFBDio">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=5ZTgkwFBDio" target="_blank">Hasan Piker Says the Quiet Part Out Loud</a>
                     </div>
-                    <div class="snippet-meta">monologue • 31m 31s • @ThePodcastoftheLotusEaters • Apr 26, 2026 • 41,758 views • 2,156 likes</div>
+                    <div class="snippet-meta">monologue • 31m 31s • @thepodcastofthelotuseaters • Apr 26, 2026 • 41,758 views • 2,156 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">The episode critiques Hasan Piker&#x27;s controversial statements regarding social murder and theft as political protest. It discusses the implications of his rhetoric and the perceived normalization of violence within leftist discourse.</div>
                     <div class="snippet-claims">
@@ -497,7 +530,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">davidstarkeytalks<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="V_QZrLOv6n4">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=V_QZrLOv6n4" target="_blank">&quot;Is Starmer a truthful man?&quot; | David Starkey clashes with Labour&#x27;s Peter Edwards</a>
                     </div>
@@ -516,7 +551,7 @@
                         </ul>
                     </div>
                     <div class="snippet-details">
-                        <p><strong>People:</strong> Kier Starmer, Boris Johnson, Rachel Reeves, Jeremy Corbyn, Alistair Campbell, Lord Hurmer, Gus O&#x27;Donnell, David Cameron, Michael Gove, Chris Leslie, Max Sweeney</p>
+                        <p><strong>People:</strong> Keir Starmer, Boris Johnson, Rachel Reeves, Jeremy Corbyn, Alastair Campbell, Lord Hurmer, Gus O&#x27;Donnell, David Cameron, Michael Gove, Chris Leslie, Max Sweeney</p>
                         <p><strong>Organizations:</strong> None</p>
                         <p><strong>Topics:</strong> Labour Party, political leadership, truthfulness in politics, public service, socialism, economic policy, civil service</p>
                     </div>
@@ -534,11 +569,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">Finding_Finance<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="_zD1fXQ0pmQ">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=_zD1fXQ0pmQ" target="_blank">🚀 10X Potential: Asymmetric Homeruns in Commodities &amp; Metals!</a>
                     </div>
-                    <div class="snippet-meta">monologue • 31m 21s • @Finding_Finance • Apr 26, 2026 • 3,231 views • 261 likes</div>
+                    <div class="snippet-meta">monologue • 31m 21s • @finding_finance • Apr 26, 2026 • 3,231 views • 261 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Andy</div>
                     <div class="snippet-summary">In this episode, Andy discusses his investment strategies focusing on commodities and the potential for significant returns through asymmetric home runs. He shares insights on market trends, personal experiences, and the importance of patience in investing.</div>
                     <div class="snippet-claims">
@@ -565,11 +602,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">Monetary-Matters<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="i0ZE0RVbUwA">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=i0ZE0RVbUwA" target="_blank">Software Loans Are on Sale | Matthew Bloomfield of Palmer Square Capital Management</a>
                     </div>
-                    <div class="snippet-meta">interview • 74m 49s • @Monetary-Matters • Apr 26, 2026 • 1,461 views • 47 likes</div>
+                    <div class="snippet-meta">interview • 74m 49s • @monetary-matters • Apr 26, 2026 • 1,461 views • 47 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Matthew Bloomfield</div>
                     <div class="snippet-summary">In this episode, Matthew Bloomfield discusses the dynamics of the business development company (BDC) market, focusing on collateralized loan obligations (CLOs) and the impact of market volatility on credit risk. He provides insights into the performance of software loans and the broader implications for investors in the current economic environment.</div>
                     <div class="snippet-claims">
@@ -596,7 +635,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">Movchans<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="ou_TSCmVHjc">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=ou_TSCmVHjc" target="_blank">Is Cyprus Real Estate Worth Buying in 2026? An Honest Analysis</a>
                     </div>
@@ -625,13 +666,48 @@
                     </div>
                 </details>
                 <details class="channel-details">
+                    <summary class="channel-summary">OGJohnAGOfficial<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="OrG5Yybnvsk">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=OrG5Yybnvsk" target="_blank">Silver&#x27;s Monday Open Just Became Unpredictable — Trump Cancelled Iran Peace Talks</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 32m 20s • @ogjohnagofficial • Apr 26, 2026 • 15,819 views • 446 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses the unpredictable impact of the US president canceling the Iran peace talks on the silver market. It explores how geopolitical events can shift market dynamics and influence trading strategies.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The cancellation of the Iran peace talks will lead to an unpredictable Monday open for silver.</li>
+                            <li>Geopolitical tensions can elevate the risk premium for safe haven assets like silver.</li>
+                            <li>The relationship between the US and Iran affects global oil supply and, consequently, silver prices.</li>
+                            <li>Market reactions to geopolitical events often follow a recognizable pattern.</li>
+                            <li>Silver&#x27;s dual role as a safe haven and industrial commodity creates complex market dynamics.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> US president, Tehran</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> silver price, Iran peace talks, geopolitical risk, market reaction, safe haven assets</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The interplay between safe haven demand and industrial concerns will define silver&#x27;s price movement in the coming weeks.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
                     <summary class="channel-summary">OutlierTrading<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="6-xlQeiQWSg">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=6-xlQeiQWSg" target="_blank">Why Equal Dollar Trades Are a Mistake — Volatility Based Position Sizing Explained</a>
                     </div>
-                    <div class="snippet-meta">monologue • 11m 43s • @OutlierTrading • Apr 26, 2026 • 158 views • 16 likes</div>
+                    <div class="snippet-meta">monologue • 11m 43s • @outliertrading • Apr 26, 2026 • 158 views • 16 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">This episode discusses the importance of volatility in position sizing for trading equities like SPY and Tesla. It emphasizes that equal dollar trades can lead to significant differences in risk and potential profit and loss volatility.</div>
                     <div class="snippet-claims">
@@ -658,11 +734,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">SkoniecznyMariusz<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="weoFaDlDmTA">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=weoFaDlDmTA" target="_blank">Aduro Clean Tech - This is Their Biggest Problem</a>
                     </div>
-                    <div class="snippet-meta">monologue • 9m 24s • @SkoniecznyMariusz • Apr 26, 2026 • 36 views • 9 likes</div>
+                    <div class="snippet-meta">monologue • 9m 24s • @skoniecznymariusz • Apr 26, 2026 • 36 views • 9 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">This episode discusses the challenges faced by Aduro Clean Technologies in communicating their technology and business model to investors. The narrator highlights the confusion among shareholders regarding the company&#x27;s focus and the broader issues of plastic recycling.</div>
                     <div class="snippet-claims">
@@ -689,11 +767,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">TheAsianGuy-k9h<span class="channel-count">(2 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="aESqYLlwzOw">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=aESqYLlwzOw" target="_blank">The Hidden Silver Supplier Is Gone — $300 Price Target Is Now &quot;Very Likely,&quot; Says 40-Year Veteran</a>
                     </div>
-                    <div class="snippet-meta">monologue • 25m 56s • @THEASIANGUY-AG • Apr 26, 2026 • 1,612 views • 118 likes</div>
+                    <div class="snippet-meta">monologue • 25m 56s • @theasianguy-ag • Apr 26, 2026 • 1,612 views • 118 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Alistair Mloud</div>
                     <div class="snippet-summary">This episode discusses the significant changes in the global silver market due to China&#x27;s abrupt halt in silver exports and its shift to record imports. The speaker argues that these developments indicate a structural supply deficit and a potential surge in silver prices.</div>
                     <div class="snippet-claims">
@@ -716,11 +796,13 @@
                         <strong>Conclusion:</strong> The hidden supply of silver is gone, and the demand is accelerating, suggesting a significant price increase is imminent.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="fuq26R22_Mg">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=fuq26R22_Mg" target="_blank">The $7,000 Gold Case Just Got Stronger: Why Every Inflation Expert Is Looking Away</a>
                     </div>
-                    <div class="snippet-meta">monologue • 32m 37s • @THEASIANGUY-AG • Apr 26, 2026 • 738 views • 64 likes</div>
+                    <div class="snippet-meta">monologue • 32m 37s • @theasianguy-ag • Apr 26, 2026 • 738 views • 64 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">This episode discusses the underlying causes of inflation and the role of commercial banks in creating money supply, arguing that current narratives about inflation are fundamentally flawed. It emphasizes the importance of investing in gold and silver as a hedge against the impending inflationary pressures.</div>
                     <div class="snippet-claims">
@@ -747,7 +829,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">TheRealJustDario<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="0keRAtt_hbs">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=0keRAtt_hbs" target="_blank">AN OIL MARKET SIGNAL NOBODY IS PAYING ATTENTION TO, ESPECIALLY AI STOCKS INVESTORS</a>
                     </div>
@@ -778,7 +862,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">adam.taggart<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="rrl1LFHTsyI">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=rrl1LFHTsyI" target="_blank">How To Compound Your Investment Wealth | Peter Slegers</a>
                     </div>
@@ -810,7 +896,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">capitalcosm<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="MaEQ47qfcU4">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=MaEQ47qfcU4" target="_blank">🔴 White House Memo Just Said They&#x27;re About To Pump So Much Money Into Metals!</a>
                     </div>
@@ -841,7 +929,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">eurodollaruniversity<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="VxVfunbxBSU">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=VxVfunbxBSU" target="_blank">Texas Oil Insiders Just Gave DIRE Warning For What&#x27;s Coming</a>
                     </div>
@@ -873,7 +963,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">nobull-markettalkwithgeorg4907<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="RfWfOyBmYpw">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=RfWfOyBmYpw" target="_blank">Peter Boockvar | Nobody Special | Jeff Garbacz |  Ross Hendricks | No Bull George Noble.</a>
                     </div>
@@ -904,7 +996,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Harry_Dent<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="kkhMEZlVZ4I">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=kkhMEZlVZ4I" target="_blank">Harry Dent: The Biggest Crash in History Is Inevitable &amp; Likely Starts in 2026</a>
                     </div>
@@ -935,7 +1029,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Lyn_Alden<span class="channel-count">(2 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="QXOXQ8ogRV4">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=QXOXQ8ogRV4" target="_blank">Lyn Alden’s Warning: Why Bitcoin is breaking the 4-Year Cycle in 2026 (This Is Not 2020)</a>
                     </div>
@@ -961,7 +1057,9 @@
                         <strong>Conclusion:</strong> Bitcoin is neither a panacea nor a passing fad, but an evolving protocol that warrants deeper examination.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="EMtWqyx8HIo">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=EMtWqyx8HIo" target="_blank">What&#x27;s Coming Is Unimaginable — Lyn Alden &amp; Luke Gromen Final Warning To Prepare</a>
                     </div>
@@ -992,7 +1090,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Michael_Oliver<span class="channel-count">(2 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="QrPxwDtMCXk">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=QrPxwDtMCXk" target="_blank">Huge Silver Price ALERT! If You Own GOLD or SILVER, Watch This NOW   Bill Holter   Michael Oliver</a>
                     </div>
@@ -1019,7 +1119,9 @@
                         <strong>Conclusion:</strong> The silver market is entering a new reality driven by structural demand and monetary stress, leading to potential explosive price movements.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="2vwIMvfpq8U">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=2vwIMvfpq8U" target="_blank">STOP Everything!   If You Own SILVER, You Need to See THIS NOW!   Michael Oliver</a>
                     </div>
@@ -1048,13 +1150,15 @@
                     </div>
                 </details>
                 <details class="channel-details">
-                    <summary class="channel-summary">topic_Rick_Rule<span class="channel-count">(2 videos)</span></summary>
+                    <summary class="channel-summary">topic_Rick_Rule<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="kW3xgq6f6jo">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=kW3xgq6f6jo" target="_blank">Rick Rule on M&amp;A Synergies, Agnico’s Strategy, Lithium Risks, and Uranium’s Energy-Security Tailwind</a>
                     </div>
-                    <div class="snippet-meta">interview • 44m 0s • @MiningStockEdu • Apr 26, 2026 • 10,401 views • 420 likes</div>
+                    <div class="snippet-meta">interview • 44m 0s • @miningstockedu • Apr 26, 2026 • 10,401 views • 420 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Rick Rule, Brian Lenny</div>
                     <div class="snippet-summary">In this episode, Rick Rule shares insights on mergers and acquisitions in the mining sector, particularly focusing on uranium and lithium markets. He discusses the strategic moves of companies like Agnico and G Mining, as well as the implications for energy security and investment opportunities.</div>
                     <div class="snippet-claims">
@@ -1076,32 +1180,6 @@
                         <strong>Conclusion:</strong> The future of uranium and lithium markets will be shaped by strategic acquisitions and the need for energy security.
                     </div>
                 </div>
-                <div class="snippet-card">
-                    <div class="snippet-title">
-                        <a href="https://www.youtube.com/watch?v=2J1pM4fCO2Q" target="_blank">“Rick Rule Just Flipped His Q2 Silver Prediction — What Happens Next Will Shock You!”</a>
-                    </div>
-                    <div class="snippet-meta">interview • 15m 22s • @metalbrief • Apr 26, 2026 • 1,872 views • 41 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Rick Rule</div>
-                    <div class="snippet-summary">Rick Rule discusses his updated predictions for silver prices and the implications for various metals markets. He emphasizes the importance of understanding market dynamics and the potential for investment opportunities in precious metals.</div>
-                    <div class="snippet-claims">
-                        <div class="snippet-claims-title">Key Claims:</div>
-                        <ul>
-                            <li>Silver prices can lead to changes in industrial demand and substitution.</li>
-                            <li>Gold can maintain its purchasing power even as the US dollar loses value.</li>
-                            <li>Investors need to be prepared for volatility in precious metals markets.</li>
-                            <li>Acquisitions are necessary for mining companies to maintain or grow production.</li>
-                            <li>Copper supply will likely fall short of demand in the coming years.</li>
-                        </ul>
-                    </div>
-                    <div class="snippet-details">
-                        <p><strong>People:</strong> None</p>
-                        <p><strong>Organizations:</strong> Franco-Nevada, Wheaton Precious, Agnico Eagle, Newmont, Barrick, Kinross, Pan American</p>
-                        <p><strong>Topics:</strong> silver prediction, gold market, investment strategies, copper demand, platinum prices</p>
-                    </div>
-                    <div class="snippet-conclusion">
-                        <strong>Conclusion:</strong> Investment demand for metals is self-correcting via price, impacting industrial usage and market dynamics.
-                    </div>
-                </div>
                     </div>
                 </details>
             </div>
@@ -1110,13 +1188,15 @@
             <summary class="topic-summary">HEALTH<span class="topic-count">(1 videos)</span></summary>
             <div class="topic-content">
                 <details class="channel-details">
-                    <summary class="channel-summary">unknown<span class="channel-count">(1 videos)</span></summary>
+                    <summary class="channel-summary">DrSeanOMara<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="lB2kin13-8U">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
-                        <a href="" target="_blank">If I Started a Carnivore Diet in 2026, I&#x27;d Do This</a>
+                        <a href="https://www.youtube.com/watch?v=lB2kin13-8U" target="_blank">If I Started a Carnivore Diet in 2026, I&#x27;d Do This</a>
                     </div>
-                    <div class="snippet-meta">monologue • 15m 54s • @DrSeanOMara • Apr 26, 2026</div>
+                    <div class="snippet-meta">monologue • 15m 54s • @drseanomara • Apr 26, 2026 • 23,257 views • 1,542 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">In this episode, the speaker outlines a structured approach to starting a carnivore diet, emphasizing the importance of tracking health metrics and understanding different diet variations. The speaker shares personal experiences and practical tips for successfully adopting this diet.</div>
                     <div class="snippet-claims">
@@ -1143,12 +1223,14 @@
             </div>
         </details>
         <details class="topic-details">
-            <summary class="topic-summary">RUSSIA<span class="topic-count">(1 videos)</span></summary>
+            <summary class="topic-summary">RUSSIA<span class="topic-count">(3 videos)</span></summary>
             <div class="topic-content">
                 <details class="channel-details">
-                    <summary class="channel-summary">IgorYakovenko<span class="channel-count">(1 videos)</span></summary>
+                    <summary class="channel-summary">IgorYakovenko<span class="channel-count">(3 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="SWWSbBVMZd0">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=SWWSbBVMZd0" target="_blank">ДУМАЕМ ВМЕСТЕ С РОМАНОМ ЦИМБАЛЮКОМ</a>
                     </div>
@@ -1174,6 +1256,62 @@
                         <strong>Conclusion:</strong> The situation in Ukraine remains dire, but there is a growing belief that Russia will ultimately face significant consequences for its actions.
                     </div>
                 </div>
+                <div class="snippet-card" data-video-id="QpB_zLVhDdg">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=QpB_zLVhDdg" target="_blank">⚡️ЯКОВЕНКО:СОЛОВЬЕВ ТРЕБУЕТ ПРЕКРАТИТЬ ОТНОШЕНИЯ С ЕВРОПОЙ. РОССИЯ ИЩЕТ ОБХОДНЫЕ ТРОПЫ</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 23m 37s • @igoryakovenko • Apr 26, 2026 • 1,457 views • 239 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">The episode discusses the implications of the latest sanctions package from the EU on Russia and the responses from Russian officials. It critiques the effectiveness of these sanctions and the rhetoric used by prominent figures like Vladimir Solovyov.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The 20th sanctions package from the EU is seen as ineffective and lacking in significant targets.</li>
+                            <li>Russia has adapted to previous sanctions and continues to find ways to circumvent them.</li>
+                            <li>The rhetoric from figures like Solovyov generates hatred and distracts from the real issues facing the Russian economy.</li>
+                            <li>Public sentiment in Russia is shifting, with increasing recognition of the war&#x27;s futility.</li>
+                            <li>Putin&#x27;s approval ratings are declining, indicating growing discontent among the populace.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Владимир Соловьёв, Дмитрий Медведев, Мария Захарова, Эльвира Набиулина, Геннадий Зюганов</p>
+                        <p><strong>Organizations:</strong> Евросоюз, Центробанк</p>
+                        <p><strong>Topics:</strong> sanctions, Russia, Europe relations, political commentary, media influence</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The ongoing sanctions struggle reflects a deeper crisis within Russia, exacerbated by ineffective leadership and public disillusionment.
+                    </div>
+                </div>
+                <div class="snippet-card" data-video-id="MQj8KKf2acc">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=MQj8KKf2acc" target="_blank">ИТОГИ НЕДЕЛИ-195. ГЛОБАЛЬНЫЙ КРИЗИС ПЕРЕГОВОРНОГО ЖАНРА</a>
+                    </div>
+                    <div class="snippet-meta">panel • 41m 42s • @igoryakovenko • Apr 26, 2026 • 22,151 views • 2,466 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Игорь Яковенко, Михаил Савва</div>
+                    <div class="snippet-summary">В этом эпизоде обсуждаются текущие кризисы переговоров в контексте войны в Украине и ситуации в Иране, а также влияние блокировки интернета на общественное мнение в России. Спикеры анализируют, как эти факторы могут повлиять на политическую стабильность и протестные настроения.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Кризис переговорного процесса между Украиной и Россией является устойчивой тенденцией.</li>
+                            <li>Иран использует текущее перемирие для восстановления своего ракетного потенциала.</li>
+                            <li>Блокировка интернета в России вызывает недовольство среди различных социальных групп.</li>
+                            <li>Недовольство из-за блокировки интернета может стать катализатором протестов против режима Путина.</li>
+                            <li>Ситуация в Иране может ухудшиться из-за экономических проблем и внутреннего недовольства.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Трамп, Зеленский, Путин, Виктория Боня, Зюганов</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> глобальный кризис, переговоры, война в Украине, ситуация в Иране, интернет в России, протесты</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Кризисы в переговорах и блокировка интернета могут привести к значительным изменениям в политической ситуации как в России, так и в Иране.
+                    </div>
+                </div>
                     </div>
                 </details>
             </div>
@@ -1184,11 +1322,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">LotuseatersDotCom<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="h32g1Ww4XJg">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=h32g1Ww4XJg" target="_blank">The King Who Killed His Nephews</a>
                     </div>
-                    <div class="snippet-meta">monologue • 22m 58s • @LotuseatersDotCom • Apr 26, 2026 • 1,330 views • 134 likes</div>
+                    <div class="snippet-meta">monologue • 22m 58s • @lotuseatersdotcom • Apr 26, 2026 • 1,330 views • 134 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">This episode explores the historical events surrounding Richard III&#x27;s rise to power and the controversial narrative surrounding his actions. It discusses differing perspectives on his character and the legitimacy of his claim to the throne.</div>
                     <div class="snippet-claims">
@@ -1215,7 +1355,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">SpaceWeatherNewsS0s<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="66UwP-rpUwo">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=66UwP-rpUwo" target="_blank">Bad News: Pole Shift Still Getting Worse | S0 News Apr.26.2026</a>
                     </div>
@@ -1246,8 +1388,14 @@
             </div>
         </details>
         <div class="footer">
-            Generated 2026-05-03 06:52:29
+            Generated 2026-09-15 22:04:18
         </div>
     </div>
+    <div class="playlist-bar" id="plBar">
+        <span class="playlist-bar-msg"><span id="plCount">0</span> selected</span>
+        <button id="plBtn" type="button">Add to playlist</button>
+    </div>
+    <script src="assets/config.js"></script>
+    <script src="assets/playlist.js"></script>
 </body>
 </html>

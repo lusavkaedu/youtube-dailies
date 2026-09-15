@@ -157,6 +157,18 @@
             font-size: 12px;
             color: #66737D;
         }
+        .site-nav {
+            text-align: center;
+            margin-top: 12px;
+        }
+        .site-nav a {
+            color: #0D7680;
+            font-size: 14px;
+            text-decoration: none;
+        }
+        .site-nav a:hover {
+            text-decoration: underline;
+        }
         /* Collapsible sections */
         details {
             margin-bottom: 8px;
@@ -244,14 +256,80 @@
                 padding: 16px;
             }
         }
+        /* Add-to-playlist UI */
+        .snippet-card { position: relative; }
+        .snippet-check {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            margin: 0;
+            cursor: pointer;
+        }
+        .snippet-check input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .snippet-card.selected {
+            box-shadow: inset 4px 0 0 #0D7680;
+            background: #FFFCF8;
+        }
+        .snippet-status {
+            position: absolute;
+            top: 14px;
+            right: 40px;
+            font-size: 14px;
+            color: #66737D;
+            min-width: 90px;
+            text-align: right;
+        }
+        .snippet-status.ok { color: #0D7680; }
+        .snippet-status.err { color: #c0392b; }
+        .playlist-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #3E474F;
+            color: #FFF;
+            padding: 12px 24px;
+            z-index: 100;
+            display: none;
+            font-family: Georgia, "Times New Roman", serif;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.15);
+        }
+        .playlist-bar.visible {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+        .playlist-bar-msg { font-size: 15px; }
+        .playlist-bar button {
+            background: #0D7680;
+            color: #FFF;
+            border: 0;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-family: Georgia, "Times New Roman", serif;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .playlist-bar button:disabled {
+            background: #66737D;
+            cursor: not-allowed;
+        }
+        body.has-bar { padding-bottom: 80px; }
     </style>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>Daily Snippets</h1>
             <div class="date">Saturday, May 02, 2026</div>
-            <div class="meta">29 videos • uploaded 2026-05-02 • 29 videos</div>
+            <div class="meta">30 videos • uploaded 2026-05-02 • 30 videos</div>
+            <div class="site-nav"><a href="search.html">🔍 Search all snippets</a></div>
         </div>
         <details class="topic-details">
             <summary class="topic-summary">POLITICS<span class="topic-count">(5 videos)</span></summary>
@@ -259,11 +337,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">LotuseatersDotCom<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="Sd81rxdwu1w">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=Sd81rxdwu1w" target="_blank">What if King Charles III Was Based?</a>
                     </div>
-                    <div class="snippet-meta">monologue • 22m 37s • @LotuseatersDotCom • May 02, 2026 • 3,540 views • 261 likes</div>
+                    <div class="snippet-meta">monologue • 22m 37s • @lotuseatersdotcom • May 02, 2026 • 3,540 views • 261 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">This episode explores a fictional scenario where King Charles III grapples with the implications of a controversial press regulation bill while navigating familial and political tensions. The narrative delves into the balance of power between the monarchy and elected officials amidst a backdrop of public unrest.</div>
                     <div class="snippet-claims">
@@ -291,11 +371,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">TheJayMartinShow<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="FBRvk9s5kcs">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=FBRvk9s5kcs" target="_blank">The War in Iran: How It Will Actually Impact Your Wallet</a>
                     </div>
-                    <div class="snippet-meta">monologue • 22m 12s • @TheJayMartinShow • May 02, 2026 • 2,612 views • 183 likes</div>
+                    <div class="snippet-meta">monologue • 22m 12s • @thejaymartinshow • May 02, 2026 • 2,612 views • 183 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">This episode discusses how the ongoing war in Iran is affecting global supply chains and the prices of essential goods, including electronics and vehicles. It emphasizes the interconnectedness of the modern economy and the potential consequences of disruptions in key trade routes.</div>
                     <div class="snippet-claims">
@@ -322,11 +404,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">ThePodcastoftheLotusEaters<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="wvLq2soKEAE">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=wvLq2soKEAE" target="_blank">Scotland Will Never Have Its Freedom</a>
                     </div>
-                    <div class="snippet-meta">monologue • 23m 6s • @ThePodcastoftheLotusEaters • May 02, 2026 • 28,938 views • 1,563 likes</div>
+                    <div class="snippet-meta">monologue • 23m 6s • @thepodcastofthelotuseaters • May 02, 2026 • 28,938 views • 1,563 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">This episode discusses the current state of Scottish politics, focusing on the SNP&#x27;s potential majority and its implications for Scotland&#x27;s future. It highlights concerns over housing, immigration, and the party&#x27;s governance failures.</div>
                     <div class="snippet-claims">
@@ -353,7 +437,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">davidstarkeytalks<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="vDFvOWh6bvM">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=vDFvOWh6bvM" target="_blank">&quot;This is how Reform will SMASH the Blob&quot; | David Starkey Talks... to Danny Kruger</a>
                     </div>
@@ -373,7 +459,7 @@
                         </ul>
                     </div>
                     <div class="snippet-details">
-                        <p><strong>People:</strong> David Cameron, George Osborne, Boris Johnson, Gina Miller, Kier Starmer, Priti Patel, Margaret Thatcher, Rob Jenner, Kimmy</p>
+                        <p><strong>People:</strong> David Cameron, George Osborne, Boris Johnson, Gina Miller, Keir Starmer, Priti Patel, Margaret Thatcher, Rob Jenner, Kimmy</p>
                         <p><strong>Organizations:</strong> Conservative Party, Reform, European Union</p>
                         <p><strong>Topics:</strong> Conservative Party, Reform Party, Brexit, Parliamentary Sovereignty, Judicial Review, Immigration Policy, Economic Growth</p>
                     </div>
@@ -386,7 +472,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">winston_marshall<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="Vy7p7WZjpSA">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=Vy7p7WZjpSA" target="_blank">‘We’ve been lied to!’ Congresswoman Hageman Sounds The Alarm: SPLC, KKK claims and MASSIVE Fraud</a>
                     </div>
@@ -417,16 +505,18 @@
             </div>
         </details>
         <details class="topic-details">
-            <summary class="topic-summary">INVESTING<span class="topic-count">(16 videos)</span></summary>
+            <summary class="topic-summary">INVESTING<span class="topic-count">(17 videos)</span></summary>
             <div class="topic-content">
                 <details class="channel-details">
                     <summary class="channel-summary">ActionableIntelligenceAlert<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="0OXm9o1euZw">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=0OXm9o1euZw" target="_blank">Ag prices breaking out. Get ready for food inflation and possible famine. AIA Weekly Update 5.2.26</a>
                     </div>
-                    <div class="snippet-meta">monologue • 67m 12s • @ActionableIntelligenceAlert • May 02, 2026 • 1,946 views • 197 likes</div>
+                    <div class="snippet-meta">monologue • 67m 12s • @actionableintelligencealert • May 02, 2026 • 1,946 views • 197 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> John Polomny</div>
                     <div class="snippet-summary">In this episode, John Polomny discusses the rising agricultural prices and the potential for food inflation and famine due to the ongoing energy crisis. He emphasizes the interconnectedness of oil prices, economic stability, and the agricultural sector&#x27;s response to rising costs.</div>
                     <div class="snippet-claims">
@@ -453,11 +543,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">CommodityCulture<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="_LkL3ShpwXY">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=_LkL3ShpwXY" target="_blank">SILVER Price &#x27;HAS to Rise a LOT&#x27; - Previous Highs &#x27;Will Be Surpassed&#x27;: Clive Thompson</a>
                     </div>
-                    <div class="snippet-meta">interview • 44m 48s • @CommodityCulture • May 02, 2026 • 22,076 views • 1,029 likes</div>
+                    <div class="snippet-meta">interview • 44m 48s • @commodityculture • May 02, 2026 • 22,076 views • 1,029 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Jesse Day, Clive Thompson</div>
                     <div class="snippet-summary">In this episode, Clive Thompson discusses the future of silver and gold prices, the impact of geopolitical events on precious metals, and investment strategies for mining stocks. He emphasizes the importance of understanding market fundamentals and the potential for significant price increases in the commodities sector.</div>
                     <div class="snippet-claims">
@@ -484,11 +576,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">Finding_Finance<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="0249kQykaGs">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=0249kQykaGs" target="_blank">Inventories Are Collapsing: Don&#x27;t Get Caught On The Wrong Side</a>
                     </div>
-                    <div class="snippet-meta">monologue • 24m 46s • @Finding_Finance • May 02, 2026 • 2,812 views • 256 likes</div>
+                    <div class="snippet-meta">monologue • 24m 46s • @finding_finance • May 02, 2026 • 2,812 views • 256 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Andy</div>
                     <div class="snippet-summary">In this episode, Andy discusses investment strategies focusing on long-term wealth building and the current state of energy inventories. He emphasizes the importance of understanding market psychology and the risks associated with short-term trading.</div>
                     <div class="snippet-claims">
@@ -515,11 +609,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">Monetary-Matters<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="AP_n6waVkjI">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=AP_n6waVkjI" target="_blank">Why Fundamentals Don&#x27;t Work For &quot;New Economy&quot; Stocks | Jacob Pozharny</a>
                     </div>
-                    <div class="snippet-meta">interview • 83m 37s • @Monetary-Matters • May 02, 2026 • 799 views • 26 likes</div>
+                    <div class="snippet-meta">interview • 83m 37s • @monetary-matters • May 02, 2026 • 799 views • 26 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Jacob Pozharny</div>
                     <div class="snippet-summary">In this episode, Jacob Pozharny discusses the limitations of traditional fundamental analysis for new economy stocks and the importance of sentiment analysis in investment strategies. He explains how understanding intangible assets and market sentiment can provide a competitive edge in stock selection.</div>
                     <div class="snippet-claims">
@@ -544,13 +640,48 @@
                     </div>
                 </details>
                 <details class="channel-details">
+                    <summary class="channel-summary">OGJohnAGOfficial<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="KPhgGD8eeSs">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=KPhgGD8eeSs" target="_blank">If You’re Buying Silver — This Week Just Changed Everything</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 32m 21s • @ogjohnagofficial • May 02, 2026 • 15,774 views • 451 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses the recent events affecting the silver market, including Federal Reserve decisions, inflation data, and significant investments in AI infrastructure. It highlights the complex interplay of these factors and their implications for silver prices moving forward.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Silver closed this week at $75 per ounce, reflecting a complex week of market events.</li>
+                            <li>The Federal Reserve&#x27;s internal dissent signals uncertainty that could benefit hard assets like silver.</li>
+                            <li>Recent inflation data shows rising costs driven by energy, complicating the Fed&#x27;s rate decisions.</li>
+                            <li>AI infrastructure investments are significantly increasing demand for silver, which is essential for high-performance electronics.</li>
+                            <li>Japan&#x27;s currency intervention led to a weaker dollar, providing a temporary boost to silver prices.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Jerome Powell, Kevin Warsh</p>
+                        <p><strong>Organizations:</strong> Federal Reserve, Morgan Stanley, Oxford Economics, Meta, Alphabet, Microsoft, Amazon</p>
+                        <p><strong>Topics:</strong> silver price, Federal Reserve, inflation data, GDP growth, AI infrastructure, Japan intervention</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The silver market is currently influenced by both temporary pressures and growing structural demand, setting the stage for future price movements.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
                     <summary class="channel-summary">OutlierTrading<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="cZvaEVW7Yf4">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=cZvaEVW7Yf4" target="_blank">Option Leverage, Convexity, and Gamma | The Options Trench</a>
                     </div>
-                    <div class="snippet-meta">monologue • 46m 52s • @OutlierTrading • May 02, 2026 • 387 views • 34 likes</div>
+                    <div class="snippet-meta">monologue • 46m 52s • @outliertrading • May 02, 2026 • 387 views • 34 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator, Chris</div>
                     <div class="snippet-summary">This episode explores the concepts of leverage, convexity, and gamma in options trading, explaining how they affect profit and loss (P&amp;L). The hosts provide examples and insights into the non-linear nature of options and their implications for traders.</div>
                     <div class="snippet-claims">
@@ -577,11 +708,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">RealVisionFinance<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="AYyylU4_A04">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=AYyylU4_A04" target="_blank">Bitcoin, AI, and Trade Ideas: Real Vision Weekly Wrap</a>
                     </div>
-                    <div class="snippet-meta">monologue • 18m 10s • @RealVisionFinance • May 02, 2026 • 169 views • 8 likes</div>
+                    <div class="snippet-meta">monologue • 18m 10s • @realvisionfinance • May 02, 2026 • 169 views • 8 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Nico Brugge, Bijan Maleki</div>
                     <div class="snippet-summary">This episode discusses recent developments in Bitcoin and AI, along with trade ideas shared by community members. The hosts also highlight new features and reports that enhance community engagement and market understanding.</div>
                     <div class="snippet-claims">
@@ -608,11 +741,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">ResourceTalks<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="8rvffSzeljU">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=8rvffSzeljU" target="_blank">Gold Overbought, Uranium Underrated, Oil Going Back to $70 | Lance Roberts Interview</a>
                     </div>
-                    <div class="snippet-meta">interview • 42m 18s • @ResourceTalks • May 02, 2026 • 691 views</div>
+                    <div class="snippet-meta">interview • 42m 18s • @resourcetalks • May 02, 2026 • 691 views</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Lance Roberts, Mark</div>
                     <div class="snippet-summary">In this episode, Lance Roberts discusses the current state of oil markets, inflation, and investment strategies in light of recent economic developments. He emphasizes the importance of understanding market dynamics and managing risk in investment decisions.</div>
                     <div class="snippet-claims">
@@ -640,11 +775,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">SkoniecznyMariusz<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="bCUc_lJt6Rs">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=bCUc_lJt6Rs" target="_blank">He has owned Aduro Stock since before the IPO $ADUR</a>
                     </div>
-                    <div class="snippet-meta">interview • 54m 40s • @SkoniecznyMariusz • May 02, 2026 • 747 views • 72 likes</div>
+                    <div class="snippet-meta">interview • 54m 40s • @skoniecznymariusz • May 02, 2026 • 747 views • 72 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator, Yazan</div>
                     <div class="snippet-summary">This episode features a discussion about Aduro&#x27;s stock performance and its potential in the market, particularly in the fields of plastic recycling and oil upgrading. The speakers reflect on their investment journey and the significance of Aduro&#x27;s technology in addressing large-scale environmental issues.</div>
                     <div class="snippet-claims">
@@ -673,13 +810,15 @@
                 <details class="channel-details">
                     <summary class="channel-summary">WeStudyBillionaires<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="IBzSnyJ9z9M">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
-                        <a href="https://www.youtube.com/watch?v=IBzSnyJ9z9M" target="_blank">Mohnish Pabrai: Berkshire, Big Mistakes &amp; Letting Winners Run (TIP812)</a>
+                        <a href="https://www.youtube.com/watch?v=IBzSnyJ9z9M" target="_blank">Monish Pabrai: Berkshire, Big Mistakes &amp; Letting Winners Run (TIP812)</a>
                     </div>
-                    <div class="snippet-meta">interview • 62m 46s • @WeStudyBillionaires • May 02, 2026 • 2,841 views • 154 likes</div>
+                    <div class="snippet-meta">interview • 62m 46s • @westudybillionaires • May 02, 2026 • 2,841 views • 154 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Mohnish Pabrai</div>
-                    <div class="snippet-summary">In this episode, Mohnish Pabrai discusses the leadership transition at Berkshire Hathaway and shares insights on investment strategies and the importance of letting winners run. He reflects on past mistakes and the dynamics of CEO compensation within the company.</div>
+                    <div class="snippet-summary">In this episode, Monish Pabrai discusses the leadership transition at Berkshire Hathaway and shares insights on investment strategies and the importance of letting winners run. He reflects on past mistakes and the dynamics of CEO compensation within the company.</div>
                     <div class="snippet-claims">
                         <div class="snippet-claims-title">Key Claims:</div>
                         <ul>
@@ -704,7 +843,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">adam.taggart<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="QkLps6zelyk">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=QkLps6zelyk" target="_blank">Very Overbought Stock Market Ripe For A Pullback | Lance Roberts</a>
                     </div>
@@ -735,7 +876,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">capitalcosm<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="z-ZuUbDKkKY">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=z-ZuUbDKkKY" target="_blank">🔴 Economic Collapse Is Coming: Here&#x27;s The ONLY Thing To Do | Rob Kientz</a>
                     </div>
@@ -766,7 +909,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">eurodollaruniversity<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="AbLig2FUAxI">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=AbLig2FUAxI" target="_blank">You won’t Believe What the Japanese Central Bank Just Did</a>
                     </div>
@@ -797,7 +942,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">hedgeye<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="CVpb8MGKWOs">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=CVpb8MGKWOs" target="_blank">Hedgeye Investing Summit Spring 2026 | Josh Crumb &amp; Jeff Currie, Abaxx Technologies</a>
                     </div>
@@ -828,7 +975,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Jared_Dillian<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="oIz2zD3oJpM">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=oIz2zD3oJpM" target="_blank">Hormuz: Fertilizer Crisis with Brent Johnson, Tony Greer, Jared Dillian, and Alex Campbell</a>
                     </div>
@@ -859,7 +1008,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Jeremy_Grantham<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="bclbgIQCYBs">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=bclbgIQCYBs" target="_blank">💥Así estallará la mayor burbuja de este siglo según Jeremy Grantham</a>
                     </div>
@@ -891,7 +1042,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Jim_Cramer<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="yd5ubeTfIDw">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=yd5ubeTfIDw" target="_blank">Mad Money 05/01/26 | Audio Only</a>
                     </div>
@@ -927,7 +1080,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">IgorLipsits_1950<span class="channel-count">(2 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="qU8741mnTJs">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=qU8741mnTJs" target="_blank">ЛИПСИЦ: ИНТЕРВЬЮ ДЛЯ &quot;НОВОЙ ГАЗЕТЫ (ЕВРОПА)&quot; 30.04.2026</a>
                     </div>
@@ -954,7 +1109,9 @@
                         <strong>Conclusion:</strong> Экономическая ситуация в России критическая, и распад страны может стать реальностью, если не произойдут значительные изменения.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="-D_Asl-s7vY">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=-D_Asl-s7vY" target="_blank">ЛИПСИЦ: ИНТЕРВЬЮ АЛЕКСАНДРУ ДЕМЧЕНКО 30.04.2026</a>
                     </div>
@@ -985,7 +1142,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">IgorYakovenko<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="p6cG6DsMpfo">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=p6cG6DsMpfo" target="_blank">ДУМАЕМ ВМЕСТЕ С ЮРИЕМ ФЕДОРОВЫМ</a>
                     </div>
@@ -1003,7 +1162,7 @@
                         </ul>
                     </div>
                     <div class="snippet-details">
-                        <p><strong>People:</strong> Трамп, Кириенко, Игорь Владимирович Липсиц, Виктория Бони, Илья Ремесло, Алихамени</p>
+                        <p><strong>People:</strong> Трамп, Кириенко, Игорь Липсиц, Виктория Бони, Илья Ремесло, Алихамени</p>
                         <p><strong>Organizations:</strong> ЦИМ, ФСБ</p>
                         <p><strong>Topics:</strong> социология в России, рейтинг Путина, война в Украине, ситуация в Иране, нефтяная промышленность</p>
                     </div>
@@ -1016,11 +1175,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">V.Shenderovich<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="mpi7kHAt7p0">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=mpi7kHAt7p0" target="_blank">ШЕНДЕРОВИЧ*: ПЕРМЬ, ТУАПСЕ, ПАРАД, КОМФОРТ РОССИЙСКИХ ТЮРЕМ</a>
                     </div>
-                    <div class="snippet-meta">monologue • 55m 8s • @V.Shenderovich • May 02, 2026 • 12,418 views • 857 likes</div>
+                    <div class="snippet-meta">monologue • 55m 8s • @v.shenderovich • May 02, 2026 • 12,418 views • 857 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Виктор Шендерович</div>
                     <div class="snippet-summary">В этом выпуске обсуждаются актуальные события в России, включая ситуацию в Туапсе и предстоящий парад 9 мая. Также поднимаются темы плановой экономики и состояния свободы слова в стране.</div>
                     <div class="snippet-claims">
@@ -1052,11 +1213,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">AkkadDaily<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="OcAKW3pNw3A">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=OcAKW3pNw3A" target="_blank">Barber Shop Turf Wars</a>
                     </div>
-                    <div class="snippet-meta">monologue • 12m 32s • @SargonofAkkad • May 02, 2026 • 37,144 views • 3,087 likes</div>
+                    <div class="snippet-meta">monologue • 12m 32s • @sargonofakkad • May 02, 2026 • 37,144 views • 3,087 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">This episode discusses the alarming rise of turf wars among barbers in Britain, highlighting the underlying issues of gang violence and illegal activities. The narrator critiques the media&#x27;s delayed response to these problems and the government&#x27;s handling of illegal immigration.</div>
                     <div class="snippet-claims">
@@ -1083,7 +1246,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">SpaceWeatherNewsS0s<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="8Cs_dPytG1w">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=8Cs_dPytG1w" target="_blank">Observers Live #35 - POLE SHIFT WEEKEND</a>
                     </div>
@@ -1113,11 +1278,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">ThePodcastoftheLotusEaters<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="-_YtNq0urfw">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=-_YtNq0urfw" target="_blank">Evil Stalks the Land</a>
                     </div>
-                    <div class="snippet-meta">monologue • 18m 50s • @ThePodcastoftheLotusEaters • May 02, 2026 • 49,870 views • 3,689 likes</div>
+                    <div class="snippet-meta">monologue • 18m 50s • @thepodcastofthelotuseaters • May 02, 2026 • 49,870 views • 3,689 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
                     <div class="snippet-summary">The episode discusses the perceived rise of violent crimes associated with asylum seekers in Britain, emphasizing a narrative of fear and moral decay. The speaker critiques the political and social responses to these events, arguing for a more protective stance towards the native population.</div>
                     <div class="snippet-claims">
@@ -1144,7 +1311,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">triggerpod<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="5VsQZebkvaA">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=5VsQZebkvaA" target="_blank">Why Critical Thinking Is Dead - Warren Smith</a>
                     </div>
@@ -1175,8 +1344,14 @@
             </div>
         </details>
         <div class="footer">
-            Generated 2026-05-22 07:59:54
+            Generated 2026-09-15 22:04:16
         </div>
     </div>
+    <div class="playlist-bar" id="plBar">
+        <span class="playlist-bar-msg"><span id="plCount">0</span> selected</span>
+        <button id="plBtn" type="button">Add to playlist</button>
+    </div>
+    <script src="assets/config.js"></script>
+    <script src="assets/playlist.js"></script>
 </body>
 </html>

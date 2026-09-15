@@ -157,6 +157,18 @@
             font-size: 12px;
             color: #66737D;
         }
+        .site-nav {
+            text-align: center;
+            margin-top: 12px;
+        }
+        .site-nav a {
+            color: #0D7680;
+            font-size: 14px;
+            text-decoration: none;
+        }
+        .site-nav a:hover {
+            text-decoration: underline;
+        }
         /* Collapsible sections */
         details {
             margin-bottom: 8px;
@@ -244,14 +256,80 @@
                 padding: 16px;
             }
         }
+        /* Add-to-playlist UI */
+        .snippet-card { position: relative; }
+        .snippet-check {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            margin: 0;
+            cursor: pointer;
+        }
+        .snippet-check input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .snippet-card.selected {
+            box-shadow: inset 4px 0 0 #0D7680;
+            background: #FFFCF8;
+        }
+        .snippet-status {
+            position: absolute;
+            top: 14px;
+            right: 40px;
+            font-size: 14px;
+            color: #66737D;
+            min-width: 90px;
+            text-align: right;
+        }
+        .snippet-status.ok { color: #0D7680; }
+        .snippet-status.err { color: #c0392b; }
+        .playlist-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #3E474F;
+            color: #FFF;
+            padding: 12px 24px;
+            z-index: 100;
+            display: none;
+            font-family: Georgia, "Times New Roman", serif;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.15);
+        }
+        .playlist-bar.visible {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+        .playlist-bar-msg { font-size: 15px; }
+        .playlist-bar button {
+            background: #0D7680;
+            color: #FFF;
+            border: 0;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-family: Georgia, "Times New Roman", serif;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .playlist-bar button:disabled {
+            background: #66737D;
+            cursor: not-allowed;
+        }
+        body.has-bar { padding-bottom: 80px; }
     </style>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>Daily Snippets</h1>
             <div class="date">Wednesday, December 24, 2025</div>
-            <div class="meta">40 videos • uploaded 2025-12-24 • 40 videos</div>
+            <div class="meta">36 videos • uploaded 2025-12-24 • 36 videos</div>
+            <div class="site-nav"><a href="search.html">🔍 Search all snippets</a></div>
         </div>
         <details class="topic-details">
             <summary class="topic-summary">POLITICS<span class="topic-count">(5 videos)</span></summary>
@@ -259,11 +337,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">AkkadDaily<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="s7cQrbKAkdk">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=s7cQrbKAkdk" target="_blank">Merry Christmas, Eurocrats!</a>
                     </div>
-                    <div class="snippet-meta">monologue • 18m 23s • @SargonofAkkad • Dec 24, 2025 • 103,078 views • 10,081 likes</div>
+                    <div class="snippet-meta">monologue • 18m 23s • @sargonofakkad • Dec 24, 2025 • 103,078 views • 10,081 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> [unknown]</div>
                     <div class="snippet-summary">The episode discusses the Trump administration&#x27;s stance on the European Union and its bureaucratic practices, particularly regarding free speech and censorship. It highlights the tensions between American values and European regulations, especially in the context of social media and digital services.</div>
                     <div class="snippet-claims">
@@ -290,11 +370,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">LotuseatersDotCom<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="tg82vXr9cSw">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=tg82vXr9cSw" target="_blank">Why National Identity Is Replacing Liberal Consensus</a>
                     </div>
-                    <div class="snippet-meta">monologue • 13m 18s • @LotuseatersDotCom • Dec 24, 2025 • 4,519 views • 412 likes</div>
+                    <div class="snippet-meta">monologue • 13m 18s • @lotuseatersdotcom • Dec 24, 2025 • 4,519 views • 412 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Tucker Carlson, Fuentes, Dan</div>
                     <div class="snippet-summary">This episode discusses the shifting dynamics of national identity in the West and its implications for US foreign policy and domestic issues. It highlights the potential for an economic crisis to exacerbate tensions between national identity and liberal values.</div>
                     <div class="snippet-claims">
@@ -322,11 +404,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">Monetary-Matters<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="uE6U7SFZz-s">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=uE6U7SFZz-s" target="_blank">“Nothing Terrifies Chinese Policymakers More” | Former Chief U.S. Treasury Diplomat Jay Shambaugh</a>
                     </div>
-                    <div class="snippet-meta">interview • 82m 20s • @Monetary-Matters • Dec 24, 2025 • 3,112 views • 87 likes</div>
+                    <div class="snippet-meta">interview • 82m 20s • @monetary-matters • Dec 24, 2025 • 3,112 views • 87 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Jay Shambaugh</div>
                     <div class="snippet-summary">In this episode, former Chief U.S. Treasury Diplomat Jay Shambaugh discusses the challenges facing China&#x27;s economy and the implications of U.S. trade policies. He emphasizes the need for China to shift towards domestic consumption and the complexities of international economic relations.</div>
                     <div class="snippet-claims">
@@ -354,12 +438,14 @@
                 <details class="channel-details">
                     <summary class="channel-summary">ThePodcastoftheLotusEaters<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="HVu5AXI6ZE0">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=HVu5AXI6ZE0" target="_blank">Elections Are Dangerous to Our Democracy</a>
                     </div>
-                    <div class="snippet-meta">monologue • 56m 51s • @ThePodcastoftheLotusEaters • Dec 24, 2025 • 85,892 views • 4,274 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Unknown, Unknown</div>
+                    <div class="snippet-meta">monologue • 56m 51s • @thepodcastofthelotuseaters • Dec 24, 2025 • 85,892 views • 4,274 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Unknown</div>
                     <div class="snippet-summary">This episode discusses the decline of the Labour Party and the shifting dynamics in British politics, particularly focusing on recent local elections and polling trends. The speakers analyze the rise of the Reform Party and the implications for traditional political structures.</div>
                     <div class="snippet-claims">
                         <div class="snippet-claims-title">Key Claims:</div>
@@ -372,7 +458,7 @@
                         </ul>
                     </div>
                     <div class="snippet-details">
-                        <p><strong>People:</strong> Edward Gibbon, Martin Bell, Robert Lo, Nigel Farage, Kia Starmer, David Lammy, Lewis Goodall, Christina McNea, Zack Goldsmith, Neil Kinnock</p>
+                        <p><strong>People:</strong> Edward Gibbon, Martin Bell, Robert Lo, Nigel Farage, Keir Starmer, David Lammy, Lewis Goodall, Christina McNea, Zack Goldsmith, Neil Kinnock</p>
                         <p><strong>Organizations:</strong> None</p>
                         <p><strong>Topics:</strong> Labour Party decline, British politics, local elections, polling trends, reform party rise</p>
                     </div>
@@ -385,13 +471,15 @@
                 <details class="channel-details">
                     <summary class="channel-summary">triggerpod<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="1swPGLfi2_8">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
-                        <a href="https://www.youtube.com/watch?v=1swPGLfi2_8" target="_blank">Why Socialism Never Works - A Warning From Venezuela - Daniel Di Martino</a>
+                        <a href="https://www.youtube.com/watch?v=1swPGLfi2_8" target="_blank">Why Socialism Never Works - A Warning From Venezuela - Danielle DiMartino Booth</a>
                     </div>
                     <div class="snippet-meta">interview • 64m 56s • @triggerpod • Dec 24, 2025 • 55,793 views • 2,475 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Daniel Di Martino</div>
-                    <div class="snippet-summary">In this episode, Daniel Di Martino discusses the catastrophic effects of socialism in Venezuela, detailing the rise and fall of its economy under Hugo Chavez and Nicolas Maduro. He warns of the dangers of similar ideologies gaining traction in the United States and the implications for American society.</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Danielle DiMartino Booth</div>
+                    <div class="snippet-summary">In this episode, Danielle DiMartino Booth discusses the catastrophic effects of socialism in Venezuela, detailing the rise and fall of its economy under Hugo Chavez and Nicolas Maduro. He warns of the dangers of similar ideologies gaining traction in the United States and the implications for American society.</div>
                     <div class="snippet-claims">
                         <div class="snippet-claims-title">Key Claims:</div>
                         <ul>
@@ -418,16 +506,18 @@
             </div>
         </details>
         <details class="topic-details">
-            <summary class="topic-summary">INVESTING<span class="topic-count">(31 videos)</span></summary>
+            <summary class="topic-summary">INVESTING<span class="topic-count">(27 videos)</span></summary>
             <div class="topic-content">
                 <details class="channel-details">
                     <summary class="channel-summary">CommodityCulture<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="_r-dwEMn5mE">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=_r-dwEMn5mE" target="_blank">&#x27;I&#x27;d Be Amazed&#x27; If AI Bubble Doesn&#x27;t Burst in 2026 - &#x27;I&#x27;m SHORTING Nvidia&#x27;: Jack Gamble</a>
                     </div>
-                    <div class="snippet-meta">interview • 41m 51s • @CommodityCulture • Dec 24, 2025 • 5,858 views • 447 likes</div>
+                    <div class="snippet-meta">interview • 41m 51s • @commodityculture • Dec 24, 2025 • 5,858 views • 447 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Jack Gamble, Jesse Day</div>
                     <div class="snippet-summary">In this episode, Jack Gamble discusses the potential bursting of the AI bubble in 2026 and shares insights on the silver and gold markets. He also delves into the implications of recent bank failures and the overall economic landscape.</div>
                     <div class="snippet-claims">
@@ -454,11 +544,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">Finding_Finance<span class="channel-count">(2 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="YYlbK4CXFNY">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=YYlbK4CXFNY" target="_blank">Commodities Update: Technical Analysis: GOLD AND SILVER FLAT, PALLADIUM SELLING OFF</a>
                     </div>
-                    <div class="snippet-meta">monologue • 13m 16s • @Finding_Finance • Dec 24, 2025 • 1,644 views • 154 likes</div>
+                    <div class="snippet-meta">monologue • 13m 16s • @finding_finance • Dec 24, 2025 • 1,644 views • 154 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Andy</div>
                     <div class="snippet-summary">In this episode, Andy provides a daily technical analysis update on various commodities, focusing on precious metals like gold, silver, and palladium. He discusses market trends, yield movements, and potential investment opportunities.</div>
                     <div class="snippet-claims">
@@ -480,11 +572,13 @@
                         <strong>Conclusion:</strong> Overall, the commodities market is showing mixed signals, with some areas indicating potential upward movement while others face selling pressure.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="bzLfhzlAj00">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=bzLfhzlAj00" target="_blank">GOLD and SILVER Signaling Hyperinflation OR NOT, ZINC Coiled, PLATINUM Outperformance, DXY Weakness</a>
                     </div>
-                    <div class="snippet-meta">monologue • 22m 17s • @Finding_Finance • Dec 24, 2025 • 2,655 views • 236 likes</div>
+                    <div class="snippet-meta">monologue • 22m 17s • @finding_finance • Dec 24, 2025 • 2,655 views • 236 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Andy</div>
                     <div class="snippet-summary">In this episode, Andy discusses the potential for hyperinflation and its impact on precious metals like gold, silver, and platinum. He also explores investment opportunities in zinc and the broader commodities market.</div>
                     <div class="snippet-claims">
@@ -499,7 +593,7 @@
                         </ul>
                     </div>
                     <div class="snippet-details">
-                        <p><strong>People:</strong> David Baitman, Paulo Macro, Luke Roman</p>
+                        <p><strong>People:</strong> David Baitman, Paulo Macro, Luke Gromen</p>
                         <p><strong>Organizations:</strong> findingvalue.com</p>
                         <p><strong>Topics:</strong> gold and silver, hyperinflation, platinum performance, DXY weakness, zinc investment</p>
                     </div>
@@ -512,11 +606,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">ForwardGuidanceBW<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="MO4GB6b_k1Q">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=MO4GB6b_k1Q" target="_blank">Why This Isn’t A Bubble &amp; Early 2026 Looks Like Goldilocks | Warren Pies</a>
                     </div>
-                    <div class="snippet-meta">interview • 49m 45s • @ForwardGuidanceBW • Dec 24, 2025 • 7,015 views • 274 likes</div>
+                    <div class="snippet-meta">interview • 49m 45s • @forwardguidancebw • Dec 24, 2025 • 7,015 views • 274 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Warren Pies</div>
                     <div class="snippet-summary">In this episode, Warren Pies discusses his market predictions for early 2026, emphasizing a Goldilocks environment with stable growth and inflation. He reflects on the past year&#x27;s performance and the implications of monetary policy on various asset classes.</div>
                     <div class="snippet-claims">
@@ -541,14 +637,49 @@
                     </div>
                 </details>
                 <details class="channel-details">
+                    <summary class="channel-summary">LaDucTrading<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="HtxcRJoshRg">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=HtxcRJoshRg" target="_blank">What&#x27;s Next After Gold &amp; Silver Targets Hit</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 9m 44s • @laductrading • Dec 24, 2025 • 708 views • 25 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses the current state of gold and silver markets, emphasizing the importance of critical minerals and the impact of geopolitical factors on commodity trading. The narrator provides insights into market trends and price targets for various metals.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Gold and silver have advanced significantly, with silver showing parabolic movement.</li>
+                            <li>The trade war with China has benefited precious metal trades.</li>
+                            <li>Falling energy prices are positively impacting gold miners&#x27; profitability.</li>
+                            <li>Central banks are increasingly settling trade in gold rather than USD.</li>
+                            <li>Investor sentiment has shifted from apathy to strong appetite for mining stocks.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> George, Trump, Jose, Brian, Jeffrey, Tim</p>
+                        <p><strong>Organizations:</strong> Leuk Trading, Market Watch</p>
+                        <p><strong>Topics:</strong> gold and silver, precious metals, market analysis, inflation, commodities</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Gold has much more room to run despite being at all-time highs nominally.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
                     <summary class="channel-summary">MacroDirtCast<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="tSUnZIhptLk">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=tSUnZIhptLk" target="_blank">The Year-End Macro Dirt - A LOOK AHEAD</a>
                     </div>
-                    <div class="snippet-meta">monologue • 25m 16s • @MacroDirtCast • Dec 24, 2025 • 3,094 views • 231 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> JD, </div>
+                    <div class="snippet-meta">monologue • 25m 16s • @macrodirtcast • Dec 24, 2025 • 3,094 views • 231 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> JD</div>
                     <div class="snippet-summary">The episode discusses market predictions and investment strategies for 2026, focusing on AI, commodities, and potential economic trends. The speakers share their insights on various sectors and the implications of current market conditions.</div>
                     <div class="snippet-claims">
                         <div class="snippet-claims-title">Key Claims:</div>
@@ -574,11 +705,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">MacroVoices<span class="channel-count">(3 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="pYWYOVpjqNE">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=pYWYOVpjqNE" target="_blank">MacroVoices #512 David Rosenberg: Will The 2025’s K become 2026’s</a>
                     </div>
-                    <div class="snippet-meta">interview • 78m 22s • @MacroVoices • Dec 24, 2025 • 410 views • 14 likes</div>
+                    <div class="snippet-meta">interview • 78m 22s • @macrovoices • Dec 24, 2025 • 410 views • 14 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Eric Townsend, David Rosenberg</div>
                     <div class="snippet-summary">In this episode, economist David Rosenberg discusses the US economic outlook, potential Fed policy errors, and the implications of AI on the economy. He argues that inflation will likely decrease in 2026 and emphasizes the importance of the stock market and energy supply in shaping future economic conditions.</div>
                     <div class="snippet-claims">
@@ -601,11 +734,13 @@
                         <strong>Conclusion:</strong> The future economic landscape will heavily depend on stock market performance and energy supply, particularly in relation to AI advancements.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="1WKJvPMIc9A">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=1WKJvPMIc9A" target="_blank">Trade of The Week - MacroVoices #512</a>
                     </div>
-                    <div class="snippet-meta">monologue • 28m 9s • @MacroVoices • Dec 24, 2025 • 330 views • 13 likes</div>
+                    <div class="snippet-meta">monologue • 28m 9s • @macrovoices • Dec 24, 2025 • 330 views • 13 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Eric Townsend, Patrick Ceresna</div>
                     <div class="snippet-summary">In this episode, Eric Townsend and Patrick Ceresna discuss the implications of the Japanese yen&#x27;s revaluation, the future of AI investments, and the competitive landscape between the US and China regarding energy and technology. They also analyze the current state of the uranium market and its potential for growth.</div>
                     <div class="snippet-claims">
@@ -627,11 +762,13 @@
                         <strong>Conclusion:</strong> The US must urgently improve its energy infrastructure to compete effectively in the AI arms race.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="UdaCXxad7eU">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=UdaCXxad7eU" target="_blank">MacroVoices #512 David Rosenberg: Will The 2025’s K become 2026’s</a>
                     </div>
-                    <div class="snippet-meta">interview • 78m 22s • @MacroVoices • Dec 24, 2025 • 1,967 views • 69 likes</div>
+                    <div class="snippet-meta">interview • 78m 22s • @macrovoices • Dec 24, 2025 • 1,967 views • 69 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Eric Townsend, David Rosenberg</div>
                     <div class="snippet-summary">In this episode, economist David Rosenberg discusses the US economic outlook, potential Fed policy errors, and the implications of AI on the economy and stock market. He argues that the labor market&#x27;s cooling and inflation trends will significantly impact future economic conditions.</div>
                     <div class="snippet-claims">
@@ -660,13 +797,15 @@
                 <details class="channel-details">
                     <summary class="channel-summary">UraniumInsider<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="YcpJFFp6jU0">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=YcpJFFp6jU0" target="_blank">Uranium Market Minute – Episode 213: 2025 – Fueling the Next Move for URANIUM</a>
                     </div>
-                    <div class="snippet-meta">monologue • 27m 1s • @UraniumInsider • Dec 24, 2025 • 490 views • 62 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Justin Hune</div>
-                    <div class="snippet-summary">In this episode, Justin Hune reviews the uranium market&#x27;s performance in 2025, discussing significant life extensions of reactors and the financial demand impacting prices. He also highlights ongoing supply challenges and predicts a tightening market moving into 2026.</div>
+                    <div class="snippet-meta">monologue • 27m 1s • @uraniuminsider • Dec 24, 2025 • 490 views • 62 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Justin Huhn</div>
+                    <div class="snippet-summary">In this episode, Justin Huhn reviews the uranium market&#x27;s performance in 2025, discussing significant life extensions of reactors and the financial demand impacting prices. He also highlights ongoing supply challenges and predicts a tightening market moving into 2026.</div>
                     <div class="snippet-claims">
                         <div class="snippet-claims-title">Key Claims:</div>
                         <ul>
@@ -679,7 +818,7 @@
                     </div>
                     <div class="snippet-details">
                         <p><strong>People:</strong> None</p>
-                        <p><strong>Organizations:</strong> Uranium Insider, Goldman Sachs, McQuary, Nixis, Mercuria, City Bank, Kamico, Kazatam, Orano, BHP</p>
+                        <p><strong>Organizations:</strong> Uranium Insider, Goldman Sachs, Macquarie, Nixis, Mercuria, City Bank, Cameco, Kazatam, Orano, BHP</p>
                         <p><strong>Topics:</strong> uranium market, 2025 review, life extensions, financial demand, supply issues, price predictions</p>
                     </div>
                     <div class="snippet-conclusion">
@@ -691,12 +830,14 @@
                 <details class="channel-details">
                     <summary class="channel-summary">WTFinancepodcast<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="Yndjc4GHRRs">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=Yndjc4GHRRs" target="_blank">Supply Glut, OPEC+ Collapse &amp; Oil&#x27;s Next Move | Josh Young</a>
                     </div>
-                    <div class="snippet-meta">interview • 37m 51s • @WTFinancepodcast • Dec 24, 2025 • 2,008 views • 81 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Anthony Fatsis, Josh Young</div>
+                    <div class="snippet-meta">interview • 37m 51s • @wtfinancepodcast • Dec 24, 2025 • 2,008 views • 81 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Anthony Fauci, Josh Young</div>
                     <div class="snippet-summary">In this episode, Josh Young discusses the current state of the oil and gas markets, including OPEC&#x27;s production strategies and the impact of geopolitical events on supply. He also shares insights on investment opportunities in the energy sector and the future of oil prices.</div>
                     <div class="snippet-claims">
                         <div class="snippet-claims-title">Key Claims:</div>
@@ -722,11 +863,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">Wealthion<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="uCgPrbUROVc">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=uCgPrbUROVc" target="_blank">Wealthion’s Best Of 2025: Francis Hunt - The Financial Reset Has Begun</a>
                     </div>
-                    <div class="snippet-meta">interview • 68m 48s • @Wealthion • Dec 24, 2025 • 9,260 views • 375 likes</div>
+                    <div class="snippet-meta">interview • 68m 48s • @wealthion • Dec 24, 2025 • 9,260 views • 375 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Maggie Lake, Francis Hunt</div>
                     <div class="snippet-summary">In this episode, Francis Hunt discusses the ongoing financial reset and the implications of a debt-based collapse on global markets. He emphasizes the importance of investing in gold and other reserve assets as the traditional financial systems face unprecedented challenges.</div>
                     <div class="snippet-claims">
@@ -740,7 +883,7 @@
                         </ul>
                     </div>
                     <div class="snippet-details">
-                        <p><strong>People:</strong> Stanley Druckenmiller Miller, Paul Tuda Jones, Jamie Dimon, Paul Falker</p>
+                        <p><strong>People:</strong> Stanley Druckenmiller, Paul Tuda Jones, Jamie Dimon, Paul Falker</p>
                         <p><strong>Organizations:</strong> None</p>
                         <p><strong>Topics:</strong> debt collapse, financial reset, market volatility, gold investment, economic depression</p>
                     </div>
@@ -753,7 +896,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">arcadiaeconomics<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="cWtb8SbdPOg">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=cWtb8SbdPOg" target="_blank">Is It Time To Sell Your Physical Gold &amp; Silver</a>
                     </div>
@@ -784,7 +929,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">capitalcosm<span class="channel-count">(2 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="Y-gqYB1ew_Y">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=Y-gqYB1ew_Y" target="_blank">🔴 They&#x27;ve LOST CONTROL of Gold &amp; Silver Prices (and now PLATINUM too!)</a>
                     </div>
@@ -810,7 +957,9 @@
                         <strong>Conclusion:</strong> Investing in precious metals is becoming increasingly urgent as market dynamics shift.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="aT3BWvLf27s">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=aT3BWvLf27s" target="_blank">🔴 Gold &amp; Silver Price EXPLOSION is a Sign of Something BIG Coming | Bill Holter &amp; David Morgan</a>
                     </div>
@@ -841,7 +990,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">eurodollaruniversity<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="PpQfiU1rRYI">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=PpQfiU1rRYI" target="_blank">BREAKING: GDP Explodes Higher (Here&#x27;s What You Must Know)</a>
                     </div>
@@ -874,7 +1025,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">thecontrariancapitalist<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="rrlSExQ9Tyg">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=rrlSExQ9Tyg" target="_blank">$72 Silver, PGMs roar on. What next?</a>
                     </div>
@@ -903,9 +1056,11 @@
                     </div>
                 </details>
                 <details class="channel-details">
-                    <summary class="channel-summary">topic_Michael_Oliver<span class="channel-count">(9 videos)</span></summary>
+                    <summary class="channel-summary">topic_Michael_Oliver<span class="channel-count">(5 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="VU405I5FwCc">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=VU405I5FwCc" target="_blank">This Is No Normal Silver Bull Market | Michael Oliver</a>
                     </div>
@@ -932,60 +1087,9 @@
                         <strong>Conclusion:</strong> The silver market is entering a new phase that could lead to unprecedented price levels.
                     </div>
                 </div>
-                <div class="snippet-card">
-                    <div class="snippet-title">
-                        <a href="https://www.youtube.com/watch?v=YUoMW00mpVc" target="_blank">&quot;You Weren’t Supposed to See This — Silver Just Broke Free (The New Reality)&quot; | Michael Oliver</a>
-                    </div>
-                    <div class="snippet-meta">monologue • 17m 22s • @finemetalsofficial • Dec 24, 2025 • 1,462 views • 32 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Michael Oliver</div>
-                    <div class="snippet-summary">Michael Oliver discusses the potential for silver prices to dramatically increase as it breaks out of a long-standing price range. He emphasizes the implications of a fiat currency crisis and the shifting dynamics in the monetary metals market.</div>
-                    <div class="snippet-claims">
-                        <div class="snippet-claims-title">Key Claims:</div>
-                        <ul>
-                            <li>Silver is likely to reach between $200 and $500 in the next six months.</li>
-                            <li>Silver has broken out of its 50-year price range, indicating a new market reality.</li>
-                            <li>Gold is projected to reach $8,000 based on historical price movements.</li>
-                            <li>Retail investors are selling silver while institutional players are accumulating it.</li>
-                            <li>A fiat currency crisis is approaching, impacting the monetary metals market.</li>
-                        </ul>
-                    </div>
-                    <div class="snippet-details">
-                        <p><strong>People:</strong> None</p>
-                        <p><strong>Organizations:</strong> None</p>
-                        <p><strong>Topics:</strong> silver price prediction, market trends, gold vs silver, fiat currency crisis, investor behavior</p>
-                    </div>
-                    <div class="snippet-conclusion">
-                        <strong>Conclusion:</strong> The current market dynamics suggest a significant shift in the value of silver and gold amidst an impending fiat currency crisis.
-                    </div>
-                </div>
-                <div class="snippet-card">
-                    <div class="snippet-title">
-                        <a href="https://www.youtube.com/watch?v=eetscg1uqeA" target="_blank">“Huge Price Alert! You Don&#x27;t Know What&#x27;s About to Hit Silver in 2 WEEKS&quot; - Michael Oliver</a>
-                    </div>
-                    <div class="snippet-meta">monologue • 14m 13s • @themetal_mindset • Dec 24, 2025 • 1,938 views • 57 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Michael Oliver</div>
-                    <div class="snippet-summary">Michael Oliver discusses the potential for silver prices to reach $200 or higher within months, while also analyzing the ongoing structural advance in gold. He emphasizes the importance of relative performance between silver and gold, suggesting a significant shift in the monetary metals market.</div>
-                    <div class="snippet-claims">
-                        <div class="snippet-claims-title">Key Claims:</div>
-                        <ul>
-                            <li>Silver could reach $200 or higher within months.</li>
-                            <li>Gold is only halfway through a multi-year structural advance.</li>
-                            <li>Recent breakouts in silver and gold indicate a shift in market dynamics.</li>
-                            <li>The current market conditions are stronger than in previous decades.</li>
-                            <li>Historical surges in silver prices followed prolonged bases and decisive breakouts.</li>
-                            <li>The global fiat system is approaching a credibility crisis.</li>
-                        </ul>
-                    </div>
-                    <div class="snippet-details">
-                        <p><strong>People:</strong> None</p>
-                        <p><strong>Organizations:</strong> Momentum Structural Analysis</p>
-                        <p><strong>Topics:</strong> silver price prediction, gold market analysis, monetary metals, market dynamics, historical trends</p>
-                    </div>
-                    <div class="snippet-conclusion">
-                        <strong>Conclusion:</strong> Silver is likely to outperform gold in the coming months as it enters a new reality phase.
-                    </div>
-                </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="wOHp1xipwDk">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=wOHp1xipwDk" target="_blank">Silver Did This Before the Last Big Shift — It’s Happening Again | Michael Oliver</a>
                     </div>
@@ -1011,7 +1115,9 @@
                         <strong>Conclusion:</strong> The silver market is just beginning a significant upward movement, and investors should focus on silver and silver miners.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="JAS74O2Zec8">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=JAS74O2Zec8" target="_blank">Silberaktien | Goldaktien - Frohe Weihachten - und Michael Oliver sagt 200$ Silber voraus!</a>
                     </div>
@@ -1037,7 +1143,9 @@
                         <strong>Conclusion:</strong> Investing in gold and silver is crucial for navigating the upcoming economic challenges.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="JLFKLn12JFg">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=JLFKLn12JFg" target="_blank">2000% Silver Revaluation! This Is What Every Silver Stacker Should Do | Michael Oliver</a>
                     </div>
@@ -1063,59 +1171,9 @@
                         <strong>Conclusion:</strong> Silver is poised for a significant price increase, potentially reaching $200 or more in the near future.
                     </div>
                 </div>
-                <div class="snippet-card">
-                    <div class="snippet-title">
-                        <a href="https://www.youtube.com/watch?v=SEIYusJkjo0" target="_blank">Eight Days Left: Silver Just Forced Traders to Do the One Thing They Can’t | Michael Oliver</a>
-                    </div>
-                    <div class="snippet-meta">monologue • 12m 13s • @2dollarsinvesting • Dec 24, 2025 • 2,542 views • 83 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Michael Oliver</div>
-                    <div class="snippet-summary">In this episode, Michael Oliver discusses the potential for silver prices to quadruple in the near future, driven by market trends and historical patterns. He emphasizes the importance of understanding the current fiat currency crisis and its implications for precious metals.</div>
-                    <div class="snippet-claims">
-                        <div class="snippet-claims-title">Key Claims:</div>
-                        <ul>
-                            <li>Silver is likely to see a significant price increase, potentially reaching $200 within months.</li>
-                            <li>The breakout of silver against gold indicates a shift in market preference towards silver.</li>
-                            <li>Historical patterns show that silver has previously quadrupled in price during similar market conditions.</li>
-                            <li>The current fiat currency crisis is reaching a critical point that could impact precious metals.</li>
-                            <li>Investors should remain positioned in silver despite potential short-term fluctuations.</li>
-                        </ul>
-                    </div>
-                    <div class="snippet-details">
-                        <p><strong>People:</strong> None</p>
-                        <p><strong>Organizations:</strong> None</p>
-                        <p><strong>Topics:</strong> silver price prediction, gold vs silver, market trends, fiat currency crisis, historical analysis</p>
-                    </div>
-                    <div class="snippet-conclusion">
-                        <strong>Conclusion:</strong> Silver is poised for a major price increase as it breaks out of long-standing market patterns.
-                    </div>
-                </div>
-                <div class="snippet-card">
-                    <div class="snippet-title">
-                        <a href="https://www.youtube.com/watch?v=tytiCHoAT6c" target="_blank">&quot;How Many Ounces Of Silver Are You HOLDING?&quot;: Michael Oliver | Silver Prediction 2026</a>
-                    </div>
-                    <div class="snippet-meta">interview • 23m 7s • @wisemetalsinvestor • Dec 24, 2025 • 4,406 views • 114 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Michael Oliver</div>
-                    <div class="snippet-summary">In this episode, Michael Oliver discusses the future of silver prices and the potential for significant increases in value. He emphasizes the importance of understanding market dynamics and the historical context of silver&#x27;s performance relative to other assets.</div>
-                    <div class="snippet-claims">
-                        <div class="snippet-claims-title">Key Claims:</div>
-                        <ul>
-                            <li>Silver is likely to reach $200 within a few months.</li>
-                            <li>The relationship between silver and equities is changing, indicating a regime shift.</li>
-                            <li>Historical patterns show that silver often experiences significant price increases after long periods of stability.</li>
-                            <li>Investors should not expect normality in market behavior as silver breaks out of its long-standing range.</li>
-                            <li>The correlation between silver and stock market downturns is inconsistent and not guaranteed.</li>
-                        </ul>
-                    </div>
-                    <div class="snippet-details">
-                        <p><strong>People:</strong> None</p>
-                        <p><strong>Organizations:</strong> S&amp;P 500, Bloomberg</p>
-                        <p><strong>Topics:</strong> silver price prediction, market trends, economic downturn, investment strategy, gold vs silver</p>
-                    </div>
-                    <div class="snippet-conclusion">
-                        <strong>Conclusion:</strong> Silver&#x27;s breakout could lead to unprecedented price increases, challenging traditional investment assumptions.
-                    </div>
-                </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="jhh2htSZT54">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=jhh2htSZT54" target="_blank">Huge Silver Price ALERT! If You Own Gold &amp; Silver, Watch Now - Michael Oliver</a>
                     </div>
@@ -1144,9 +1202,11 @@
                     </div>
                 </details>
                 <details class="channel-details">
-                    <summary class="channel-summary">topic_Rick_Rule<span class="channel-count">(5 videos)</span></summary>
+                    <summary class="channel-summary">topic_Rick_Rule<span class="channel-count">(4 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="eQ6JoFcpiK0">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=eQ6JoFcpiK0" target="_blank">In it to Win it Live Stream Q&amp;A - Gold, Silver, Platinum, Oil</a>
                     </div>
@@ -1164,7 +1224,7 @@
                         </ul>
                     </div>
                     <div class="snippet-details">
-                        <p><strong>People:</strong> Dr. Hemp, Justin Hune, Rick, Barbara, Andrew, Eric, George, Dustin, Ronnie, William, Matt, Blaine, Kristoff, Chop Liver, Zamu</p>
+                        <p><strong>People:</strong> Dr. Hemp, Justin Huhn, Rick, Barbara, Andrew, Eric, George, Dustin, Ronnie, William, Matt, Blaine, Kristoff, Chop Liver, Zamu</p>
                         <p><strong>Organizations:</strong> Samsung, High Croft Mining, Kazatomprom</p>
                         <p><strong>Topics:</strong> gold market, silver market, platinum trends, oil investments, uranium speculation, natural gas outlook</p>
                     </div>
@@ -1172,7 +1232,9 @@
                         <strong>Conclusion:</strong> Investors should consider reallocating their portfolios into commodities like gold, silver, and oil as they are expected to outperform traditional equities.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="36nvXOc3tmA">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=36nvXOc3tmA" target="_blank">&quot;Nothing Will STOP $10,000 GOLD &amp; $200 SILVER in 2026&quot; - Jim Rickards</a>
                     </div>
@@ -1192,14 +1254,16 @@
                     </div>
                     <div class="snippet-details">
                         <p><strong>People:</strong> Georgia Maloney, Mario Draghi</p>
-                        <p><strong>Organizations:</strong> Bloomberg, JP Morgan</p>
+                        <p><strong>Organizations:</strong> Bloomberg, JPMorgan</p>
                         <p><strong>Topics:</strong> gold price prediction, silver price forecast, central bank buying, financial warfare, supply and demand</p>
                     </div>
                     <div class="snippet-conclusion">
                         <strong>Conclusion:</strong> Gold&#x27;s price is likely to accelerate as key psychological levels are breached, with silver following suit.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="UnTKZZglupQ">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=UnTKZZglupQ" target="_blank">&quot;If You Own SILVER, You Need to See THIS NOW!&quot;: Rick Rule | Silver Price 2025</a>
                     </div>
@@ -1225,34 +1289,9 @@
                         <strong>Conclusion:</strong> The world is facing a significant shift in energy and resource markets, with underinvestment leading to future supply challenges.
                     </div>
                 </div>
-                <div class="snippet-card">
-                    <div class="snippet-title">
-                        <a href="https://www.youtube.com/watch?v=oF1SLR7Ql7g" target="_blank">Something HUGE Just Triggered in Gold &amp; Silver — And They’re Hiding It | Rick Rule &amp; Jim Ricakrds</a>
-                    </div>
-                    <div class="snippet-meta">interview • 16m 13s • @themetal_mindset • Dec 24, 2025 • 2,287 views • 102 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Rick Rule, Jim Rickards</div>
-                    <div class="snippet-summary">In this episode, Rick Rule and Jim Rickards discuss the evolving role of gold and silver in the financial system, emphasizing the importance of owning these metals as both a store of value and a medium of exchange. They explore how technology is changing the dynamics of gold transactions and the implications for investors.</div>
-                    <div class="snippet-claims">
-                        <div class="snippet-claims-title">Key Claims:</div>
-                        <ul>
-                            <li>Gold is a must-own asset for preserving purchasing power.</li>
-                            <li>Digital tokens are reducing transaction costs for gold.</li>
-                            <li>China historically treated silver as a primary currency.</li>
-                            <li>The paper market for gold and silver is significantly larger than the physical supply.</li>
-                            <li>Gold could reach $10,000 an ounce by 2026.</li>
-                            <li>Silver prices could rise to $200 in the context of gold&#x27;s increase.</li>
-                        </ul>
-                    </div>
-                    <div class="snippet-details">
-                        <p><strong>People:</strong> Blle Masters, Mario Draghi, Georgia Maloney</p>
-                        <p><strong>Organizations:</strong> Tether, JP Morgan</p>
-                        <p><strong>Topics:</strong> gold investment, silver market, digital tokens, monetary system, China&#x27;s role</p>
-                    </div>
-                    <div class="snippet-conclusion">
-                        <strong>Conclusion:</strong> Gold and silver are regaining their roles as functional money in a changing financial landscape.
-                    </div>
-                </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="eKOvC5Ore74">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=eKOvC5Ore74" target="_blank">Unbelievable Price ALERT! If You Own GOLD &amp; SILVER, Watch This NOW | Rick Rule</a>
                     </div>
@@ -1283,11 +1322,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">triANGLEINVESTOR<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="Q2uWvMrM5Po">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=Q2uWvMrM5Po" target="_blank">American Uranium (ASX:AMU) 2026 Milestones: Resource Update, Infill Drilling &amp; Scoping Study Refresh</a>
                     </div>
-                    <div class="snippet-meta">interview • 21m 26s • @triANGLEINVESTOR • Dec 24, 2025 • 10 views • 3 likes</div>
+                    <div class="snippet-meta">interview • 21m 26s • @triangleinvestor • Dec 24, 2025 • 10 views • 3 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Lucy Anvalovich, Bruce Lane</div>
                     <div class="snippet-summary">This episode features an interview with Bruce Lane, executive director of American Uranium Limited, discussing the current state of the uranium market and the company&#x27;s plans for 2026. Key topics include resource updates, drilling results, and market sentiment.</div>
                     <div class="snippet-claims">
@@ -1302,7 +1343,7 @@
                     </div>
                     <div class="snippet-details">
                         <p><strong>People:</strong> None</p>
-                        <p><strong>Organizations:</strong> American Uranium Limited, Kamico, Department of Energy</p>
+                        <p><strong>Organizations:</strong> American Uranium Limited, Cameco, Department of Energy</p>
                         <p><strong>Topics:</strong> uranium market, company developments, 2026 milestones, resource update, infill drilling</p>
                     </div>
                     <div class="snippet-conclusion">
@@ -1319,13 +1360,15 @@
                 <details class="channel-details">
                     <summary class="channel-summary">IgorLipsits_1950<span class="channel-count">(2 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="CXWVGs88WLA">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
-                        <a href="https://www.youtube.com/watch?v=CXWVGs88WLA" target="_blank">Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Липсиц: ИНТЕРВЬЮ ЕВГЕНИЮ КИСЕЛЕВУ 22.12.2025</a>
+                        <a href="https://www.youtube.com/watch?v=CXWVGs88WLA" target="_blank">Игорь Липсиц: ИНТЕРВЬЮ ЕВГЕНИЮ КИСЕЛЕВУ 22.12.2025</a>
                     </div>
-                    <div class="snippet-meta">interview • 47m 50s • @IgorLipsits_1950 • Dec 24, 2025 • 4,780 views • 730 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Евгений Киселёв, Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Липсиц</div>
-                    <div class="snippet-summary">В этом интервью Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Липсиц обсуждает экономическую ситуацию в России в конце 2025 года, подчеркивая проблемы, связанные с бюджетным дефицитом и инфляцией. Он также рассматривает влияние войны на экономику и предсказывает ухудшение жизненных условий для граждан.</div>
+                    <div class="snippet-meta">interview • 47m 50s • @igorlipsits_1950 • Dec 24, 2025 • 4,780 views • 730 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Евгений Киселёв, Игорь Липсиц</div>
+                    <div class="snippet-summary">В этом интервью Игорь Липсиц обсуждает экономическую ситуацию в России в конце 2025 года, подчеркивая проблемы, связанные с бюджетным дефицитом и инфляцией. Он также рассматривает влияние войны на экономику и предсказывает ухудшение жизненных условий для граждан.</div>
                     <div class="snippet-claims">
                         <div class="snippet-claims-title">Key Claims:</div>
                         <ul>
@@ -1345,12 +1388,14 @@
                         <strong>Conclusion:</strong> Экономическая ситуация в России продолжает ухудшаться, и граждане сталкиваются с растущими трудностями.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="9qmvSvE0w_4">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
-                        <a href="https://www.youtube.com/watch?v=9qmvSvE0w_4" target="_blank">Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Липсиц: ИНТЕРВЬЮ ДЛЯ КАНАЛА &quot;DEUTSCHE WELLE&quot; 24.12.2025</a>
+                        <a href="https://www.youtube.com/watch?v=9qmvSvE0w_4" target="_blank">Игорь Липсиц: ИНТЕРВЬЮ ДЛЯ КАНАЛА &quot;DEUTSCHE WELLE&quot; 24.12.2025</a>
                     </div>
-                    <div class="snippet-meta">interview • 17m 13s • @IgorLipsits_1950 • Dec 24, 2025 • 18,729 views • 1,206 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Липсиц</div>
+                    <div class="snippet-meta">interview • 17m 13s • @igorlipsits_1950 • Dec 24, 2025 • 18,729 views • 1,206 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Игорь Липсиц</div>
                     <div class="snippet-summary">In this episode, economist Igor Lipsitz discusses the bleak outlook for the Russian economy in 2026, focusing on the impact of rising taxes and falling oil prices. He highlights the potential for increased delays in salary payments and pension distributions due to a shrinking budget.</div>
                     <div class="snippet-claims">
                         <div class="snippet-claims-title">Key Claims:</div>
@@ -1381,11 +1426,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">ThePodcastoftheLotusEaters<span class="channel-count">(2 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="YTQ403UEljc">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=YTQ403UEljc" target="_blank">The Top 5 Christmas Movies</a>
                     </div>
-                    <div class="snippet-meta">monologue • 39m 30s • @ThePodcastoftheLotusEaters • Dec 24, 2025 • 9,640 views • 556 likes</div>
+                    <div class="snippet-meta">monologue • 39m 30s • @thepodcastofthelotuseaters • Dec 24, 2025 • 9,640 views • 556 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> N/A</div>
                     <div class="snippet-summary">This episode discusses the top five Christmas movies, exploring their themes, cultural significance, and personal anecdotes related to each film. The speakers share their thoughts on what makes a movie a Christmas classic and recommend films to watch during the holiday season.</div>
                     <div class="snippet-claims">
@@ -1406,11 +1453,13 @@
                         <strong>Conclusion:</strong> These films, while varying in their direct connection to Christmas, embody the spirit and themes associated with the holiday season.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="Wjx7dD3EAYI">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=Wjx7dD3EAYI" target="_blank">Teaching Femi the Meaning of Per Capita (For Christmas)</a>
                     </div>
-                    <div class="snippet-meta">monologue • 21m 13s • @ThePodcastoftheLotusEaters • Dec 24, 2025 • 40,916 views • 2,345 likes</div>
+                    <div class="snippet-meta">monologue • 21m 13s • @thepodcastofthelotuseaters • Dec 24, 2025 • 40,916 views • 2,345 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> N/A</div>
                     <div class="snippet-summary">This episode discusses the implications of government initiatives aimed at addressing misogyny in schools and the influence of figures like Andrew Tate on young men. It also explores the concept of &#x27;per capita&#x27; in the context of crime statistics and societal perceptions.</div>
                     <div class="snippet-claims">
@@ -1424,7 +1473,7 @@
                         </ul>
                     </div>
                     <div class="snippet-details">
-                        <p><strong>People:</strong> Andrew Tate, Kier Starmer, David Lammy, Rupert Lowe, Femi Olow, Fraser Nelson, Ed Miliband, Owen Jones, Jess Phillips</p>
+                        <p><strong>People:</strong> Andrew Tate, Keir Starmer, David Lammy, Rupert Lowe, Femi Olow, Fraser Nelson, Ed Miliband, Owen Jones, Jess Phillips</p>
                         <p><strong>Organizations:</strong> None</p>
                         <p><strong>Topics:</strong> misogyny in schools, Andrew Tate influence, per capita explanation, role models for boys, government initiatives, racial crime statistics</p>
                     </div>
@@ -1437,8 +1486,14 @@
             </div>
         </details>
         <div class="footer">
-            Generated 2026-02-13 17:20:14
+            Generated 2026-09-15 22:04:58
         </div>
     </div>
+    <div class="playlist-bar" id="plBar">
+        <span class="playlist-bar-msg"><span id="plCount">0</span> selected</span>
+        <button id="plBtn" type="button">Add to playlist</button>
+    </div>
+    <script src="assets/config.js"></script>
+    <script src="assets/playlist.js"></script>
 </body>
 </html>

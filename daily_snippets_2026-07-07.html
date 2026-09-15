@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Snippets - 2026-07-07</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background-color: #FFF1E0;
+            color: #3E474F;
+            line-height: 1.6;
+            padding: 24px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            padding: 32px 0;
+            border-bottom: 3px solid #3E474F;
+            margin-bottom: 32px;
+        }
+        .header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .header .date {
+            font-size: 18px;
+            color: #66737D;
+        }
+        .header .meta {
+            font-size: 14px;
+            color: #66737D;
+            margin-top: 12px;
+        }
+        .topic-section {
+            margin-bottom: 40px;
+        }
+        .topic-title {
+            font-size: 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 0;
+            border-bottom: 2px solid #F2DFCE;
+            margin-bottom: 24px;
+            color: #3E474F;
+        }
+        .channel-section {
+            margin-bottom: 28px;
+        }
+        .channel-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            margin-bottom: 16px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .snippet-card {
+            background: #FFF9F5;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border-left: 4px solid #FCD0AF;
+        }
+        .snippet-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .snippet-title a {
+            color: #0D7680;
+            text-decoration: none;
+        }
+        .snippet-title a:hover {
+            text-decoration: underline;
+        }
+        .snippet-meta {
+            font-size: 13px;
+            color: #66737D;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+        .snippet-speakers {
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .snippet-speakers strong {
+            color: #3E474F;
+        }
+        .snippet-summary {
+            font-size: 15px;
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+        .snippet-claims {
+            margin-bottom: 16px;
+        }
+        .snippet-claims-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .snippet-claims ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .snippet-claims li {
+            font-size: 14px;
+            padding: 4px 0 4px 16px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .snippet-claims li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #0D7680;
+        }
+        .snippet-details {
+            font-size: 13px;
+            color: #66737D;
+            border-top: 1px solid #F2DFCE;
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+        .snippet-details p {
+            margin-bottom: 4px;
+        }
+        .snippet-conclusion {
+            font-size: 14px;
+            font-style: italic;
+            color: #3E474F;
+            background: #F2DFCE;
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 12px;
+        }
+        .footer {
+            text-align: center;
+            padding: 24px 0;
+            border-top: 1px solid #F2DFCE;
+            margin-top: 40px;
+            font-size: 12px;
+            color: #66737D;
+        }
+        .site-nav {
+            text-align: center;
+            margin-top: 12px;
+        }
+        .site-nav a {
+            color: #0D7680;
+            font-size: 14px;
+            text-decoration: none;
+        }
+        .site-nav a:hover {
+            text-decoration: underline;
+        }
+        /* Collapsible sections */
+        details {
+            margin-bottom: 8px;
+        }
+        details summary {
+            cursor: pointer;
+            list-style: none;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary::before {
+            content: "▶";
+            display: inline-block;
+            margin-right: 8px;
+            transition: transform 0.2s;
+            font-size: 12px;
+        }
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
+        .topic-details {
+            border: 1px solid #F2DFCE;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            background: #FFF9F5;
+        }
+        .topic-summary {
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 16px 20px;
+            color: #3E474F;
+            background: #F2DFCE;
+            border-radius: 8px;
+        }
+        .topic-details[open] .topic-summary {
+            border-radius: 8px 8px 0 0;
+        }
+        .topic-count {
+            font-size: 14px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .topic-content {
+            padding: 16px 20px;
+        }
+        .channel-details {
+            border: 1px solid #FCD0AF;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            background: white;
+        }
+        .channel-summary {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            padding: 12px 16px;
+            background: #FFF9F5;
+            border-radius: 6px;
+        }
+        .channel-details[open] .channel-summary {
+            border-radius: 6px 6px 0 0;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .channel-count {
+            font-size: 13px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .channel-content {
+            padding: 12px 16px;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 16px;
+            }
+            .header h1 {
+                font-size: 28px;
+            }
+            .snippet-card {
+                padding: 16px;
+            }
+        }
+        /* Add-to-playlist UI */
+        .snippet-card { position: relative; }
+        .snippet-check {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            margin: 0;
+            cursor: pointer;
+        }
+        .snippet-check input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .snippet-card.selected {
+            box-shadow: inset 4px 0 0 #0D7680;
+            background: #FFFCF8;
+        }
+        .snippet-status {
+            position: absolute;
+            top: 14px;
+            right: 40px;
+            font-size: 14px;
+            color: #66737D;
+            min-width: 90px;
+            text-align: right;
+        }
+        .snippet-status.ok { color: #0D7680; }
+        .snippet-status.err { color: #c0392b; }
+        .playlist-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #3E474F;
+            color: #FFF;
+            padding: 12px 24px;
+            z-index: 100;
+            display: none;
+            font-family: Georgia, "Times New Roman", serif;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.15);
+        }
+        .playlist-bar.visible {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+        .playlist-bar-msg { font-size: 15px; }
+        .playlist-bar button {
+            background: #0D7680;
+            color: #FFF;
+            border: 0;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-family: Georgia, "Times New Roman", serif;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .playlist-bar button:disabled {
+            background: #66737D;
+            cursor: not-allowed;
+        }
+        body.has-bar { padding-bottom: 80px; }
+    </style>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Daily Snippets</h1>
+            <div class="date">Tuesday, July 07, 2026</div>
+            <div class="meta">10 videos • uploaded 2026-07-07 • 10 videos</div>
+            <div class="site-nav"><a href="search.html">🔍 Search all snippets</a></div>
+        </div>
+        <details class="topic-details">
+            <summary class="topic-summary">POLITICS<span class="topic-count">(6 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">AkkadDaily<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="BVKGyhn5kng">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=BVKGyhn5kng" target="_blank">The Liberal Tiktokkers are Discovering Restore Britain</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 14m 36s • @sargonofakkad • Jul 07, 2026 • 212,610 views • 10,257 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses the emergence of the political group Restore Britain and their controversial views on immigration and human rights. The narrator critiques the current political landscape and the perceived failures of both conservative and liberal ideologies.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Restore Britain advocates for the forced removal of immigrants based on ethnic background.</li>
+                            <li>The Equality Act is seen as oppressive to straight white men.</li>
+                            <li>Dismantling the Human Rights Act would allow for the removal of foreigners in the UK.</li>
+                            <li>Restore Britain claims to have around 120,000 members, surpassing some established political parties.</li>
+                            <li>The narrator believes that a competitive society benefits straight white men and everyone else.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Boris Johnson, Tony Blair, Elon Musk, Rupert Lowe</p>
+                        <p><strong>Organizations:</strong> Hope Not Hate, Restore Britain</p>
+                        <p><strong>Topics:</strong> remigration, human rights, equality act, political ideology, Restore Britain</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The narrator supports the goals of Restore Britain, viewing them as a necessary response to current political issues.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">ThePodcastoftheLotusEaters<span class="channel-count">(4 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="El7kq4spmAc">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=El7kq4spmAc" target="_blank">France’s Judgement Day</a>
+                    </div>
+                    <div class="snippet-meta">panel • 16m 5s • @thepodcastofthelotuseaters • Jul 07, 2026 • 107,345 views • 4,913 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses the recent legal troubles of Marine Le Pen and their implications for the National Rally party in France. It also explores the current political landscape and potential candidates for the upcoming presidential election.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Marine Le Pen has lost her appeal and cannot run for president next year.</li>
+                            <li>She was found guilty of embezzlement related to party funds.</li>
+                            <li>Le Pen received a suspended sentence and a fine, and cannot run for office for five years.</li>
+                            <li>Jordan Bardella, her successor, polls better than Le Pen.</li>
+                            <li>The political landscape in France is fragmented with multiple parties on both the left and right.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Marine Le Pen, Nicholas Sturgeon, Macron, Zuma, Jean Marie Le Pen, Jordan Bardella</p>
+                        <p><strong>Organizations:</strong> European Parliament</p>
+                        <p><strong>Topics:</strong> Marine Le Pen&#x27;s appeal, French politics, National Rally, 2024 presidential election, political landscape in France</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The National Rally party is likely to remain strong despite Le Pen&#x27;s personal setbacks.
+                    </div>
+                </div>
+                <div class="snippet-card" data-video-id="anObw1qpQeg">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=anObw1qpQeg" target="_blank">Is Farage Finished?</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 30m 29s • @thepodcastofthelotuseaters • Jul 07, 2026 • 63,565 views • 2,758 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses the financial controversies surrounding Nigel Farage and the Reform party, particularly focusing on a significant donation from a crypto investor and the implications of a parliamentary investigation. The narrator explores the connections between Farage, his finances, and various political figures, raising questions about transparency and accountability in politics.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Nigel Farage is under investigation for failing to declare a £5 million gift from crypto investor Christopher Harborn.</li>
+                            <li>Critics allege that the donation may have been intended to secure political favors.</li>
+                            <li>Farage&#x27;s financial dealings have raised questions about his transparency and integrity as a politician.</li>
+                            <li>The Reform party has proposed crypto-friendly policies following the donation.</li>
+                            <li>Farage has denied any wrongdoing, claiming the donation was for security costs.</li>
+                            <li>Connections to convicted criminal George Swinfen Cotrol have further complicated Farage&#x27;s financial narrative.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Nigel Farage, Christopher Harborn, Boris Johnson, Rishi Sunak, George Swinfen Cotrol, Josh Barberind, Robert Jenrick, Andy Burnham, Keir Starmer</p>
+                        <p><strong>Organizations:</strong> Reform UK, Financial Times, Direct Bullion, GB News</p>
+                        <p><strong>Topics:</strong> Nigel Farage, political finances, crypto donations, parliamentary investigation, media bias</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The ongoing investigation into Farage&#x27;s finances could have significant repercussions for his political career and the Reform party.
+                    </div>
+                </div>
+                <div class="snippet-card" data-video-id="h_H08l2Gkc0">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=h_H08l2Gkc0" target="_blank">Give Them Death</a>
+                    </div>
+                    <div class="snippet-meta">panel • 29m 25s • @thepodcastofthelotuseaters • Jul 07, 2026 • 94,588 views • 4,719 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses the controversial ideas surrounding prison abolition and capital punishment, particularly in the context of modern political movements. The speakers debate the effectiveness of prisons and the implications of abolishing them in favor of alternative forms of punishment.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Prisons are seen by some as obsolete and ineffective in deterring crime.</li>
+                            <li>The left argues that economic inequality leads to crime, while others believe in personal responsibility.</li>
+                            <li>Short prison sentences may increase reoffending rates by exposing criminals to a network of crime.</li>
+                            <li>Some believe that capital punishment is a necessary deterrent for serious crimes.</li>
+                            <li>The discussion includes the idea that punishment should be more about moral justice than deterrence.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Mandani, AOC, Angela Davis, Carmelo Anthony, Sydney Silverman</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> prison abolition, capital punishment, criminal justice, Democratic Socialism, equality</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The speakers suggest that while prisons may not be the solution, alternative forms of punishment should be considered.
+                    </div>
+                </div>
+                <div class="snippet-card" data-video-id="udTzE1hW4zI">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=udTzE1hW4zI" target="_blank">Trump Just Changed the World Cup?!</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 65m 31s • @thepodcastofthelotuseaters • Jul 07, 2026 • 11,468 views • 1,240 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses Donald Trump&#x27;s involvement in the World Cup and the political implications of his actions regarding a red card suspension. It also touches on royal family news and media controversies.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Trump pressured FIFA to review a red card given to a USA player, leading to its suspension.</li>
+                            <li>Many in the football community criticized Trump&#x27;s interference as political.</li>
+                            <li>The episode highlights ongoing legal battles involving Prince Harry and the media.</li>
+                            <li>The narrator reflects on the state of media ethics and the treatment of public figures.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Donald Trump, Harry, Baroness Dorine Lawrence, David Furnish, Liz Hurley, Sadie Frost, Sir Simon Hughes, Nigel Farage, Aean Holmes, Hugh Edwards, Charlie Kirk</p>
+                        <p><strong>Organizations:</strong> FIFA, UEFA, Associated Newspapers</p>
+                        <p><strong>Topics:</strong> World Cup, Trump&#x27;s influence, football politics, royal family news, media ethics</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Trump&#x27;s involvement in football politics raises questions about the integrity of sports governance.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">pastukhov_kitchen<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="TiRJuNfM5zc">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=TiRJuNfM5zc" target="_blank">Зачем Путин жертвует нефтянкой; Россию возвращают в спорт; Теракт в Монако - Пастуховская Кухня</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 34m 50s • @pastukhov_kitchen • Jul 07, 2026 • 108,851 views • 6,995 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Пастухов</div>
+                    <div class="snippet-summary">В этом выпуске обсуждаются вопросы возвращения российских спортсменов в международные соревнования на фоне войны в Украине и политизации спорта. Также рассматриваются предложения о перемирии и их последствия для обеих сторон конфликта.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Международный олимпийский комитет рассматривает возможность возвращения российских спортсменов.</li>
+                            <li>Спорт стал политизироваться, что противоречит его изначальной концепции.</li>
+                            <li>Путин не может закончить войну без символа победы.</li>
+                            <li>Перемирие на условиях Зеленского будет воспринято как поражение для Путина.</li>
+                            <li>Мир полон конфликтов, и исключение стран из олимпийского движения не решает проблемы.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Путин, Зеленский</p>
+                        <p><strong>Organizations:</strong> Международный олимпийский комитет, FIFA</p>
+                        <p><strong>Topics:</strong> возвращение России в спорт, война в Украине, олимпийское движение, политизация спорта, перемирие</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Возвращение российских спортсменов возможно только при условии деполитизации спорта.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">INVESTING<span class="topic-count">(3 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">LaDucTrading<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="Yqduhfq2uFc">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=Yqduhfq2uFc" target="_blank">Rotation &amp; Mean Reversion In Semi Shorts</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 9m 27s • @laductrading • Jul 07, 2026 • 416 views • 22 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses the current state of the semiconductor market, focusing on sector rotation and short selling strategies. The speaker analyzes recent market movements and provides insights on specific stocks and ETFs.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Samsung&#x27;s disappointing performance has impacted the memory sector.</li>
+                            <li>SanDisk and Micron have been recommended as shorts, with significant price drops.</li>
+                            <li>The market is experiencing a rotation from semiconductors to hyperscalers.</li>
+                            <li>Earnings reports next week could influence market direction.</li>
+                            <li>The MAG7 ratio indicates potential sideways movement in the market.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> Samsung, SanDisk, Micron, SK Hynix, EWI, IGV</p>
+                        <p><strong>Topics:</strong> semiconductors, market trends, short selling, earnings, money flow</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The semiconductor market is not done falling and may experience more sideways movement before any significant recovery.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">OGJohnAGOfficial<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="7H7FCdxz4f8">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=7H7FCdxz4f8" target="_blank">China Just Triggered Silver&#x27;s Next Big Crash — Silver Down 14% (Silver Trading Ban?)</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 25m 51s • @ogjohnagofficial • Jul 07, 2026 • 1,848 views • 72 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses the recent crash in silver prices and the implications of China&#x27;s actions regarding precious metals trading. It explores the relationship between China&#x27;s banking decisions, retail investor impacts, and the broader market dynamics affecting silver and gold.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>ICBC and other major banks are permanently closing retail gold and silver trading accounts.</li>
+                            <li>China&#x27;s central bank is increasing its gold purchases while retail investors are being locked out.</li>
+                            <li>Silver&#x27;s price has dropped significantly due to margin hikes and supply chain disruptions.</li>
+                            <li>The sulfuric acid export ban from China is impacting silver production as it is a byproduct of copper mining.</li>
+                            <li>The Federal Reserve&#x27;s potential rate hikes could further affect silver prices negatively.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> John</p>
+                        <p><strong>Organizations:</strong> ICBC, Postal Savings Bank of China, Ping An Bank, China Guangfa Bank, CME Group, JP Morgan, Goldman Sachs, Bank of America, Silver Institute</p>
+                        <p><strong>Topics:</strong> silver market crash, China&#x27;s gold buying, retail trading ban, supply chain issues, economic indicators</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The removal of retail speculation may actually create a clearer market for silver, potentially leading to a price recovery.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">ResourceTalks<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="0yiCsbenX9E">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=0yiCsbenX9E" target="_blank">Big Salt Deposit, But Can They Get it Financed &amp; Built on Time? | Atlas Salt CEO Interview</a>
+                    </div>
+                    <div class="snippet-meta">interview • 100m 10s • @resourcetalks • Jul 07, 2026 • 1,689 views</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Nolan, unnamed narrator</div>
+                    <div class="snippet-summary">In this episode, Nolan, the CEO of Atlas Salt, discusses the company&#x27;s Great Atlantic Salt project, its financing challenges, and the strategic plans for development. The conversation covers the project&#x27;s potential, market dynamics, and Nolan&#x27;s background in the mining industry.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Atlas Salt&#x27;s Great Atlantic Salt project has probable reserves of 95 million tons.</li>
+                            <li>The company is currently working on securing project financing with Endeavor Financial.</li>
+                            <li>Nolan emphasizes the importance of building a strong capital markets profile for the company.</li>
+                            <li>The project aims for commercial production by 2030.</li>
+                            <li>Atlas Salt has a clean balance sheet with no long-term debt.</li>
+                            <li>The company is positioned to meet the growing demand for low-cost salt in North America.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Pat Larissy, Rick Leel, Roland How, Jeff Kilborn, Alistar, Michael Cahugus</p>
+                        <p><strong>Organizations:</strong> Atlas Salt, Tero Hutton, Hatch, Endeavor Financial, First Mining Gold, Vulcan Minerals, Compass Minerals, New Gold, SNC Lavalin</p>
+                        <p><strong>Topics:</strong> salt mining, financing, project development, market analysis, CEO insights</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Nolan is committed to advancing the Great Atlantic Salt project and believes in its potential for success.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">OTHER<span class="topic-count">(1 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">eurodollaruniversity<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="wMG9-0SZIXU">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=wMG9-0SZIXU" target="_blank">Walmart Is CUTTING Prices Because Consumers Are &quot;Out Of Money&quot;</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 19m 21s • @eurodollaruniversity • Jul 07, 2026 • 59,845 views • 2,272 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses Walmart&#x27;s decision to cut prices on thousands of items in response to a weakening consumer environment. It highlights the implications of these price cuts for the economy and inflation narrative.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Walmart is cutting prices due to a weak consumer environment.</li>
+                            <li>The labor market data shows significant job losses and declining employment.</li>
+                            <li>High gasoline prices are impacting consumer spending and purchasing power.</li>
+                            <li>Walmart&#x27;s price cuts indicate a lack of pricing power among retailers.</li>
+                            <li>The TIPS market is signaling weakening inflation pressure due to declining demand.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Jerome Powell, Kevin Warsh</p>
+                        <p><strong>Organizations:</strong> Walmart, Pepsi, Coca-Cola, Kroger, Augusta Precious Metals, Euro Dollar University, The Wall Street Journal, CBS, The New York Times</p>
+                        <p><strong>Topics:</strong> Walmart price cuts, consumer spending, inflation, labor market, gasoline prices, economic indicators</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Walmart&#x27;s price cuts are a critical macro signal indicating a shift from price shock to demand destruction in the economy.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <div class="footer">
+            Generated 2026-09-15 22:03:53
+        </div>
+    </div>
+    <div class="playlist-bar" id="plBar">
+        <span class="playlist-bar-msg"><span id="plCount">0</span> selected</span>
+        <button id="plBtn" type="button">Add to playlist</button>
+    </div>
+    <script src="assets/config.js"></script>
+    <script src="assets/playlist.js"></script>
+</body>
+</html>

@@ -157,6 +157,18 @@
             font-size: 12px;
             color: #66737D;
         }
+        .site-nav {
+            text-align: center;
+            margin-top: 12px;
+        }
+        .site-nav a {
+            color: #0D7680;
+            font-size: 14px;
+            text-decoration: none;
+        }
+        .site-nav a:hover {
+            text-decoration: underline;
+        }
         /* Collapsible sections */
         details {
             margin-bottom: 8px;
@@ -244,14 +256,80 @@
                 padding: 16px;
             }
         }
+        /* Add-to-playlist UI */
+        .snippet-card { position: relative; }
+        .snippet-check {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            margin: 0;
+            cursor: pointer;
+        }
+        .snippet-check input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .snippet-card.selected {
+            box-shadow: inset 4px 0 0 #0D7680;
+            background: #FFFCF8;
+        }
+        .snippet-status {
+            position: absolute;
+            top: 14px;
+            right: 40px;
+            font-size: 14px;
+            color: #66737D;
+            min-width: 90px;
+            text-align: right;
+        }
+        .snippet-status.ok { color: #0D7680; }
+        .snippet-status.err { color: #c0392b; }
+        .playlist-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #3E474F;
+            color: #FFF;
+            padding: 12px 24px;
+            z-index: 100;
+            display: none;
+            font-family: Georgia, "Times New Roman", serif;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.15);
+        }
+        .playlist-bar.visible {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+        .playlist-bar-msg { font-size: 15px; }
+        .playlist-bar button {
+            background: #0D7680;
+            color: #FFF;
+            border: 0;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-family: Georgia, "Times New Roman", serif;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .playlist-bar button:disabled {
+            background: #66737D;
+            cursor: not-allowed;
+        }
+        body.has-bar { padding-bottom: 80px; }
     </style>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>Daily Snippets</h1>
             <div class="date">Tuesday, January 06, 2026</div>
-            <div class="meta">36 videos • uploaded 2026-01-06 • 36 videos</div>
+            <div class="meta">34 videos • uploaded 2026-01-06 • 34 videos</div>
+            <div class="site-nav"><a href="search.html">🔍 Search all snippets</a></div>
         </div>
         <details class="topic-details">
             <summary class="topic-summary">POLITICS<span class="topic-count">(8 videos)</span></summary>
@@ -259,13 +337,15 @@
                 <details class="channel-details">
                     <summary class="channel-summary">AkkadDaily<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="Dm5E2rSgzzg">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=Dm5E2rSgzzg" target="_blank">Vivek Quits Social Media</a>
                     </div>
-                    <div class="snippet-meta">monologue • 13m 25s • @SargonofAkkad • Jan 06, 2026 • 115,598 views • 6,098 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Vivic Ramaswami</div>
-                    <div class="snippet-summary">The episode discusses Vivic Ramaswami&#x27;s decision to quit social media and the implications of social media on political representation and public opinion. It critiques the disconnect between online perceptions and real-world voter sentiments.</div>
+                    <div class="snippet-meta">monologue • 13m 25s • @sargonofakkad • Jan 06, 2026 • 115,598 views • 6,098 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Vivek Ramaswamy</div>
+                    <div class="snippet-summary">The episode discusses Vivek Ramaswamy decision to quit social media and the implications of social media on political representation and public opinion. It critiques the disconnect between online perceptions and real-world voter sentiments.</div>
                     <div class="snippet-claims">
                         <div class="snippet-claims-title">Key Claims:</div>
                         <ul>
@@ -290,11 +370,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">Con_Tomlinson<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="DBN5F0EspOY">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=DBN5F0EspOY" target="_blank">The Blank Slate is to Blame for Mass Migration and Hate Speech Laws</a>
                     </div>
-                    <div class="snippet-meta">monologue • 69m 29s • @Con_Tomlinson • Jan 06, 2026 • 2 likes</div>
+                    <div class="snippet-meta">monologue • 69m 29s • @con_tomlinson • Jan 06, 2026 • 2 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Elon Musk, Paola Ramos, Simona Malcolm Collins, Lewis Goodall, Yurum Hzone</div>
                     <div class="snippet-summary">This episode discusses the concept of the blank slate fallacy and its implications for mass migration and hate speech laws. It critiques the belief that all humans are fundamentally equal and explores how this ideology influences modern political discourse.</div>
                     <div class="snippet-claims">
@@ -320,13 +402,15 @@
                     </div>
                 </details>
                 <details class="channel-details">
-                    <summary class="channel-summary">ThePodcastoftheLotusEaters<span class="channel-count">(2 videos)</span></summary>
+                    <summary class="channel-summary">ThePodcastoftheLotusEaters<span class="channel-count">(3 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="_mRIcsHSDCg">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=_mRIcsHSDCg" target="_blank">The New Containment Method</a>
                     </div>
-                    <div class="snippet-meta">monologue • 25m 3s • @ThePodcastoftheLotusEaters • Jan 06, 2026 • 51,822 views • 2,760 likes</div>
+                    <div class="snippet-meta">monologue • 25m 3s • @thepodcastofthelotuseaters • Jan 06, 2026 • 51,822 views • 2,760 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Josh</div>
                     <div class="snippet-summary">This episode discusses the controversial case of Allah Abd El Fatar, who was granted British citizenship despite his inflammatory tweets against white people. The speakers critique the political and media responses to his case, highlighting perceived biases and the implications for immigration policy.</div>
                     <div class="snippet-claims">
@@ -348,11 +432,41 @@
                         <strong>Conclusion:</strong> The episode argues that the focus on anti-Semitism in Abd El Fatar&#x27;s case overshadows the more concerning anti-white rhetoric.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="4MBtZusfqrU">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=4MBtZusfqrU" target="_blank">Trump’s Plan to Buy Greenland | Tuesday 6th January 2026 | Breakfast With Beau</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 61m 40s • @thepodcastofthelotuseaters • Jan 06, 2026 • 28,294 views • 2,522 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses Trump&#x27;s controversial plans regarding Greenland and the ongoing legal troubles of Venezuelan leader Maduro. The narrator also touches on various political issues in the UK and the implications of these events on international relations.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Maduro claims he is a prisoner of war in a US court.</li>
+                            <li>Trump&#x27;s plans for Greenland could destabilize NATO.</li>
+                            <li>The UK is experiencing political turmoil with the sacking of the Manchester United manager.</li>
+                            <li>The NHS is undergoing reforms to fast track prostate diagnoses.</li>
+                            <li>Investors are reacting positively to the potential removal of Maduro.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Trump, Maduro, Saddam Hussein, Noriega, King Charles I, Elon Musk, Rubio, Karma, Nage, Starmer, Dylan Lindsay</p>
+                        <p><strong>Organizations:</strong> NATO, NHS</p>
+                        <p><strong>Topics:</strong> Trump&#x27;s Greenland plans, Maduro&#x27;s court case, UK politics, NHS reforms, Venezuelan economy</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The episode highlights the interconnectedness of global politics and the potential consequences of Trump&#x27;s actions on international relations.
+                    </div>
+                </div>
+                <div class="snippet-card" data-video-id="vRctM3bP5_U">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=vRctM3bP5_U" target="_blank">The Return of the Neocons</a>
                     </div>
-                    <div class="snippet-meta">monologue • 30m 21s • @ThePodcastoftheLotusEaters • Jan 06, 2026 • 29,179 views • 1,475 likes</div>
+                    <div class="snippet-meta">monologue • 30m 21s • @thepodcastofthelotuseaters • Jan 06, 2026 • 29,179 views • 1,475 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> N/A</div>
                     <div class="snippet-summary">This episode discusses the resurgence of neoconservative policies in US foreign affairs, particularly regarding Venezuela. It highlights the implications of regime change and the potential benefits for American investors and oligarchs.</div>
                     <div class="snippet-claims">
@@ -377,40 +491,11 @@
                     </div>
                 </details>
                 <details class="channel-details">
-                    <summary class="channel-summary">pastukhov_kitchen<span class="channel-count">(1 videos)</span></summary>
-                    <div class="channel-content">
-                <div class="snippet-card">
-                    <div class="snippet-title">
-                        <a href="https://www.youtube.com/watch?v=lx8Sfx_zEOE" target="_blank">Украине дали Гарантии. Ждать ли мира? Переживет ли НАТО Гренландию? Пастуховская Кухня</a>
-                    </div>
-                    <div class="snippet-meta">panel • 28m 52s • @pastukhov_kitchen • Jan 06, 2026 • 87,379 views • 4,855 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> N/A</div>
-                    <div class="snippet-summary">В этом эпизоде обсуждаются новые гарантии безопасности для Украины от европейских стран и их влияние на конфликт с Россией. Также рассматриваются возможные последствия для НАТО и роль Трампа в текущей политической ситуации.</div>
-                    <div class="snippet-claims">
-                        <div class="snippet-claims-title">Key Claims:</div>
-                        <ul>
-                            <li>Украина и Франция согласовали, что первой линией обороны станут 700,000 бойцов ВСУ.</li>
-                            <li>Франция и Великобритания готовы разместить свои войска в Украине после подписания мирного соглашения.</li>
-                            <li>Германия возьмет на себя ответственность за безопасность Украины и Европы.</li>
-                            <li>Трамп не присутствовал на мероприятии, что вызывает вопросы о его влиянии.</li>
-                            <li>Россия не согласится на перемирие при наличии иностранных войск на своей территории.</li>
-                        </ul>
-                    </div>
-                    <div class="snippet-details">
-                        <p><strong>People:</strong> Зеленский, Трамп, Мерц, Макрон</p>
-                        <p><strong>Organizations:</strong> НАТО, США, Франция, Великобритания, Германия</p>
-                        <p><strong>Topics:</strong> гарантии безопасности, война в Украине, отношения с Россией, вмешательство НАТО, мирные соглашения</p>
-                    </div>
-                    <div class="snippet-conclusion">
-                        <strong>Conclusion:</strong> Декларации о безопасности не подкреплены реальными рычагами давления на Путина, что делает их маловероятными для реализации.
-                    </div>
-                </div>
-                    </div>
-                </details>
-                <details class="channel-details">
                     <summary class="channel-summary">topic_Doomberg<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="mwgwJXZg4hY">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=mwgwJXZg4hY" target="_blank">Might Makes Right: Global Consequences (CLIP)- Doomberg</a>
                     </div>
@@ -439,15 +524,17 @@
                     </div>
                 </details>
                 <details class="channel-details">
-                    <summary class="channel-summary">unknown<span class="channel-count">(1 videos)</span></summary>
+                    <summary class="channel-summary">topic_Louis_Vincent_Gave<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="viWVFO7lyRE">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
-                        <a href="" target="_blank">Taiwan, TSMC, Chips Are Not The Key To The Tech War! Louis Louis Louis Vincent Gave Gave Gave On the US–China Tech War｜China｜USA</a>
+                        <a href="https://www.youtube.com/watch?v=viWVFO7lyRE" target="_blank">Taiwan, TSMC, Chips Are Not The Key To The Tech War! Louis Vincent Gave On the US–China Tech War｜China｜USA</a>
                     </div>
-                    <div class="snippet-meta">interview • 31m 29s • Jan 06, 2026</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Louis Louis Louis Vincent Gave Gave Gave</div>
-                    <div class="snippet-summary">In this episode, Louis Louis Louis Vincent Gave Gave Gave discusses the evolving dynamics of the US-China tech war, emphasizing that chips and Taiwan are not the central issues. He argues that China&#x27;s industrial capacity has significantly advanced, often unnoticed by the West.</div>
+                    <div class="snippet-meta">interview • 31m 29s • @asiapacificreview • Jan 06, 2026 • 7,962 views • 226 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Louis-Vincent Gave</div>
+                    <div class="snippet-summary">In this episode, Louis Vincent Gave discusses the evolving dynamics of the US-China tech war, emphasizing that chips and Taiwan are not the central issues. He argues that China&#x27;s industrial capacity has significantly advanced, often unnoticed by the West.</div>
                     <div class="snippet-claims">
                         <div class="snippet-claims-title">Key Claims:</div>
                         <ul>
@@ -472,7 +559,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">winston_marshall<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="etMQpJ5J0Ek">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=etMQpJ5J0Ek" target="_blank">The Inconvenient Truth About Reparations and the Slave Trade</a>
                     </div>
@@ -504,16 +593,18 @@
             </div>
         </details>
         <details class="topic-details">
-            <summary class="topic-summary">INVESTING<span class="topic-count">(27 videos)</span></summary>
+            <summary class="topic-summary">INVESTING<span class="topic-count">(24 videos)</span></summary>
             <div class="topic-content">
                 <details class="channel-details">
                     <summary class="channel-summary">CommodityCulture<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="iZvD73txgSo">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=iZvD73txgSo" target="_blank">&#x27;The Consumer is Dead&#x27; - Economy &#x27;Way Worse&#x27; Than Most Understand: Melody Wright</a>
                     </div>
-                    <div class="snippet-meta">interview • 36m 40s • @CommodityCulture • Jan 06, 2026 • 34,078 views • 1,418 likes</div>
+                    <div class="snippet-meta">interview • 36m 40s • @commodityculture • Jan 06, 2026 • 34,078 views • 1,418 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Melody Wright</div>
                     <div class="snippet-summary">In this episode, Melody Wright discusses the dire state of the US economy and housing market, highlighting issues such as fraud and consumer debt. She also explores potential opportunities amidst economic challenges and the implications of recent geopolitical events.</div>
                     <div class="snippet-claims">
@@ -541,11 +632,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">Finding_Finance<span class="channel-count">(2 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="mV8MutHVIKY">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=mV8MutHVIKY" target="_blank">Commodities Update: Technical Analysis: GODZILLA CANDLESTICK IN NICKEL, SILVER AND PLATINUM RACING</a>
                     </div>
-                    <div class="snippet-meta">monologue • 17m 15s • @Finding_Finance • Jan 06, 2026 • 3,342 views • 304 likes</div>
+                    <div class="snippet-meta">monologue • 17m 15s • @finding_finance • Jan 06, 2026 • 3,342 views • 304 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Andy</div>
                     <div class="snippet-summary">In this episode, Andy provides a technical analysis of various commodities, including nickel, silver, and platinum, while discussing market trends and investment opportunities. He shares insights on price movements and patterns in the commodities market.</div>
                     <div class="snippet-claims">
@@ -568,11 +661,13 @@
                         <strong>Conclusion:</strong> The commodities market is in a bullish phase, with several metals showing strong upward momentum.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="7YwY1veEL2U">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=7YwY1veEL2U" target="_blank">URGENT: Copper Is Exploding &amp; Energy Is Squeezing! (Gold Alert)</a>
                     </div>
-                    <div class="snippet-meta">monologue • 29m 51s • @Finding_Finance • Jan 06, 2026 • 4,473 views • 388 likes</div>
+                    <div class="snippet-meta">monologue • 29m 51s • @finding_finance • Jan 06, 2026 • 4,473 views • 388 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Andy</div>
                     <div class="snippet-summary">In this episode, Andy discusses the current trends in commodities, particularly focusing on copper and energy stocks, while sharing his investment strategies. He emphasizes the importance of understanding market cycles and technical analysis for successful investing.</div>
                     <div class="snippet-claims">
@@ -599,11 +694,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">Wealthion<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="ltSykNqlnBI">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=ltSykNqlnBI" target="_blank">Jonathan Wellum: AI Valuations, U.S. Growth &amp; Why Gold Still Wins in 2026</a>
                     </div>
-                    <div class="snippet-meta">interview • 41m 5s • @Wealthion • Jan 06, 2026 • 1,204 views • 39 likes</div>
+                    <div class="snippet-meta">interview • 41m 5s • @wealthion • Jan 06, 2026 • 1,204 views • 39 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Jonathan Wellum</div>
                     <div class="snippet-summary">In this episode, Jonathan Wellum discusses the impact of AI on market valuations, the performance of gold and silver, and the contrasting economic outlooks for the U.S. and Canada. He emphasizes the importance of value investing and the potential for growth in various sectors despite current economic challenges.</div>
                     <div class="snippet-claims">
@@ -630,7 +727,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">adam.taggart<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="l86zUCh5FOg">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=l86zUCh5FOg" target="_blank">This Fourth Turning&#x27;s Market Crash Risks Are &#x27;Exceptional&#x27; | Neil Howe</a>
                     </div>
@@ -661,7 +760,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">arcadiaeconomics<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="NhK1bHEeDxM">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=NhK1bHEeDxM" target="_blank">UBS: Silver To $85, With $100+ Upside</a>
                     </div>
@@ -692,7 +793,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">capitalcosm<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="DeoIWk17jgk">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=DeoIWk17jgk" target="_blank">🔴 GOLD &amp; SILVER Prices Are Signaling a MASSIVE Event Coming</a>
                     </div>
@@ -710,7 +813,7 @@
                         </ul>
                     </div>
                     <div class="snippet-details">
-                        <p><strong>People:</strong> Martin Armstrong, Don Durret</p>
+                        <p><strong>People:</strong> Martin Armstrong, Don Durrett</p>
                         <p><strong>Organizations:</strong> JPMorgan, Bullion Standard Pro</p>
                         <p><strong>Topics:</strong> gold prices, silver prices, market trends, insider buying, capital controls</p>
                     </div>
@@ -723,7 +826,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">eurodollaruniversity<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="IFLP0ihFudU">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=IFLP0ihFudU" target="_blank">Something Is Very, Very Wrong</a>
                     </div>
@@ -755,13 +860,15 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Jim_Bianco<span class="channel-count">(2 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="nW8Xgid1zuo">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=nW8Xgid1zuo" target="_blank">China&#x27;s Role in Crude Oil Volatility &amp; Trump&#x27;s 10-Year Yield Focus</a>
                     </div>
-                    <div class="snippet-meta">interview • 8m 12s • @BiancoResearch • Jan 06, 2026 • 3,244 views • 90 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Jim Jim Jim Jim Jim Jim Jim Jim Jim Bianco</div>
-                    <div class="snippet-summary">This episode discusses the impact of US actions in Venezuela on oil markets and the implications for the 10-year yield under the Trump administration. Jim Jim Jim Jim Jim Jim Jim Jim Jim Bianco provides insights into the current state of oil production and market dynamics.</div>
+                    <div class="snippet-meta">interview • 8m 12s • @biancoresearch • Jan 06, 2026 • 3,244 views • 90 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Jim Bianco</div>
+                    <div class="snippet-summary">This episode discusses the impact of US actions in Venezuela on oil markets and the implications for the 10-year yield under the Trump administration. Jim Bianco provides insights into the current state of oil production and market dynamics.</div>
                     <div class="snippet-claims">
                         <div class="snippet-claims-title">Key Claims:</div>
                         <ul>
@@ -774,18 +881,20 @@
                     </div>
                     <div class="snippet-details">
                         <p><strong>People:</strong> Nicolas Maduro, Trump</p>
-                        <p><strong>Organizations:</strong> Jim Jim Jim Jim Jim Jim Jim Jim Bianco Research, Twitter X</p>
+                        <p><strong>Organizations:</strong> Jim Bianco Research, Twitter X</p>
                         <p><strong>Topics:</strong> oil markets, Venezuela, 10-year yield, Trump administration, China</p>
                     </div>
                     <div class="snippet-conclusion">
                         <strong>Conclusion:</strong> The 10-year yield is likely to rise as global economic conditions change.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="HauruzZ89lY">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=HauruzZ89lY" target="_blank">2025: The U.S. Stands Alone</a>
                     </div>
-                    <div class="snippet-meta">monologue • 27m 54s • @BiancoResearch • Jan 06, 2026 • 1,230 views • 57 likes</div>
+                    <div class="snippet-meta">monologue • 27m 54s • @biancoresearch • Jan 06, 2026 • 1,230 views • 57 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Kristen Radish, Jim Bianco</div>
                     <div class="snippet-summary">In this episode, Jim Bianco discusses the performance of the Bianco Research Fixed Income Total Return Index and the unique position of the US 10-year yield in 2025. He explores the implications of government spending and inflation on fixed income investing.</div>
                     <div class="snippet-claims">
@@ -812,7 +921,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Marc_Faber<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="ABhuVwhRZc8">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=ABhuVwhRZc8" target="_blank">Marc Faber on Imperialism, Oil, Gold &amp; System Breakdown</a>
                     </div>
@@ -841,9 +952,44 @@
                     </div>
                 </details>
                 <details class="channel-details">
+                    <summary class="channel-summary">topic_Michael_Belkin<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="n_Lb39ai1tM">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=n_Lb39ai1tM" target="_blank">&#x27;We&#x27;re still very early in the super cycle,&#x27; says Altimeter Capital&#x27;s Brad Gerstner</a>
+                    </div>
+                    <div class="snippet-meta">interview • 9m 3s • @cnbctelevision • Jan 06, 2026 • 70,873 views • 516 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Brad Gerstner</div>
+                    <div class="snippet-summary">In this episode, Brad Gerstner discusses the current investment landscape, emphasizing the importance of stock picking in a market characterized by an AI super cycle. He shares insights on Nvidia&#x27;s performance and the broader implications for technology investments.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The market is currently a stock pickers market.</li>
+                            <li>Nvidia is expected to grow earnings significantly this year.</li>
+                            <li>Investment in AI infrastructure is crucial and ongoing.</li>
+                            <li>Coreweave presents a unique investment opportunity despite market concerns.</li>
+                            <li>Meta is not currently a holding due to its transition challenges in AI.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Jensen Wong, Stacy Rascan, Dan Ies, Susan Lee, Alexander Wang</p>
+                        <p><strong>Organizations:</strong> Altimeter Capital, Nvidia, TSMC, Amazon, Microsoft, Coreweave, Meta</p>
+                        <p><strong>Topics:</strong> AI super cycle, Nvidia earnings, stock picking, market trends, investment strategies</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Investors should focus on discerning stock picks rather than a broad market approach.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
                     <summary class="channel-summary">topic_Michael_Green_investor<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="41zwgeGGPF4">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=41zwgeGGPF4" target="_blank">Markets Aren’t Driven by Fundamentals – Flows Decide Everything | Michael Green</a>
                     </div>
@@ -874,13 +1020,15 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Michael_Howell<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="8gIg9pQ3cjs">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
-                        <a href="https://www.youtube.com/watch?v=8gIg9pQ3cjs" target="_blank">&quot;We Just Changed Our Bull Market Prediction For 2026&quot; | Raoul Paul and Michael Howell</a>
+                        <a href="https://www.youtube.com/watch?v=8gIg9pQ3cjs" target="_blank">&quot;We Just Changed Our Bull Market Prediction For 2026&quot; | Raoul Pal and Michael Howell</a>
                     </div>
                     <div class="snippet-meta">interview • 18m 53s • @dailydosecrypto • Jan 06, 2026 • 1,106 views • 26 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Raoul Paul, Michael Howell</div>
-                    <div class="snippet-summary">In this episode, Raoul Paul and Michael Howell discuss the changing landscape of liquidity and its implications for the bull market prediction for 2026. Howell emphasizes the shift from Fed-driven liquidity to Treasury-driven liquidity and its potential impact on financial markets and the real economy.</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Raoul Pal, Michael Howell</div>
+                    <div class="snippet-summary">In this episode, Raoul Pal and Michael Howell discuss the changing landscape of liquidity and its implications for the bull market prediction for 2026. Howell emphasizes the shift from Fed-driven liquidity to Treasury-driven liquidity and its potential impact on financial markets and the real economy.</div>
                     <div class="snippet-claims">
                         <div class="snippet-claims-title">Key Claims:</div>
                         <ul>
@@ -892,7 +1040,7 @@
                         </ul>
                     </div>
                     <div class="snippet-details">
-                        <p><strong>People:</strong> Kevin Hassett, Scott Bessent, Lori Logan, John Williams, Jay Pal, Michelle Bowman, Steven Miran, Raoul Paul</p>
+                        <p><strong>People:</strong> Kevin Hassett, Scott Bessent, Lori Logan, John Williams, Jay Pal, Michelle Bowman, Steven Miran, Raoul Pal</p>
                         <p><strong>Organizations:</strong> Crossber Capital</p>
                         <p><strong>Topics:</strong> bull market prediction, liquidity trends, Fed policy, Treasury QE, economic outlook, crypto implications</p>
                     </div>
@@ -903,9 +1051,11 @@
                     </div>
                 </details>
                 <details class="channel-details">
-                    <summary class="channel-summary">topic_Michael_Oliver<span class="channel-count">(7 videos)</span></summary>
+                    <summary class="channel-summary">topic_Michael_Oliver<span class="channel-count">(6 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="X4ukx78K1C4">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=X4ukx78K1C4" target="_blank">Michael Oliver’s Prediction: Gold &amp; Silver’s Explosive Breakout</a>
                     </div>
@@ -931,33 +1081,38 @@
                         <strong>Conclusion:</strong> Expect silver to reach new highs as it breaks out of its long-standing price range.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="1Y0OXBgwz9Y">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
-                        <a href="https://www.youtube.com/watch?v=-BvyfioJUs8" target="_blank">Silver Breaking Out to $500 - Stock Market Crash Coming (Expert Reveals All) | Michael Oliver</a>
+                        <a href="https://www.youtube.com/watch?v=1Y0OXBgwz9Y" target="_blank">Alert! If You Own SILVER, You Have Few Days to Prepare for This Price Shock | Michael Oliver</a>
                     </div>
-                    <div class="snippet-meta">interview • 14m 45s • @finemetalsofficial • Jan 06, 2026 • 3,329 views • 74 likes</div>
+                    <div class="snippet-meta">monologue • 17m 30s • @metalhub95 • Jan 06, 2026 • 1,004 views • 18 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Michael Oliver</div>
-                    <div class="snippet-summary">Michael Oliver discusses the recent breakout of silver and gold against the S&amp;P, indicating a potential shift in investment from the stock market to monetary metals. He warns of a looming stock market crash while highlighting the undervaluation of silver and its miners.</div>
+                    <div class="snippet-summary">Michael Oliver discusses the current state of the silver market, emphasizing its potential for significant price increases due to unique supply and demand dynamics. He compares historical price movements and highlights the importance of understanding the silver-gold ratio in predicting future trends.</div>
                     <div class="snippet-claims">
                         <div class="snippet-claims-title">Key Claims:</div>
                         <ul>
-                            <li>Silver has broken out of a decade-long basing range versus gold.</li>
-                            <li>Current silver prices suggest a potential rise to $500.</li>
-                            <li>The US stock market is showing classic topping patterns similar to past crashes.</li>
-                            <li>Gold and silver typically do not correlate with stock market declines.</li>
-                            <li>The T-bond market is showing signs of weakness that could impact the stock market.</li>
+                            <li>Silver is in an acceleration mode, not a normal uptrend.</li>
+                            <li>Current market conditions suggest a potential price shock for silver.</li>
+                            <li>Historical patterns indicate that silver often lags behind gold before making explosive moves.</li>
+                            <li>Industrial demand for silver is increasing while supply is not keeping pace.</li>
+                            <li>The silver-gold ratio has recently broken out of a multi-year base, signaling a new bull market.</li>
+                            <li>Silver could reach $200 in the next six months based on historical trends.</li>
                         </ul>
                     </div>
                     <div class="snippet-details">
                         <p><strong>People:</strong> None</p>
-                        <p><strong>Organizations:</strong> Bloomberg</p>
-                        <p><strong>Topics:</strong> silver breakout, gold vs silver, stock market crash, T-bond market, commodity index</p>
+                        <p><strong>Organizations:</strong> COMEX</p>
+                        <p><strong>Topics:</strong> silver price, gold ratio, market trends, monetary fundamentals, supply demand</p>
                     </div>
                     <div class="snippet-conclusion">
-                        <strong>Conclusion:</strong> Investors should consider reallocating to gold and silver as a fresh buy signal emerges.
+                        <strong>Conclusion:</strong> Silver&#x27;s fundamentals have shifted decisively, indicating a potential for explosive price movements.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="FLq4X09TwFQ">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=FLq4X09TwFQ" target="_blank">&quot;What I Just Discovered About Silver Will Change the World FOREVER&quot;: Michael Oliver | Silver 2026</a>
                     </div>
@@ -984,37 +1139,13 @@
                         <strong>Conclusion:</strong> The transition from commodity to currency alternative for silver is imminent, with significant price increases expected.
                     </div>
                 </div>
-                <div class="snippet-card">
-                    <div class="snippet-title">
-                        <a href="https://www.youtube.com/watch?v=xHsjJHTe_pI" target="_blank">Something Huge Just Snapped in London’s Silver Market 😳 | Silver Repricing Begins | Michael Oliver</a>
-                    </div>
-                    <div class="snippet-meta">monologue • 8m 19s • @businessupside • Jan 06, 2026 • 11,803 views • 158 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Michael Oliver</div>
-                    <div class="snippet-summary">In this episode, Michael Oliver discusses the current state of the silver market and its potential for dramatic repricing based on historical patterns. He emphasizes that silver is entering a phase of acceleration rather than a typical bull market.</div>
-                    <div class="snippet-claims">
-                        <div class="snippet-claims-title">Key Claims:</div>
-                        <ul>
-                            <li>Silver is in an acceleration mode, not a normal uptrend.</li>
-                            <li>Historical precedents suggest that mispriced markets correct suddenly and forcefully.</li>
-                            <li>Silver has lagged behind other commodities but is now poised for a significant repricing.</li>
-                            <li>Past transitions in commodities like copper and lead were explosive and not gradual.</li>
-                            <li>Current market conditions indicate that silver&#x27;s repricing could be abrupt.</li>
-                        </ul>
-                    </div>
-                    <div class="snippet-details">
-                        <p><strong>People:</strong> None</p>
-                        <p><strong>Organizations:</strong> None</p>
-                        <p><strong>Topics:</strong> silver market, gold comparison, price acceleration, historical trends, market mispricing</p>
-                    </div>
-                    <div class="snippet-conclusion">
-                        <strong>Conclusion:</strong> Silver is likely to experience a dramatic repricing soon.
-                    </div>
-                </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="MfLk_4I5Vz4">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=MfLk_4I5Vz4" target="_blank">“LISTEN CAREFULLY! This Is My Honest 2026 Silver Price Prediction” --  Michael Oliver</a>
                     </div>
-                    <div class="snippet-meta">monologue • 10m 8s • Jan 06, 2026 • 1,009 views • 33 likes</div>
+                    <div class="snippet-meta">monologue • 10m 8s • @metalmovesofficial • Jan 06, 2026 • 1,009 views • 33 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Michael Oliver</div>
                     <div class="snippet-summary">Michael Oliver discusses his bullish predictions for silver and gold prices, emphasizing recent market trends and technical indicators. He argues that the current conditions signal the beginning of a new bull market for monetary metals.</div>
                     <div class="snippet-claims">
@@ -1036,7 +1167,9 @@
                         <strong>Conclusion:</strong> The current market conditions point to a developing surge in silver and gold prices, not a market top.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="90UkIb9rNr0">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=90UkIb9rNr0" target="_blank">Huge Silver Price ALERT! If You Own GOLD or SILVER, Watch This NOW - Bill Holter &amp; Michael Oliver</a>
                     </div>
@@ -1062,7 +1195,9 @@
                         <strong>Conclusion:</strong> The silver market is entering a new reality characterized by explosive price movements driven by demand and supply imbalances.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="oEM6CeuHltk">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=oEM6CeuHltk" target="_blank">&quot;Major Silver Move AHEAD! Prepare for BIGGEST BREAKOUT In History&quot; – Michael Oliver &amp; Bill Holter</a>
                     </div>
@@ -1091,9 +1226,11 @@
                     </div>
                 </details>
                 <details class="channel-details">
-                    <summary class="channel-summary">topic_Rick_Rule<span class="channel-count">(4 videos)</span></summary>
+                    <summary class="channel-summary">topic_Rick_Rule<span class="channel-count">(3 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="RhJptUQSD5E">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=RhJptUQSD5E" target="_blank">🔴 PREPARE NOW Silver Buyers! It&#x27;s About to Get DRAMATIC! | Rick Rule</a>
                     </div>
@@ -1119,7 +1256,9 @@
                         <strong>Conclusion:</strong> The precious metals market is poised for significant growth, particularly in silver, driven by various economic factors.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="o4Hh-ORZajQ">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=o4Hh-ORZajQ" target="_blank">Rick Rule on How to Invest Wisely If You’re Just Entering the Sector? - Financial Fitness 37</a>
                     </div>
@@ -1145,38 +1284,13 @@
                         <strong>Conclusion:</strong> Investing wisely in the resource sector requires patience, knowledge, and a focus on quality companies.
                     </div>
                 </div>
-                <div class="snippet-card">
-                    <div class="snippet-title">
-                        <a href="https://www.youtube.com/watch?v=NLX5qUhj1vg" target="_blank">Many SIlver Stackers Just Became Multi-Millionaires In 2026 &amp; They Don&#x27;t Know It Yet | Rick Rule</a>
-                    </div>
-                    <div class="snippet-meta">monologue • 11m 20s • @2dollarsinvesting • Jan 06, 2026 • 21,036 views • 586 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Rick Rule</div>
-                    <div class="snippet-summary">In this episode, Rick Rule discusses the shifting leadership from gold to silver in the current bull market and shares his investment strategies. He emphasizes the importance of liquidity and the potential for significant gains in high-quality silver stocks.</div>
-                    <div class="snippet-claims">
-                        <div class="snippet-claims-title">Key Claims:</div>
-                        <ul>
-                            <li>Leadership in the bull market is shifting from gold to silver.</li>
-                            <li>Generalist investors typically enter the silver market two to three years into a bull market.</li>
-                            <li>The silver juniors are experiencing a massive increase in capital issuance.</li>
-                            <li>Investors should be cautious about inflation in share counts of junior silver stocks.</li>
-                            <li>Maintaining liquidity is crucial for taking advantage of market turmoil.</li>
-                            <li>High-quality silver stocks can significantly outperform during a silver bull market.</li>
-                        </ul>
-                    </div>
-                    <div class="snippet-details">
-                        <p><strong>People:</strong> Warren Buffett</p>
-                        <p><strong>Organizations:</strong> Franco Nevada, Berkshire Hathaway, Exxon Mobile, Farmers and Merchants Bank of Long Beach, City Corp</p>
-                        <p><strong>Topics:</strong> silver market, gold vs silver, investing strategy, market liquidity, bull market</p>
-                    </div>
-                    <div class="snippet-conclusion">
-                        <strong>Conclusion:</strong> Investors should focus on high-quality silver stocks and maintain liquidity to capitalize on market opportunities.
-                    </div>
-                </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="WxjqIQuAXzc">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=WxjqIQuAXzc" target="_blank">Rick Rule: Why $80 Silver Is Just the Start, Trump &amp; Venezuela Reaction, Finance Tips</a>
                     </div>
-                    <div class="snippet-meta">interview • 63m 45s • Jan 06, 2026 • 1,576 views • 54 likes</div>
+                    <div class="snippet-meta">interview • 63m 45s • @kanekikojo • Jan 06, 2026 • 1,576 views • 54 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Rick Rule, Kojo</div>
                     <div class="snippet-summary">In this episode, Rick Rule discusses the current state of silver and oil investments, the implications of political events in Venezuela, and offers financial advice for different age groups. The conversation also touches on the broader economic landscape and the impact of government policies on personal finance.</div>
                     <div class="snippet-claims">
@@ -1203,7 +1317,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Stephanie_Pomboy<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="XvxdLpIOAQg">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=XvxdLpIOAQg" target="_blank">&quot;It&#x27;s BEGUN But Most Don&#x27;t Know It Yet...&quot; - Stephanie Pomboy</a>
                     </div>
@@ -1231,60 +1347,40 @@
                 </div>
                     </div>
                 </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">RUSSIA<span class="topic-count">(1 videos)</span></summary>
+            <div class="topic-content">
                 <details class="channel-details">
-                    <summary class="channel-summary">unknown<span class="channel-count">(2 videos)</span></summary>
+                    <summary class="channel-summary">pastukhov_kitchen<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="lx8Sfx_zEOE">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
-                        <a href="" target="_blank">&#x27;We&#x27;re still very early in the super cycle,&#x27; says Altimeter Capital&#x27;s Brad Gerstner</a>
+                        <a href="https://www.youtube.com/watch?v=lx8Sfx_zEOE" target="_blank">Украине дали Гарантии. Ждать ли мира? Переживет ли НАТО Гренландию? Пастуховская Кухня</a>
                     </div>
-                    <div class="snippet-meta">interview • 9m 3s • Jan 06, 2026</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Brad Gerstner</div>
-                    <div class="snippet-summary">In this episode, Brad Gerstner discusses the current investment landscape, emphasizing the importance of stock picking in a market characterized by an AI super cycle. He shares insights on Nvidia&#x27;s performance and the broader implications for technology investments.</div>
+                    <div class="snippet-meta">panel • 28m 52s • @pastukhov_kitchen • Jan 06, 2026 • 87,379 views • 4,855 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> N/A</div>
+                    <div class="snippet-summary">В этом эпизоде обсуждаются новые гарантии безопасности для Украины от европейских стран и их влияние на конфликт с Россией. Также рассматриваются возможные последствия для НАТО и роль Трампа в текущей политической ситуации.</div>
                     <div class="snippet-claims">
                         <div class="snippet-claims-title">Key Claims:</div>
                         <ul>
-                            <li>The market is currently a stock pickers market.</li>
-                            <li>Nvidia is expected to grow earnings significantly this year.</li>
-                            <li>Investment in AI infrastructure is crucial and ongoing.</li>
-                            <li>Coreweave presents a unique investment opportunity despite market concerns.</li>
-                            <li>Meta is not currently a holding due to its transition challenges in AI.</li>
+                            <li>Украина и Франция согласовали, что первой линией обороны станут 700,000 бойцов ВСУ.</li>
+                            <li>Франция и Великобритания готовы разместить свои войска в Украине после подписания мирного соглашения.</li>
+                            <li>Германия возьмет на себя ответственность за безопасность Украины и Европы.</li>
+                            <li>Трамп не присутствовал на мероприятии, что вызывает вопросы о его влиянии.</li>
+                            <li>Россия не согласится на перемирие при наличии иностранных войск на своей территории.</li>
                         </ul>
                     </div>
                     <div class="snippet-details">
-                        <p><strong>People:</strong> Jensen Wong, Stacy Rascan, Dan Ies, Susan Lee, Alexander Wang</p>
-                        <p><strong>Organizations:</strong> Altimeter Capital, Nvidia, TSMC, Amazon, Microsoft, Coreweave, Meta</p>
-                        <p><strong>Topics:</strong> AI super cycle, Nvidia earnings, stock picking, market trends, investment strategies</p>
+                        <p><strong>People:</strong> Зеленский, Трамп, Мерц, Макрон</p>
+                        <p><strong>Organizations:</strong> НАТО, США, Франция, Великобритания, Германия</p>
+                        <p><strong>Topics:</strong> гарантии безопасности, война в Украине, отношения с Россией, вмешательство НАТО, мирные соглашения</p>
                     </div>
                     <div class="snippet-conclusion">
-                        <strong>Conclusion:</strong> Investors should focus on discerning stock picks rather than a broad market approach.
-                    </div>
-                </div>
-                <div class="snippet-card">
-                    <div class="snippet-title">
-                        <a href="" target="_blank">Alert! If You Own SILVER, You Have Few Days to Prepare for This Price Shock | Michael Oliver</a>
-                    </div>
-                    <div class="snippet-meta">monologue • 17m 30s • Jan 06, 2026</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Michael Oliver</div>
-                    <div class="snippet-summary">Michael Oliver discusses the current state of the silver market, emphasizing its potential for significant price increases due to unique supply and demand dynamics. He compares historical price movements and highlights the importance of understanding the silver-gold ratio in predicting future trends.</div>
-                    <div class="snippet-claims">
-                        <div class="snippet-claims-title">Key Claims:</div>
-                        <ul>
-                            <li>Silver is in an acceleration mode, not a normal uptrend.</li>
-                            <li>Current market conditions suggest a potential price shock for silver.</li>
-                            <li>Historical patterns indicate that silver often lags behind gold before making explosive moves.</li>
-                            <li>Industrial demand for silver is increasing while supply is not keeping pace.</li>
-                            <li>The silver-gold ratio has recently broken out of a multi-year base, signaling a new bull market.</li>
-                            <li>Silver could reach $200 in the next six months based on historical trends.</li>
-                        </ul>
-                    </div>
-                    <div class="snippet-details">
-                        <p><strong>People:</strong> None</p>
-                        <p><strong>Organizations:</strong> COMEX</p>
-                        <p><strong>Topics:</strong> silver price, gold ratio, market trends, monetary fundamentals, supply demand</p>
-                    </div>
-                    <div class="snippet-conclusion">
-                        <strong>Conclusion:</strong> Silver&#x27;s fundamentals have shifted decisively, indicating a potential for explosive price movements.
+                        <strong>Conclusion:</strong> Декларации о безопасности не подкреплены реальными рычагами давления на Путина, что делает их маловероятными для реализации.
                     </div>
                 </div>
                     </div>
@@ -1297,11 +1393,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">ThePodcastoftheLotusEaters<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="m98ruObH_Fg">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=m98ruObH_Fg" target="_blank">The Wh***’s Redemption</a>
                     </div>
-                    <div class="snippet-meta">monologue • 26m 1s • @ThePodcastoftheLotusEaters • Jan 06, 2026 • 3,691 views • 352 likes</div>
+                    <div class="snippet-meta">monologue • 26m 1s • @thepodcastofthelotuseaters • Jan 06, 2026 • 3,691 views • 352 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Harry, Samson, Josh</div>
                     <div class="snippet-summary">This episode discusses the impact of platforms like Only Fans on young women and the potential for redemption after engaging in such activities. It examines the psychological and spiritual consequences of participating in pornography and the societal implications of these platforms.</div>
                     <div class="snippet-claims">
@@ -1328,8 +1426,14 @@
             </div>
         </details>
         <div class="footer">
-            Generated 2026-02-25 06:45:35
+            Generated 2026-09-15 22:04:54
         </div>
     </div>
+    <div class="playlist-bar" id="plBar">
+        <span class="playlist-bar-msg"><span id="plCount">0</span> selected</span>
+        <button id="plBtn" type="button">Add to playlist</button>
+    </div>
+    <script src="assets/config.js"></script>
+    <script src="assets/playlist.js"></script>
 </body>
 </html>

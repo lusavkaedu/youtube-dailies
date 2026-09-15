@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Snippets - 2026-07-06</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background-color: #FFF1E0;
+            color: #3E474F;
+            line-height: 1.6;
+            padding: 24px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            padding: 32px 0;
+            border-bottom: 3px solid #3E474F;
+            margin-bottom: 32px;
+        }
+        .header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .header .date {
+            font-size: 18px;
+            color: #66737D;
+        }
+        .header .meta {
+            font-size: 14px;
+            color: #66737D;
+            margin-top: 12px;
+        }
+        .topic-section {
+            margin-bottom: 40px;
+        }
+        .topic-title {
+            font-size: 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 0;
+            border-bottom: 2px solid #F2DFCE;
+            margin-bottom: 24px;
+            color: #3E474F;
+        }
+        .channel-section {
+            margin-bottom: 28px;
+        }
+        .channel-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            margin-bottom: 16px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .snippet-card {
+            background: #FFF9F5;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border-left: 4px solid #FCD0AF;
+        }
+        .snippet-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .snippet-title a {
+            color: #0D7680;
+            text-decoration: none;
+        }
+        .snippet-title a:hover {
+            text-decoration: underline;
+        }
+        .snippet-meta {
+            font-size: 13px;
+            color: #66737D;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+        .snippet-speakers {
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .snippet-speakers strong {
+            color: #3E474F;
+        }
+        .snippet-summary {
+            font-size: 15px;
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+        .snippet-claims {
+            margin-bottom: 16px;
+        }
+        .snippet-claims-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .snippet-claims ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .snippet-claims li {
+            font-size: 14px;
+            padding: 4px 0 4px 16px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .snippet-claims li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #0D7680;
+        }
+        .snippet-details {
+            font-size: 13px;
+            color: #66737D;
+            border-top: 1px solid #F2DFCE;
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+        .snippet-details p {
+            margin-bottom: 4px;
+        }
+        .snippet-conclusion {
+            font-size: 14px;
+            font-style: italic;
+            color: #3E474F;
+            background: #F2DFCE;
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 12px;
+        }
+        .footer {
+            text-align: center;
+            padding: 24px 0;
+            border-top: 1px solid #F2DFCE;
+            margin-top: 40px;
+            font-size: 12px;
+            color: #66737D;
+        }
+        .site-nav {
+            text-align: center;
+            margin-top: 12px;
+        }
+        .site-nav a {
+            color: #0D7680;
+            font-size: 14px;
+            text-decoration: none;
+        }
+        .site-nav a:hover {
+            text-decoration: underline;
+        }
+        /* Collapsible sections */
+        details {
+            margin-bottom: 8px;
+        }
+        details summary {
+            cursor: pointer;
+            list-style: none;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary::before {
+            content: "▶";
+            display: inline-block;
+            margin-right: 8px;
+            transition: transform 0.2s;
+            font-size: 12px;
+        }
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
+        .topic-details {
+            border: 1px solid #F2DFCE;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            background: #FFF9F5;
+        }
+        .topic-summary {
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 16px 20px;
+            color: #3E474F;
+            background: #F2DFCE;
+            border-radius: 8px;
+        }
+        .topic-details[open] .topic-summary {
+            border-radius: 8px 8px 0 0;
+        }
+        .topic-count {
+            font-size: 14px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .topic-content {
+            padding: 16px 20px;
+        }
+        .channel-details {
+            border: 1px solid #FCD0AF;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            background: white;
+        }
+        .channel-summary {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            padding: 12px 16px;
+            background: #FFF9F5;
+            border-radius: 6px;
+        }
+        .channel-details[open] .channel-summary {
+            border-radius: 6px 6px 0 0;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .channel-count {
+            font-size: 13px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .channel-content {
+            padding: 12px 16px;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 16px;
+            }
+            .header h1 {
+                font-size: 28px;
+            }
+            .snippet-card {
+                padding: 16px;
+            }
+        }
+        /* Add-to-playlist UI */
+        .snippet-card { position: relative; }
+        .snippet-check {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            margin: 0;
+            cursor: pointer;
+        }
+        .snippet-check input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .snippet-card.selected {
+            box-shadow: inset 4px 0 0 #0D7680;
+            background: #FFFCF8;
+        }
+        .snippet-status {
+            position: absolute;
+            top: 14px;
+            right: 40px;
+            font-size: 14px;
+            color: #66737D;
+            min-width: 90px;
+            text-align: right;
+        }
+        .snippet-status.ok { color: #0D7680; }
+        .snippet-status.err { color: #c0392b; }
+        .playlist-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #3E474F;
+            color: #FFF;
+            padding: 12px 24px;
+            z-index: 100;
+            display: none;
+            font-family: Georgia, "Times New Roman", serif;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.15);
+        }
+        .playlist-bar.visible {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+        .playlist-bar-msg { font-size: 15px; }
+        .playlist-bar button {
+            background: #0D7680;
+            color: #FFF;
+            border: 0;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-family: Georgia, "Times New Roman", serif;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .playlist-bar button:disabled {
+            background: #66737D;
+            cursor: not-allowed;
+        }
+        body.has-bar { padding-bottom: 80px; }
+    </style>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Daily Snippets</h1>
+            <div class="date">Monday, July 06, 2026</div>
+            <div class="meta">6 videos • uploaded 2026-07-06 • 6 videos</div>
+            <div class="site-nav"><a href="search.html">🔍 Search all snippets</a></div>
+        </div>
+        <details class="topic-details">
+            <summary class="topic-summary">INVESTING<span class="topic-count">(2 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">OGJohnAGOfficial<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="_AQoR8DzuSY">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=_AQoR8DzuSY" target="_blank">If You Hold Silver, Kevin Warsh Just Revealed a Secret (Don&#x27;t Ignore This)</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 25m 4s • @ogjohnagofficial • Jul 06, 2026 • 1,516 views • 57 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> John</div>
+                    <div class="snippet-summary">This episode discusses the recent movements in the silver market and the implications of Kevin Warsh&#x27;s statements as the new Fed chair. It highlights the interplay between monetary policy and the physical silver market amidst ongoing supply deficits.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Silver is currently trading at $62 an ounce after significant volatility.</li>
+                            <li>Kevin Warsh&#x27;s nomination as Fed chair triggered a major sell-off in silver.</li>
+                            <li>Warsh&#x27;s recent comments suggest inflation risks are easing, impacting market perceptions.</li>
+                            <li>The silver market is facing a six-year supply deficit, with demand outpacing production.</li>
+                            <li>Silver&#x27;s price movements are influenced by both Fed policy and physical market conditions.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Kevin Warsh, Donald Trump, Kevin Hassett, Avi Gilbert</p>
+                        <p><strong>Organizations:</strong> Federal Reserve, JP Morgan, Silver Institute, Hoover Institution</p>
+                        <p><strong>Topics:</strong> silver market, Kevin Warsh, monetary policy, inflation risks, supply deficit</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The combination of easing inflation risks and ongoing supply deficits presents a complex but potentially favorable outlook for silver.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">eurodollaruniversity<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="tST_j1gvIYU">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=tST_j1gvIYU" target="_blank">Why China’s Oil Demand May Be The Biggest Macro Signal Right Now</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 18m 50s • @eurodollaruniversity • Jul 06, 2026 • 61,524 views • 2,418 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses the significant changes in the oil market driven by China&#x27;s declining demand and Saudi Arabia&#x27;s drastic price cuts. It highlights the implications of these shifts for the global economy and oil pricing dynamics.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Saudi Arabia cut its main crude price for Asian buyers by $11 a barrel, the largest reduction since 2000.</li>
+                            <li>Chinese households are spending less, leading to a collapse in property investment and bank lending.</li>
+                            <li>The oil market is experiencing a contango, indicating oversupply and weak demand.</li>
+                            <li>Physical crude tied to Chinese demand is trading at historic discounts.</li>
+                            <li>China&#x27;s credit system is under stress, affecting its oil demand significantly.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> Saudi Aramco, JP Morgan, Monetary Metals</p>
+                        <p><strong>Topics:</strong> China oil demand, Saudi Arabia, global macro signals, contango, economic downturn</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The episode concludes that the weakening of China&#x27;s oil demand is a critical macroeconomic signal indicating a potential global downturn.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">OTHER<span class="topic-count">(4 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">AkkadDaily<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="OyH4SmmiVsY">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=OyH4SmmiVsY" target="_blank">The Funniest Thing I&#x27;ve Seen For Ages</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 11m 16s • @sargonofakkad • Jul 06, 2026 • 321,402 views • 19,614 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">The episode discusses the behavior of certain communities in public spaces, particularly in relation to a viral protest photo involving the Patriot Front. The narrator reflects on societal reactions to these behaviors and the implications of authority and compliance.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The behavior of certain communities is tolerated, leading to more public disruptions.</li>
+                            <li>The presence of militarized groups can influence public behavior and compliance.</li>
+                            <li>The Patriot Front&#x27;s actions are questioned, but they have not engaged in violent riots.</li>
+                            <li>The narrator suggests that the presence of these groups has had a net positive effect on public order.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> James Woods, Brian Krassenstein, Donald Trump</p>
+                        <p><strong>Organizations:</strong> New York Post, Washington Post, Right Angle News Network, Telegraph</p>
+                        <p><strong>Topics:</strong> white supremacy, Patriot Front, public behavior, protests, social norms</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The presence of the Patriot Front is seen as a net benefit to public order, despite societal concerns.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">ThePodcastoftheLotusEaters<span class="channel-count">(2 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="JhddvbECc8Y">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=JhddvbECc8Y" target="_blank">His Holiness Is Mistaken</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 30m 57s • @thepodcastofthelotuseaters • Jul 06, 2026 • 44,827 views • 2,574 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses the recent comments made by Pope Leo the 14th regarding immigration and the global economic system. The speaker critiques the Pope&#x27;s views on social justice and the responsibilities of European nations towards migrants.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The Pope&#x27;s stance on immigration assumes a global government which is impractical.</li>
+                            <li>Economic systems inherently generate poverty and exclusion; equality cannot be achieved economically.</li>
+                            <li>Charity should not be compelled through taxation but should come from voluntary giving.</li>
+                            <li>The responsibility for migration issues lies primarily with the governments of the migrants&#x27; home countries.</li>
+                            <li>The Pope&#x27;s call for social justice overlooks the safety and welfare of European citizens.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Pope Leo the 14th, Saint Augustine, Joseph de Maistre, St. John Chrysostom, Justin Martyr, Emperor Julian the Apostate, Tertullian</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> Pope&#x27;s comments, immigration policy, economic inequality, Christian charity, border security</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The Pope&#x27;s views are seen as sentimental and not grounded in a realistic understanding of economic and social dynamics.
+                    </div>
+                </div>
+                <div class="snippet-card" data-video-id="R_KTG7EN0Aw">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=R_KTG7EN0Aw" target="_blank">250 Years of America</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 20m 2s • @thepodcastofthelotuseaters • Jul 06, 2026 • 37,558 views • 3,112 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode reflects on the 250th anniversary of the Declaration of Independence, celebrating American history and the contributions of key figures like George Washington and Thomas Jefferson. It highlights various events and cultural expressions that marked the occasion.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The 250th anniversary of the Declaration of Independence was celebrated with fireworks and parades across America.</li>
+                            <li>A time capsule containing artifacts from all 50 states was buried in Philadelphia as part of the celebrations.</li>
+                            <li>Washington&#x27;s Newburgh Address was crucial in preventing a mutiny among American soldiers.</li>
+                            <li>The cultural landscape of America has evolved, allowing for films about founding figures like Washington.</li>
+                            <li>Jefferson and Adams both died on the 50th anniversary of the Declaration of Independence.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Carl, Washington, Trump, Thomas Jefferson, John Adams, Hamilton, Ernest Hemingway</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> 250th anniversary, Declaration of Independence, American history, Washington&#x27;s leadership, cultural celebration, founding fathers</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The episode emphasizes the importance of celebrating America&#x27;s history and the enduring spirit of its founding principles.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">Wealthion<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="-1JUQOPW8Nw">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=-1JUQOPW8Nw" target="_blank">Michael Strain: Why the American Economy Keeps Surprising Everyone</a>
+                    </div>
+                    <div class="snippet-meta">interview • 28m 8s • @wealthion • Jul 06, 2026 • 1,778 views • 36 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Maggie Lake, Michael Strain</div>
+                    <div class="snippet-summary">In this episode, Michael Strain discusses the current state of the US economy, highlighting its resilience despite various challenges such as inflation and geopolitical tensions. He also addresses misconceptions about consumer sentiment and the impact of trade policies.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The US economy is showing remarkable resilience despite stubborn inflation and geopolitical issues.</li>
+                            <li>Consumer spending remains strong, with households willing to dip into savings to maintain their spending levels.</li>
+                            <li>The Fed&#x27;s interest rate hikes were expected to harm the economy, but it has proven more resilient than anticipated.</li>
+                            <li>Trade policies, particularly tariffs, are contributing to rising consumer prices and economic challenges.</li>
+                            <li>There is a significant divide between asset-holding households and those without assets, impacting economic perceptions.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> President Trump, Chairman Powell, Kevin Worsh</p>
+                        <p><strong>Organizations:</strong> American Enterprise Institute</p>
+                        <p><strong>Topics:</strong> US economy, inflation, consumer spending, trade policy, economic resilience, interest rates, AI impact</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The US economy is resilient, but there are significant risks and challenges that need to be addressed.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <div class="footer">
+            Generated 2026-09-15 22:03:54
+        </div>
+    </div>
+    <div class="playlist-bar" id="plBar">
+        <span class="playlist-bar-msg"><span id="plCount">0</span> selected</span>
+        <button id="plBtn" type="button">Add to playlist</button>
+    </div>
+    <script src="assets/config.js"></script>
+    <script src="assets/playlist.js"></script>
+</body>
+</html>

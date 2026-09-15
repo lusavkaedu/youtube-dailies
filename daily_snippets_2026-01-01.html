@@ -157,6 +157,18 @@
             font-size: 12px;
             color: #66737D;
         }
+        .site-nav {
+            text-align: center;
+            margin-top: 12px;
+        }
+        .site-nav a {
+            color: #0D7680;
+            font-size: 14px;
+            text-decoration: none;
+        }
+        .site-nav a:hover {
+            text-decoration: underline;
+        }
         /* Collapsible sections */
         details {
             margin-bottom: 8px;
@@ -244,14 +256,80 @@
                 padding: 16px;
             }
         }
+        /* Add-to-playlist UI */
+        .snippet-card { position: relative; }
+        .snippet-check {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            margin: 0;
+            cursor: pointer;
+        }
+        .snippet-check input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .snippet-card.selected {
+            box-shadow: inset 4px 0 0 #0D7680;
+            background: #FFFCF8;
+        }
+        .snippet-status {
+            position: absolute;
+            top: 14px;
+            right: 40px;
+            font-size: 14px;
+            color: #66737D;
+            min-width: 90px;
+            text-align: right;
+        }
+        .snippet-status.ok { color: #0D7680; }
+        .snippet-status.err { color: #c0392b; }
+        .playlist-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #3E474F;
+            color: #FFF;
+            padding: 12px 24px;
+            z-index: 100;
+            display: none;
+            font-family: Georgia, "Times New Roman", serif;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.15);
+        }
+        .playlist-bar.visible {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+        .playlist-bar-msg { font-size: 15px; }
+        .playlist-bar button {
+            background: #0D7680;
+            color: #FFF;
+            border: 0;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-family: Georgia, "Times New Roman", serif;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .playlist-bar button:disabled {
+            background: #66737D;
+            cursor: not-allowed;
+        }
+        body.has-bar { padding-bottom: 80px; }
     </style>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>Daily Snippets</h1>
             <div class="date">Thursday, January 01, 2026</div>
-            <div class="meta">27 videos • uploaded 2026-01-01 • 27 videos</div>
+            <div class="meta">24 videos • uploaded 2026-01-01 • 24 videos</div>
+            <div class="site-nav"><a href="search.html">🔍 Search all snippets</a></div>
         </div>
         <details class="topic-details">
             <summary class="topic-summary">POLITICS<span class="topic-count">(2 videos)</span></summary>
@@ -259,11 +337,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">ThePodcastoftheLotusEaters<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="8Qf61dJaoT8">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=8Qf61dJaoT8" target="_blank">The SHOCKING Truth About Hitler’s Balls</a>
                     </div>
-                    <div class="snippet-meta">monologue • 41m 36s • @ThePodcastoftheLotusEaters • Jan 01, 2026 • 10,806 views • 897 likes</div>
+                    <div class="snippet-meta">monologue • 41m 36s • @thepodcastofthelotuseaters • Jan 01, 2026 • 10,806 views • 897 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> []</div>
                     <div class="snippet-summary">This episode explores the bizarre thesis that Adolf Hitler&#x27;s physical attributes, particularly his genitalia, are foundational to the criticisms of liberal democracy and its enemies. The discussion critiques modern interpretations of Hitler&#x27;s legacy through a lens of genetic determinism and political pathology.</div>
                     <div class="snippet-claims">
@@ -290,12 +370,14 @@
                 <details class="channel-details">
                     <summary class="channel-summary">andrewgoldheretics<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="ixG4Wo56P7c">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=ixG4Wo56P7c" target="_blank">Labour&#x27;s Pakistan Secret: Protecting Criminals?</a>
                     </div>
                     <div class="snippet-meta">interview • 50m 42s • @andrewgoldheretics • Jan 01, 2026 • 4,098 views • 826 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Laya Cunningham, Andrew</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Laila Cunningham, Andrew</div>
                     <div class="snippet-summary">This episode discusses the complexities of immigration policy in the UK, particularly focusing on the Pakistani community and the political implications of immigration. The speakers express concerns about national security and the perceived failures of current political leadership regarding immigration issues.</div>
                     <div class="snippet-claims">
                         <div class="snippet-claims-title">Key Claims:</div>
@@ -321,16 +403,18 @@
             </div>
         </details>
         <details class="topic-details">
-            <summary class="topic-summary">INVESTING<span class="topic-count">(20 videos)</span></summary>
+            <summary class="topic-summary">INVESTING<span class="topic-count">(17 videos)</span></summary>
             <div class="topic-content">
                 <details class="channel-details">
                     <summary class="channel-summary">CommodityCulture<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="JPTSdH6QU5M">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=JPTSdH6QU5M" target="_blank">China Has Changed the SILVER Game From Paper to PHYSICAL - &#x27;Watch Shanghai&#x27;: Francis Hunt</a>
                     </div>
-                    <div class="snippet-meta">interview • 61m 3s • @CommodityCulture • Jan 01, 2026 • 15,181 views • 1,423 likes</div>
+                    <div class="snippet-meta">interview • 61m 3s • @commodityculture • Jan 01, 2026 • 15,181 views • 1,423 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Francis Hunt</div>
                     <div class="snippet-summary">In this episode, Francis Hunt discusses the evolving silver market, emphasizing China&#x27;s significant influence and the shift from paper to physical silver. He provides insights on investment strategies and the geopolitical landscape affecting silver prices as we enter 2026.</div>
                     <div class="snippet-claims">
@@ -357,11 +441,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">Finding_Finance<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="GbqMpg98Sh4">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=GbqMpg98Sh4" target="_blank">Silver&#x27;s HOT Streak | Will Nickel, Copper, &amp; Oil Explode in 2026?</a>
                     </div>
-                    <div class="snippet-meta">monologue • 26m 28s • @Finding_Finance • Jan 01, 2026 • 2,245 views • 236 likes</div>
+                    <div class="snippet-meta">monologue • 26m 28s • @finding_finance • Jan 01, 2026 • 2,245 views • 236 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Andy</div>
                     <div class="snippet-summary">In this episode, Andy discusses the current state and future predictions for commodities, particularly focusing on silver, copper, and oil. He emphasizes the potential for significant price increases in these markets by 2026 due to supply shortages and market dynamics.</div>
                     <div class="snippet-claims">
@@ -388,11 +474,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">Monetary-Matters<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="YJDDhz8xTQY">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=YJDDhz8xTQY" target="_blank">Citrini’s 26 Trades for 2026 | Citrini on BS Jobs, AI Materials, Advanced Packaging, &amp; More</a>
                     </div>
-                    <div class="snippet-meta">interview • 143m 10s • @Monetary-Matters • Jan 01, 2026 • 435 views • 28 likes</div>
+                    <div class="snippet-meta">interview • 143m 10s • @monetary-matters • Jan 01, 2026 • 435 views • 28 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Catrini, Jack</div>
                     <div class="snippet-summary">In this episode, Catrini discusses his investment strategies and predictions for 2026, focusing on thematic equity research, AI, and various sectors poised for growth. The conversation covers specific trades, market trends, and the implications of technological advancements on investment opportunities.</div>
                     <div class="snippet-claims">
@@ -419,7 +507,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">capitalcosm<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="2S3FNBWNHuw">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=2S3FNBWNHuw" target="_blank">🔴 $500 by Year End? Gary Savage ALERT To SILVER Buyers</a>
                     </div>
@@ -450,7 +540,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">eurodollaruniversity<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="d4p6H1PU7LA">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=d4p6H1PU7LA" target="_blank">OMG! You Won’t Believe What Just Happened in the Treasury Market</a>
                     </div>
@@ -481,7 +573,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Lyn_Alden<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="kxMSRPRD2TM">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=kxMSRPRD2TM" target="_blank">This Is Why Lyn Alden Thinks Silver Could 10x</a>
                     </div>
@@ -512,7 +606,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Marc_Faber<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="I2VzAC8QZao">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=I2VzAC8QZao" target="_blank">&quot;NoOne&#x27;s Talking About This...&quot; - Marc Faber</a>
                     </div>
@@ -541,35 +637,11 @@
                     </div>
                 </details>
                 <details class="channel-details">
-                    <summary class="channel-summary">topic_Michael_Oliver<span class="channel-count">(9 videos)</span></summary>
+                    <summary class="channel-summary">topic_Michael_Oliver<span class="channel-count">(6 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
-                    <div class="snippet-title">
-                        <a href="https://www.youtube.com/watch?v=vNXlk1igaqA" target="_blank">Michael Oliver Silver 2025 You Have No Idea What&#x27;s Coming Out in Two Weeks</a>
-                    </div>
-                    <div class="snippet-meta">monologue • 23m 53s • @goldrushreporter • Jan 01, 2026 • 2,037 views • 47 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Michael Oliver</div>
-                    <div class="snippet-summary">This episode discusses the significant structural shifts in the gold and silver markets, emphasizing the transition of capital from equities to monetary assets. It highlights the implications of these shifts for investors and the potential for explosive price movements in silver.</div>
-                    <div class="snippet-claims">
-                        <div class="snippet-claims-title">Key Claims:</div>
-                        <ul>
-                            <li>Gold has broken out structurally against all major equity indices.</li>
-                            <li>Silver has begun its breakout relative to gold, indicating potential for parabolic gains.</li>
-                            <li>Institutional capital is leading the shift towards gold and silver, not retail investors.</li>
-                            <li>The freezing of Russia&#x27;s reserves has prompted a move towards assets that cannot be confiscated.</li>
-                            <li>Physical demand for silver is increasing, as indicated by backwardation in the market.</li>
-                        </ul>
-                    </div>
-                    <div class="snippet-details">
-                        <p><strong>People:</strong> India, China, Russia</p>
-                        <p><strong>Organizations:</strong> Federal Reserve</p>
-                        <p><strong>Topics:</strong> gold market, silver breakout, institutional investing, capital flows, market structure</p>
-                    </div>
-                    <div class="snippet-conclusion">
-                        <strong>Conclusion:</strong> Gold and silver are at the beginning of a long cycle of appreciation driven by structural changes in capital allocation.
-                    </div>
-                </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="4a45DKRUClo">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=4a45DKRUClo" target="_blank">New Years Day Special on Gold and Silver | Michael Oliver and Jimmy Connor</a>
                     </div>
@@ -596,33 +668,9 @@
                         <strong>Conclusion:</strong> The current market dynamics suggest a significant shift towards precious metals and commodities, driven by inflation and monetary policy.
                     </div>
                 </div>
-                <div class="snippet-card">
-                    <div class="snippet-title">
-                        <a href="https://www.youtube.com/watch?v=0iHYwDAGK3I" target="_blank">Silver Is Triggering Behavior Central Banks Only Show in Crises | Michael Oliver</a>
-                    </div>
-                    <div class="snippet-meta">interview • 13m 12s • @2dollarsinvesting • Jan 01, 2026 • 2,748 views • 73 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Michael Oliver</div>
-                    <div class="snippet-summary">In this episode, Michael Oliver discusses the current state of the silver market, emphasizing its unique supply-demand dynamics and potential for significant price increases. He predicts that silver is entering a new reality, driven by industrial demand and monetary factors.</div>
-                    <div class="snippet-claims">
-                        <div class="snippet-claims-title">Key Claims:</div>
-                        <ul>
-                            <li>Silver is experiencing a supply deficit that is not improving despite rising prices.</li>
-                            <li>The majority of silver supply comes from base metal mining, not dedicated silver mines.</li>
-                            <li>Silver&#x27;s price is expected to reach hundreds of dollars as it enters a new reality.</li>
-                            <li>The relationship between silver and gold prices indicates a potential breakout for silver.</li>
-                            <li>Historical patterns suggest that silver can experience rapid price increases when it breaks out of its long-term range.</li>
-                        </ul>
-                    </div>
-                    <div class="snippet-details">
-                        <p><strong>People:</strong> Elon Musk</p>
-                        <p><strong>Organizations:</strong> None</p>
-                        <p><strong>Topics:</strong> silver market, supply demand, price volatility, monetary metals, investment strategy</p>
-                    </div>
-                    <div class="snippet-conclusion">
-                        <strong>Conclusion:</strong> Silver is poised for a significant price surge due to unique market conditions and industrial demand.
-                    </div>
-                </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="P7WwaRXu22c">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=P7WwaRXu22c" target="_blank">They Tried 1 Last Fake Crash &amp; Silver Just Exposed the Paper Market’s Breaking Point |Michael Oliver</a>
                     </div>
@@ -648,7 +696,9 @@
                         <strong>Conclusion:</strong> Silver is on the verge of a significant price transformation due to underlying monetary issues and supply constraints.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="fSdfKrX8Ej0">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=fSdfKrX8Ej0" target="_blank">&quot;LISTEN CAREFULLY! If You Own Gold &amp; Silver, Watch This Now&quot;: Michael Oliver | Silver Price 2026</a>
                     </div>
@@ -674,7 +724,9 @@
                         <strong>Conclusion:</strong> Silver and gold are poised for significant price increases, with silver miners likely to outperform.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="VpAMQY3fyDA">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=VpAMQY3fyDA" target="_blank">Prepare For The BIGGEST BULLRUN in History for Gold &amp; Silver - Michael Oliver</a>
                     </div>
@@ -700,33 +752,9 @@
                         <strong>Conclusion:</strong> The next phase for gold and silver is likely to see prices reset higher and remain elevated.
                     </div>
                 </div>
-                <div class="snippet-card">
-                    <div class="snippet-title">
-                        <a href="https://www.youtube.com/watch?v=WMvZjm5ZBgg" target="_blank">Something Very Dramatic is Going to Happen to Silver - $200-$500 by Summer 2026 | Michael Oliver</a>
-                    </div>
-                    <div class="snippet-meta">monologue • 16m 29s • @finemetalsofficial • Jan 01, 2026 • 8,766 views • 258 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Michael Oliver</div>
-                    <div class="snippet-summary">In this episode, Michael Oliver discusses the future of silver prices, predicting a significant increase driven by monetary stress and bond market issues. He emphasizes the importance of staying invested and ignoring short-term pullbacks.</div>
-                    <div class="snippet-claims">
-                        <div class="snippet-claims-title">Key Claims:</div>
-                        <ul>
-                            <li>Silver has broken its 50-year range and is expected to reach $200 to $500 by summer 2026.</li>
-                            <li>The rise in silver prices is driven by monetary stress and bond market failure, not just supply shortages.</li>
-                            <li>Investors should not sell during pullbacks, as late buyers will be chasing prices.</li>
-                            <li>The T-bond market is vulnerable, which could impact the economy significantly.</li>
-                            <li>Silver&#x27;s price increase is also influenced by industrial demand and monetary factors.</li>
-                        </ul>
-                    </div>
-                    <div class="snippet-details">
-                        <p><strong>People:</strong> None</p>
-                        <p><strong>Organizations:</strong> CME</p>
-                        <p><strong>Topics:</strong> silver price prediction, monetary stress, bond market failure, investment strategy, market behavior</p>
-                    </div>
-                    <div class="snippet-conclusion">
-                        <strong>Conclusion:</strong> Silver is likely to experience a dramatic price increase, reaching new highs due to underlying economic factors.
-                    </div>
-                </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="2rv8b5dVFuM">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=2rv8b5dVFuM" target="_blank">Silver Just Crashed — But This Is Why the Big Move Isn’t Over | Michael Oliver</a>
                     </div>
@@ -752,7 +780,9 @@
                         <strong>Conclusion:</strong> Silver is likely to experience a major price increase in the coming months due to underlying market changes.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="RhU1-BoJfIg">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=RhU1-BoJfIg" target="_blank">$500 Is Certain! Silver’s 2026 Price Explosion Will Never Be FORGOTTEN” - Michael Oliver</a>
                     </div>
@@ -783,7 +813,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Rick_Rule<span class="channel-count">(2 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="X1L6tEHRZFo">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=X1L6tEHRZFo" target="_blank">Gold Buyers Need to Hear This! Watch This Before It’s Too Late - Rick Rule </a>
                     </div>
@@ -810,7 +842,9 @@
                         <strong>Conclusion:</strong> Owning real assets is essential for protecting oneself from the financial fallout of political decisions.
                     </div>
                 </div>
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="kComf3F8ALI">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=kComf3F8ALI" target="_blank">In it to Win it Live Stream Q&amp;A</a>
                     </div>
@@ -841,7 +875,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">topic_Stephanie_Pomboy<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="JsW3sE9L3Fg">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=JsW3sE9L3Fg" target="_blank">&quot;What&#x27;s Coming Is Bigger Than A Recession&quot; - Stephanie Pomboy</a>
                     </div>
@@ -873,12 +909,14 @@
                 <details class="channel-details">
                     <summary class="channel-summary">triANGLEINVESTOR<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="1eWgFg1dVLE">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=1eWgFg1dVLE" target="_blank">Number ONE Commodity for 2026🚨Commodity Supercycle CONFIRMED! - John Polomny</a>
                     </div>
-                    <div class="snippet-meta">interview • 26m 51s • @triANGLEINVESTOR • Jan 01, 2026 • 1,741 views • 148 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Lucian Walovich, John Polomny</div>
+                    <div class="snippet-meta">interview • 26m 51s • @triangleinvestor • Jan 01, 2026 • 1,741 views • 148 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Lucijan Valkovic, John Polomny</div>
                     <div class="snippet-summary">In this episode, John Polomny discusses the anticipated commodity supercycle for 2026, highlighting key resource sectors and investment strategies. He emphasizes the importance of understanding market dynamics and historical trends in resource investing.</div>
                     <div class="snippet-claims">
                         <div class="snippet-claims-title">Key Claims:</div>
@@ -909,13 +947,15 @@
                 <details class="channel-details">
                     <summary class="channel-summary">IgorLipsits_1950<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="vAIRmG5BrhI">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
-                        <a href="https://www.youtube.com/watch?v=vAIRmG5BrhI" target="_blank">Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Липсиц: В ГОСТЯХ У НОВОГОДНЕГО &quot;BREAKFAST SHOW&quot; 31.12.2025</a>
+                        <a href="https://www.youtube.com/watch?v=vAIRmG5BrhI" target="_blank">Игорь Липсиц: В ГОСТЯХ У НОВОГОДНЕГО &quot;BREAKFAST SHOW&quot; 31.12.2025</a>
                     </div>
-                    <div class="snippet-meta">interview • 8m 59s • @IgorLipsits_1950 • Jan 01, 2026 • 21,246 views • 2,449 likes</div>
-                    <div class="snippet-speakers"><strong>Speakers:</strong> Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Липсиц</div>
-                    <div class="snippet-summary">In this episode, Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Игорь Липсиц discusses the current state of the Russian economy and shares his predictions for the upcoming year. The conversation also touches on New Year traditions and the impact of economic changes on society.</div>
+                    <div class="snippet-meta">interview • 8m 59s • @igorlipsits_1950 • Jan 01, 2026 • 21,246 views • 2,449 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Игорь Липсиц</div>
+                    <div class="snippet-summary">In this episode, Игорь Липсиц discusses the current state of the Russian economy and shares his predictions for the upcoming year. The conversation also touches on New Year traditions and the impact of economic changes on society.</div>
                     <div class="snippet-claims">
                         <div class="snippet-claims-title">Key Claims:</div>
                         <ul>
@@ -945,11 +985,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">RaymondIbrahim-HW<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="n3Kqat3_lec">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=n3Kqat3_lec" target="_blank">From Muslim Conquests to Christian Crusades</a>
                     </div>
-                    <div class="snippet-meta">monologue • 9m 16s • @RaymondIbrahim-HW • Jan 01, 2026 • 1,158 views • 365 likes</div>
+                    <div class="snippet-meta">monologue • 9m 16s • @raymondibrahim-hw • Jan 01, 2026 • 1,158 views • 365 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> [unknown]</div>
                     <div class="snippet-summary">This episode explores the historical context of the Muslim conquests and the subsequent Christian Crusades, highlighting the complex relationships and conflicts between the two religions. It discusses the motivations behind the Crusades and the ideological justifications used by Christians to engage in warfare.</div>
                     <div class="snippet-claims">
@@ -976,11 +1018,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">SpaceWeatherNewsS0s<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="GivISIuHNg8">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=GivISIuHNg8" target="_blank">Ben Davidson Cooks Astronomers on Micronovae in 10 Minutes</a>
                     </div>
-                    <div class="snippet-meta">monologue • 9m 27s • @SpaceWeatherNewsS0s • Jan 01, 2026 • 14,515 views • 2,117 likes</div>
+                    <div class="snippet-meta">monologue • 9m 27s • @spaceweathernewss0s • Jan 01, 2026 • 14,515 views • 2,117 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Ben Davidson</div>
                     <div class="snippet-summary">In this episode, Ben Davidson discusses the concept of micronovae and their implications for understanding nova events and Earth&#x27;s magnetic field. He critiques mainstream astronomical interpretations and presents his own theories regarding the relationship between galactic phenomena and geological evidence on Earth.</div>
                     <div class="snippet-claims">
@@ -1007,11 +1051,13 @@
                 <details class="channel-details">
                     <summary class="channel-summary">ThePodcastoftheLotusEaters<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="y8ZlLR2jBng">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=y8ZlLR2jBng" target="_blank">2025’s Monkey News</a>
                     </div>
-                    <div class="snippet-meta">monologue • 31m 53s • @ThePodcastoftheLotusEaters • Jan 01, 2026 • 3,629 views • 493 likes</div>
+                    <div class="snippet-meta">monologue • 31m 53s • @thepodcastofthelotuseaters • Jan 01, 2026 • 3,629 views • 493 likes</div>
                     <div class="snippet-speakers"><strong>Speakers:</strong> Harry</div>
                     <div class="snippet-summary">This episode covers various amusing and bizarre monkey news stories from 2025, highlighting incidents involving monkeys and their interactions with humans. The discussion includes both light-hearted anecdotes and more serious implications regarding monkey behavior and rights.</div>
                     <div class="snippet-claims">
@@ -1039,7 +1085,9 @@
                 <details class="channel-details">
                     <summary class="channel-summary">adam.taggart<span class="channel-count">(1 videos)</span></summary>
                     <div class="channel-content">
-                <div class="snippet-card">
+                <div class="snippet-card" data-video-id="MZgL67lN2NM">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
                     <div class="snippet-title">
                         <a href="https://www.youtube.com/watch?v=MZgL67lN2NM" target="_blank">Is Thorium The Future Of Nuclear Energy? | Kirk Sorensen</a>
                     </div>
@@ -1070,8 +1118,14 @@
             </div>
         </details>
         <div class="footer">
-            Generated 2026-02-25 06:45:36
+            Generated 2026-09-15 22:04:56
         </div>
     </div>
+    <div class="playlist-bar" id="plBar">
+        <span class="playlist-bar-msg"><span id="plCount">0</span> selected</span>
+        <button id="plBtn" type="button">Add to playlist</button>
+    </div>
+    <script src="assets/config.js"></script>
+    <script src="assets/playlist.js"></script>
 </body>
 </html>
