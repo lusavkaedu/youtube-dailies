@@ -351,8 +351,15 @@
             if (!cb.classList || !cb.classList.contains('vid-check')) return;
             var card = cb.closest('.snippet-card');
             if (card) card.classList.toggle('selected', cb.checked);
-            // Restore base message format with current count
-            if (msgEl) msgEl.innerHTML = baseMsg;
+            // Restore base message format with current count. innerHTML
+            // replacement destroys and reparses the #plCount span each
+            // time, so countEl (captured once in init()) goes stale after
+            // the first change event -- re-fetch it before refreshCount()
+            // writes to it, or the visible count freezes at its initial value.
+            if (msgEl) {
+                msgEl.innerHTML = baseMsg;
+                countEl = document.getElementById('plCount');
+            }
             refreshCount();
         });
         refreshCount();
