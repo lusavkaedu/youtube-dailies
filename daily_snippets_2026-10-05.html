@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Snippets - 2026-10-05</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background-color: #FFF1E0;
+            color: #3E474F;
+            line-height: 1.6;
+            padding: 24px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            padding: 32px 0;
+            border-bottom: 3px solid #3E474F;
+            margin-bottom: 32px;
+        }
+        .header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .header .date {
+            font-size: 18px;
+            color: #66737D;
+        }
+        .header .meta {
+            font-size: 14px;
+            color: #66737D;
+            margin-top: 12px;
+        }
+        .topic-section {
+            margin-bottom: 40px;
+        }
+        .topic-title {
+            font-size: 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 0;
+            border-bottom: 2px solid #F2DFCE;
+            margin-bottom: 24px;
+            color: #3E474F;
+        }
+        .channel-section {
+            margin-bottom: 28px;
+        }
+        .channel-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            margin-bottom: 16px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .snippet-card {
+            background: #FFF9F5;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border-left: 4px solid #FCD0AF;
+        }
+        .snippet-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .snippet-title a {
+            color: #0D7680;
+            text-decoration: none;
+        }
+        .snippet-title a:hover {
+            text-decoration: underline;
+        }
+        .snippet-meta {
+            font-size: 13px;
+            color: #66737D;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+        .snippet-speakers {
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .snippet-speakers strong {
+            color: #3E474F;
+        }
+        .snippet-summary {
+            font-size: 15px;
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+        .snippet-claims {
+            margin-bottom: 16px;
+        }
+        .snippet-claims-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .snippet-claims ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .snippet-claims li {
+            font-size: 14px;
+            padding: 4px 0 4px 16px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .snippet-claims li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #0D7680;
+        }
+        .snippet-details {
+            font-size: 13px;
+            color: #66737D;
+            border-top: 1px solid #F2DFCE;
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+        .snippet-details p {
+            margin-bottom: 4px;
+        }
+        .snippet-conclusion {
+            font-size: 14px;
+            font-style: italic;
+            color: #3E474F;
+            background: #F2DFCE;
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 12px;
+        }
+        .footer {
+            text-align: center;
+            padding: 24px 0;
+            border-top: 1px solid #F2DFCE;
+            margin-top: 40px;
+            font-size: 12px;
+            color: #66737D;
+        }
+        .site-nav {
+            text-align: center;
+            margin-top: 12px;
+        }
+        .site-nav a {
+            color: #0D7680;
+            font-size: 14px;
+            text-decoration: none;
+        }
+        .site-nav a:hover {
+            text-decoration: underline;
+        }
+        /* Collapsible sections */
+        details {
+            margin-bottom: 8px;
+        }
+        details summary {
+            cursor: pointer;
+            list-style: none;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary::before {
+            content: "▶";
+            display: inline-block;
+            margin-right: 8px;
+            transition: transform 0.2s;
+            font-size: 12px;
+        }
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
+        .topic-details {
+            border: 1px solid #F2DFCE;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            background: #FFF9F5;
+        }
+        .topic-summary {
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 16px 20px;
+            color: #3E474F;
+            background: #F2DFCE;
+            border-radius: 8px;
+        }
+        .topic-details[open] .topic-summary {
+            border-radius: 8px 8px 0 0;
+        }
+        .topic-count {
+            font-size: 14px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .topic-content {
+            padding: 16px 20px;
+        }
+        .channel-details {
+            border: 1px solid #FCD0AF;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            background: white;
+        }
+        .channel-summary {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            padding: 12px 16px;
+            background: #FFF9F5;
+            border-radius: 6px;
+        }
+        .channel-details[open] .channel-summary {
+            border-radius: 6px 6px 0 0;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .channel-count {
+            font-size: 13px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .channel-content {
+            padding: 12px 16px;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 16px;
+            }
+            .header h1 {
+                font-size: 28px;
+            }
+            .snippet-card {
+                padding: 16px;
+            }
+        }
+        /* Add-to-playlist UI */
+        .snippet-card { position: relative; }
+        .snippet-check {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            margin: 0;
+            cursor: pointer;
+        }
+        .snippet-check input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .snippet-card.selected {
+            box-shadow: inset 4px 0 0 #0D7680;
+            background: #FFFCF8;
+        }
+        .snippet-status {
+            position: absolute;
+            top: 14px;
+            right: 40px;
+            font-size: 14px;
+            color: #66737D;
+            min-width: 90px;
+            text-align: right;
+        }
+        .snippet-status.ok { color: #0D7680; }
+        .snippet-status.err { color: #c0392b; }
+        .playlist-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #3E474F;
+            color: #FFF;
+            padding: 12px 24px;
+            z-index: 100;
+            display: none;
+            font-family: Georgia, "Times New Roman", serif;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.15);
+        }
+        .playlist-bar.visible {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+        .playlist-bar-msg { font-size: 15px; }
+        .playlist-bar button {
+            background: #0D7680;
+            color: #FFF;
+            border: 0;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-family: Georgia, "Times New Roman", serif;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .playlist-bar button:disabled {
+            background: #66737D;
+            cursor: not-allowed;
+        }
+        body.has-bar { padding-bottom: 80px; }
+    </style>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Daily Snippets</h1>
+            <div class="date">Monday, October 05, 2026</div>
+            <div class="meta">4 videos • uploaded 2026-10-05 • 4 videos</div>
+            <div class="site-nav"><a href="search.html">🔍 Search all snippets</a></div>
+        </div>
+        <details class="topic-details">
+            <summary class="topic-summary">POLITICS<span class="topic-count">(2 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">MarioNawfal<span class="channel-count">(2 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="mo2soj4_QZU">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=mo2soj4_QZU" target="_blank">U.S. BOMBERS URGENTLY WITHDRAW FROM UK BASE AFTER IRANIAN ATTACK THREAT– w/ Karen Kwiatkowski</a>
+                    </div>
+                    <div class="snippet-meta">interview • 31m 39s • @marionawfal • Oct 05, 2026 • 18,173 views • 1,996 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Brandon Weichert, Karen Katowski</div>
+                    <div class="snippet-summary">This episode discusses the urgent withdrawal of U.S. B1 bombers from a UK base following a threat of an Iranian attack. The conversation explores the implications of this move on U.S. military strategy and the broader geopolitical landscape.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The B1 bombers were pulled out due to an alleged terrorist attack threat.</li>
+                            <li>There is skepticism about the government&#x27;s narrative regarding the threat.</li>
+                            <li>The withdrawal could indicate a de-escalation of military tensions.</li>
+                            <li>Trump&#x27;s policies are blamed for current military and economic challenges.</li>
+                            <li>There are speculations about a secret deal involving the U.S., Arabs, and Iran.</li>
+                            <li>The Houthi fighters are portrayed as a well-organized military force.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Mario Knoff, Donald Trump, Rich Baris, Netanyahu</p>
+                        <p><strong>Organizations:</strong> US Air Force, UN</p>
+                        <p><strong>Topics:</strong> Iranian attack threat, US military strategy, B1 bombers withdrawal, Trump&#x27;s policies, Middle East tensions, Houthi fighters</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The episode suggests that the withdrawal of bombers may be a strategic repositioning rather than a genuine de-escalation.
+                    </div>
+                </div>
+                <div class="snippet-card" data-video-id="8p6E8etGvDs">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=8p6E8etGvDs" target="_blank">THREE CARRIERS + 20,000+ TROOPS - Retd. Navy Cmdr. Bobby Jones</a>
+                    </div>
+                    <div class="snippet-meta">interview • 11m 14s • @marionawfal • Oct 05, 2026 • 1,070 views • 68 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Retd. Navy Cmdr. Bobby Jones</div>
+                    <div class="snippet-summary">In this episode, Retd. Navy Cmdr. Bobby Jones discusses the implications of increased U.S. military presence in the Middle East and the potential for nuclear escalation. He analyzes the strategic challenges of an amphibious landing and the political motivations behind military decisions.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The U.S. is deploying three aircraft carriers and over 20,000 additional troops to the region.</li>
+                            <li>A nuclear strike in the Middle East would devastate the economy and is unlikely to happen.</li>
+                            <li>The logistics of an amphibious landing in the current warfare environment are extremely challenging.</li>
+                            <li>The presence of special operation forces in Baluchistan could expedite a marine landing.</li>
+                            <li>The current military leadership may not fully understand the risks involved in a potential landing.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Ronald Reagan, Colonel Aguilar, Tom, Rubio, J D</p>
+                        <p><strong>Organizations:</strong> Air Force, CIA</p>
+                        <p><strong>Topics:</strong> military strategy, nuclear threats, Middle East conflict, U.S. military presence, political implications</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The strategic risks of an amphibious landing in the current environment make it a fool&#x27;s errand.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">INVESTING<span class="topic-count">(2 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">GoldInvestmentLetter<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="eZLj9BjnYOU">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=eZLj9BjnYOU" target="_blank">GIL Special Sunday Night Update</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 71m 30s • @goldinvestmentletter • Oct 05, 2026 • 28 views • 5 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Eric Mashinsky</div>
+                    <div class="snippet-summary">In this episode, Eric Mashinsky discusses his investment strategies in gold and cryptocurrency, providing insights on market trends and specific stocks. He emphasizes the importance of cash reserves and strategic buying during market corrections.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Gold is expected to correct back to the $3,500 area before rising again.</li>
+                            <li>Investors should maintain cash reserves to take advantage of market corrections.</li>
+                            <li>Eric is reallocating part of his portfolio from gold mining stocks to cryptocurrency.</li>
+                            <li>Ethereum is expected to catch up in value during the next market cycle.</li>
+                            <li>Search Light Resources is considered a highly undervalued investment opportunity.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Erica, Carl Hanaman, John Pollson, Dr. Tom Kaplan, Shane Morrow</p>
+                        <p><strong>Organizations:</strong> Phenom, THM, Soul Strategies, Galaxy Digital, Search Light Resources</p>
+                        <p><strong>Topics:</strong> gold market, crypto investments, mining stocks, market corrections, investment strategies</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Investors should be prepared for market corrections and consider diversifying into cryptocurrencies while maintaining positions in promising mining stocks.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">OGJohnAGYT<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="nTcjq4Rver0">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=nTcjq4Rver0" target="_blank">Silver Hit 914 Million Ounces In London&#x27;s Vaults — The Highest Since 2022, Further Back Than He Said</a>
+                    </div>
+                    <div class="snippet-meta">interview • 21m 21s • @ogjohnagyt • Oct 05, 2026 • 19 views • 3 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Daniel</div>
+                    <div class="snippet-summary">This episode discusses the current state of the silver market, focusing on inventory levels and demand dynamics. It analyzes claims made by a Deutsche Bank analyst regarding silver&#x27;s performance relative to gold and the implications of rising inventories.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>London&#x27;s free floating inventories of silver are at their highest since November 2024.</li>
+                            <li>The COMX holds a stockpile that is too large for its open interest.</li>
+                            <li>Shanghai inventories of silver have risen significantly.</li>
+                            <li>Chinese demand for silver in solar applications is down by a third in 2026.</li>
+                            <li>More availability of silver means it tends to lag behind gold in performance.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> Deutsche Bank, BNN Bloomberg, Kitco News, CME Group, Shanghai Gold Exchange, London Bullion Market Association</p>
+                        <p><strong>Topics:</strong> silver market, inventory levels, gold comparison, Chinese demand, volatility</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The analysis suggests that while silver inventories are rising, the market dynamics indicate that silver may continue to underperform relative to gold.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <div class="footer">
+            Generated 2026-10-05 03:30:25
+        </div>
+    </div>
+    <div class="playlist-bar" id="plBar">
+        <span class="playlist-bar-msg"><span id="plCount">0</span> selected</span>
+        <button id="plBtn" type="button">Add to playlist</button>
+    </div>
+    <script src="assets/config.js"></script>
+    <script src="assets/playlist.js"></script>
+</body>
+</html>
