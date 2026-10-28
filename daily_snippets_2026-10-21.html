@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Snippets - 2026-10-21</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background-color: #FFF1E0;
+            color: #3E474F;
+            line-height: 1.6;
+            padding: 24px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            padding: 32px 0;
+            border-bottom: 3px solid #3E474F;
+            margin-bottom: 32px;
+        }
+        .header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .header .date {
+            font-size: 18px;
+            color: #66737D;
+        }
+        .header .meta {
+            font-size: 14px;
+            color: #66737D;
+            margin-top: 12px;
+        }
+        .topic-section {
+            margin-bottom: 40px;
+        }
+        .topic-title {
+            font-size: 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 0;
+            border-bottom: 2px solid #F2DFCE;
+            margin-bottom: 24px;
+            color: #3E474F;
+        }
+        .channel-section {
+            margin-bottom: 28px;
+        }
+        .channel-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            margin-bottom: 16px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .snippet-card {
+            background: #FFF9F5;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border-left: 4px solid #FCD0AF;
+        }
+        .snippet-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .snippet-title a {
+            color: #0D7680;
+            text-decoration: none;
+        }
+        .snippet-title a:hover {
+            text-decoration: underline;
+        }
+        .snippet-meta {
+            font-size: 13px;
+            color: #66737D;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+        .snippet-speakers {
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .snippet-speakers strong {
+            color: #3E474F;
+        }
+        .snippet-summary {
+            font-size: 15px;
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+        .snippet-claims {
+            margin-bottom: 16px;
+        }
+        .snippet-claims-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .snippet-claims ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .snippet-claims li {
+            font-size: 14px;
+            padding: 4px 0 4px 16px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .snippet-claims li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #0D7680;
+        }
+        .snippet-details {
+            font-size: 13px;
+            color: #66737D;
+            border-top: 1px solid #F2DFCE;
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+        .snippet-details p {
+            margin-bottom: 4px;
+        }
+        .snippet-conclusion {
+            font-size: 14px;
+            font-style: italic;
+            color: #3E474F;
+            background: #F2DFCE;
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 12px;
+        }
+        .footer {
+            text-align: center;
+            padding: 24px 0;
+            border-top: 1px solid #F2DFCE;
+            margin-top: 40px;
+            font-size: 12px;
+            color: #66737D;
+        }
+        .site-nav {
+            text-align: center;
+            margin-top: 12px;
+        }
+        .site-nav a {
+            color: #0D7680;
+            font-size: 14px;
+            text-decoration: none;
+        }
+        .site-nav a:hover {
+            text-decoration: underline;
+        }
+        /* Collapsible sections */
+        details {
+            margin-bottom: 8px;
+        }
+        details summary {
+            cursor: pointer;
+            list-style: none;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary::before {
+            content: "▶";
+            display: inline-block;
+            margin-right: 8px;
+            transition: transform 0.2s;
+            font-size: 12px;
+        }
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
+        .topic-details {
+            border: 1px solid #F2DFCE;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            background: #FFF9F5;
+        }
+        .topic-summary {
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 16px 20px;
+            color: #3E474F;
+            background: #F2DFCE;
+            border-radius: 8px;
+        }
+        .topic-details[open] .topic-summary {
+            border-radius: 8px 8px 0 0;
+        }
+        .topic-count {
+            font-size: 14px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .topic-content {
+            padding: 16px 20px;
+        }
+        .channel-details {
+            border: 1px solid #FCD0AF;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            background: white;
+        }
+        .channel-summary {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            padding: 12px 16px;
+            background: #FFF9F5;
+            border-radius: 6px;
+        }
+        .channel-details[open] .channel-summary {
+            border-radius: 6px 6px 0 0;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .channel-count {
+            font-size: 13px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .channel-content {
+            padding: 12px 16px;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 16px;
+            }
+            .header h1 {
+                font-size: 28px;
+            }
+            .snippet-card {
+                padding: 16px;
+            }
+        }
+        /* Add-to-playlist UI */
+        .snippet-card { position: relative; }
+        .snippet-check {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            margin: 0;
+            cursor: pointer;
+        }
+        .snippet-check input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .snippet-card.selected {
+            box-shadow: inset 4px 0 0 #0D7680;
+            background: #FFFCF8;
+        }
+        .snippet-status {
+            position: absolute;
+            top: 14px;
+            right: 40px;
+            font-size: 14px;
+            color: #66737D;
+            min-width: 90px;
+            text-align: right;
+        }
+        .snippet-status.ok { color: #0D7680; }
+        .snippet-status.err { color: #c0392b; }
+        .playlist-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #3E474F;
+            color: #FFF;
+            padding: 12px 24px;
+            z-index: 100;
+            display: none;
+            font-family: Georgia, "Times New Roman", serif;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.15);
+        }
+        .playlist-bar.visible {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+        .playlist-bar-msg { font-size: 15px; }
+        .playlist-bar button {
+            background: #0D7680;
+            color: #FFF;
+            border: 0;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-family: Georgia, "Times New Roman", serif;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .playlist-bar button:disabled {
+            background: #66737D;
+            cursor: not-allowed;
+        }
+        body.has-bar { padding-bottom: 80px; }
+    </style>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Daily Snippets</h1>
+            <div class="date">Wednesday, October 21, 2026</div>
+            <div class="meta">4 videos • uploaded 2026-10-21 • 4 videos</div>
+            <div class="site-nav"><a href="search.html">🔍 Search all snippets</a></div>
+        </div>
+        <details class="topic-details">
+            <summary class="topic-summary">INVESTING<span class="topic-count">(4 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">topic_Chris_Vermeulen<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="t3TLHWPvA9s">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=t3TLHWPvA9s" target="_blank">Chris Vermeulen: Gold, Silver in Bear Market, I&#x27;m 100% in Cash Now</a>
+                    </div>
+                    <div class="snippet-meta">interview • 28m 37s • @investingnews • Oct 21, 2026 • 78,021 views • 1,037 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Charlotte McCloud, Chris Vermeulen</div>
+                    <div class="snippet-summary">In this episode, Chris Vermeulen discusses the current state of the gold and silver markets, emphasizing their bear market status and potential price targets. He shares his investment strategy, focusing on cash positions and waiting for optimal buying opportunities.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Gold and silver are currently in a bear market with significant downside potential.</li>
+                            <li>Technical analysis suggests gold could drop to 3100 or 3600.</li>
+                            <li>Investors should wait for specific technical levels before buying precious metals.</li>
+                            <li>The stock market is experiencing a rotation as investors seek safety.</li>
+                            <li>Interest rates and yields could trigger a stock market correction.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> investingnews.com, technicaltraders.com</p>
+                        <p><strong>Topics:</strong> gold market, silver market, bear market, investment strategy, market trends, technical analysis</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Chris Vermeulen is currently 100% in cash, waiting for the right opportunity to invest.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">topic_Jim_Cramer<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="8hyuKwPjqyg">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=8hyuKwPjqyg" target="_blank">Mad Money 10/21/26 | Audio Only</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 44m 22s • @cnbctelevision • Oct 21, 2026 • 13,245 views • 91 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Jim Cramer</div>
+                    <div class="snippet-summary">In this episode of Mad Money, Jim Cramer shares his methods for picking stocks and managing investments effectively. He emphasizes the importance of doing homework and understanding market dynamics to make informed investment decisions.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Investing in individual stocks can yield better returns than index funds if done with discipline.</li>
+                            <li>The new high list is a valuable tool for identifying potential stock investments.</li>
+                            <li>Insider buying can indicate confidence in a stock&#x27;s future performance.</li>
+                            <li>Heavy short interest combined with insider buying can signal a buying opportunity.</li>
+                            <li>Trading around a core position allows investors to capitalize on market volatility.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Andrew, Drena, Timothy, Vincent, Russell, Lynn, Kyle</p>
+                        <p><strong>Organizations:</strong> CNBC</p>
+                        <p><strong>Topics:</strong> stock picking, investing strategies, market analysis, insider buying, short selling, portfolio management</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Understanding market signals and employing disciplined strategies can significantly enhance investment success.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">topic_Lyn_Alden<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="g_bw3HiJxbo">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=g_bw3HiJxbo" target="_blank">Lyn Alden: I’m Going All In Before This Bitcoin Bull Run</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 22m 33s • @moneytalks101 • Oct 21, 2026 • 10,274 views • 144 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Lyn Alden</div>
+                    <div class="snippet-summary">In this episode, Lyn Alden discusses the impact of geopolitical events on Bitcoin and other assets, particularly focusing on the Strait of Hormuz and its influence on oil prices and inflation. She analyzes potential outcomes of ongoing peace talks and their implications for the market.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The biggest move in Bitcoin this week was influenced by geopolitical tensions rather than crypto-specific events.</li>
+                            <li>If the U.S. and Iran reach a peace agreement, it could lead to a significant drop in oil prices and a rise in Bitcoin.</li>
+                            <li>Higher inflation and interest rates negatively impact Bitcoin&#x27;s performance.</li>
+                            <li>Gold and Bitcoin holders may benefit from government actions that increase liquidity without debt issuance.</li>
+                            <li>The current fiscal dominance means that structural deficits are a significant factor in the economy.</li>
+                            <li>Market volatility is driven by headlines, making it risky to use leverage in trading.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Hank Paulson, Asim Munir, Abbas Araqchi, Steve Witkoff, Vladimir Putin</p>
+                        <p><strong>Organizations:</strong> Tesla, Barclays</p>
+                        <p><strong>Topics:</strong> Bitcoin, gold, inflation, oil prices, fiscal policy, peace negotiations</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Bitcoin&#x27;s future performance is closely tied to geopolitical developments, particularly in the Middle East.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">topic_Rick_Rule<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="QH5-WPAUE-Y">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=QH5-WPAUE-Y" target="_blank">Huge GOLD News Coming Out of China! If You Own Gold &amp; Silver, Watch This Now - Rick Rule &amp; Innecco</a>
+                    </div>
+                    <div class="snippet-meta">interview • 13m 31s • @theinvestinggem • Oct 21, 2026 • 6,221 views • 25 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Rick Rule</div>
+                    <div class="snippet-summary">In this episode, Rick Rule discusses the implications of China&#x27;s actions on the global gold market and the petrodollar system. He emphasizes the importance of gold as a hedge against currency erosion and the potential for silver to gain momentum in the future.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The US dollar&#x27;s dominance as a reserve currency is declining.</li>
+                            <li>China is internationalizing the yuan, which will impact gold&#x27;s role in the global economy.</li>
+                            <li>Gold has increased significantly in value, reflecting central banks&#x27; accumulation of bullion.</li>
+                            <li>The affordability crisis in America is linked to currency devaluation.</li>
+                            <li>Silver is not yet hated by the market, indicating potential for future growth.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Jamie Dimon, Eric Yeung, Jesse</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> petrodollar system, China&#x27;s gold strategy, silver market, inflation crisis, currency erosion, investing in precious metals</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The shift towards a gold-anchored currency system is underway, with significant implications for investors.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <div class="footer">
+            Generated 2026-10-28 16:16:27
+        </div>
+    </div>
+    <div class="playlist-bar" id="plBar">
+        <span class="playlist-bar-msg"><span id="plCount">0</span> selected</span>
+        <button id="plBtn" type="button">Add to playlist</button>
+    </div>
+    <script src="assets/config.js"></script>
+    <script src="assets/playlist.js"></script>
+</body>
+</html>
