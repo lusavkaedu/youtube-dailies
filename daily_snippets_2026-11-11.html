@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Snippets - 2026-11-11</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background-color: #FFF1E0;
+            color: #3E474F;
+            line-height: 1.6;
+            padding: 24px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            padding: 32px 0;
+            border-bottom: 3px solid #3E474F;
+            margin-bottom: 32px;
+        }
+        .header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .header .date {
+            font-size: 18px;
+            color: #66737D;
+        }
+        .header .meta {
+            font-size: 14px;
+            color: #66737D;
+            margin-top: 12px;
+        }
+        .topic-section {
+            margin-bottom: 40px;
+        }
+        .topic-title {
+            font-size: 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 0;
+            border-bottom: 2px solid #F2DFCE;
+            margin-bottom: 24px;
+            color: #3E474F;
+        }
+        .channel-section {
+            margin-bottom: 28px;
+        }
+        .channel-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            margin-bottom: 16px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .snippet-card {
+            background: #FFF9F5;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border-left: 4px solid #FCD0AF;
+        }
+        .snippet-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .snippet-title a {
+            color: #0D7680;
+            text-decoration: none;
+        }
+        .snippet-title a:hover {
+            text-decoration: underline;
+        }
+        .snippet-meta {
+            font-size: 13px;
+            color: #66737D;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+        .snippet-speakers {
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .snippet-speakers strong {
+            color: #3E474F;
+        }
+        .snippet-summary {
+            font-size: 15px;
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+        .snippet-claims {
+            margin-bottom: 16px;
+        }
+        .snippet-claims-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .snippet-claims ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .snippet-claims li {
+            font-size: 14px;
+            padding: 4px 0 4px 16px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .snippet-claims li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #0D7680;
+        }
+        .snippet-details {
+            font-size: 13px;
+            color: #66737D;
+            border-top: 1px solid #F2DFCE;
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+        .snippet-details p {
+            margin-bottom: 4px;
+        }
+        .snippet-conclusion {
+            font-size: 14px;
+            font-style: italic;
+            color: #3E474F;
+            background: #F2DFCE;
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 12px;
+        }
+        .footer {
+            text-align: center;
+            padding: 24px 0;
+            border-top: 1px solid #F2DFCE;
+            margin-top: 40px;
+            font-size: 12px;
+            color: #66737D;
+        }
+        .site-nav {
+            text-align: center;
+            margin-top: 12px;
+        }
+        .site-nav a {
+            color: #0D7680;
+            font-size: 14px;
+            text-decoration: none;
+        }
+        .site-nav a:hover {
+            text-decoration: underline;
+        }
+        /* Collapsible sections */
+        details {
+            margin-bottom: 8px;
+        }
+        details summary {
+            cursor: pointer;
+            list-style: none;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary::before {
+            content: "▶";
+            display: inline-block;
+            margin-right: 8px;
+            transition: transform 0.2s;
+            font-size: 12px;
+        }
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
+        .topic-details {
+            border: 1px solid #F2DFCE;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            background: #FFF9F5;
+        }
+        .topic-summary {
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 16px 20px;
+            color: #3E474F;
+            background: #F2DFCE;
+            border-radius: 8px;
+        }
+        .topic-details[open] .topic-summary {
+            border-radius: 8px 8px 0 0;
+        }
+        .topic-count {
+            font-size: 14px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .topic-content {
+            padding: 16px 20px;
+        }
+        .channel-details {
+            border: 1px solid #FCD0AF;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            background: white;
+        }
+        .channel-summary {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            padding: 12px 16px;
+            background: #FFF9F5;
+            border-radius: 6px;
+        }
+        .channel-details[open] .channel-summary {
+            border-radius: 6px 6px 0 0;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .channel-count {
+            font-size: 13px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .channel-content {
+            padding: 12px 16px;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 16px;
+            }
+            .header h1 {
+                font-size: 28px;
+            }
+            .snippet-card {
+                padding: 16px;
+            }
+        }
+        /* Add-to-playlist UI */
+        .snippet-card { position: relative; }
+        .snippet-check {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            margin: 0;
+            cursor: pointer;
+        }
+        .snippet-check input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .snippet-card.selected {
+            box-shadow: inset 4px 0 0 #0D7680;
+            background: #FFFCF8;
+        }
+        .snippet-status {
+            position: absolute;
+            top: 14px;
+            right: 40px;
+            font-size: 14px;
+            color: #66737D;
+            min-width: 90px;
+            text-align: right;
+        }
+        .snippet-status.ok { color: #0D7680; }
+        .snippet-status.err { color: #c0392b; }
+        .playlist-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #3E474F;
+            color: #FFF;
+            padding: 12px 24px;
+            z-index: 100;
+            display: none;
+            font-family: Georgia, "Times New Roman", serif;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.15);
+        }
+        .playlist-bar.visible {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+        .playlist-bar-msg { font-size: 15px; }
+        .playlist-bar button {
+            background: #0D7680;
+            color: #FFF;
+            border: 0;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-family: Georgia, "Times New Roman", serif;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .playlist-bar button:disabled {
+            background: #66737D;
+            cursor: not-allowed;
+        }
+        body.has-bar { padding-bottom: 80px; }
+    </style>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Daily Snippets</h1>
+            <div class="date">Wednesday, November 11, 2026</div>
+            <div class="meta">6 videos • uploaded 2026-11-11 • 6 videos</div>
+            <div class="site-nav"><a href="search.html">🔍 Search all snippets</a></div>
+        </div>
+        <details class="topic-details">
+            <summary class="topic-summary">POLITICS<span class="topic-count">(4 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">MarioNawfal<span class="channel-count">(4 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="KZ0q1ypYs_o">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=KZ0q1ypYs_o" target="_blank">IRAN UNVEILS NEW MISSILE ARSENAL, WARNS OF “NEW SURPRISES” IF ATTACKED – w/ David Pyne</a>
+                    </div>
+                    <div class="snippet-meta">interview • 53m 38s • @marionawfal • Nov 11, 2026 • 22,752 views • 1,604 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Brandon Ward, David Pyne</div>
+                    <div class="snippet-summary">The episode discusses Iran&#x27;s unveiling of new missile technology and the implications for US military strategy and foreign policy. David Pyne shares insights on the ongoing conflicts in the Middle East and the potential outcomes of US involvement in Ukraine.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Iran has developed hypersonic weapons that are difficult to intercept or track.</li>
+                            <li>The US military faces significant challenges in responding to Iranian capabilities.</li>
+                            <li>Trump&#x27;s political losses may influence his willingness to escalate military actions.</li>
+                            <li>The potential for a new nuclear deal with Iran could be worse than previous agreements.</li>
+                            <li>The Houthis in Yemen have gained significant control and could disrupt oil traffic.</li>
+                            <li>The geopolitical landscape in the Middle East is shifting towards a post-American era.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Commander Bobby Jones, Trump, JD Vance, Obama, Steve Wickoff, Pete Hegseth, Netanyahu, Gaddy Eisenkot, Zelensky, Elon Musk, Dr. Peter Pry, Michael Yan</p>
+                        <p><strong>Organizations:</strong> EMP electromagnetic pulse task force, US Navy, GCC, Substack</p>
+                        <p><strong>Topics:</strong> Iran missile capabilities, US military strategy, Trump administration, Middle East geopolitics, Ukraine conflict, US foreign policy</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The US must navigate complex geopolitical challenges in the Middle East and Ukraine, with potential shifts in strategy under the current administration.
+                    </div>
+                </div>
+                <div class="snippet-card" data-video-id="PxcjKAlAv9w">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=PxcjKAlAv9w" target="_blank">MAGA REELS FROM MIDTERM WIPEOUT AS DEMOCRATS TARGET TRUMP&#x27;S WAR w/ Harry Kazianis &amp; Justin Snyder</a>
+                    </div>
+                    <div class="snippet-meta">panel • 56m 14s • @marionawfal • Nov 11, 2026 • 2,687 views • 164 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Brandon Weichert, Harry Kazianis, Justin Snyder</div>
+                    <div class="snippet-summary">This episode discusses the implications of the midterm elections on Trump&#x27;s presidency and the ongoing war in the Middle East. The panelists analyze the shifting dynamics within the Republican Party and the potential for bipartisan cooperation on immigration and economic issues.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Trump&#x27;s presidency is characterized by a focus on media and ratings.</li>
+                            <li>The Republican Party is struggling to adapt to changing demographics and voter concerns.</li>
+                            <li>There is potential for bipartisan immigration reform if both parties can find common ground.</li>
+                            <li>Trump&#x27;s legacy may be defined by economic challenges and national debt.</li>
+                            <li>Democrats are gaining ground by addressing issues that resonate with younger voters.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Pete Hegsth, J. D. Vance, Marco Rubio, Steven Miller, Hakeem Jeff, Chris Van Hollen, Ro Khanna, Chuck Schumer, Chris Coons, Chris Murphy, Bobby Jones, Jared Kushner, Natalie, Jim Jordan, John Thune, Troy Jackson, Barack Obama</p>
+                        <p><strong>Organizations:</strong> 1945.com, National Security Journal, Fox News</p>
+                        <p><strong>Topics:</strong> Trump&#x27;s presidency, Midterm elections, Iran war, Immigration policy, Democratic strategies, Republican party dynamics, Economic issues</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The Republican Party must evolve to address the concerns of younger voters and economic issues to remain relevant.
+                    </div>
+                </div>
+                <div class="snippet-card" data-video-id="mq_DgWlVpQo">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=mq_DgWlVpQo" target="_blank">THE FLAW IN THE JENSEN HUANG &quot;CHINESE SPY&quot; STORY - Philip Pilkington</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 6m 31s • @marionawfal • Nov 11, 2026 • 920 views • 37 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Philip Pilkington</div>
+                    <div class="snippet-summary">In this episode, Philip Pilkington discusses the implications of the recent allegations against Jensen Huang and the potential fallout for US-China relations. He argues that the public nature of the accusations could lead to significant economic consequences, particularly regarding chip sanctions and trade wars.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>If the allegations against Jensen Huang were true, they would have been handled privately.</li>
+                            <li>The US government struggles to keep secrets, leading to intentional leaks to shape narratives.</li>
+                            <li>Nvidia is a key player in the US economy, particularly in the GPU market.</li>
+                            <li>A renewed trade war with China could have severe implications for US interests in the Middle East.</li>
+                            <li>There is a faction in Washington that is out of touch with the realities of technology and economics.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Jensen Huang, Trump</p>
+                        <p><strong>Organizations:</strong> Nvidia</p>
+                        <p><strong>Topics:</strong> Chinese spy story, US-China relations, chip sanctions, trade war, Nvidia&#x27;s role</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The public handling of the Jensen Huang case could escalate tensions between the US and China, potentially reigniting a trade war.
+                    </div>
+                </div>
+                <div class="snippet-card" data-video-id="HcXGuY3YOlM">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=HcXGuY3YOlM" target="_blank">RUBIO SAYS ISRAEL CAN PAY FOR WEAPONS, $3.3B 5-YR AID DEAL FACES CONGRESS – w/ Michael Yon</a>
+                    </div>
+                    <div class="snippet-meta">interview • 55m 10s • @marionawfal • Nov 11, 2026 • 7,282 views • 465 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Brandon Weichert, Michael Yon</div>
+                    <div class="snippet-summary">In this episode, Brandon Weichert interviews Michael Yon about the intertwining of Zionism with US military interests and the ongoing global conflicts. They discuss the implications of these dynamics on future wars and the nature of information warfare.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The Zionist lobby is influencing US military integration with Israel.</li>
+                            <li>Cults can be custom-made to achieve specific geopolitical goals.</li>
+                            <li>The war in Iran is ongoing and will not end soon.</li>
+                            <li>Historical patterns show that wars are often preceded by information warfare.</li>
+                            <li>Life and conflict are part of a larger, ongoing process that seeks efficiency and consolidation.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Ernie Pile, Theodore Herzel, RFK, Brett Weinstein, Iris Chang, Ignatius Ding, Russell Low</p>
+                        <p><strong>Organizations:</strong> None</p>
+                        <p><strong>Topics:</strong> Zionism, US-Israel relations, war predictions, information warfare, global conflicts, cults and ideology</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The ongoing wars and geopolitical struggles will continue to evolve, driven by underlying forces and historical patterns.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">INVESTING<span class="topic-count">(2 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">thecontrariancapitalist<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="tFO0u1bXhzQ">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=tFO0u1bXhzQ" target="_blank">Don Durrett - Which Silver Stocks Could Rise 50x?</a>
+                    </div>
+                    <div class="snippet-meta">interview • 56m 44s • @thecontrariancapitalist • Nov 11, 2026 • 20 views • 2 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Don Durrett</div>
+                    <div class="snippet-summary">In this episode, Don Durrett discusses the current state of silver and gold stocks, market sentiment, and his investment strategies. He shares insights on potential price targets for gold and silver and the implications of economic trends on these investments.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The current correction in gold and silver prices has lasted too long, causing discomfort among investors.</li>
+                            <li>Durrett believes that the war in Iran has influenced the recent dip in gold prices.</li>
+                            <li>He emphasizes the importance of understanding why one owns gold and mining stocks.</li>
+                            <li>Durrett predicts that gold prices could reach $8,000 in the next three years.</li>
+                            <li>He suggests that silver could reach between $150 to $200 based on gold&#x27;s performance.</li>
+                            <li>Durrett warns that the U.S. economy is on a path to significant decline, predicting a reset in 2028.</li>
+                            <li>He identifies several mining stocks with high potential for growth based on future gold and silver prices.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Robert Kaplan</p>
+                        <p><strong>Organizations:</strong> goldstockdata.com</p>
+                        <p><strong>Topics:</strong> silver stocks, gold prices, market sentiment, investment strategies, economic outlook</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> Durrett believes we are at the beginning of a significant shift in the gold and silver markets, with potential for substantial price increases.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">topic_Jim_Cramer<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="FcRo9UNkwGY">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=FcRo9UNkwGY" target="_blank">If oil plummets to $40 you&#x27;re going to see CPI come down too, says Jim Cramer</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 11m 48s • @cnbctelevision • Nov 11, 2026 • 3,191 views • 82 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Jim Cramer</div>
+                    <div class="snippet-summary">Jim Cramer discusses the impact of oil prices on inflation and the consumer price index (CPI), while analyzing the current market conditions and potential strategies for investors. He also addresses Nvidia&#x27;s situation and the upcoming IPO of Anthropic.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>If oil plummets to $40, CPI will come down significantly.</li>
+                            <li>The October CPI reading was much worse than expected, indicating rising inflation.</li>
+                            <li>Interest rates are likely to increase due to the hot CPI reading.</li>
+                            <li>Nvidia&#x27;s leadership may need to change to navigate current market challenges.</li>
+                            <li>The upcoming Anthropic IPO could be one of the greatest ever, according to Goldman Sachs.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Lori Logan, Christopher Waller, Jensen Wong, Ian Buck, Rick</p>
+                        <p><strong>Organizations:</strong> Dallas Fed, Nvidia, Walmart, Costco, Goldman Sachs, T-Mobile, Block, Bloom Energy</p>
+                        <p><strong>Topics:</strong> CPI, oil prices, Nvidia, inflation, AI, investing strategies</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The market may stabilize if oil prices drop and inflation eases.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <div class="footer">
+            Generated 2026-11-11 04:04:06
+        </div>
+    </div>
+    <div class="playlist-bar" id="plBar">
+        <span class="playlist-bar-msg"><span id="plCount">0</span> selected</span>
+        <button id="plBtn" type="button">Add to playlist</button>
+    </div>
+    <script src="assets/config.js"></script>
+    <script src="assets/playlist.js"></script>
+</body>
+</html>
