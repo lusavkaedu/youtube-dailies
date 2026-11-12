@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Snippets - 2026-11-12</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background-color: #FFF1E0;
+            color: #3E474F;
+            line-height: 1.6;
+            padding: 24px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            padding: 32px 0;
+            border-bottom: 3px solid #3E474F;
+            margin-bottom: 32px;
+        }
+        .header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .header .date {
+            font-size: 18px;
+            color: #66737D;
+        }
+        .header .meta {
+            font-size: 14px;
+            color: #66737D;
+            margin-top: 12px;
+        }
+        .topic-section {
+            margin-bottom: 40px;
+        }
+        .topic-title {
+            font-size: 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 0;
+            border-bottom: 2px solid #F2DFCE;
+            margin-bottom: 24px;
+            color: #3E474F;
+        }
+        .channel-section {
+            margin-bottom: 28px;
+        }
+        .channel-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            margin-bottom: 16px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .snippet-card {
+            background: #FFF9F5;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border-left: 4px solid #FCD0AF;
+        }
+        .snippet-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .snippet-title a {
+            color: #0D7680;
+            text-decoration: none;
+        }
+        .snippet-title a:hover {
+            text-decoration: underline;
+        }
+        .snippet-meta {
+            font-size: 13px;
+            color: #66737D;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+        .snippet-speakers {
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .snippet-speakers strong {
+            color: #3E474F;
+        }
+        .snippet-summary {
+            font-size: 15px;
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+        .snippet-claims {
+            margin-bottom: 16px;
+        }
+        .snippet-claims-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #3E474F;
+        }
+        .snippet-claims ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .snippet-claims li {
+            font-size: 14px;
+            padding: 4px 0 4px 16px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .snippet-claims li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #0D7680;
+        }
+        .snippet-details {
+            font-size: 13px;
+            color: #66737D;
+            border-top: 1px solid #F2DFCE;
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+        .snippet-details p {
+            margin-bottom: 4px;
+        }
+        .snippet-conclusion {
+            font-size: 14px;
+            font-style: italic;
+            color: #3E474F;
+            background: #F2DFCE;
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 12px;
+        }
+        .footer {
+            text-align: center;
+            padding: 24px 0;
+            border-top: 1px solid #F2DFCE;
+            margin-top: 40px;
+            font-size: 12px;
+            color: #66737D;
+        }
+        .site-nav {
+            text-align: center;
+            margin-top: 12px;
+        }
+        .site-nav a {
+            color: #0D7680;
+            font-size: 14px;
+            text-decoration: none;
+        }
+        .site-nav a:hover {
+            text-decoration: underline;
+        }
+        /* Collapsible sections */
+        details {
+            margin-bottom: 8px;
+        }
+        details summary {
+            cursor: pointer;
+            list-style: none;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary::before {
+            content: "▶";
+            display: inline-block;
+            margin-right: 8px;
+            transition: transform 0.2s;
+            font-size: 12px;
+        }
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
+        .topic-details {
+            border: 1px solid #F2DFCE;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            background: #FFF9F5;
+        }
+        .topic-summary {
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 16px 20px;
+            color: #3E474F;
+            background: #F2DFCE;
+            border-radius: 8px;
+        }
+        .topic-details[open] .topic-summary {
+            border-radius: 8px 8px 0 0;
+        }
+        .topic-count {
+            font-size: 14px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .topic-content {
+            padding: 16px 20px;
+        }
+        .channel-details {
+            border: 1px solid #FCD0AF;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            background: white;
+        }
+        .channel-summary {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D7680;
+            padding: 12px 16px;
+            background: #FFF9F5;
+            border-radius: 6px;
+        }
+        .channel-details[open] .channel-summary {
+            border-radius: 6px 6px 0 0;
+            border-bottom: 1px solid #FCD0AF;
+        }
+        .channel-count {
+            font-size: 13px;
+            font-weight: normal;
+            color: #66737D;
+            margin-left: 8px;
+        }
+        .channel-content {
+            padding: 12px 16px;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 16px;
+            }
+            .header h1 {
+                font-size: 28px;
+            }
+            .snippet-card {
+                padding: 16px;
+            }
+        }
+        /* Add-to-playlist UI */
+        .snippet-card { position: relative; }
+        .snippet-check {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            margin: 0;
+            cursor: pointer;
+        }
+        .snippet-check input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .snippet-card.selected {
+            box-shadow: inset 4px 0 0 #0D7680;
+            background: #FFFCF8;
+        }
+        .snippet-status {
+            position: absolute;
+            top: 14px;
+            right: 40px;
+            font-size: 14px;
+            color: #66737D;
+            min-width: 90px;
+            text-align: right;
+        }
+        .snippet-status.ok { color: #0D7680; }
+        .snippet-status.err { color: #c0392b; }
+        .playlist-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #3E474F;
+            color: #FFF;
+            padding: 12px 24px;
+            z-index: 100;
+            display: none;
+            font-family: Georgia, "Times New Roman", serif;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.15);
+        }
+        .playlist-bar.visible {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+        .playlist-bar-msg { font-size: 15px; }
+        .playlist-bar button {
+            background: #0D7680;
+            color: #FFF;
+            border: 0;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-family: Georgia, "Times New Roman", serif;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .playlist-bar button:disabled {
+            background: #66737D;
+            cursor: not-allowed;
+        }
+        body.has-bar { padding-bottom: 80px; }
+    </style>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Daily Snippets</h1>
+            <div class="date">Thursday, November 12, 2026</div>
+            <div class="meta">9 videos • uploaded 2026-11-12 • 9 videos</div>
+            <div class="site-nav"><a href="search.html">🔍 Search all snippets</a></div>
+        </div>
+        <details class="topic-details">
+            <summary class="topic-summary">POLITICS<span class="topic-count">(4 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">MarioNawfal<span class="channel-count">(4 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="LgXh11Bv-p4">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=LgXh11Bv-p4" target="_blank">BREAKING: U.S. ACCEPTS 4 OF IRAN&#x27;S 7 DEMANDS, CONTESTS 3 – w/ Alan Eyre</a>
+                    </div>
+                    <div class="snippet-meta">interview • 26m 15s • @marionawfal • Nov 12, 2026 • 13,345 views • 715 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Brandon Ward, Alan Eyre</div>
+                    <div class="snippet-summary">This episode discusses the recent developments in US-Iran relations, particularly focusing on the acceptance of some Iranian demands by the Trump administration. The conversation also touches on the implications for regional security and the potential for de-escalation in the Iran conflict.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The Trump administration has tentatively agreed to four of Iran&#x27;s seven demands.</li>
+                            <li>Netanyahu and Trump reportedly had a heated argument over the Iran war.</li>
+                            <li>Iran&#x27;s key demands include unblocking funds and lifting the blockade to sell oil.</li>
+                            <li>The Gulf countries are taking on more diplomatic responsibilities in the region.</li>
+                            <li>There is skepticism about the likelihood of a deal being reached with Iran.</li>
+                            <li>The US military presence in the Middle East is expected to decrease.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Mark Canian, Robert Barnes, Donald Trump, Netanyahu, Mosen Resoi, Eisen Cot, Steve Miller, Alois, Arachi, Hussein</p>
+                        <p><strong>Organizations:</strong> CSIS, New York Post, CIA</p>
+                        <p><strong>Topics:</strong> Iran demands, US foreign policy, Middle East tensions, Trump administration, regional security, diplomatic negotiations</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The episode suggests that while there may be some movement towards negotiations, significant challenges remain in achieving a lasting resolution.
+                    </div>
+                </div>
+                <div class="snippet-card" data-video-id="8SW-aqhsgGc">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=8SW-aqhsgGc" target="_blank">HEGSETH SAYS HE&#x27;D DO IRAN WAR AGAIN, GOP BLOCKS IMPEACHMENT AS DEMS NO SHOW  – w/ Robert Barnes</a>
+                    </div>
+                    <div class="snippet-meta">interview • 52m 42s • @marionawfal • Nov 12, 2026 • 20,471 views • 1,102 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Brandon Wigert, Robert Barnes</div>
+                    <div class="snippet-summary">In this episode, Brandon Wigert and Robert Barnes discuss the implications of recent elections on U.S. foreign policy, particularly regarding the Iran war, and the potential for a third-party movement in 2028. They analyze the disconnect between political elites and the electorate&#x27;s desires for peace and economic stability.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Barnes predicts a significant Democratic victory in the midterms, comparing it to historical elections.</li>
+                            <li>He argues that the current political environment is a betrayal election due to ongoing wars.</li>
+                            <li>Barnes critiques Sebastian Gorka&#x27;s background and influence in U.S. politics.</li>
+                            <li>He highlights the disconnect between Democratic elites and their new members from Trump-won districts.</li>
+                            <li>Barnes suggests that if the GOP fails to course correct, a third-party movement could emerge in 2028.</li>
+                            <li>He emphasizes the need for both parties to address voter concerns about war and economic issues.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Trump, Richard Barers, Angie Nixon, Justin Snyder, Sebastian Gorka, Chuck Schumer, Hakeem Jeffries, Dan Ballis Bonino, JD Vance, Tulsi, Bobby Kennedy, Marcia Blackburn, Tim Burchett, Alex Karp, Bill Press, Rick Tera, Tom Cotton, Michelle Bachmann, Laura Ingraham, Megyn Kelly, Amanda Millius, Elon Musk, Jean-Luc Mélenchon</p>
+                        <p><strong>Organizations:</strong> 1776 Law Center, People&#x27;s Pundit Daily</p>
+                        <p><strong>Topics:</strong> Iran war, GOP politics, Democratic strategy, 2028 elections, Voter dissatisfaction, Foreign policy, Corruption investigations</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The political landscape is shifting, and if neither party adapts to the electorate&#x27;s demands, a third-party movement could gain traction by 2028.
+                    </div>
+                </div>
+                <div class="snippet-card" data-video-id="y0RH2VnaoEY">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=y0RH2VnaoEY" target="_blank">BREAKING: IRAQ CRACKS DOWN ON IRAN-BACKED MILITIAS AFTER DELIVERING US RESPONSE  w/ Anthony Aguilar</a>
+                    </div>
+                    <div class="snippet-meta">interview • 43m 17s • @marionawfal • Nov 12, 2026 • 8,244 views • 619 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Brandon Weichert, Anthony Aguilar</div>
+                    <div class="snippet-summary">This episode discusses the escalating tensions between Iran-backed militias and the Iraqi government, as well as the implications for US foreign policy under the Trump administration. The conversation also touches on military readiness and the potential for renewed conflict in the region.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Iran-backed militias are escalating confrontations with the Iraqi Prime Minister.</li>
+                            <li>The US has accepted some of Iran&#x27;s demands in negotiations.</li>
+                            <li>Trump&#x27;s administration is facing internal pressures regarding military action in the Middle East.</li>
+                            <li>Israel is preparing for potential military action against Iran.</li>
+                            <li>The US military is critically short on munitions for a sustained conflict.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Donald Trump, Ali al-Zahedi, Steve Miller, Pete Hegseth, Marco Rubio, Netanyahu, Robert Barnes, Jensen Wang, Alice Wang</p>
+                        <p><strong>Organizations:</strong> CSIS, US Army, IDF</p>
+                        <p><strong>Topics:</strong> Iran conflict, US military strategy, Iraq militias, Israel relations, Trump administration, Middle East tensions</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The US cannot walk away from the conflict in the Middle East without facing significant consequences.
+                    </div>
+                </div>
+                <div class="snippet-card" data-video-id="XPF6bo-mO6s">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=XPF6bo-mO6s" target="_blank">TRUMP&#x27;S $16.5B ISRAEL AID DEAL FACES DEMOCRATIC CONGRESS BLOCKADE – w/ Andrew Day &amp; Clint Russell</a>
+                    </div>
+                    <div class="snippet-meta">panel • 31m 42s • @marionawfal • Nov 12, 2026 • 4,679 views • 391 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Brandon Weichert, Clint Russell, Andrew Day</div>
+                    <div class="snippet-summary">This episode discusses the implications of Trump&#x27;s foreign policy decisions regarding Iran and the dynamics within the Democratic Party following recent elections. The speakers analyze Trump&#x27;s potential actions and the influence of various political figures on his administration&#x27;s strategy.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Clint Russell argues that Trump is not sovereign and will do the bidding of those who control him.</li>
+                            <li>Andrew Day suggests that Trump&#x27;s aversion to being perceived as a loser complicates his ability to end the Iran war.</li>
+                            <li>The speakers discuss the possibility of Trump being influenced by neoconservatives in his administration.</li>
+                            <li>There is skepticism about whether the Democrats will effectively address the issues they were elected on.</li>
+                            <li>The potential for military escalation in the Middle East remains a significant concern.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Donald Trump, Netanyahu, JD Vance, Robert Barnes, Marco Rubio, Hakeem Jeffries, AOC, Chris Van Hollen, Tim Burchett, Mark Dubowitz, Resi</p>
+                        <p><strong>Organizations:</strong> American Conservative, New York Post</p>
+                        <p><strong>Topics:</strong> Trump&#x27;s foreign policy, Iran conflict, Democratic Party dynamics, GOP future, US military strategy, Middle East tensions</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The political landscape is fraught with challenges, and both parties may struggle to represent the interests of the American people effectively.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">INVESTING<span class="topic-count">(3 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">arcadiaeconomics<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="CWwhqY2TNEw">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=CWwhqY2TNEw" target="_blank">Gold &amp; Silver Resume Explosion Higher When THIS Happens</a>
+                    </div>
+                    <div class="snippet-meta">interview • 48m 22s • @arcadiaeconomics • Nov 12, 2026 • 349 views • 48 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Chris, Jesse Day</div>
+                    <div class="snippet-summary">This episode discusses the current state of gold and silver prices in relation to inflation and government spending, featuring insights from Jesse Day on market trends and geopolitical influences. The conversation also touches on the uranium market and the potential for future investment opportunities.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Gold and silver prices are expected to rise due to ongoing economic deterioration.</li>
+                            <li>Central banks, including China, are accumulating gold, indicating a lack of confidence in fiat currencies.</li>
+                            <li>The inflation rate is not decreasing as claimed by some politicians, complicating the economic outlook.</li>
+                            <li>The uranium market is currently undervalued despite rising prices, presenting a potential investment opportunity.</li>
+                            <li>Retail participation in gold and silver investing is expected to increase as inflation concerns grow.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Donald Trump, Peter Schiff, Steve Eisman, Ed Dow, Rick Rule, Naomi Klein</p>
+                        <p><strong>Organizations:</strong> Arcadia Economics, Commodity Culture, Morgan Stanley, Black Rock, Vanguard</p>
+                        <p><strong>Topics:</strong> gold and silver prices, inflation, government spending, market manipulation, geopolitics, uranium market</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The trend for gold and silver is upward, driven by economic instability and inflation.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">topic_Jim_Cramer<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="AiEB4AT2IdU">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=AiEB4AT2IdU" target="_blank">Sometimes you need a reality check, even if you are a huge believer in something: Cramer on Nvidia</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 12m 36s • @cnbctelevision • Nov 12, 2026 • 4,769 views • 339 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Jim Kramer</div>
+                    <div class="snippet-summary">In this episode, Jim Kramer discusses the current state of tech stocks, particularly focusing on Nvidia and the implications of recent events surrounding its CEO. He emphasizes the importance of staying diversified in investments and shares insights from an interview with Michael Intrader about the future of data centers.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Nvidia&#x27;s CEO Jensen Wong may be out due to a scandal, impacting investor sentiment.</li>
+                            <li>Despite challenges, there is significant demand for data centers and Nvidia chips.</li>
+                            <li>Michael Intrader believes the value of Nvidia chips will increase significantly in the coming years.</li>
+                            <li>The upcoming IPO of Anthropic could reach a valuation of up to $1.7 trillion.</li>
+                            <li>Investors should remain cautious but not abandon data center stocks entirely.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Jensen Wong, Michael Intrader, Charlie Morrison, David Faber, Hillary Maxon, Gary, Gus</p>
+                        <p><strong>Organizations:</strong> Nvidia, Cororeweave, Oracle, Meta, Jersey Mike&#x27;s, Wingstop, Anthropic</p>
+                        <p><strong>Topics:</strong> Nvidia, data centers, AI, investing strategies, market trends</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The tech market shows potential for recovery, particularly in AI and data centers, despite current uncertainties.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">topic_Lyn_Alden<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="7UopY9pKCsA">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=7UopY9pKCsA" target="_blank">Anthropic IPO Could Pop The Bubble...Here&#x27;s Why (w/Lyn Alden)</a>
+                    </div>
+                    <div class="snippet-meta">interview • 55m 1s • @rebelcapitalistinterviews • Nov 12, 2026 • 1,244 views • 113 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Lyn Alden</div>
+                    <div class="snippet-summary">In this episode, Lyn Alden discusses the current state of investing, particularly in semiconductors and AI, and the implications of potential IPOs like Anthropic. The conversation explores market cycles, regulatory challenges, and the impact of fiscal policy on the economy.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>The AI trade still has time to run despite froth in the market.</li>
+                            <li>Semiconductors are currently more profitable than data centers.</li>
+                            <li>Many hyperscalers are free cash flow negative, except for Microsoft.</li>
+                            <li>The frontier models are facing regulatory challenges that could impact their valuations.</li>
+                            <li>The upcoming Anthropic IPO is crucial for the future of AI investments.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> None</p>
+                        <p><strong>Organizations:</strong> Nvidia, Microsoft, Alphabet, Oracle, Amazon, Meta</p>
+                        <p><strong>Topics:</strong> AI investment, semiconductors, market cycles, regulatory concerns, fiscal policy, private equity</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The success or failure of the Anthropic IPO could significantly influence the future of AI investments and the broader market.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <details class="topic-details">
+            <summary class="topic-summary">OTHER<span class="topic-count">(2 videos)</span></summary>
+            <div class="topic-content">
+                <details class="channel-details">
+                    <summary class="channel-summary">MarioNawfal<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="IUgKCG5F8U8">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=IUgKCG5F8U8" target="_blank">BREAKING: NVIDIA TO OUST JENSEN HUANG AFTER SECOND AFFAIR EXPOSED – w/ Nicholas Eftimiades</a>
+                    </div>
+                    <div class="snippet-meta">interview • 22m 53s • @marionawfal • Nov 12, 2026 • 5,909 views • 310 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> Brandon Wiker, Nicholas Eftimiades</div>
+                    <div class="snippet-summary">This episode discusses the implications of Jensen Huang&#x27;s ousting from Nvidia due to a scandal involving Chinese espionage. Nicholas Eftimiades shares insights on the broader issues of national security and the challenges posed by espionage in the tech industry.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Nvidia plans to oust Jensen Huang after a second affair is exposed.</li>
+                            <li>Alice Wang&#x27;s involvement is seen as a significant threat to Nvidia&#x27;s operations.</li>
+                            <li>The Chinese Ministry of State Security employs a whole-of-society approach to espionage.</li>
+                            <li>The U.S. lacks a structured response to counter Chinese espionage effectively.</li>
+                            <li>There is a growing concern over the vulnerability of U.S. technology in AI and quantum computing.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Jensen Huang, Alan Heir, Alice Wang, Elon Musk, Alex Karp, Eileen Wong</p>
+                        <p><strong>Organizations:</strong> Nvidia, CIA, Department of Justice, NIH, National Science Foundation</p>
+                        <p><strong>Topics:</strong> Chinese espionage, Nvidia scandal, national security, economic warfare, quantum computing, intellectual property theft</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The Jensen Huang case highlights the urgent need for a comprehensive strategy to combat espionage and protect national security.
+                    </div>
+                </div>
+                    </div>
+                </details>
+                <details class="channel-details">
+                    <summary class="channel-summary">eurodollaruniversity<span class="channel-count">(1 videos)</span></summary>
+                    <div class="channel-content">
+                <div class="snippet-card" data-video-id="zQsKGQ6LNvk">
+                    <label class="snippet-check" title="Select for playlist"><input type="checkbox" class="vid-check"></label>
+                    <span class="snippet-status"></span>
+                    <div class="snippet-title">
+                        <a href="https://www.youtube.com/watch?v=zQsKGQ6LNvk" target="_blank">Baby Food Prices Just Revealed a Dark Truth About the U.S. Economy</a>
+                    </div>
+                    <div class="snippet-meta">monologue • 21m 53s • @eurodollaruniversity • Nov 12, 2026 • 1,548 views • 153 likes</div>
+                    <div class="snippet-speakers"><strong>Speakers:</strong> unnamed narrator</div>
+                    <div class="snippet-summary">This episode discusses the recent surge in baby food and formula prices and its implications for the U.S. economy, highlighting the affordability crisis faced by families. It critiques the prevailing inflation narrative and emphasizes the disconnect between economic indicators and the lived experiences of consumers.</div>
+                    <div class="snippet-claims">
+                        <div class="snippet-claims-title">Key Claims:</div>
+                        <ul>
+                            <li>Baby food and formula prices surged 5.1% in October, the largest monthly increase ever recorded.</li>
+                            <li>Families are cutting back on other expenses due to rising costs of necessities.</li>
+                            <li>The bond market is signaling weakening demand rather than inflation.</li>
+                            <li>Airlines are cutting capacity due to rising fuel costs and softening demand.</li>
+                            <li>The auto market is shrinking as lower-income consumers are pushed out.</li>
+                            <li>The affordability crisis cannot be solved by ignoring the struggles of households.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-details">
+                        <p><strong>People:</strong> Hugh Pill</p>
+                        <p><strong>Organizations:</strong> Virgin Atlantic, Monetary Metals, Bureau of Labor Statistics</p>
+                        <p><strong>Topics:</strong> baby food prices, U.S. economy, affordability crisis, demand destruction, inflation narrative</p>
+                    </div>
+                    <div class="snippet-conclusion">
+                        <strong>Conclusion:</strong> The surge in baby formula prices highlights a broader economic issue of demand destruction and impoverishment.
+                    </div>
+                </div>
+                    </div>
+                </details>
+            </div>
+        </details>
+        <div class="footer">
+            Generated 2026-11-12 03:56:17
+        </div>
+    </div>
+    <div class="playlist-bar" id="plBar">
+        <span class="playlist-bar-msg"><span id="plCount">0</span> selected</span>
+        <button id="plBtn" type="button">Add to playlist</button>
+    </div>
+    <script src="assets/config.js"></script>
+    <script src="assets/playlist.js"></script>
+</body>
+</html>
